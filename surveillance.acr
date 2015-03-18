@@ -1,3 +1,5 @@
-\newacro{NSA}{National Security Agency}
-\newacro{CIA}{Central Intelligence Agency}
+\newacro{NSA}{US National Security Agency}
+\newacro{GCHQ}{UK Government Communications Headquarters}
+\newacro{CIA}{US Central Intelligence Agency}
 \newacro{TAO}{Tailored Access Operations}
+\newacro{FRA}{Swedish National Defence Radio Establishment}
