@@ -4,3 +4,10 @@
 \newacro{DH}{Diffie-Hellman}
 \newacro{OTP}{One-Time Pad}
 \newacro{crMAC}{Message-Authentication Code}
+\newacro{PFS}{Perfect Forward-Secrecy}
+\newacro{SMP}{Socialist Millionaires' Problem}
+\newacro{DHKE}{Diffie-Hellman Key-Exchange}
+\newacro{AKE}{Authenticated Key-Exchange}
+\newacro{PRF}{Pseudo-Random Function}
+
+\newacro{OTR}{Off-The-Record}
