@@ -1,0 +1,5 @@
+\newacro{DLP}{Discrete Logarithm Problem}
+\newacro{ZKP}{Zero-Knowledge Proof of Knowledge}
+\newacro{DCP}{Dining Cryptographers Problem}
+\newacro{DH}{Diffie-Hellman}
+\newacro{OTP}{One-Time Pad}
