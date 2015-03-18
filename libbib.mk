@@ -12,3 +12,8 @@ LIBBIB+=surveillance.acr
 
 ${LIBBIB}: libbib
 	[ -e "./$@" ] || ln -s libbib/$@ ./$@
+
+.PHONY: clean-depends
+clean-depends: clean-libbib
+clean-libbib:
+	${RM} ${LIBBIB}
