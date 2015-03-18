@@ -3,3 +3,4 @@
 \newacro{DCP}{Dining Cryptographers Problem}
 \newacro{DH}{Diffie-Hellman}
 \newacro{OTP}{One-Time Pad}
+\newacro{crMAC}{Message-Authentication Code}
