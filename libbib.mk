@@ -4,6 +4,7 @@ LIBBIB+=meta.bib
 LIBBIB+=otrmsg.bib
 LIBBIB+=ppes.bib
 LIBBIB+=surveillance.bib
+LIBBIB+=privacy.bib
 
 LIBBIB+=ac.acr
 LIBBIB+=crypto.acr
