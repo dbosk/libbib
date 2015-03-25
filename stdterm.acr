@@ -1,7 +1,7 @@
-\newacro{CSP}{Cloud Service Provider}
-\newacro{ISP}{Internet Service Provider}
+\newacro{CSP}{Cloud service provider}
+\newacro{ISP}{Internet service provider}
 
 % social networks
-\newacro{OSN}{Online Social Network}
-\newacro{DOSN}{Distributed Online Social Network}
-\newacro{IM}{Instant Messaging}
+\newacro{OSN}{online social network}
+\newacro{DOSN}{distributed online social network}
+\newacro{IM}{instant messaging}

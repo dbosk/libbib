@@ -1,13 +1,18 @@
 \newacro{DLP}{Discrete Logarithm Problem}
-\newacro{ZKP}{Zero-Knowledge Proof of Knowledge}
+\newacro{ZKP}{zero-knowledge proof of knowledge}
 \newacro{DCP}{Dining Cryptographers Problem}
 \newacro{DH}{Diffie-Hellman}
 \newacro{OTP}{One-Time Pad}
-\newacro{crMAC}[MAC]{Message-Authentication Code}
-\newacro{PFS}{Perfect Forward-Secrecy}
+\newacro{crMAC}[MAC]{message-authentication code}
+\newacro{PFS}{perfect forward-secrecy}
 \newacro{SMP}{Socialist Millionaires' Problem}
-\newacro{DHKE}{Diffie-Hellman Key-Exchange}
-\newacro{AKE}{Authenticated Key-Exchange}
-\newacro{PRF}{Pseudo-Random Function}
+\newacro{DHKE}{Diffie-Hellman key-exchange}
+\newacro{AKE}{authenticated key-exchange}
+\newacro{PRF}{pseudo-random function}
 
-\newacro{OTR}{Off-The-Record}
+\newacro{BE}{broadcast encryption}
+\newacro{ANOBE}{anonymous broadcast encryption}
+\newacro{IBE}{identity-based encryption}
+\newacro{PE}{predicate encryption}
+
+\newacro{OTR}{Off-the-Record}

@@ -1,4 +1,5 @@
-\newacro{ABAC}{Attribute-Based Access Control}
-\newacro{RBAC}{Role-Based Access Control}
-\newacro{DAC}{Discretionary Access Control}
-\newacro{acMAC}[MAC]{Mandatory Access Control}
+\newacro{AC}{access control}
+\newacro{ABAC}{attribute-based access control}
+\newacro{RBAC}{role-based access control}
+\newacro{DAC}{discretionary access control}
+\newacro{acMAC}[MAC]{mandatory access control}
