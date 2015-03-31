@@ -10,6 +10,8 @@
 \newacro{AKE}{authenticated key-exchange}
 \newacro{PRF}{pseudo-random function}
 
+\newacro{PKE}{public-key encryption}
+
 \newacro{BE}{broadcast encryption}
 \newacro{ANOBE}{anonymous broadcast encryption}
 \newacro{IBE}{identity-based encryption}
