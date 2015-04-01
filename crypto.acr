@@ -15,6 +15,7 @@
 \newacro{BE}{broadcast encryption}
 \newacro{ANOBE}{anonymous broadcast encryption}
 \newacro{IBE}{identity-based encryption}
+\newacro{ABE}{attribute-based encryption}
 \newacro{PE}{predicate encryption}
 
 \newacro{OTR}{Off-the-Record}

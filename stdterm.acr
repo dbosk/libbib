@@ -1,6 +1,8 @@
 \newacro{CSP}{Cloud service provider}
 \newacro{ISP}{Internet service provider}
 
+\newacro{TTP}{trusted third party}
+
 % social networks
 \newacro{OSN}{online social network}
 \newacro{DOSN}{distributed online social network}
