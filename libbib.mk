@@ -1,6 +1,7 @@
 LIBBIB+=anon.bib
 LIBBIB+=crypto.bib
 LIBBIB+=meta.bib
+LIBBIB+=osn.bib
 LIBBIB+=otrmsg.bib
 LIBBIB+=ppes.bib
 LIBBIB+=surveillance.bib
