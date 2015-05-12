@@ -18,4 +18,4 @@ ${LIBBIB}: libbib
 .PHONY: clean-depends
 clean-depends: clean-libbib
 clean-libbib:
-	${RM} ${LIBBIB}
+	find ${LIBBIB} -type l | xargs ${RM}
