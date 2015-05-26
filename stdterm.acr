@@ -1,5 +1,6 @@
 \newacro{CSP}{Cloud Service Provider}
 \newacro{ISP}{Internet Service Provider}
+\newacro{NFC}{Near-Field Communication}
 
 % social networks
 \newacro{OSN}{Online Social Network}
