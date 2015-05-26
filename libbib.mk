@@ -1,6 +1,7 @@
 LIBBIB+=anon.bib
 LIBBIB+=crypto.bib
 LIBBIB+=meta.bib
+LIBBIB+=osn.bib
 LIBBIB+=otrmsg.bib
 LIBBIB+=ppes.bib
 LIBBIB+=surveillance.bib
@@ -17,4 +18,4 @@ ${LIBBIB}: libbib
 .PHONY: clean-depends
 clean-depends: clean-libbib
 clean-libbib:
-	${RM} ${LIBBIB}
+	find ${LIBBIB} -type l | xargs ${RM}
