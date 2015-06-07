@@ -3,19 +3,20 @@
 \newacro{DCP}{Dining Cryptographers Problem}
 \newacro{DH}{Diffie-Hellman}
 \newacro{OTP}{One-Time Pad}
-\newacro{crMAC}[MAC]{message-authentication code}
-\newacro{PFS}{perfect forward-secrecy}
+\newacro{crMAC}[MAC]{Message-Authentication Code}
+\newacro{PFS}{Perfect Forward-Secrecy}
 \newacro{SMP}{Socialist Millionaires' Problem}
-\newacro{DHKE}{Diffie-Hellman key-exchange}
-\newacro{AKE}{authenticated key-exchange}
-\newacro{PRF}{pseudo-random function}
+\newacro{DHKE}{Diffie-Hellman Key-Exchange}
+\newacro{AKE}{Authenticated Key-Exchange}
+\newacro{PRF}{Pseudo-Random Function}
+\newacro{PRNG}{Pseudo-Random Number Generator}
 
-\newacro{PKE}{public-key encryption}
+\newacro{PKE}{Public-Key Encryption}
 
-\newacro{BE}{broadcast encryption}
-\newacro{ANOBE}{anonymous broadcast encryption}
-\newacro{IBE}{identity-based encryption}
-\newacro{ABE}{attribute-based encryption}
-\newacro{PE}{predicate encryption}
+\newacro{BE}{Broadcast Encryption}
+\newacro{ANOBE}{Anonymous Broadcast Encryption}
+\newacro{IBE}{Identity-Based Encryption}
+\newacro{ABE}{Attribute-Based Encryption}
+\newacro{PE}{Predicate Encryption}
 
 \newacro{OTR}{Off-the-Record}
