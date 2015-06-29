@@ -1,5 +1,5 @@
 \newacro{DLP}{Discrete Logarithm Problem}
-\newacro{ZKP}{zero-knowledge proof of knowledge}
+\newacro{ZKP}{Zero-Knowledge Proof of Knowledge}
 \newacro{DCP}{Dining Cryptographers Problem}
 \newacro{DH}{Diffie-Hellman}
 \newacro{OTP}{One-Time Pad}
@@ -10,6 +10,7 @@
 \newacro{AKE}{Authenticated Key-Exchange}
 \newacro{PRF}{Pseudo-Random Function}
 \newacro{PRNG}{Pseudo-Random Number Generator}
+\newacro{RNG}{Random Number Generator}
 
 \newacro{PKE}{Public-Key Encryption}
 
