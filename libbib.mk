@@ -6,6 +6,7 @@ LIBBIB+=otrmsg.bib
 LIBBIB+=ppes.bib
 LIBBIB+=surveillance.bib
 LIBBIB+=privacy.bib
+LIBBIB+=otpkx.bib
 
 LIBBIB+=ac.acr
 LIBBIB+=crypto.acr
