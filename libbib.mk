@@ -7,6 +7,7 @@ LIBBIB+=ppes.bib
 LIBBIB+=surveillance.bib
 LIBBIB+=privacy.bib
 LIBBIB+=otpkx.bib
+LIBBIB+=nfc.bib
 
 LIBBIB+=ac.acr
 LIBBIB+=crypto.acr
