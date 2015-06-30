@@ -4,6 +4,7 @@
 \newacro{DH}{Diffie-Hellman}
 \newacro{OTP}{One-Time Pad}
 \newacro{crMAC}[MAC]{Message-Authentication Code}
+\newacro{MAC}{Message-Authentication Code}
 \newacro{PFS}{Perfect Forward-Secrecy}
 \newacro{SMP}{Socialist Millionaires' Problem}
 \newacro{DHKE}{Diffie-Hellman Key-Exchange}
