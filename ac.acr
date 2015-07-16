@@ -1,7 +1,0 @@
-\newacro{AC}{Access Control}
-\newacro{ABAC}{Attribute-Based Access Control}
-\newacro{RBAC}{Role-Based Access Control}
-\newacro{DAC}{Discretionary Access Control}
-\newacro{acMAC}[MAC]{Mandatory Access Control}
-
-\newacro{ACL}{Access Control List}

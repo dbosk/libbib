@@ -1,0 +1,97 @@
+\NeedsTeXFormat{LaTeX2e}[1999/12/01]
+\ProvidesPackage{libbib}[2015/07/16 v0.1 LaTeX/BibTeX library]
+\RequirePackage{amsmath}
+\RequirePackage{xparse}
+\RequirePackage{acronym}
+\DeclareOption{stdmaths}{%
+  % General maths
+  \ProvideDocumentCommand{\ord}{m}{\ensuremath{|#1|}}
+  \DeclareMathOperator{\Z}{\mathbb{Z}}
+  \DeclareMathOperator{\K}{\mathcal{K}}
+  \DeclareMathOperator{\textand}{\qquad and\qquad}
+}
+\DeclareOption{algebra}{%
+  % Galois fields (finite fields)
+  \DeclareMathOperator{\GF}{\mathrm{GF}}
+  \DeclareMathOperator{\F}{\mathbb{F}}
+}
+\DeclareOption{crypto}{%
+  % Cryptographic functions
+  \DeclareMathOperator{\Sign}{\mathrm{Sign}}
+  \DeclareMathOperator{\Verify}{\mathrm{Verify}}
+  \DeclareMathOperator{\Enc}{\mathrm{Enc}}
+  \DeclareMathOperator{\Dec}{\mathrm{Dec}}
+  \DeclareMathOperator{\AuthEnc}{\mathrm{AuthEnc}}
+  \DeclareMathOperator{\AuthDec}{\mathrm{AuthDec}}
+  \DeclareMathOperator{\Hash}{\mathrm{Hash}}
+  \DeclareMathOperator{\MAC}{\mathrm{MAC}}
+  \DeclareMathOperator{\Keygen}{\mathrm{Keygen}}
+  % Computational problems
+  \newacro{DLP}{Discrete Logarithm Problem}
+  \newacro{DH}{Diffie-Hellman}
+  \newacro{DDH}{Decision Diffie-Hellman}
+  \newacro{DCP}{Dining Cryptographers Problem}
+  \newacro{SMP}{Socialist Millionaires' Problem}
+  % Cryptographic mechanisms
+  \newacro{OTP}{One-Time Pad}
+  \newacro{ZKP}{Zero-Knowledge Proof of Knowledge}
+  \newacro{MAC}{Message-Authentication Code}
+  \newacro{PRF}{Pseudo-Random Function}
+  \newacro{PRNG}{Pseudo-Random Number Generator}
+  \newacro{RNG}{Random Number Generator}
+  % Key-exchange mechanisms
+  \newacro{DHKE}{Diffie-Hellman Key-Exchange}
+  \newacro{AKE}{Authenticated Key-Exchange}
+  % Cryptographic properties
+  \newacro{PFS}{Perfect Forward-Secrecy}
+  % Types of encryption
+  \newacro{PKE}{Public-Key Encryption}
+  \newacro{BE}{Broadcast Encryption}
+  \newacro{ANOBE}{Anonymous Broadcast Encryption}
+  \newacro{IBE}{Identity-Based Encryption}
+  \newacro{ABE}{Attribute-Based Encryption}
+  \newacro{PE}{Predicate Encryption}
+  % Protocols
+  \newacro{OTR}{Off-the-Record}
+}
+\DeclareOption{ac}{%
+  \newacro{AC}{Access Control}
+  % Access Control Models
+  \newacro{ABAC}{Attribute-Based Access Control}
+  \newacro{RBAC}{Role-Based Access Control}
+  \newacro{DAC}{Discretionary Access Control}
+  \newacro{acMAC}[MAC]{Mandatory Access Control}
+  % Access control objects
+  \newacro{ACL}{Access Control List}
+}
+\DeclareOption{surveillance}{%
+  % Surveillance agencies
+  \newacro{NSA}{US National Security Agency}
+  \newacro{GCHQ}{UK Government Communications Headquarters}
+  \newacro{CIA}{US Central Intelligence Agency}
+  \newacro{TAO}{Tailored Access Operations}
+  \newacro{FRA}{Swedish National Defence Radio Establishment}
+}
+\DeclareOption{stdterm}{%
+  % Types of providers
+  \newacro{CSP}{Cloud Service Provider}
+  \newacro{ISP}{Internet Service Provider}
+  % Entities
+  \newacro{TTP}{Trusted Third-Party}
+  % Protocols
+  \newacro{NFC}{Near-Field Communication}
+  % World Wide Web
+  \newacro{WWW}{World Wide Web}
+  \newacro{URL}{Uniform Resource Locator}
+  \newacro{URI}{Uniform Resource Identifier}
+  \newacro{URN}{Uniform Resource Name}
+  % Social Networks
+  \newacro{OSN}{Online Social Network}
+  \newacro{DOSN}{Distributed Online Social Network}
+  \newacro{IM}{Instant Messaging}
+  % Services/protocols
+  \newacro{GPG}{GNU Privacy Guard}
+  \newacro{PGP}{Pretty Good Privacy}
+}
+\ProcessOptions\relax
+\endinput

@@ -10,10 +10,7 @@ LIBBIB+=otpkx.bib
 LIBBIB+=nfc.bib
 LIBBIB+=ac.bib
 
-LIBBIB+=ac.acr
-LIBBIB+=crypto.acr
-LIBBIB+=stdterm.acr
-LIBBIB+=surveillance.acr
+LIBBIB+=libbib.sty
 
 INCLUDE_LIBBIB?=libbib
 
