@@ -23,3 +23,7 @@ clean-libbib:
 	find ${LIBBIB} -type l | xargs ${RM}
 
 include ${INCLUDE_LIBBIB}/ac.mk
+include ${INCLUDE_LIBBIB}/anon.mk
+include ${INCLUDE_LIBBIB}/crypto.mk
+include ${INCLUDE_LIBBIB}/meta.mk
+include ${INCLUDE_LIBBIB}/privacy.mk
