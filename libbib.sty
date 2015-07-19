@@ -17,15 +17,18 @@
 }
 \DeclareOption{crypto}{%
   % Cryptographic functions
-  \DeclareMathOperator{\Sign}{\mathrm{Sign}}
-  \DeclareMathOperator{\Verify}{\mathrm{Verify}}
-  \DeclareMathOperator{\Enc}{\mathrm{Enc}}
-  \DeclareMathOperator{\Dec}{\mathrm{Dec}}
-  \DeclareMathOperator{\AuthEnc}{\mathrm{AuthEnc}}
-  \DeclareMathOperator{\AuthDec}{\mathrm{AuthDec}}
-  \DeclareMathOperator{\Hash}{\mathrm{Hash}}
-  \DeclareMathOperator{\MAC}{\mathrm{MAC}}
-  \DeclareMathOperator{\Keygen}{\mathrm{Keygen}}
+  \DeclareMathOperator{\Sign}{\mathsf{Sign}}
+  \DeclareMathOperator{\Verify}{\mathsf{Verify}}
+  \DeclareMathOperator{\Enc}{\mathsf{Enc}}
+  \DeclareMathOperator{\Dec}{\mathsf{Dec}}
+  \DeclareMathOperator{\AuthEnc}{\mathsf{AuthEnc}}
+  \DeclareMathOperator{\AuthDec}{\mathsf{AuthDec}}
+  \DeclareMathOperator{\Hash}{\mathsf{Hash}}
+  \DeclareMathOperator{\MAC}{\mathsf{MAC}}
+  \DeclareMathOperator{\Keygen}{\mathsf{Keygen}}
+  % Cryptographic parts
+  \ProvideDocumentCommand{\PubKey}{m}{\ensuremath{k_{#1}}}
+  \ProvideDocumentCommand{\PriKey}{m}{\ensuremath{\PubKey{#1}^{-1}}}
   % Computational problems
   \newacro{DLP}{Discrete Logarithm Problem}
   \newacro{DH}{Diffie-Hellman}
@@ -39,6 +42,8 @@
   \newacro{PRF}{Pseudo-Random Function}
   \newacro{PRNG}{Pseudo-Random Number Generator}
   \newacro{RNG}{Random Number Generator}
+  \newacro{KEM}{Key-Encapsulation Mechanism}
+  \newacro{DEM}{Data-Encryption Mechanism}
   % Key-exchange mechanisms
   \newacro{DHKE}{Diffie-Hellman Key-Exchange}
   \newacro{AKE}{Authenticated Key-Exchange}
