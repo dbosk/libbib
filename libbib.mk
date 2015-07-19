@@ -9,6 +9,7 @@ LIBBIB+=privacy.bib
 LIBBIB+=otpkx.bib
 LIBBIB+=nfc.bib
 LIBBIB+=ac.bib
+LIBBIB+=be.bib
 
 LIBBIB+=libbib.sty
 
@@ -24,6 +25,8 @@ clean-libbib:
 
 include ${INCLUDE_LIBBIB}/ac.mk
 include ${INCLUDE_LIBBIB}/anon.mk
+include ${INCLUDE_LIBBIB}/be.mk
 include ${INCLUDE_LIBBIB}/crypto.mk
 include ${INCLUDE_LIBBIB}/meta.mk
+include ${INCLUDE_LIBBIB}/osn.mk
 include ${INCLUDE_LIBBIB}/privacy.mk

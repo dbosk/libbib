@@ -16,6 +16,15 @@ RobustEncryption.pdf:
 	wget -O $@ http://link.springer.com/content/pdf/10.1007%2F978-3-642-11799-2_28.pdf
 
 
+.PHONY: KD-KEM
+KD-KEM: KD-KEM.pdf
+	evince $^
+
+CRYPTO_FILES+= KD-KEM.pdf
+KD-KEM.pdf:
+	wget -O $@ http://link.springer.com/content/pdf/10.1007%2F978-3-540-28628-8_26.pdf
+
+
 .PHONY: clean-depends clean-crypto
 clean-depends: clean-crypto
 clean-crypto:

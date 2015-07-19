@@ -15,6 +15,14 @@ AC_FILES+= AccessControl.pdf
 AccessControl.pdf:
 	wget $@ http://ieeexplore.ieee.org/ielx1/35/7577/00312842.pdf?tp=&arnumber=312842&isnumber=7577
 
+.PHONY: PEAC
+PEAC: PEAC.pdf
+	evince $^
+
+AC_FILES+= PEAC.pdf
+PEAC.pdf:
+	wget -O $@ http://peerson.net/papers/sesocPredicateEncryption.pdf
+
 
 .PHONY: clean-depends clean-ac
 clean-depends: clean-ac

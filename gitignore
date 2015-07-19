@@ -7,6 +7,7 @@ libbib.sty
 # libbib: bib-files
 ac.bib
 anon.bib
+be.bib
 crypto.bib
 meta.bib
 nfc.bib
