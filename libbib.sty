@@ -17,7 +17,10 @@
 }
 \DeclareOption{crypto}{%
   % Cryptographic functions
+  % XXX Make all crypto functions commands
   \DeclareMathOperator{\Sign}{\mathsf{Sign}}
+  %\DeclareMathOperator{\SignOp}{\mathsf{Sign}}
+  %\ProvideDocumentCommand{\Sign}{oo}{\SignOp_{#1}\left(#2\right)}
   \DeclareMathOperator{\Verify}{\mathsf{Verify}}
   \DeclareMathOperator{\Enc}{\mathsf{Enc}}
   \DeclareMathOperator{\Dec}{\mathsf{Dec}}
@@ -27,8 +30,12 @@
   \DeclareMathOperator{\MAC}{\mathsf{MAC}}
   \DeclareMathOperator{\Keygen}{\mathsf{Keygen}}
   % Cryptographic parts
-  \ProvideDocumentCommand{\PubKey}{m}{\ensuremath{k_{#1}}}
-  \ProvideDocumentCommand{\PriKey}{m}{\ensuremath{\PubKey{#1}^{-1}}}
+  \ProvideDocumentCommand{\Key}{m}{\ensuremath{k_{#1}}}
+  \ProvideDocumentCommand{\MACKey}{m}{\ensuremath{k_{#1}^{\MAC}}}
+  \ProvideDocumentCommand{\PubKey}{m}{\ensuremath{k_{#1}^{\mathsf{Pub}}}}
+  \ProvideDocumentCommand{\PriKey}{m}{\ensuremath{k_{#1}^{\mathsf{Pri}}}}
+  \ProvideDocumentCommand{\SignKey}{m}{\ensuremath{s_{#1}}}
+  \ProvideDocumentCommand{\VerifKey}{m}{\ensuremath{v_{#1}}}
   % Computational problems
   \newacro{DLP}{Discrete Logarithm Problem}
   \newacro{DH}{Diffie-Hellman}
