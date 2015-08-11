@@ -18,6 +18,7 @@
 \DeclareOption{crypto}{%
   % Cryptographic functions
   % XXX Make all crypto functions commands
+  \DeclareMathOperator{\Gen}{\mathsf{Gen}}
   \DeclareMathOperator{\Sign}{\mathsf{Sign}}
   %\DeclareMathOperator{\SignOp}{\mathsf{Sign}}
   %\ProvideDocumentCommand{\Sign}{oo}{\SignOp_{#1}\left(#2\right)}
@@ -25,7 +26,8 @@
   \DeclareMathOperator{\Enc}{\mathsf{Enc}}
   \DeclareMathOperator{\Dec}{\mathsf{Dec}}
   \DeclareMathOperator{\AuthEnc}{\mathsf{AuthEnc}}
-  \DeclareMathOperator{\AuthDec}{\mathsf{AuthDec}}
+  \DeclareMathOperator{\AuthDec}{\mathsf{VerifDec}}
+  \DeclareMathOperator{\VerifDec}{\mathsf{VerifDec}}
   \DeclareMathOperator{\Hash}{\mathsf{Hash}}
   \DeclareMathOperator{\MAC}{\mathsf{MAC}}
   \DeclareMathOperator{\Keygen}{\mathsf{Keygen}}
