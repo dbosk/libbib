@@ -16,6 +16,14 @@ RobustEncryption.pdf:
 	wget -O $@ http://link.springer.com/content/pdf/10.1007%2F978-3-642-11799-2_28.pdf
 
 
+.PHONY: RandomnessReuse
+RandomnessReuse: RandomnessReuse.pdf
+	evince $^
+
+CRYPTO_FILES+= 	RandomnessReuse.pdf
+RandomnessReuse.pdf:
+	wget -O $@ http://link.springer.com/content/pdf/10.1007%2F978-3-540-77272-9_16.pdf
+
 .PHONY: KD-KEM
 KD-KEM: KD-KEM.pdf
 	evince $^
