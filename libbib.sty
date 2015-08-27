@@ -3,6 +3,7 @@
 \RequirePackage{amsmath}
 \RequirePackage{xparse}
 \RequirePackage{acronym}
+\RequirePackage{textcomp}
 \DeclareOption{stdmaths}{%
   % General maths
   \ProvideDocumentCommand{\ord}{m}{\ensuremath{|#1|}}
@@ -18,6 +19,8 @@
   \NewDocumentCommand{\card}{m}{\ensuremath{|#1|}}
 }
 \DeclareOption{crypto}{%
+  % General algorithmic parts
+  \ProvideDocumentCommand{\rgets}{}{\overset{\text{\textcent}}{\gets}}
   % Cryptographic functions
   % XXX Make all crypto functions commands
   \DeclareMathOperator{\Gen}{\mathsf{Gen}}
@@ -28,8 +31,8 @@
   \DeclareMathOperator{\Enc}{\mathsf{Enc}}
   \DeclareMathOperator{\Dec}{\mathsf{Dec}}
   \DeclareMathOperator{\AuthEnc}{\mathsf{AuthEnc}}
-  \DeclareMathOperator{\AuthDec}{\mathsf{VerifDec}}
-  \DeclareMathOperator{\VerifDec}{\mathsf{VerifDec}}
+  \DeclareMathOperator{\AuthDec}{\mathsf{AuthDec}}
+  \DeclareMathOperator{\VerifDec}{\mathsf{AuthDec}}
   \DeclareMathOperator{\Hash}{\mathsf{Hash}}
   \DeclareMathOperator{\MAC}{\mathsf{MAC}}
   \DeclareMathOperator{\Keygen}{\mathsf{Keygen}}
