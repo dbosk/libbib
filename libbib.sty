@@ -4,45 +4,257 @@
 \RequirePackage{xparse}
 \RequirePackage{acronym}
 \RequirePackage{textcomp}
+\RequirePackage{ifthen}
 \DeclareOption{stdmaths}{%
   % General maths
-  \ProvideDocumentCommand{\ord}{m}{\ensuremath{|#1|}}
-  \DeclareMathOperator{\Z}{\mathbb{Z}}
-  \DeclareMathOperator{\K}{\mathcal{K}}
-  \DeclareMathOperator{\textand}{\qquad and\qquad}
+  %\ProvideDocumentCommand{\ord}{m}{\ensuremath{|#1|}}
+  %\DeclareMathOperator{\Z}{\mathbb{Z}}
+  %\DeclareMathOperator{\textand}{\qquad and\qquad}
+  \ProvideDocumentCommand{\Prob}{o}{%
+    \IfValueTF{#1}{%
+      \ensuremath{\Pr\left[ #1 \right]}%
+    }{%
+      \ensuremath{\Pr\left[ \cdot \right]}%
+    }%
+  }
 }
 \DeclareOption{algebra}{%
   % Galois fields (finite fields)
   \DeclareMathOperator{\GF}{\mathrm{GF}}
   \DeclareMathOperator{\F}{\mathbb{F}}
   \DeclareMathOperator{\ord}{ord}
-  \NewDocumentCommand{\card}{m}{\ensuremath{|#1|}}
+  \ProvideDocumentCommand{\card}{m}{\ensuremath{|#1|}}
 }
 \DeclareOption{crypto}{%
   % General algorithmic parts
+  %\DeclareMathOperator{\K}{\mathcal{K}}
+  \DeclareMathOperator{\M}{\mathcal{M}}
+  \DeclareMathOperator{\C}{\mathcal{C}}
+  \ProvideDocumentCommand{\Scheme}{s m}{%
+    \IfBooleanTF{#1}{%
+      \ensuremath{\overline{\mathcal{#2}}}%
+    }{%
+      \ensuremath{\mathcal{#2}}%
+    }
+  }
+  \ProvideDocumentCommand{\indcpa}{}{\ensuremath{\text{\rm IND-CPA}}}
+  \ProvideDocumentCommand{\indcca}{}{\ensuremath{\text{\rm IND-CCA}}}
+  \ProvideDocumentCommand{\intptxt}{}{\ensuremath{\text{\rm INT-PTXT}}}
+  \ProvideDocumentCommand{\intctxt}{}{\ensuremath{\text{\rm INT-CTXT}}}
+  \ProvideDocumentCommand{\nmcpa}{}{\ensuremath{\text{\rm NM-CPA}}}
+  \ProvideDocumentCommand{\nmcca}{}{\ensuremath{\text{\rm NM-CCA}}}
+  \ProvideDocumentCommand{\denss}{}{\ensuremath{\text{\rm DEN-SS}}}
   \ProvideDocumentCommand{\rgets}{}{\overset{\text{\textcent}}{\gets}}
+  \DeclareMathOperator{\AdvOp}{\mathbf{Adv}}
+  \ProvideDocumentCommand{\Adv}{m m o}{%
+    \IfValueTF{#3}{%
+      \ensuremath{\AdvOp^{#1}_{#2}\left( #3 \right)}%
+    }{%
+      \ensuremath{\AdvOp^{#1}_{#2}\left( \cdot \right)}%
+    }%
+  }
+  \DeclareMathOperator{\ExpOp}{\mathbf{Exp}}
+  \ProvideDocumentCommand{\Exp}{m m o}{%
+    \IfValueTF{#3}{%
+      \ensuremath{\ExpOp^{#1}_{#2}\left( #3 \right)}%
+    }{%
+      \ensuremath{\ExpOp^{#1}_{#2}\left( \cdot \right)}%
+    }%
+  }
   % Cryptographic functions
   % XXX Make all crypto functions commands
-  \DeclareMathOperator{\Gen}{\mathsf{Gen}}
-  \DeclareMathOperator{\Sign}{\mathsf{Sign}}
-  %\DeclareMathOperator{\SignOp}{\mathsf{Sign}}
-  %\ProvideDocumentCommand{\Sign}{oo}{\SignOp_{#1}\left(#2\right)}
-  \DeclareMathOperator{\Verify}{\mathsf{Verify}}
-  \DeclareMathOperator{\Enc}{\mathsf{Enc}}
-  \DeclareMathOperator{\Dec}{\mathsf{Dec}}
-  \DeclareMathOperator{\AuthEnc}{\mathsf{AuthEnc}}
-  \DeclareMathOperator{\AuthDec}{\mathsf{AuthDec}}
-  \DeclareMathOperator{\VerifDec}{\mathsf{AuthDec}}
-  \DeclareMathOperator{\Hash}{\mathsf{Hash}}
-  \DeclareMathOperator{\MAC}{\mathsf{MAC}}
-  \DeclareMathOperator{\Keygen}{\mathsf{Keygen}}
+  \DeclareMathOperator{\GenOp}{\mathsf{Gen}}
+  \ProvideDocumentCommand{\Gen}{s o m}{\ensuremath{%
+    \IfBooleanTF{#1}{%
+      \overline{\GenOp}%
+      \IfValueT{#2}{^{#2}}%
+      \ifthenelse{\equal{#3}{}}{}{\mathopen{}\left(#3\right)\mathclose{}}%
+    }{%
+      \GenOp%
+      \IfValueT{#2}{^{#2}}%
+      \ifthenelse{\equal{#3}{}}{}{\mathopen{}\left(#3\right)\mathclose{}}%
+    }%
+  }}
+  \DeclareMathOperator{\KeygenOp}{\mathsf{Keygen}}
+  \ProvideDocumentCommand{\Keygen}{s o m}{\ensuremath{%
+    \IfBooleanTF{#1}{%
+      \overline{\KeygenOp}%
+      \IfValueT{#2}{^{#2}}%
+      \ifthenelse{\equal{#3}{}}{}{\mathopen{}\left(#3\right)\mathclose{}}%
+    }{%
+      \KeygenOp%
+      \IfValueT{#2}{^{#2}}%
+      \ifthenelse{\equal{#3}{}}{}{\mathopen{}\left(#3\right)\mathclose{}}%
+    }%
+  }}
+  \DeclareMathOperator{\SignOp}{\mathsf{Sign}}
+  \ProvideDocumentCommand{\Sign}{s o o m}{\ensuremath{%
+    \IfBooleanTF{#1}{%
+      \overline{\SignOp}%
+      \IfValueT{#2}{_{#2}}%
+      \IfValueT{#3}{^{#3}}%
+      \ifthenelse{\equal{#4}{}}{}{\mathopen{}\left(#4\right)\mathclose{}}%
+    }{%
+      \SignOp%
+      \IfValueT{#2}{_{#2}}%
+      \IfValueT{#3}{^{#3}}%
+      \ifthenelse{\equal{#4}{}}{}{\mathopen{}\left(#4\right)\mathclose{}}%
+    }%
+  }}
+  %\DeclareMathOperator{\Hash}{\mathsf{Hash}}
+  \DeclareMathOperator{\MACOp}{\mathsf{MAC}}
+  \ProvideDocumentCommand{\MAC}{s o o m}{\ensuremath{%
+    \IfBooleanTF{#1}{%
+      \overline{\MACOp}%
+      \IfValueT{#2}{_{#2}}%
+      \IfValueT{#3}{^{#3}}%
+      \ifthenelse{\equal{#4}{}}{}{\mathopen{}\left(#4\right)\mathclose{}}%
+    }{%
+      \MACOp%
+      \IfValueT{#2}{_{#2}}%
+      \IfValueT{#3}{^{#3}}%
+      \ifthenelse{\equal{#4}{}}{}{\mathopen{}\left(#4\right)\mathclose{}}%
+    }%
+  }}
+  \DeclareMathOperator{\TagOp}{\mathsf{Tag}}
+  \ProvideDocumentCommand{\Tag}{s o o m}{\ensuremath{%
+    \IfBooleanTF{#1}{%
+      \overline{\TagOp}%
+      \IfValueT{#2}{_{#2}}%
+      \IfValueT{#3}{^{#3}}%
+      \ifthenelse{\equal{#4}{}}{}{\mathopen{}\left(#4\right)\mathclose{}}%
+    }{%
+      \TagOp%
+      \IfValueT{#2}{_{#2}}%
+      \IfValueT{#3}{^{#3}}%
+      \ifthenelse{\equal{#4}{}}{}{\mathopen{}\left(#4\right)\mathclose{}}%
+    }%
+  }}
+  \DeclareMathOperator{\VerifyOp}{\mathsf{Verify}}
+  \ProvideDocumentCommand{\Verify}{s o o m}{\ensuremath{%
+    \IfBooleanTF{#1}{%
+      \overline{\VerifyOp}%
+      \IfValueT{#2}{_{#2}}%
+      \IfValueT{#3}{^{#3}}%
+      \ifthenelse{\equal{#4}{}}{}{\mathopen{}\left(#4\right)\mathclose{}}%
+    }{%
+      \VerifyOp%
+      \IfValueT{#2}{_{#2}}%
+      \IfValueT{#3}{^{#3}}%
+      \ifthenelse{\equal{#4}{}}{}{\mathopen{}\left(#4\right)\mathclose{}}%
+    }%
+  }}
+  \DeclareMathOperator{\EncOp}{\mathsf{Enc}}
+  \ProvideDocumentCommand{\Enc}{s o o m}{\ensuremath{%
+    \IfBooleanTF{#1}{%
+      \overline{\EncOp}%
+      \IfValueT{#2}{_{#2}}%
+      \IfValueT{#3}{^{#3}}%
+      \ifthenelse{\equal{#4}{}}{}{\mathopen{}\left(#4\right)\mathclose{}}%
+    }{%
+      \EncOp%
+      \IfValueT{#2}{_{#2}}%
+      \IfValueT{#3}{^{#3}}%
+      \ifthenelse{\equal{#4}{}}{}{\mathopen{}\left(#4\right)\mathclose{}}%
+    }%
+  }}
+  \DeclareMathOperator{\DecOp}{\mathsf{Dec}}
+  \ProvideDocumentCommand{\Dec}{s o o m}{\ensuremath{%
+    \IfBooleanTF{#1}{%
+      \overline{\DecOp}%
+      \IfValueT{#2}{_{#2}}%
+      \IfValueT{#3}{^{#3}}%
+      \ifthenelse{\equal{#4}{}}{}{\mathopen{}\left(#4\right)\mathclose{}}%
+    }{%
+      \DecOp%
+      \IfValueT{#2}{_{#2}}%
+      \IfValueT{#3}{^{#3}}%
+      \ifthenelse{\equal{#4}{}}{}{\mathopen{}\left(#4\right)\mathclose{}}%
+    }%
+  }}
+  \DeclareMathOperator{\AuthEncOp}{\mathsf{AuthEnc}}
+  \ProvideDocumentCommand{\AuthEnc}{s o o m}{\ensuremath{%
+    \IfBooleanTF{#1}{%
+      \overline{\AuthEncOp}%
+      \IfValueT{#2}{_{#2}}%
+      \IfValueT{#3}{^{#3}}%
+      \ifthenelse{\equal{#4}{}}{}{\mathopen{}\left(#4\right)\mathclose{}}%
+    }{%
+      \AuthEncOp%
+      \IfValueT{#2}{_{#2}}%
+      \IfValueT{#3}{^{#3}}%
+      \ifthenelse{\equal{#4}{}}{}{\mathopen{}\left(#4\right)\mathclose{}}%
+    }%
+  }}
+  \DeclareMathOperator{\AuthDecOp}{\mathsf{AuthDec}}
+  \ProvideDocumentCommand{\AuthDec}{s o o m}{\ensuremath{%
+    \IfBooleanTF{#1}{%
+      \overline{\AuthDecOp}%
+      \IfValueT{#2}{_{#2}}%
+      \IfValueT{#3}{^{#3}}%
+      \ifthenelse{\equal{#4}{}}{}{\mathopen{}\left(#4\right)\mathclose{}}%
+    }{%
+      \AuthDecOp%
+      \IfValueT{#2}{_{#2}}%
+      \IfValueT{#3}{^{#3}}%
+      \ifthenelse{\equal{#4}{}}{}{\mathopen{}\left(#4\right)\mathclose{}}%
+    }%
+  }}
+  \DeclareMathOperator{\VerifDecOp}{\mathsf{AuthDec}}
+  \ProvideDocumentCommand{\VerifDec}{s o o m}{\ensuremath{%
+    \IfBooleanTF{#1}{%
+      \overline{\VerifDecOp}%
+      \IfValueT{#2}{_{#2}}%
+      \IfValueT{#3}{^{#3}}%
+      \ifthenelse{\equal{#4}{}}{}{\mathopen{}\left(#4\right)\mathclose{}}%
+    }{%
+      \VerifDecOp%
+      \IfValueT{#2}{_{#2}}%
+      \IfValueT{#3}{^{#3}}%
+      \ifthenelse{\equal{#4}{}}{}{\mathopen{}\left(#4\right)\mathclose{}}%
+    }%
+  }}
   % Cryptographic parts
-  \ProvideDocumentCommand{\Key}{m}{\ensuremath{k_{#1}}}
-  \ProvideDocumentCommand{\MACKey}{m}{\ensuremath{k_{#1}^{\MAC}}}
-  \ProvideDocumentCommand{\PubKey}{m}{\ensuremath{k_{#1}^{\mathsf{Pub}}}}
-  \ProvideDocumentCommand{\PriKey}{m}{\ensuremath{k_{#1}^{\mathsf{Pri}}}}
-  \ProvideDocumentCommand{\SignKey}{m}{\ensuremath{s_{#1}}}
-  \ProvideDocumentCommand{\VerifKey}{m}{\ensuremath{v_{#1}}}
+  \ProvideDocumentCommand{\Key}{s m}{\ensuremath{%
+    \IfBooleanT{#1}{\hat}k%
+    %\IfValueT{#2}{^{#2}}%
+    \ifthenelse{\equal{#2}{}}{}{_{#2}}%
+  }}
+  \ProvideDocumentCommand{\PubKey}{s m}{\ensuremath{%
+    \IfBooleanT{#1}{\hat}k%
+    \ifthenelse{\equal{#2}{}}{}{_{#2}}%
+    ^{\mathsf{Pu}}%
+  }}
+  \ProvideDocumentCommand{\PriKey}{s m}{\ensuremath{%
+    \IfBooleanT{#1}{\hat}k%
+    \ifthenelse{\equal{#2}{}}{}{_{#2}}%
+    ^{\mathsf{Pr}}%
+  }}
+  \ProvideDocumentCommand{\MACKey}{s m}{\ensuremath{%
+    \IfBooleanT{#1}{\hat}k%
+    \ifthenelse{\equal{#2}{}}{}{_{#2}}%
+    ^{\mathsf{MA}}%
+  }}
+  \ProvideDocumentCommand{\TagKey}{s m}{\ensuremath{%
+    \IfBooleanT{#1}{\hat}k%
+    \ifthenelse{\equal{#2}{}}{}{_{#2}}%
+    ^{\mathsf{MA}}%
+  }}
+  \ProvideDocumentCommand{\SignKey}{s m}{\ensuremath{%
+    \IfBooleanT{#1}{\hat}s%
+    \ifthenelse{\equal{#2}{}}{}{_{#2}}%
+  }}
+  \ProvideDocumentCommand{\VerifKey}{s m}{\ensuremath{%
+    \IfBooleanT{#1}{\hat}v%
+    \ifthenelse{\equal{#2}{}}{}{_{#2}}%
+  }}
+  % Crypto properties
+  \newacro{IND-CPA}{Indistinguishability under Chosen-Plaintext Attack}
+  \newacro{IND-CCA}{Indistinguishability under Chosen-Ciphertext Attack}
+  \newacro{WUF-CMA}{Weak Unforgeability under Chosen-Message Attack}
+  \newacro{SUF-CMA}{Strong Unforgeability under Chosen-Message Attack}
+  \newacro{INT-PTXT}{Integrity for Plaintexts}
+  \newacro{INT-CTXT}{Integrity for Ciphertexts}
   % Computational problems
   \newacro{DLP}{Discrete Logarithm Problem}
   \newacro{DH}{Diffie-Hellman}
@@ -58,6 +270,7 @@
   \newacro{RNG}{Random Number Generator}
   \newacro{KEM}{Key-Encapsulation Mechanism}
   \newacro{DEM}{Data-Encryption Mechanism}
+  \newacro{EtM}{encrypt-then-MAC}
   % Key-exchange mechanisms
   \newacro{DHKE}{Diffie-Hellman Key-Exchange}
   \newacro{AKE}{Authenticated Key-Exchange}
@@ -91,7 +304,8 @@
   \newacro{TAO}{Tailored Access Operations}
   \newacro{FRA}{Swedish National Defence Radio Establishment}
 }
-\DeclareOption{stdterm}{%
+\DeclareOption{std}{%
+  \ProvideDocumentCommand{\concat}{}{\mathbin{\|}}
   % Types of providers
   \newacro{CSP}{Cloud Service Provider}
   \newacro{ISP}{Internet Service Provider}
