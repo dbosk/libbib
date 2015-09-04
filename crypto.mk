@@ -42,6 +42,15 @@ CRYPTO_FILES+= AuthEncryption.pdf
 AuthEncryption.pdf:
 	wget -O $@ http://link.springer.com/content/pdf/10.1007%2Fs00145-008-9026-x.pdf
 
+
+.PHONY: StatefulDecryption
+StatefulDecryption: StatefulDecryption.pdf
+	evince $^
+
+CRYPTO_FILES+= StatefulDecryption.pdf
+StatefulDecryption.pdf:
+	wget -O $@ http://delivery.acm.org/10.1145/1000000/996945/p206-bellare.pdf
+
 .PHONY: Signcryption
 Signcryption: Signcryption.pdf
 	evince $^
