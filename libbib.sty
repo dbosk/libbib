@@ -10,13 +10,14 @@
   %\ProvideDocumentCommand{\ord}{m}{\ensuremath{|#1|}}
   %\DeclareMathOperator{\Z}{\mathbb{Z}}
   %\DeclareMathOperator{\textand}{\qquad and\qquad}
-  \ProvideDocumentCommand{\Prob}{o}{%
-    \IfValueTF{#1}{%
-      \ensuremath{\Pr\left[ #1 \right]}%
-    }{%
-      \ensuremath{\Pr\left[ \cdot \right]}%
-    }%
-  }
+  \ProvideDocumentCommand{\Prob}{o o m}{\ensuremath{%
+    \Pr%
+    \IfValueT{#1}{\ifthenelse{\equal{#1}{}}{}{_{#1}}}%
+    \IfValueT{#2}{^{#2}}%
+    \mathopen{}\left[%
+      \ifthenelse{\equal{#3}{}}{\cdot}{#3}%
+    \right]\mathclose{}%
+  }}
 }
 \DeclareOption{algebra}{%
   % Galois fields (finite fields)
