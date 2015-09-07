@@ -8,8 +8,9 @@
 \DeclareOption{stdmaths}{%
   % General maths
   %\ProvideDocumentCommand{\ord}{m}{\ensuremath{|#1|}}
-  %\DeclareMathOperator{\Z}{\mathbb{Z}}
-  %\DeclareMathOperator{\textand}{\qquad and\qquad}
+  \DeclareMathOperator{\Z}{\mathbb{Z}}
+  \DeclareMathOperator{\N}{\mathbb{N}}
+  \ProvideDocumentCommand{\textand}{}{\ensuremath{\qquad\text{and}\qquad}}
   \ProvideDocumentCommand{\Prob}{o o m}{\ensuremath{%
     \Pr%
     \IfValueT{#1}{\ifthenelse{\equal{#1}{}}{}{_{#1}}}%
