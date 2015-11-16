@@ -60,6 +60,45 @@ Signcryption.pdf:
 	wget -O $@ http://www.signcryption.org/publications/pdffiles/yz-signcrypt-full.pdf
 
 
+.PHONY: OTPKX
+OTPKX: OTPKX.pdf
+	evince $^
+
+CRYPTO_FILES+= OTPKX.pdf
+OTPKX.pdf:
+	wget -O $@ http://link.springer.com/content/pdf/10.1007%2F978-3-319-26502-5_6.pdf
+
+
+.PHONY: DiffieHellman
+DiffieHellman: DiffieHellman.pdf
+	evince $^
+
+CRYPTO_FILES+= DiffieHellman.pdf
+DiffieHellman.pdf:
+	wget -O $@ http://ieeexplore.ieee.org.focus.lib.kth.se/ielx5/18/22693/01055638.pdf
+
+
+.PHONY: AuthKeyExchange
+AuthKeyExchange: AuthKeyExchange.pdf
+	evince $^
+
+CRYPTO_FILES+= AuthKeyExchange.pdf
+AuthKeyExchange.pdf:
+	wget -O $@ http://link.springer.com/content/pdf/10.1007%2FBF00124891.pdf
+
+
+.PHONY: BroadcastEncryption
+BroadcastEncryption: BroadcastEncryption.pdf
+	evince $^
+
+CRYPTO_FILES+= BroadcastEncryption.pdf
+BroadcastEncryption.pdf:
+	wget -O $@ http://link.springer.com/content/pdf/10.1007%2F3-540-48329-2_40.pdf
+
+
+
+
+
 .PHONY: clean-depends clean-crypto
 clean-depends: clean-crypto
 clean-crypto:
