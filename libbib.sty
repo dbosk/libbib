@@ -2,111 +2,658 @@
 \ProvidesPackage{libbib}[2015/07/16 v0.1 LaTeX/BibTeX library]
 \RequirePackage{amsmath}
 \RequirePackage{xparse}
-\RequirePackage{acronym}
+\RequirePackage{mfirstuc-english}
+\NewDocumentCommand{\libbib@capitalize}{m}{#1}
+\PassOptionsToPackage{single}{acro}
+\PassOptionsToPackage{label}{acro}
+\PassOptionsToPackage{uc-cmd=\makefirstuc}{acro}
+\RequirePackage{acro}
+\RequirePackage{textcomp}
+\RequirePackage{ifthen}
+\DeclareOption{springer}{%
+  \RenewDocumentCommand{\libbib@capitalize}{m}{\capitalisewords{#1}}
+}
 \DeclareOption{stdmaths}{%
   % General maths
-  \ProvideDocumentCommand{\ord}{m}{\ensuremath{|#1|}}
+  %\ProvideDocumentCommand{\ord}{m}{\ensuremath{|#1|}}
   \DeclareMathOperator{\Z}{\mathbb{Z}}
-  \DeclareMathOperator{\K}{\mathcal{K}}
-  \DeclareMathOperator{\textand}{\qquad and\qquad}
+  \DeclareMathOperator{\N}{\mathbb{N}}
+  \ProvideDocumentCommand{\textand}{}{\ensuremath{\qquad\text{and}\qquad}}
+  \ProvideDocumentCommand{\Prob}{o o m}{\ensuremath{%
+    \Pr%
+    \IfValueT{#1}{\ifthenelse{\equal{#1}{}}{}{_{#1}}}%
+    \IfValueT{#2}{^{#2}}%
+    \mathopen{}\left[%
+      \ifthenelse{\equal{#3}{}}{\cdot}{#3}%
+    \right]\mathclose{}%
+  }}
 }
 \DeclareOption{algebra}{%
   % Galois fields (finite fields)
   \DeclareMathOperator{\GF}{\mathrm{GF}}
   \DeclareMathOperator{\F}{\mathbb{F}}
+  \DeclareMathOperator{\ord}{ord}
+  \ProvideDocumentCommand{\card}{m}{\ensuremath{|#1|}}
 }
 \DeclareOption{crypto}{%
+  % General algorithmic parts
+  %\DeclareMathOperator{\K}{\mathcal{K}}
+  \DeclareMathOperator{\M}{\mathcal{M}}
+  \DeclareMathOperator{\C}{\mathcal{C}}
+  \ProvideDocumentCommand{\Scheme}{s m}{%
+    \IfBooleanTF{#1}{%
+      \ensuremath{\overline{\mathcal{#2}}}%
+    }{%
+      \ensuremath{\mathcal{#2}}%
+    }
+  }
+  \ProvideDocumentCommand{\indcpa}{}{\ensuremath{\text{IND-CPA}}}
+  \ProvideDocumentCommand{\indcca}{}{\ensuremath{\text{IND-CCA}}}
+  \ProvideDocumentCommand{\indsfcca}{}{\ensuremath{\text{IND-SFCCA}}}
+  \ProvideDocumentCommand{\intptxt}{}{\ensuremath{\text{INT-PTXT}}}
+  \ProvideDocumentCommand{\intctxt}{}{\ensuremath{\text{INT-CTXT}}}
+  \ProvideDocumentCommand{\intsfctxt}{}{\ensuremath{\text{INT-SFCTXT}}}
+  \ProvideDocumentCommand{\nmcpa}{}{\ensuremath{\text{NM-CPA}}}
+  \ProvideDocumentCommand{\nmcca}{}{\ensuremath{\text{NM-CCA}}}
+  \ProvideDocumentCommand{\sufcma}{}{\ensuremath{\text{SUF-CMA}}}
+  \ProvideDocumentCommand{\denss}{}{\ensuremath{\text{DEN-SS}}}
+  \ProvideDocumentCommand{\rgets}{}{\overset{\text{\textcent}}{\gets}}
+  \DeclareMathOperator{\AdvOp}{\mathbf{Adv}}
+  \ProvideDocumentCommand{\Adv}{m m o}{%
+    \IfValueTF{#3}{%
+      \ensuremath{\AdvOp^{#1}_{#2}\left( #3 \right)}%
+    }{%
+      \ensuremath{\AdvOp^{#1}_{#2}\left( \cdot \right)}%
+    }%
+  }
+  \DeclareMathOperator{\ExpOp}{\mathbf{Exp}}
+  \ProvideDocumentCommand{\Exp}{m m o}{%
+    \IfValueTF{#3}{%
+      \ensuremath{\ExpOp^{#1}_{#2}\left( #3 \right)}%
+    }{%
+      \ensuremath{\ExpOp^{#1}_{#2}\left( \cdot \right)}%
+    }%
+  }
   % Cryptographic functions
   % XXX Make all crypto functions commands
-  \DeclareMathOperator{\Gen}{\mathsf{Gen}}
-  \DeclareMathOperator{\Sign}{\mathsf{Sign}}
-  %\DeclareMathOperator{\SignOp}{\mathsf{Sign}}
-  %\ProvideDocumentCommand{\Sign}{oo}{\SignOp_{#1}\left(#2\right)}
-  \DeclareMathOperator{\Verify}{\mathsf{Verify}}
-  \DeclareMathOperator{\Enc}{\mathsf{Enc}}
-  \DeclareMathOperator{\Dec}{\mathsf{Dec}}
-  \DeclareMathOperator{\AuthEnc}{\mathsf{AuthEnc}}
-  \DeclareMathOperator{\AuthDec}{\mathsf{VerifDec}}
-  \DeclareMathOperator{\VerifDec}{\mathsf{VerifDec}}
-  \DeclareMathOperator{\Hash}{\mathsf{Hash}}
-  \DeclareMathOperator{\MAC}{\mathsf{MAC}}
-  \DeclareMathOperator{\Keygen}{\mathsf{Keygen}}
+  \DeclareMathOperator{\GenOp}{\mathsf{Gen}}
+  \ProvideDocumentCommand{\Gen}{s o m}{\ensuremath{%
+    \IfBooleanTF{#1}{%
+      \overline{\GenOp}%
+      \IfValueT{#2}{^{#2}}%
+      \ifthenelse{\equal{#3}{}}{}{\mathopen{}\left(#3\right)\mathclose{}}%
+    }{%
+      \GenOp%
+      \IfValueT{#2}{^{#2}}%
+      \ifthenelse{\equal{#3}{}}{}{\mathopen{}\left(#3\right)\mathclose{}}%
+    }%
+  }}
+  \DeclareMathOperator{\KeygenOp}{\mathsf{Keygen}}
+  \ProvideDocumentCommand{\Keygen}{s o m}{\ensuremath{%
+    \IfBooleanTF{#1}{%
+      \overline{\KeygenOp}%
+      \IfValueT{#2}{^{#2}}%
+      \ifthenelse{\equal{#3}{}}{}{\mathopen{}\left(#3\right)\mathclose{}}%
+    }{%
+      \KeygenOp%
+      \IfValueT{#2}{^{#2}}%
+      \ifthenelse{\equal{#3}{}}{}{\mathopen{}\left(#3\right)\mathclose{}}%
+    }%
+  }}
+  \DeclareMathOperator{\SignOp}{\mathsf{Sign}}
+  \ProvideDocumentCommand{\Sign}{s o o m}{\ensuremath{%
+    \IfBooleanTF{#1}{%
+      \overline{\SignOp}%
+      \IfValueT{#2}{_{#2}}%
+      \IfValueT{#3}{^{#3}}%
+      \ifthenelse{\equal{#4}{}}{}{\mathopen{}\left(#4\right)\mathclose{}}%
+    }{%
+      \SignOp%
+      \IfValueT{#2}{_{#2}}%
+      \IfValueT{#3}{^{#3}}%
+      \ifthenelse{\equal{#4}{}}{}{\mathopen{}\left(#4\right)\mathclose{}}%
+    }%
+  }}
+  %\DeclareMathOperator{\Hash}{\mathsf{Hash}}
+  \DeclareMathOperator{\MACOp}{\mathsf{MAC}}
+  \ProvideDocumentCommand{\MAC}{s o o m}{\ensuremath{%
+    \IfBooleanTF{#1}{%
+      \overline{\MACOp}%
+      \IfValueT{#2}{_{#2}}%
+      \IfValueT{#3}{^{#3}}%
+      \ifthenelse{\equal{#4}{}}{}{\mathopen{}\left(#4\right)\mathclose{}}%
+    }{%
+      \MACOp%
+      \IfValueT{#2}{_{#2}}%
+      \IfValueT{#3}{^{#3}}%
+      \ifthenelse{\equal{#4}{}}{}{\mathopen{}\left(#4\right)\mathclose{}}%
+    }%
+  }}
+  \DeclareMathOperator{\TagOp}{\mathsf{Tag}}
+  \ProvideDocumentCommand{\Tag}{s o o m}{\ensuremath{%
+    \IfBooleanTF{#1}{%
+      \overline{\TagOp}%
+      \IfValueT{#2}{_{#2}}%
+      \IfValueT{#3}{^{#3}}%
+      \ifthenelse{\equal{#4}{}}{}{\mathopen{}\left(#4\right)\mathclose{}}%
+    }{%
+      \TagOp%
+      \IfValueT{#2}{_{#2}}%
+      \IfValueT{#3}{^{#3}}%
+      \ifthenelse{\equal{#4}{}}{}{\mathopen{}\left(#4\right)\mathclose{}}%
+    }%
+  }}
+  \DeclareMathOperator{\VerifyOp}{\mathsf{Verify}}
+  \ProvideDocumentCommand{\Verify}{s o o m}{\ensuremath{%
+    \IfBooleanTF{#1}{%
+      \overline{\VerifyOp}%
+      \IfValueT{#2}{_{#2}}%
+      \IfValueT{#3}{^{#3}}%
+      \ifthenelse{\equal{#4}{}}{}{\mathopen{}\left(#4\right)\mathclose{}}%
+    }{%
+      \VerifyOp%
+      \IfValueT{#2}{_{#2}}%
+      \IfValueT{#3}{^{#3}}%
+      \ifthenelse{\equal{#4}{}}{}{\mathopen{}\left(#4\right)\mathclose{}}%
+    }%
+  }}
+  \DeclareMathOperator{\EncOp}{\mathsf{Enc}}
+  \ProvideDocumentCommand{\Enc}{s o o m}{\ensuremath{%
+    \IfBooleanTF{#1}{%
+      \overline{\EncOp}%
+      \IfValueT{#2}{_{#2}}%
+      \IfValueT{#3}{^{#3}}%
+      \ifthenelse{\equal{#4}{}}{}{\mathopen{}\left(#4\right)\mathclose{}}%
+    }{%
+      \EncOp%
+      \IfValueT{#2}{_{#2}}%
+      \IfValueT{#3}{^{#3}}%
+      \ifthenelse{\equal{#4}{}}{}{\mathopen{}\left(#4\right)\mathclose{}}%
+    }%
+  }}
+  \DeclareMathOperator{\DecOp}{\mathsf{Dec}}
+  \ProvideDocumentCommand{\Dec}{s o o m}{\ensuremath{%
+    \IfBooleanTF{#1}{%
+      \overline{\DecOp}%
+      \IfValueT{#2}{_{#2}}%
+      \IfValueT{#3}{^{#3}}%
+      \ifthenelse{\equal{#4}{}}{}{\mathopen{}\left(#4\right)\mathclose{}}%
+    }{%
+      \DecOp%
+      \IfValueT{#2}{_{#2}}%
+      \IfValueT{#3}{^{#3}}%
+      \ifthenelse{\equal{#4}{}}{}{\mathopen{}\left(#4\right)\mathclose{}}%
+    }%
+  }}
+  \DeclareMathOperator{\AuthEncOp}{\mathsf{AuthEnc}}
+  \ProvideDocumentCommand{\AuthEnc}{s o o m}{\ensuremath{%
+    \IfBooleanTF{#1}{%
+      \overline{\AuthEncOp}%
+      \IfValueT{#2}{_{#2}}%
+      \IfValueT{#3}{^{#3}}%
+      \ifthenelse{\equal{#4}{}}{}{\mathopen{}\left(#4\right)\mathclose{}}%
+    }{%
+      \AuthEncOp%
+      \IfValueT{#2}{_{#2}}%
+      \IfValueT{#3}{^{#3}}%
+      \ifthenelse{\equal{#4}{}}{}{\mathopen{}\left(#4\right)\mathclose{}}%
+    }%
+  }}
+  \DeclareMathOperator{\AuthDecOp}{\mathsf{AuthDec}}
+  \ProvideDocumentCommand{\AuthDec}{s o o m}{\ensuremath{%
+    \IfBooleanTF{#1}{%
+      \overline{\AuthDecOp}%
+      \IfValueT{#2}{_{#2}}%
+      \IfValueT{#3}{^{#3}}%
+      \ifthenelse{\equal{#4}{}}{}{\mathopen{}\left(#4\right)\mathclose{}}%
+    }{%
+      \AuthDecOp%
+      \IfValueT{#2}{_{#2}}%
+      \IfValueT{#3}{^{#3}}%
+      \ifthenelse{\equal{#4}{}}{}{\mathopen{}\left(#4\right)\mathclose{}}%
+    }%
+  }}
+  \DeclareMathOperator{\VerifDecOp}{\mathsf{AuthDec}}
+  \ProvideDocumentCommand{\VerifDec}{s o o m}{\ensuremath{%
+    \IfBooleanTF{#1}{%
+      \overline{\VerifDecOp}%
+      \IfValueT{#2}{_{#2}}%
+      \IfValueT{#3}{^{#3}}%
+      \ifthenelse{\equal{#4}{}}{}{\mathopen{}\left(#4\right)\mathclose{}}%
+    }{%
+      \VerifDecOp%
+      \IfValueT{#2}{_{#2}}%
+      \IfValueT{#3}{^{#3}}%
+      \ifthenelse{\equal{#4}{}}{}{\mathopen{}\left(#4\right)\mathclose{}}%
+    }%
+  }}
   % Cryptographic parts
-  \ProvideDocumentCommand{\Key}{m}{\ensuremath{k_{#1}}}
-  \ProvideDocumentCommand{\MACKey}{m}{\ensuremath{k_{#1}^{\MAC}}}
-  \ProvideDocumentCommand{\PubKey}{m}{\ensuremath{k_{#1}^{\mathsf{Pub}}}}
-  \ProvideDocumentCommand{\PriKey}{m}{\ensuremath{k_{#1}^{\mathsf{Pri}}}}
-  \ProvideDocumentCommand{\SignKey}{m}{\ensuremath{s_{#1}}}
-  \ProvideDocumentCommand{\VerifKey}{m}{\ensuremath{v_{#1}}}
+  \ProvideDocumentCommand{\Key}{s m}{\ensuremath{%
+    \IfBooleanT{#1}{\hat}k%
+    %\IfValueT{#2}{^{#2}}%
+    \ifthenelse{\equal{#2}{}}{}{_{#2}}%
+  }}
+  \ProvideDocumentCommand{\PubKey}{s m}{\ensuremath{%
+    \IfBooleanT{#1}{\hat}k%
+    \ifthenelse{\equal{#2}{}}{}{_{#2}}%
+    ^{\mathsf{Pub}}%
+  }}
+  \ProvideDocumentCommand{\PriKey}{s m}{\ensuremath{%
+    \IfBooleanT{#1}{\hat}k%
+    \ifthenelse{\equal{#2}{}}{}{_{#2}}%
+    ^{\mathsf{Pri}}%
+  }}
+  \ProvideDocumentCommand{\MACKey}{s m}{\ensuremath{%
+    \IfBooleanT{#1}{\hat}k%
+    \ifthenelse{\equal{#2}{}}{}{_{#2}}%
+    ^{\mathsf{MA}}%
+  }}
+  \ProvideDocumentCommand{\TagKey}{s m}{\ensuremath{%
+    \IfBooleanT{#1}{\hat}k%
+    \ifthenelse{\equal{#2}{}}{}{_{#2}}%
+    ^{\mathsf{MA}}%
+  }}
+  \ProvideDocumentCommand{\SignKey}{s m}{\ensuremath{%
+    \IfBooleanT{#1}{\hat}s%
+    \ifthenelse{\equal{#2}{}}{}{_{#2}}%
+  }}
+  \ProvideDocumentCommand{\VerifKey}{s m}{\ensuremath{%
+    \IfBooleanT{#1}{\hat}v%
+    \ifthenelse{\equal{#2}{}}{}{_{#2}}%
+  }}
+  % Crypto properties
+  \DeclareAcronym{IND-CPA}{%
+    short = {IND-CPA},
+    long = {\libbib@capitalize{%
+        indistinguishability under chosen-plaintext attack%
+      }},
+    cite = {AuthEncryption}
+  }
+  \DeclareAcronym{IND-CCA}{%
+    short = {IND-CCA},
+    long = {\libbib@capitalize{%
+        indistinguishability under chosen-ciphertext attack%
+      }},
+    cite = {AuthEncryption}
+  }
+  \DeclareAcronym{IND-SFCCA}{%
+    short = {IND-SFCCA},
+    long = {\libbib@capitalize{%
+        indistinguishability under statefully chosen-ciphertext attack%
+      }},
+    cite = {StatefulDecryption}
+  }
+  \DeclareAcronym{WUF-CMA}{%
+    short = {WUF-CMA},
+    long = {\libbib@capitalize{%
+        weak unforgeability under chosen-message attack%
+      }},
+    cite = {AuthEncryption}
+  }
+  \DeclareAcronym{SUF-CMA}{%
+    short = {SUF-CMA},
+    long = {\libbib@capitalize{%
+        strong unforgeability under chosen-message attack%
+    }},
+    cite = {AuthEncryption}
+  }
+  \DeclareAcronym{INT-PTXT}{%
+    short = {INT-PTXT},
+    long = {\libbib@capitalize{%
+        integrity of plaintexts%
+      }},
+    cite = {AuthEncryption}
+  }
+  \DeclareAcronym{INT-SFPTXT}{%
+    short = {INT-SFPTXT},
+    long = {\libbib@capitalize{%
+        integrity of stateful plaintexts%
+      }},
+    cite = {StatefulDecryption}
+  }
+  \DeclareAcronym{INT-CTXT}{%
+    short = {INT-CTXT},
+    long = {\libbib@capitalize{%
+        integrity of ciphertexts%
+      }},
+    cite = {AuthEncryption}
+  }
+  \DeclareAcronym{INT-SFCTXT}{%
+    short = {INT-SFCTXT},
+    long = {\libbib@capitalize{%
+        integrity of stateful ciphertexts%
+      }},
+    cite = {StatefulDecryption}
+  }
+  \DeclareAcronym{DEN-SS}{%
+    short = {DEN-SS},
+    long = {\libbib@capitalize{%
+        deniability under surveillance-state attack%
+      }},
+    cite = {OTPKX}
+  }
   % Computational problems
-  \newacro{DLP}{Discrete Logarithm Problem}
-  \newacro{DH}{Diffie-Hellman}
-  \newacro{DDH}{Decision Diffie-Hellman}
-  \newacro{DCP}{Dining Cryptographers Problem}
-  \newacro{SMP}{Socialist Millionaires' Problem}
+  \DeclareAcronym{DL}{%
+    short = {DL},
+    long = {Discrete Logarithm}
+  }
+  \DeclareAcronym{CDH}{%
+    short = {CDH},
+    long = {Computational Diffie-Hellman}
+  }
+  \DeclareAcronym{DDH}{%
+    short = {DDH},
+    long = {Decisional Diffie-Hellman}
+  }
+  \DeclareAcronym{DC}{%
+    short = {DC},
+    long = {Dining Cryptographers},
+    cite = {DiningCryptographers}
+  }
+  \DeclareAcronym{SMP}{%
+    short = {SMP},
+    long = {Socialist Millionaires' Problem}
+  }
   % Cryptographic mechanisms
-  \newacro{OTP}{One-Time Pad}
-  \newacro{ZKP}{Zero-Knowledge Proof of Knowledge}
-  \newacro{MAC}{Message-Authentication Code}
-  \newacro{PRF}{Pseudo-Random Function}
-  \newacro{PRNG}{Pseudo-Random Number Generator}
-  \newacro{RNG}{Random Number Generator}
-  \newacro{KEM}{Key-Encapsulation Mechanism}
-  \newacro{DEM}{Data-Encryption Mechanism}
+  \DeclareAcronym{OTP}{%
+    short = {OTP},
+    long = {One-Time Pad}
+  }
+  \DeclareAcronym{ZKP}{%
+    short = {ZKP},
+    long = {\libbib@capitalize{%
+        zero-knowledge proof of knowledge%
+      }}
+  }
+  \DeclareAcronym{MAC}{%
+    short = {MAC},
+    long = {\libbib@capitalize{%
+        message-authentication code%
+      }}
+  }
+  \DeclareAcronym{PRF}{%
+    short = {PRF},
+    long = {\libbib@capitalize{%
+        pseudo-random function%
+      }}
+  }
+  \DeclareAcronym{PRNG}{%
+    short = {PRNG},
+    long = {\libbib@capitalize{%
+        pseudo-random number generator%
+      }}
+  }
+  \DeclareAcronym{RNG}{%
+    short = {RNG},
+    long = {\libbib@capitalize{%
+        random-number generator%
+      }}
+  }
+  \DeclareAcronym{KEM}{%
+    short = {KEM},
+    long = {\libbib@capitalize{%
+        key-encapsulation mechanism%
+      }}
+  }
+  \DeclareAcronym{DEM}{%
+    short = {DEM},
+    long = {\libbib@capitalize{%
+        data-encryption mechanism%
+      }}
+  }
+  \DeclareAcronym{EtM}{%
+    short = {EtM},
+    long = {\libbib@capitalize{%
+        encrypt-then-MAC
+      }},
+    cite = {AuthEncryption}
+  }
   % Key-exchange mechanisms
-  \newacro{DHKE}{Diffie-Hellman Key-Exchange}
-  \newacro{AKE}{Authenticated Key-Exchange}
+  \DeclareAcronym{KE}{%
+    short = {KE},
+    long = {\libbib@capitalize{%
+        key-exchange%
+      }}
+  }
+  \DeclareAcronym{DHKE}{%
+    short = {DHKE},
+    long = {Diffie-Hellman \acifused{\acs{KE}}{\acf{KE}}},
+    cite = {DiffieHellman}
+  }
+  \DeclareAcronym{AKE}{%
+    short = {AKE},
+    long = {\libbib@capitalize{%
+        authenticated  \acifused{\acs{KE}}{\acf{KE}}%
+      }},
+    cite = {AuthKeyExchange}
+  }
   % Cryptographic properties
-  \newacro{PFS}{Perfect Forward-Secrecy}
+  \DeclareAcronym{PFS}{%
+    short = {PFS},
+    long = {\libbib@capitalize{%
+        perfect forward-secrecy%
+      }}
+  }
   % Types of encryption
-  \newacro{PKE}{Public-Key Encryption}
-  \newacro{BE}{Broadcast Encryption}
-  \newacro{ANOBE}{Anonymous Broadcast Encryption}
-  \newacro{IBE}{Identity-Based Encryption}
-  \newacro{ABE}{Attribute-Based Encryption}
-  \newacro{PE}{Predicate Encryption}
+  \DeclareAcronym{PKC}{%
+    short = {PKC},
+    long = {\libbib@capitalize{%
+        public-key cryptography%
+      }}
+  }
+  \DeclareAcronym{BE}{%
+    short = {BE},
+    long = {\libbib@capitalize{%
+        broadcast encryption%
+      }},
+    cite = {BroadcastEncryption}
+  }
+  \DeclareAcronym{ANOBE}{%
+    short = {ANOBE},
+    long = {\libbib@capitalize{%
+        anonymous broadcast encryption%
+      }},
+    cite = {ANOBE}
+  }
+  \DeclareAcronym{IBE}{%
+    short = {IBE},
+    long = {\libbib@capitalize{%
+        identity-based encryption%
+      }}
+  }
+  \DeclareAcronym{ABE}{%
+    short = {ABE},
+    long = {\libbib@capitalize{%
+        attribute-based encryption%
+      }}
+  }
+  \DeclareAcronym{PE}{%
+    short = {PE},
+    long = {\libbib@capitalize{%
+        predicate encryption%
+      }}
+  }
   % Protocols
-  \newacro{OTR}{Off-the-Record}
+  \DeclareAcronym{OTR}{%
+    short = {OTR},
+    long = {Off-the-Record},
+    cite = {otr2004}
+  }
 }
 \DeclareOption{ac}{%
-  \newacro{AC}{Access Control}
+  \DeclareAcronym{AC}{%
+    short = {AC},
+    long = {\libbib@capitalize{%
+        access control%
+      }}
+  }
   % Access Control Models
-  \newacro{ABAC}{Attribute-Based Access Control}
-  \newacro{RBAC}{Role-Based Access Control}
-  \newacro{DAC}{Discretionary Access Control}
-  \newacro{acMAC}[MAC]{Mandatory Access Control}
+  \DeclareAcronym{ABAC}{%
+    short = {ABAC},
+    long = {\libbib@capitalize{%
+        attribute-based \acsifused{\acs{AC}}{\acf{AC}}%
+      }}
+  }
+  \DeclareAcronym{RBAC}{%
+    short = {RBAC},
+    long = {\libbib@capitalize{%
+        role-based \acsifused{\acs{AC}}{\acf{AC}}%
+      }}
+  }
+  \DeclareAcronym{DAC}{%
+    short = {DAC},
+    long = {\libbib@capitalize{%
+        discretionary \acsifused{\acs{AC}}{\acf{AC}}%
+      }}
+  }
+  \DeclareAcronym{acMAC}{%
+    short = {MAC},
+    long = {\libbib@capitalize{%
+        mandatory \acsifused{\acs{AC}}{\acf{AC}}%
+      }}
+  }
   % Access control objects
-  \newacro{ACL}{Access Control List}
+  \DeclareAcronym{ACL}{%
+    short = {ACL},
+    long = {\libbib@capitalize{%
+        \acsifused{\acs{AC}}{\acf{AC}} list%
+      }}
+  }
 }
 \DeclareOption{surveillance}{%
   % Surveillance agencies
-  \newacro{NSA}{US National Security Agency}
-  \newacro{GCHQ}{UK Government Communications Headquarters}
-  \newacro{CIA}{US Central Intelligence Agency}
-  \newacro{TAO}{Tailored Access Operations}
-  \newacro{FRA}{Swedish National Defence Radio Establishment}
+  \DeclareAcronym{NSA}{%
+    short = {NSA},
+    long = {US National Security Agency}
+  }
+  \DeclareAcronym{GCHQ}{%
+    short = {GCHQ},
+    long = {UK Government Communications Headquarters}
+  }
+  \DeclareAcronym{CIA}{%
+    short = {CIA},
+    long = {US Central Intelligence Agency}
+  }
+  \DeclareAcronym{TAO}{%
+    short = {TAO},
+    long = {Tailored Access Operations}
+  }
+  \DeclareAcronym{FRA}{%
+    short = {FRA},
+    long = {Försvarets radioanstalt},
+    foreign = {Swedish National Defence Radio Establishment}
+  }
 }
-\DeclareOption{stdterm}{%
+\DeclareOption{std}{%
+  \ProvideDocumentCommand{\concat}{}{\mathbin{\|}}
+  \DeclareAcronym{ICT}{%
+    short = {ICT},
+    long = {\libbib@capitalize{%
+        information and communication technology%
+      }},
+    long-plural-form = {\libbib@capitalize{%
+        information and communication technologies%
+      }}
+  }
+  \DeclareAcronym{PET}{%
+    short = {PET},
+    long = {\libbib@capitalize{%
+        privacy-enhancing technology%
+      }},
+    long-plural-form = {\libbib@capitalize{%
+        privacy-enhancing technologies%
+      }}
+  }
+  \DeclareAcronym{DoS}{%
+    short = {DoS},
+    long = {\libbib@capitalize{%
+        denial-of-service%
+      }}
+  }
   % Types of providers
-  \newacro{CSP}{Cloud Service Provider}
-  \newacro{ISP}{Internet Service Provider}
+  \DeclareAcronym{CSP}{%
+    short = {CSP},
+    long = {\libbib@capitalize{%
+        cloud-service provider%
+      }}
+  }
+  \DeclareAcronym{ISP}{%
+    short = {ISP},
+    long = {\libbib@capitalize{%
+        Internet-service provider%
+      }}
+  }
   % Entities
-  \newacro{TTP}{Trusted Third-Party}
+  \DeclareAcronym{TTP}{%
+    short = {TTP},
+    long = {\libbib@capitalize{%
+        trusted third-party%
+      }}
+  }
   % Protocols
-  \newacro{NFC}{Near-Field Communication}
+  \DeclareAcronym{NFC}{%
+    short = {NFC},
+    long = {Near-Field Communication}
+  }
   % World Wide Web
-  \newacro{WWW}{World Wide Web}
-  \newacro{URL}{Uniform Resource Locator}
-  \newacro{URI}{Uniform Resource Identifier}
-  \newacro{URN}{Uniform Resource Name}
+  \DeclareAcronym{WWW}{%
+    short = {WWW},
+    long = {World-Wide Web}
+  }
+  \DeclareAcronym{URL}{%
+    short = {URL},
+    long = {Uniform Resource Locator}
+  }
+  \DeclareAcronym{URI}{%
+    short = {URI},
+    long = {Uniform Resource Identifier}
+  }
+  \DeclareAcronym{URN}{%
+    short = {URN},
+    long = {Uniform Resource Name}
+  }
   % Social Networks
-  \newacro{OSN}{Online Social Network}
-  \newacro{DOSN}{Distributed Online Social Network}
-  \newacro{IM}{Instant Messaging}
-  \newacro{TOC}{Table of Contents}
+  \DeclareAcronym{OSN}{%
+    short = {OSN},
+    long = {\libbib@capitalize{%
+       online social network%
+     }}
+  }
+  \DeclareAcronym{DOSN}{%
+    short = {DOSN},
+    long = {\libbib@capitalize{%
+        distributed \acifused{\acs{OSN}}{\acf{OSN}}%
+      }}
+  }
+  \DeclareAcronym{IM}{%
+    short = {IM},
+    long = {\libbib@capitalize{%
+        instant messaging%
+      }}
+  }
+  \DeclareAcronym{TOC}{%
+    short = {TOC},
+    long = {\libbib@capitalize{%
+        table of contents%
+      }}
+  }
   % Services/protocols
-  \newacro{GPG}{GNU Privacy Guard}
-  \newacro{PGP}{Pretty Good Privacy}
+  \DeclareAcronym{GPG}{%
+    short = {GPG},
+    long = {GNU Privacy Guard},
+    cite = {GnuPG}
+  }
+  \DeclareAcronym{PGP}{%
+    short = {PGP},
+    long = {Pretty Good Privacy}
+  }
+  % Models
+  \DeclareAcronym{P2P}{%
+    short = {P2P},
+    long = {\libbib@capitalize{%
+        peer-to-peer%
+      }}
+  }
 }
 \ProcessOptions\relax
 \endinput

@@ -24,6 +24,15 @@ PEAC.pdf:
 	wget -O $@ http://peerson.net/papers/sesocPredicateEncryption.pdf
 
 
+.PHONY: DistStorAccessControl
+DistStorAccessControl: DistStorAccessControl.pdf
+	evince $^
+
+AC_FILES+= DistStorAccessControl.pdf
+DistStorAccessControl.pdf:
+	wget -O $@ https://github.com/dbosk/anobe/releases/download/v0.1/anobe-paper.pdf
+
+
 .PHONY: clean-depends clean-ac
 clean-depends: clean-ac
 clean-ac:
