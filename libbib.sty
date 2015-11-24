@@ -417,13 +417,15 @@
   }
   \DeclareAcronym{DHKE}{%
     short = {DHKE},
-    long = {Diffie-Hellman \acifused{\acs{KE}}{\acf{KE}}},
+    long = {\libbib@capitalize{%
+        Diffie-Hellman key-exchange%
+      }},
     cite = {DiffieHellman}
   }
   \DeclareAcronym{AKE}{%
     short = {AKE},
     long = {\libbib@capitalize{%
-        authenticated  \acifused{\acs{KE}}{\acf{KE}}%
+        authenticated key-exchange
       }},
     cite = {AuthKeyExchange}
   }
@@ -510,32 +512,32 @@
   \DeclareAcronym{ABAC}{%
     short = {ABAC},
     long = {\libbib@capitalize{%
-        attribute-based \acsifused{\acs{AC}}{\acf{AC}}%
+        attribute-based access control%
       }}
   }
   \DeclareAcronym{RBAC}{%
     short = {RBAC},
     long = {\libbib@capitalize{%
-        role-based \acsifused{\acs{AC}}{\acf{AC}}%
+        role-based access control%
       }}
   }
   \DeclareAcronym{DAC}{%
     short = {DAC},
     long = {\libbib@capitalize{%
-        discretionary \acsifused{\acs{AC}}{\acf{AC}}%
+        discretionary access control%
       }}
   }
   \DeclareAcronym{acMAC}{%
     short = {MAC},
     long = {\libbib@capitalize{%
-        mandatory \acsifused{\acs{AC}}{\acf{AC}}%
+        mandatory access control%
       }}
   }
   % Access control objects
   \DeclareAcronym{ACL}{%
     short = {ACL},
     long = {\libbib@capitalize{%
-        \acsifused{\acs{AC}}{\acf{AC}} list%
+        access control list%
       }}
   }
 }
@@ -641,7 +643,7 @@
   \DeclareAcronym{DOSN}{%
     short = {DOSN},
     long = {\libbib@capitalize{%
-        distributed \acifused{\acs{OSN}}{\acf{OSN}}%
+        decentralized online social network%
       }}
   }
   \DeclareAcronym{IM}{%
