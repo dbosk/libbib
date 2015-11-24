@@ -12,6 +12,12 @@
 \RequirePackage{ifthen}
 \DeclareOption{springer}{%
   \RenewDocumentCommand{\libbib@capitalize}{m}{\capitalisewords{#1}}
+  \let\Ac\ac
+  \let\Acf\acf
+  \let\Acl\acl
+  \let\Acp\acp
+  \let\Aclp\aclp
+  \let\Acfp\acfp
 }
 \DeclareOption{stdmaths}{%
   % General maths
