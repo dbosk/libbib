@@ -10,7 +10,9 @@
 \RequirePackage{acro}
 \RequirePackage{textcomp}
 \RequirePackage{ifthen}
-\DeclareOption{springer}{%
+\PassOptionsToPackage{compress}{cleveref}
+\RequirePackage{cleveref}
+\DeclareOption{lncs}{%
   \RenewDocumentCommand{\libbib@capitalize}{m}{\capitalisewords{#1}}
   \let\Ac\ac
   \let\Acf\acf
@@ -18,6 +20,24 @@
   \let\Acp\acp
   \let\Aclp\aclp
   \let\Acfp\acfp
+  \crefname{chapter}{Chap.}{Chap.}
+  \Crefname{chapter}{Chapter}{Chapters}
+  \crefname{section}{Sect.}{Sect.}
+  \Crefname{section}{Section}{Sections}
+  \crefname{figure}{Fig.}{Fig.}
+  \Crefname{figure}{Figure}{Figures}
+  \crefname{table}{Tab.}{Tab.}
+  \Crefname{table}{Table}{Tables}
+  \crefname{definition}{Def.}{Def.}
+  \Crefname{definition}{Definition}{Definitions}
+  \crefname{theorem}{Thm.}{Thm.}
+  \Crefname{theorem}{Theorem}{Theorems}
+  \crefname{lemma}{Lem.}{Lem.}
+  \Crefname{lemma}{Lemma}{Lemmas}
+  \crefname{corollary}{Cor.}{Cor.}
+  \Crefname{corollary}{Corollary}{Corollaries}
+  \crefname{proposition}{Prop.}{Prop.}
+  \Crefname{proposition}{Proposition}{Propositions}
 }
 \DeclareOption{stdmaths}{%
   % General maths
