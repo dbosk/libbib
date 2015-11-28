@@ -33,6 +33,15 @@ DistStorAccessControl.pdf:
 	wget -O $@ https://github.com/dbosk/anobe/releases/download/v0.1/anobe-paper.pdf
 
 
+.PHONY: TunableACinP2P
+TunableACinP2P: TunableACinP2P.pdf
+	evince $^
+
+AC_FILES+= TunableACinP2P.pdf
+TunableACinP2P.pdf:
+	wget -O $@ http://ieeexplore.ieee.org.focus.lib.kth.se/ielx5/5602002/5608706/05608723.pdf
+
+
 .PHONY: clean-depends clean-ac
 clean-depends: clean-ac
 clean-ac:
