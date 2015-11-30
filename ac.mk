@@ -42,6 +42,15 @@ TunableACinP2P.pdf:
 	wget -O $@ http://ieeexplore.ieee.org.focus.lib.kth.se/ielx5/5602002/5608706/05608723.pdf
 
 
+.PHONY: PPACTechniquesInDistSys
+PPACTechniquesInDistSys: PPACTechniquesInDistSys.pdf
+	evince $^
+
+AC_FILES+= PPACTechniquesInDistSys.pdf
+PPACTechniquesInDistSys.pdf:
+	wget -O $@ http://ro.uow.edu.au/cgi/viewcontent.cgi?article=5326&context=theses
+
+
 .PHONY: clean-depends clean-ac
 clean-depends: clean-ac
 clean-ac:

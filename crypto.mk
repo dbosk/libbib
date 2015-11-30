@@ -176,6 +176,51 @@ AnonProxyReencrypt.pdf:
 	wget -O $@ http://ndc.zjgsu.edu.cn/~jshao/papers/SCN2011-Anonymous%20proxy%20re-encryption.pdf
 
 
+.PHONY: CP-ABE
+CP-ABE: CP-ABE.pdf
+	evince $^
+
+CRYPTO_FILES+= CP-ABE.pdf
+CP-ABE.pdf:
+	wget -O $@ http://ieeexplore.ieee.org${LIBRARY_EXT}/ielx5/4223200/4223201/04223236.pdf
+
+
+.PHONY: KP-ABE
+KP-ABE: KP-ABE.pdf
+	evince $^
+
+CRYPTO_FILES+= KP-ABE.pdf
+KP-ABE.pdf:
+	wget -O $@ http://delivery.acm.org${LIBRARY_EXT}/10.1145/1190000/1180418/p89-goyal.pdf
+
+
+.PHONY: DABE
+DABE: DABE.pdf
+	evince $^
+
+CRYPTO_FILES+= DABE.pdf
+DABE.pdf:
+	wget -O $@ http://download.springer.com${LIBRARY_EXT}/static/pdf/576/chp%253A10.1007%252F978-3-642-20465-4_31.pdf
+
+
+.PHONY: DualSystemEncryption
+DualSystemEncryption: DualSystemEncryption.pdf
+	evince $^
+
+CRYPTO_FILES+= DualSystemEncryption.pdf
+DualSystemEncryption.pdf:
+	wget -O $@ http://link.springer.com${LIBRARY_EXT}/content/pdf/10.1007%2F978-3-642-03356-8_36.pdf
+
+
+.PHONY: NewDualSystemEncryption
+NewDualSystemEncryption: NewDualSystemEncryption.pdf
+	evince $^
+
+CRYPTO_FILES+= NewDualSystemEncryption.pdf
+NewDualSystemEncryption.pdf:
+	wget -O $@ http://link.springer.com${LIBRARY_EXT}/content/pdf/10.1007%2F978-3-642-11799-2_27.pdf
+
+
 .PHONY: clean-depends clean-crypto
 clean-depends: clean-crypto
 clean-crypto:
