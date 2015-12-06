@@ -221,6 +221,15 @@ NewDualSystemEncryption.pdf:
 	wget -O $@ http://link.springer.com${LIBRARY_EXT}/content/pdf/10.1007%2F978-3-642-11799-2_27.pdf
 
 
+.PHONY: FSThresholdSignatures
+FSThresholdSignatures: FSThresholdSignatures.pdf
+	evince $^
+
+CRYPTO_FILES+= FSThresholdSignatures.pdf
+FSThresholdSignatures.pdf:
+	wget -O $@ http://link.springer.com${LIBRARY_EXT}/content/pdf/10.1007%2F3-540-45353-9_32.pdf
+
+
 .PHONY: clean-depends clean-crypto
 clean-depends: clean-crypto
 clean-crypto:
