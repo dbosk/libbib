@@ -634,6 +634,61 @@
     long-indefinite = {an},
   }
 }
+\DeclareOption{auth}{%
+  \DeclareAcronym{eID}{%
+    short = {eID},
+    short-indefinite = {an},
+    long = {\libbib@capitalize{%
+        electronic ID%
+      }},
+    long-indefinite = {an},
+  }
+  \DeclareAcronym{PKI}{%
+    short = {PKI},
+    long = {\libbib@capitalize{%
+        public-key infrastructure%
+      }},
+  }
+  \DeclareAcronym{CA}{%
+    short = {CA},
+    long = {\libbib@capitalize{%
+        certificate authority%
+      }},
+  }
+}
+\DeclareOption{location}{%
+  \DeclareAcronym{PROPS}{%
+    short = {PROPS},
+    long = {PRivacy-preserving lOcation-Proof System},
+    cite = {PROPS},
+  }
+  \DeclareAcronym{LP}{%
+    short = {LP},
+    short-indefinite = {an},
+    long = {\libbib@capitalize{%
+        location proof%
+      }},
+    long-indefinite = {a},
+  }
+  \DeclareAcronym{LPS}{%
+    short = {LPS},
+    short-indefinite = {an},
+    long = {\libbib@capitalize{%
+        location-proof share%
+      }},
+    long-indefinite = {a},
+  }
+}
+\DeclareOption{smc}{%
+  \DeclareAcronym{SMC}{%
+    short = {SMC},
+    short-indefinite = {an},
+    long = {\libbib@capitalize{%
+        secure multiparty computation%
+      }},
+    long-indefinite = {a},
+  }
+}
 \DeclareOption{surveillance}{%
   % Surveillance agencies
   \DeclareAcronym{NSA}{%
@@ -729,9 +784,11 @@
   % Social Networks
   \DeclareAcronym{OSN}{%
     short = {OSN},
+    short-indefinite = {an},
     long = {\libbib@capitalize{%
        online social network%
-     }}
+     }},
+   long-indefinite = {an},
   }
   \DeclareAcronym{DOSN}{%
     short = {DOSN},
