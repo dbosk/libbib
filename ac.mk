@@ -24,6 +24,33 @@ PEAC.pdf:
 	wget -O $@ http://peerson.net/papers/sesocPredicateEncryption.pdf
 
 
+.PHONY: DistStorAccessControl
+DistStorAccessControl: DistStorAccessControl.pdf
+	evince $^
+
+AC_FILES+= DistStorAccessControl.pdf
+DistStorAccessControl.pdf:
+	wget -O $@ https://github.com/dbosk/anobe/releases/download/v0.1/anobe-paper.pdf
+
+
+.PHONY: TunableACinP2P
+TunableACinP2P: TunableACinP2P.pdf
+	evince $^
+
+AC_FILES+= TunableACinP2P.pdf
+TunableACinP2P.pdf:
+	wget -O $@ http://ieeexplore.ieee.org.focus.lib.kth.se/ielx5/5602002/5608706/05608723.pdf
+
+
+.PHONY: PPACTechniquesInDistSys
+PPACTechniquesInDistSys: PPACTechniquesInDistSys.pdf
+	evince $^
+
+AC_FILES+= PPACTechniquesInDistSys.pdf
+PPACTechniquesInDistSys.pdf:
+	wget -O $@ http://ro.uow.edu.au/cgi/viewcontent.cgi?article=5326&context=theses
+
+
 .PHONY: clean-depends clean-ac
 clean-depends: clean-ac
 clean-ac:

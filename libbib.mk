@@ -1,15 +1,18 @@
+LIBBIB+=ac.bib
 LIBBIB+=anon.bib
+LIBBIB+=auth.bib
+LIBBIB+=be.bib
 LIBBIB+=crypto.bib
+LIBBIB+=location.bib
 LIBBIB+=meta.bib
+LIBBIB+=nfc.bib
 LIBBIB+=osn.bib
 LIBBIB+=otrmsg.bib
-LIBBIB+=ppes.bib
-LIBBIB+=surveillance.bib
-LIBBIB+=privacy.bib
 LIBBIB+=otpkx.bib
-LIBBIB+=nfc.bib
-LIBBIB+=ac.bib
-LIBBIB+=be.bib
+LIBBIB+=ppes.bib
+LIBBIB+=privacy.bib
+LIBBIB+=reputation.bib
+LIBBIB+=surveillance.bib
 
 LIBBIB+=libbib.sty
 
@@ -25,8 +28,12 @@ clean-libbib:
 
 include ${INCLUDE_LIBBIB}/ac.mk
 include ${INCLUDE_LIBBIB}/anon.mk
+include ${INCLUDE_LIBBIB}/auth.mk
 include ${INCLUDE_LIBBIB}/be.mk
 include ${INCLUDE_LIBBIB}/crypto.mk
+include ${INCLUDE_LIBBIB}/location.mk
 include ${INCLUDE_LIBBIB}/meta.mk
 include ${INCLUDE_LIBBIB}/osn.mk
+include ${INCLUDE_LIBBIB}/ppes.mk
 include ${INCLUDE_LIBBIB}/privacy.mk
+include ${INCLUDE_LIBBIB}/reputation.mk
