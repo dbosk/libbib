@@ -86,15 +86,6 @@ Signcryption.pdf:
 	wget -O $@ http://www.signcryption.org/publications/pdffiles/yz-signcrypt-full.pdf
 
 
-.PHONY: OTPKX
-OTPKX: OTPKX.pdf
-	evince $^
-
-CRYPTO_FILES+= OTPKX.pdf
-OTPKX.pdf:
-	wget -O $@ http://link.springer.com/content/pdf/10.1007%2F978-3-319-26502-5_6.pdf
-
-
 .PHONY: DiffieHellman
 DiffieHellman: DiffieHellman.pdf
 	evince $^
