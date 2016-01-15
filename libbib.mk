@@ -18,7 +18,7 @@ LIBBIB+=libbib.sty
 
 INCLUDE_LIBBIB?=libbib
 
-${LIBBIB}: ${INCLUDE_LIBBIB}
+${LIBBIB}:
 	[ -e "./$@" ] || ln -s ${INCLUDE_LIBBIB}/$@ ./$@
 
 .PHONY: clean-depends
