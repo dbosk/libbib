@@ -63,9 +63,11 @@
 }
 \DeclareOption{crypto}{%
   % General algorithmic parts
-  %\DeclareMathOperator{\K}{\mathcal{K}}
+  \DeclareMathOperator{\K}{\mathcal{K}}
   \DeclareMathOperator{\M}{\mathcal{M}}
   \DeclareMathOperator{\C}{\mathcal{C}}
+  \DeclareMathOperator{\E}{\mathcal{E}}
+  \DeclareMathOperator{\D}{\mathcal{D}}
   \ProvideDocumentCommand{\Scheme}{s m}{%
     \IfBooleanTF{#1}{%
       \ensuremath{\overline{\mathcal{#2}}}%
@@ -150,6 +152,20 @@
       \ifthenelse{\equal{#4}{}}{}{\mathopen{}\left(#4\right)\mathclose{}}%
     }{%
       \MACOp%
+      \IfValueT{#2}{_{#2}}%
+      \IfValueT{#3}{^{#3}}%
+      \ifthenelse{\equal{#4}{}}{}{\mathopen{}\left(#4\right)\mathclose{}}%
+    }%
+  }}
+  \DeclareMathOperator{\HMACOp}{\mathsf{HMAC}}
+  \ProvideDocumentCommand{\HMAC}{s o o m}{\ensuremath{%
+    \IfBooleanTF{#1}{%
+      \overline{\HMACOp}%
+      \IfValueT{#2}{_{#2}}%
+      \IfValueT{#3}{^{#3}}%
+      \ifthenelse{\equal{#4}{}}{}{\mathopen{}\left(#4\right)\mathclose{}}%
+    }{%
+      \HMACOp%
       \IfValueT{#2}{_{#2}}%
       \IfValueT{#3}{^{#3}}%
       \ifthenelse{\equal{#4}{}}{}{\mathopen{}\left(#4\right)\mathclose{}}%
@@ -391,10 +407,30 @@
         zero-knowledge proof of knowledge%
       }}
   }
+  \DeclareAcronym{MA}{%
+    short = {MA},
+    long = {\libbib@capitalize{%
+        message authentication%
+      }}
+  }
   \DeclareAcronym{MAC}{%
     short = {MAC},
     long = {\libbib@capitalize{%
         message-authentication code%
+      }}
+  }
+  \DeclareAcronym{HMAC}{%
+    short = {HMAC},
+    short-indefinite = {an},
+    long = {\libbib@capitalize{%
+        hash-based message-authentication code%
+      }},
+    long-indefinite = {a},
+  }
+  \DeclareAcronym{PRP}{%
+    short = {PRP},
+    long = {\libbib@capitalize{%
+        pseudo-random permutation%
       }}
   }
   \DeclareAcronym{PRF}{%
