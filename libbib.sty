@@ -64,8 +64,8 @@
 \DeclareOption{crypto}{%
   % General algorithmic parts
   %\DeclareMathOperator{\K}{\mathcal{K}}
-  \DeclareMathOperator{\M}{\mathcal{M}}
-  \DeclareMathOperator{\C}{\mathcal{C}}
+  %\DeclareMathOperator{\M}{\mathcal{M}}
+  %\DeclareMathOperator{\C}{\mathcal{C}}
   \ProvideDocumentCommand{\Scheme}{s m}{%
     \IfBooleanTF{#1}{%
       \ensuremath{\overline{\mathcal{#2}}}%
@@ -786,9 +786,9 @@
     short = {OSN},
     short-indefinite = {an},
     long = {\libbib@capitalize{%
-       online social network%
-     }},
-   long-indefinite = {an},
+        online social network%
+      }},
+    long-indefinite = {an},
   }
   \DeclareAcronym{DOSN}{%
     short = {DOSN},
