@@ -1,3 +1,27 @@
+.PHONY: HMAC HMAC-std
+HMAC: HMAC.pdf
+HMAC-std: HMAC-std.pdf
+
+HMAC HMAC-std:
+	evince $^
+
+CRYPTO_FILES+=	HMAC.pdf HMAC-std.pdf
+HMAC.pdf:
+	wget -O $@ http://link.springer.com${LIBRARY_EXT}/content/pdf/10.1007%2F3-540-68697-5_1.pdf
+
+HMAC-std.pdf:
+	wget -O $@ https://csrc.nist.gov/publications/fips/fips198-1/FIPS-198-1_final.pdf
+
+
+.PHONY: ElGamal
+ElGamal: ElGamal.pdf
+	evince $^
+
+CRYPTO_FILES+=	ElGamal.pdf
+ElGamal.pdf:
+	wget -O $@ http://link.springer.com${LIBRARY_EXT}/content/pdf/10.1007%2F3-540-39568-7_2.pdf
+
+
 .PHONY: ShannonSecrecy
 ShannonSecrecy: ShannonSecrecy.pdf
 	evince $^
