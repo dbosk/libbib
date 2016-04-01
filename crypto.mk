@@ -245,6 +245,15 @@ FSThresholdSignatures.pdf:
 	wget -O $@ http://link.springer.com${LIBRARY_EXT}/content/pdf/10.1007%2F3-540-45353-9_32.pdf
 
 
+.PHONY: Schnorr
+Schnorr: Schnorr.pdf
+	evince $^
+
+CRYPTO_FILES+= Schnorr.pdf
+Schnorr.pdf:
+	wget -O $@ http://link.springer.com${LIBRARY_EXT}/content/pdf/10.1007%2FBF00196725.pdf
+
+
 .PHONY: clean-depends clean-crypto
 clean-depends: clean-crypto
 clean-crypto:
