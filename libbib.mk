@@ -13,6 +13,7 @@ LIBBIB+=ppes.bib
 LIBBIB+=privacy.bib
 LIBBIB+=reputation.bib
 LIBBIB+=surveillance.bib
+LIBBIB+=mpc.bib
 
 LIBBIB+=libbib.sty
 
@@ -37,3 +38,4 @@ include ${INCLUDE_LIBBIB}/osn.mk
 include ${INCLUDE_LIBBIB}/ppes.mk
 include ${INCLUDE_LIBBIB}/privacy.mk
 include ${INCLUDE_LIBBIB}/reputation.mk
+include ${INCLUDE_LIBBIB}/mpc.mk

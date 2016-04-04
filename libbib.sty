@@ -43,8 +43,11 @@
 \DeclareOption{stdmaths}{%
   % General maths
   %\ProvideDocumentCommand{\ord}{m}{\ensuremath{|#1|}}
-  \DeclareMathOperator{\Z}{\mathbb{Z}}
   \DeclareMathOperator{\N}{\mathbb{N}}
+  \DeclareMathOperator{\Z}{\mathbb{Z}}
+  \DeclareMathOperator{\Q}{\mathbb{Q}}
+  \DeclareMathOperator{\R}{\mathbb{R}}
+  %\DeclareMathOperator{\C}{\mathbb{C}}
   \ProvideDocumentCommand{\textand}{}{\ensuremath{\qquad\text{and}\qquad}}
   \ProvideDocumentCommand{\Prob}{o o m}{\ensuremath{%
     \Pr%
@@ -731,9 +734,9 @@
     long-indefinite = {a},
   }
 }
-\DeclareOption{smc}{%
-  \DeclareAcronym{SMC}{%
-    short = {SMC},
+\DeclareOption{mpc}{%
+  \DeclareAcronym{MPC}{%
+    short = {MPC},
     short-indefinite = {an},
     long = {\libbib@capitalize{%
         secure multiparty computation%
