@@ -3,6 +3,7 @@ LIBBIB+=anon.bib
 LIBBIB+=auth.bib
 LIBBIB+=be.bib
 LIBBIB+=crypto.bib
+LIBBIB+=depend.bib
 LIBBIB+=location.bib
 LIBBIB+=meta.bib
 LIBBIB+=nfc.bib
@@ -32,6 +33,7 @@ include ${INCLUDE_LIBBIB}/anon.mk
 include ${INCLUDE_LIBBIB}/auth.mk
 include ${INCLUDE_LIBBIB}/be.mk
 include ${INCLUDE_LIBBIB}/crypto.mk
+include ${INCLUDE_LIBBIB}/depend.mk
 include ${INCLUDE_LIBBIB}/location.mk
 include ${INCLUDE_LIBBIB}/meta.mk
 include ${INCLUDE_LIBBIB}/osn.mk
