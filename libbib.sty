@@ -40,7 +40,7 @@
   \crefname{proposition}{Prop.}{Prop.}
   \Crefname{proposition}{Proposition}{Propositions}
 }
-\DeclareOption{stdmaths}{%
+\DeclareOption{math}{%
   % General maths
   %\ProvideDocumentCommand{\ord}{m}{\ensuremath{|#1|}}
   \DeclareMathOperator{\N}{\mathbb{N}}
@@ -395,17 +395,29 @@
     short = {DLP},
     long = {Discrete Logarithm Problem}
   }
+  \DeclareAcronym{DH}{
+    short = {DH},
+    long = {Diffie-Hellman},
+    cite = {DiffieHellman}
+  }
   \DeclareAcronym{DHP}{%
     short = {DHP},
-    long = {Diffie-Hellman Problem}
+    long = {Diffie-Hellman Problem},
+    cite = {DiffieHellman}
   }
   \DeclareAcronym{DDH}{%
     short = {DDH},
-    long = {Decisional Diffie-Hellman}
+    long = {Decisional Diffie-Hellman},
+    cite = {DiffieHellman}
   }
   \DeclareAcronym{DC}{%
     short = {DC},
     long = {Dining Cryptographers},
+    cite = {DiningCryptographers}
+  }
+  \DeclareAcronym{DCP}{%
+    short = {DCP},
+    long = {Dining Cryptographers Problem},
     cite = {DiningCryptographers}
   }
   \DeclareAcronym{SMP}{%
