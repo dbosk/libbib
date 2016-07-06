@@ -67,18 +67,22 @@
 }
 \DeclareOption{crypto}{%
   % General algorithmic parts
+  \ProvideDocumentCommand{\Scheme}{s m o o}{\ensuremath{%
+      \operatorname{%
+        \IfBooleanTF{#1}{%
+          \overline{{\mathsf{#2}}}%
+        }{%
+          {\mathsf{#2}}%
+        }%
+        \IfValueT{#3}{.\!\mathsf{#3}}%
+      }%
+      \IfValueT{#4}{\mleft( #4 \mright)}%
+    }}
   \DeclareMathOperator{\K}{\mathcal{K}}
   \DeclareMathOperator{\M}{\mathcal{M}}
   \DeclareMathOperator{\C}{\mathcal{C}}
   \DeclareMathOperator{\E}{\mathcal{E}}
   \DeclareMathOperator{\D}{\mathcal{D}}
-  \ProvideDocumentCommand{\Scheme}{s m}{%
-    \IfBooleanTF{#1}{%
-      \ensuremath{\overline{\mathcal{#2}}}%
-    }{%
-      \ensuremath{\mathcal{#2}}%
-    }
-  }
   \ProvideDocumentCommand{\indcpa}{}{\ensuremath{\text{IND-CPA}}}
   \ProvideDocumentCommand{\indcca}{}{\ensuremath{\text{IND-CCA}}}
   \ProvideDocumentCommand{\indsfcca}{}{\ensuremath{\text{IND-SFCCA}}}
