@@ -43,8 +43,11 @@
 \DeclareOption{stdmaths}{%
   % General maths
   %\ProvideDocumentCommand{\ord}{m}{\ensuremath{|#1|}}
-  \DeclareMathOperator{\Z}{\mathbb{Z}}
   \DeclareMathOperator{\N}{\mathbb{N}}
+  \DeclareMathOperator{\Z}{\mathbb{Z}}
+  \DeclareMathOperator{\Q}{\mathbb{Q}}
+  \DeclareMathOperator{\R}{\mathbb{R}}
+  %\DeclareMathOperator{\C}{\mathbb{C}}
   \ProvideDocumentCommand{\textand}{}{\ensuremath{\qquad\text{and}\qquad}}
   \ProvideDocumentCommand{\Prob}{o o m}{\ensuremath{%
     \Pr%
@@ -64,9 +67,6 @@
 }
 \DeclareOption{crypto}{%
   % General algorithmic parts
-  %\DeclareMathOperator{\K}{\mathcal{K}}
-  %\DeclareMathOperator{\M}{\mathcal{M}}
-  %\DeclareMathOperator{\C}{\mathcal{C}}
   \ProvideDocumentCommand{\Scheme}{s m o o}{\ensuremath{%
       \operatorname{%
         \IfBooleanTF{#1}{%
@@ -78,6 +78,11 @@
       }%
       \IfValueT{#4}{\mleft( #4 \mright)}%
     }}
+  \DeclareMathOperator{\K}{\mathcal{K}}
+  \DeclareMathOperator{\M}{\mathcal{M}}
+  \DeclareMathOperator{\C}{\mathcal{C}}
+  \DeclareMathOperator{\E}{\mathcal{E}}
+  \DeclareMathOperator{\D}{\mathcal{D}}
   \ProvideDocumentCommand{\indcpa}{}{\ensuremath{\text{IND-CPA}}}
   \ProvideDocumentCommand{\indcca}{}{\ensuremath{\text{IND-CCA}}}
   \ProvideDocumentCommand{\indsfcca}{}{\ensuremath{\text{IND-SFCCA}}}
@@ -170,6 +175,20 @@
       \IfValueT{#2}{_{#2}}%
       \IfValueT{#3}{^{#3}}%
       \ifthenelse{\equal{#4}{}}{}{\mleft(#4\mright)}%
+    }%
+  }}
+  \DeclareMathOperator{\HMACOp}{\mathsf{HMAC}}
+  \ProvideDocumentCommand{\HMAC}{s o o m}{\ensuremath{%
+    \IfBooleanTF{#1}{%
+      \overline{\HMACOp}%
+      \IfValueT{#2}{_{#2}}%
+      \IfValueT{#3}{^{#3}}%
+      \ifthenelse{\equal{#4}{}}{}{\mathopen{}\left(#4\right)\mathclose{}}%
+    }{%
+      \HMACOp%
+      \IfValueT{#2}{_{#2}}%
+      \IfValueT{#3}{^{#3}}%
+      \ifthenelse{\equal{#4}{}}{}{\mathopen{}\left(#4\right)\mathclose{}}%
     }%
   }}
   \DeclareMathOperator{\TagOp}{\mathsf{Tag}}
@@ -376,13 +395,13 @@
     cite = {OTPKX}
   }
   % Computational problems
-  \DeclareAcronym{DL}{%
-    short = {DL},
-    long = {Discrete Logarithm}
+  \DeclareAcronym{DLP}{%
+    short = {DLP},
+    long = {Discrete Logarithm Problem}
   }
-  \DeclareAcronym{CDH}{%
-    short = {CDH},
-    long = {Computational Diffie-Hellman}
+  \DeclareAcronym{DHP}{%
+    short = {DHP},
+    long = {Diffie-Hellman Problem}
   }
   \DeclareAcronym{DDH}{%
     short = {DDH},
@@ -408,10 +427,31 @@
         zero-knowledge proof of knowledge%
       }}
   }
+  \DeclareAcronym{MA}{%
+    short = {MA},
+    long = {\libbib@capitalize{%
+        message authentication%
+      }}
+  }
   \DeclareAcronym{MAC}{%
     short = {MAC},
     long = {\libbib@capitalize{%
         message-authentication code%
+      }}
+  }
+  \DeclareAcronym{HMAC}{%
+    short = {HMAC},
+    short-indefinite = {an},
+    long = {\libbib@capitalize{%
+        hash-based message-authentication code%
+      }},
+    long-indefinite = {a},
+    cite = {HMAC},
+  }
+  \DeclareAcronym{PRP}{%
+    short = {PRP},
+    long = {\libbib@capitalize{%
+        pseudo-random permutation%
       }}
   }
   \DeclareAcronym{PRF}{%
@@ -698,9 +738,9 @@
     long-indefinite = {a},
   }
 }
-\DeclareOption{smc}{%
-  \DeclareAcronym{SMC}{%
-    short = {SMC},
+\DeclareOption{mpc}{%
+  \DeclareAcronym{MPC}{%
+    short = {MPC},
     short-indefinite = {an},
     long = {\libbib@capitalize{%
         secure multiparty computation%
@@ -709,6 +749,12 @@
   }
 }
 \DeclareOption{surveillance}{%
+}
+\DeclareOption{organizations}{%
+  \DeclareAcronym{UN}{%
+    short = {UN},
+    long = {United Nations},
+  }
   % Surveillance agencies
   \DeclareAcronym{NSA}{%
     short = {NSA},
@@ -757,6 +803,14 @@
     long = {\libbib@capitalize{%
         denial-of-service%
       }}
+  }
+  \DeclareAcronym{APT}{%
+    short = {APT},
+    short-indefinite = {an},
+    long = {\libbib@capitalize{%
+        advanced persistent threat%
+      }},
+    long-indefinite = {an}
   }
   % Types of providers
   \DeclareAcronym{CSP}{%
@@ -843,6 +897,14 @@
     long = {\libbib@capitalize{%
         peer-to-peer%
       }}
+  }
+}
+\DeclareOption{distrib}{%
+  \DeclareAcronym{DHT}{%
+    short = {DHT},
+    long = {\libbib@capitalize{%
+        distributed hash table%
+      }},
   }
 }
 \ProcessOptions\relax
