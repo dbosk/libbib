@@ -41,3 +41,11 @@ include ${INCLUDE_BIBSP}/ppes.mk
 include ${INCLUDE_BIBSP}/privacy.mk
 include ${INCLUDE_BIBSP}/reputation.mk
 include ${INCLUDE_BIBSP}/mpc.mk
+
+define bibsp_display
+.PHONY: $(1)
+$(1):
+	xdg-open ${URL-$(1)}
+endef
+
+$(foreach ref,${BIBSP_REFKEY},$(eval $(call bibsp_display,${ref})))
