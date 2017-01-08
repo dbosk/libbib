@@ -16,9 +16,11 @@ BIBSP_BIB+=reputation.bib
 BIBSP_BIB+=surveillance.bib
 BIBSP_BIB+=mpc.bib
 
+BIBSP_STY+=libbib.sty
 BIBSP_STY+=bibsp.sty
 
-INCLUDE_BIBSP?=.
+INCLUDE_LIBBIB?=	.
+INCLUDE_BIBSP?=		${INCLUDE_LIBBIB}
 
 ${BIBSP_BIB} ${BIBSP_STY}:
 	[ -e "./$@" ] || ln -s ${INCLUDE_BIBSP}/$@ ./$@
