@@ -15,6 +15,7 @@ BIBSP_BIB+=privacy.bib
 BIBSP_BIB+=reputation.bib
 BIBSP_BIB+=surveillance.bib
 BIBSP_BIB+=mpc.bib
+BIBSP_BIB+=passwd.bib
 
 BIBSP_STY+=libbib.sty
 BIBSP_STY+=bibsp.sty
@@ -43,6 +44,7 @@ include ${INCLUDE_BIBSP}/ppes.mk
 include ${INCLUDE_BIBSP}/privacy.mk
 include ${INCLUDE_BIBSP}/reputation.mk
 include ${INCLUDE_BIBSP}/mpc.mk
+include ${INCLUDE_BIBSP}/passwd.mk
 
 define bibsp_display
 .PHONY: $(1)
