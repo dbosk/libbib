@@ -9,3 +9,6 @@ URL-SecurityWithoutIdentification=http://delivery.acm.org/10.1145/10000/4373/p10
 
 BIBSP_REFKEY+=Tor
 URL-Tor=http://freehaven.net/anonbib/cache/tor-design.pdf
+
+BIBSP_REFKEY+=TowardsMeasuringAnonymity
+URL-TowardsMeasuringAnonymity=http://www.academia.edu/download/40412595/Towards_Measuring_Anonymity20151126-1621-1mi6po3.pdf
