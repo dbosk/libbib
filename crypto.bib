@@ -31,11 +31,90 @@
   keywords={Kryptering},
 }
 
+@book{GoldreichFOC-1,
+  author={Goldreich, Oded},
+  title={Foundations of cryptography, Vol.~1: Basic tools},
+  publisher={Cambridge Univ.\ Press},
+  address={Cambridge},
+  year={2001},
+  ISBN={0-521-79172-3},
+}
+@book{GoldreichFOC-2,
+  author={Goldreich, Oded},
+  title={Foundations of cryptography, Vol.~2: Basic applications},
+  publisher={Cambridge Univ.\ Press},
+  address={Cambridge},
+  year={2004},
+  ISBN={0-521-83084-2:},
+} 
+
+@book{KatzLindell-v1,
+  title={Introduction to modern cryptography},
+  author={Katz, Jonathan and Lindell, Yehuda},
+  publisher={Chapman {\&} Hall/CRC},
+  address={Boca Raton},
+  year={2008},
+  edition={1},
+  ISBN={9781584885511},
+}
+@book{KatzLindell-v2,
+  title={Introduction to modern cryptography},
+  author={Katz, Jonathan and Lindell, Yehuda.},
+  publisher={Chapman {\&} Hall/CRC},
+  address={Boca Raton},
+  year={2014},
+  edition={2},
+  ISBN={9781466570269},
+} 
+
+@incollection{HMAC,
+  author="Bellare, Mihir
+      and Canetti, Ran
+      and Krawczyk, Hugo",
+  editor="Koblitz, Neal",
+  title="Keying Hash Functions for Message Authentication",
+  booktitle="Advances in Cryptology --- CRYPTO '96: Prooceedings of the 16th 
+      Annual International Cryptology Conference",
+  year="1996",
+  publisher="Springer Berlin Heidelberg",
+  address="Berlin, Heidelberg",
+  pages="1--15",
+  isbn="978-3-540-68697-2",
+  doi="10.1007/3-540-68697-5_1",
+  url="http://dx.doi.org/10.1007/3-540-68697-5_1"
+}
+
+@techreport{HMAC-std,
+  title={The Keyed-Hash Message Authentication Code (HMAC)},
+  type={Federal Information Processing Standards Publication},
+  number={198-1},
+  institution={National Institute of Standards and Technology},
+  year={2008},
+  month={7},
+  URL={http://csrc.nist.gov/publications/fips/fips198-1/FIPS-198-1_final.pdf},
+}
+
+@inproceedings{ElGamal,
+  author="ElGamal, Taher",
+  editor="Blakley, George Robert
+      and Chaum, David",
+  title="A Public Key Cryptosystem and a Signature Scheme Based on Discrete 
+      Logarithms",
+  booktitle="Advances in Cryptology: Proceedings of CRYPTO 84",
+  year="1985",
+  publisher="Springer Berlin Heidelberg",
+  address="Berlin, Heidelberg",
+  pages="10--18",
+  isbn="978-3-540-39568-3",
+  doi="10.1007/3-540-39568-7_2",
+  url="http://dx.doi.org/10.1007/3-540-39568-7_2",
+}
+
 @incollection{DeniableEncryption,
   title={Deniable encryption},
   author={Canetti, Ran and Dwork, Cynthia and Naor, Moni and Ostrovsky, 
     Rafail},
-  booktitle={Advances in Cryptology—CRYPTO'97},
+  booktitle={CRYPTO'97},
   pages={90--104},
   year={1997},
   publisher={Springer}
@@ -90,7 +169,7 @@
   title={Key-Privacy in Public-Key Encryption},
   author={Bellare, Mihir and Boldyreva, Alexandra and Desai, Anand and 
     Pointcheval, David},
-  booktitle={Advances in Cryptology — ASIACRYPT 2001},
+  booktitle={ASIACRYPT 2001},
   editor={Boyd, Colin},
   series={Lecture Notes in Computer Science},
   volume={2248},
@@ -131,7 +210,7 @@
 @incollection{KD-KEM,
   title={A New Paradigm of Hybrid Encryption Scheme},
   author={Kurosawa, Kaoru and Desmedt, Yvo},
-  booktitle={Advances in Cryptology – CRYPTO 2004},
+  booktitle={CRYPTO 2004},
   editor={Franklin, Matt},
   series={Lecture Notes in Computer Science},
   volume={3152},
@@ -149,7 +228,7 @@
   title={Digital signcryption or how to achieve
     cost (signature \& encryption)≪ cost (signature)+ cost (encryption)},
   author={Zheng, Yuliang},
-  booktitle={Advances in Cryptology—CRYPTO'97},
+  booktitle={CRYPTO'97},
   pages={165--179},
   year={1997},
   publisher={Springer}
@@ -255,7 +334,7 @@
 @incollection{AtomicProxyCrypto,
   title={Divertible protocols and atomic proxy cryptography},
   author={Blaze, Matt and Bleumer, Gerrit and Strauss, Martin},
-  booktitle={Advances in Cryptology — EUROCRYPT'98},
+  booktitle={EUROCRYPT'98},
   editor={Nyberg, Kaisa},
   series={Lecture Notes in Computer Science},
   volume={1403},
@@ -271,7 +350,7 @@
 @inproceedings{CP-ABE,
   title={Ciphertext-Policy Attribute-Based Encryption},
   author={Bethencourt, J. and Sahai, A. and Waters, B.},
-  booktitle={Security and Privacy, 2007. SP '07. IEEE Symposium on},
+  booktitle={Security and Privacy, 2007},
   pages={321-334},
   year={2007},
   keywords={authorisation;cryptography;distributed processing;storage 
@@ -288,9 +367,8 @@
   title = {Attribute-based Encryption for Fine-grained Access Control of 
     Encrypted Data},
   author = {Goyal, Vipul and Pandey, Omkant and Sahai, Amit and Waters, Brent},
-  booktitle = {Proceedings of the 13th ACM Conference on Computer and 
-    Communications Security},
-  series = {CCS '06},
+  booktitle = {CCS'06},
+  series = {CCS},
   pages = {89--98},
   publisher = {ACM},
   address = {New York, NY, USA},
@@ -307,7 +385,7 @@
 @incollection{DABE,
   title={Decentralizing Attribute-Based Encryption},
   author={Lewko, Allison and Waters, Brent},
-  booktitle={Advances in Cryptology – EUROCRYPT 2011},
+  booktitle={EUROCRYPT 2011},
   editor={Paterson, Kenneth G.},
   series={Lecture Notes in Computer Science},
   volume={6632},
@@ -325,7 +403,7 @@
   title={Dual System Encryption: Realizing Fully Secure IBE and HIBE under 
     Simple Assumptions},
   isbn={978-3-642-03355-1},
-  booktitle={Advances in Cryptology - CRYPTO 2009},
+  booktitle={CRYPTO 2009},
   editor={Halevi, Shai},
   series={Lecture Notes in Computer Science},
   volume={5677},
@@ -371,11 +449,84 @@
   language={English}
 }
 
+@inbook{UniqueGroupSignatures,
+  author="Franklin, Matthew
+      and Zhang, Haibin",
+  editor="Foresti, Sara
+      and Yung, Moti
+      and Martinelli, Fabio",
+  chapter="Unique Group Signatures",
+  title="Computer Security -- ESORICS 2012: 17th European Symposium on Research in Computer Security, Pisa, Italy, September 10-12, 2012. Proceedings",
+  year="2012",
+  publisher="Springer Berlin Heidelberg",
+  address="Berlin, Heidelberg",
+  pages="643--660",
+  isbn="978-3-642-33167-1",
+  doi="10.1007/978-3-642-33167-1_37",
+  url="http://dx.doi.org/10.1007/978-3-642-33167-1_37"
+}
+@Inbook{UniqueRingSignatures,
+  author="Franklin, Matthew
+      and Zhang, Haibin",
+  editor="Sadeghi, Ahmad-Reza",
+  chapter="Unique Ring Signatures: A Practical Construction",
+  title="Financial Cryptography and Data Security: 17th International Conference, FC 2013, Okinawa, Japan, April 1-5, 2013, Revised Selected Papers",
+  year="2013",
+  publisher="Springer Berlin Heidelberg",
+  address="Berlin, Heidelberg",
+  pages="162--170",
+  isbn="978-3-642-39884-1",
+  doi="10.1007/978-3-642-39884-1_13",
+  url="http://dx.doi.org/10.1007/978-3-642-39884-1_13"
+}
+@article{ListSignatures,
+  author = "Sébastien Canard and Berry Schoenmakers and Martijn Stam and 
+      Jacques Traoré",
+  title = "List signature schemes",
+  journal = "Discrete Applied Mathematics",
+  volume = "154",
+  number = "2",
+  pages = "189--201",
+  year = "2006",
+  note = "Coding and Cryptography",
+  issn = "0166-218X",
+  doi = "http://dx.doi.org/10.1016/j.dam.2005.08.003",
+  url = "http://www.sciencedirect.com/science/article/pii/S0166218X05002283",
+  keywords = "Electronic voting schemes",
+  keywords = "Group signature schemes",
+  keywords = "List signature schemes ",
+  abstract = "A group signature scheme allows group members to issue signatures 
+      on behalf of the group, while hiding for each signature which group 
+      member actually issued it. Such scheme also involves a group manager, who 
+      is able to open any group signature by showing which group member issued 
+      it. We introduce the concept of list signatures as a variant of group 
+      signatures which sets a limit on the number of signatures each group 
+      member may issue. These limits must be enforced without having the group 
+      manager open signatures of honest group members—which excludes the 
+      trivial solution in which the group manager opens every signature to see 
+      whether some group members exceed their limits. Furthermore, we consider 
+      the problem of publicly identifying group members who exceed their 
+      limits, also without involving the group manager."
+}
+
+@Article{Schnorr,
+  author="Schnorr, C. P.",
+  title="Efficient signature generation by smart cards",
+  journal="Journal of Cryptology",
+  volume="4",
+  number="3",
+  year="1991",
+  pages="161--174",
+  issn="1432-1378",
+  doi="10.1007/BF00196725",
+  url="http://dx.doi.org/10.1007/BF00196725",
+}
+
+
 @inproceedings{di2006deniable,
   title={Deniable authentication and key exchange},
   author={Di Raimondo, Mario and Gennaro, Rosario and Krawczyk, Hugo},
-  booktitle={Proceedings of the 13th ACM conference on Computer and 
-    communications security},
+  booktitle={CCS'06},
   pages={400--409},
   year={2006},
   organization={ACM}
@@ -425,15 +576,7 @@
   month={3},
   URL={http://csrc.nist.gov/publications/fips/fips180-4/fips-180-4.pdf},
 }
-@techreport{hmac,
-  title={The Keyed-Hash Message Authentication Code (HMAC)},
-  type={Federal Information Processing Standards Publication},
-  number={198-1},
-  institution={National Institute of Standards and Technology},
-  year={2008},
-  month={7},
-  URL={http://csrc.nist.gov/publications/fips/fips198-1/FIPS-198-1_final.pdf},
-}
+
 @article{smp,
   title={A fair and efficient solution to the socialist millionaires’ problem},
   author={Boudot, Fabrice and Schoenmakers, Berry and Traore, Jacques},
@@ -451,7 +594,7 @@
 @inproceedings{BroadcastEncryption,
   title={Broadcast encryption},
   author={Fiat, Amos and Naor, Moni},
-  booktitle={Advances in Cryptology—CRYPTO’93},
+  booktitle={CRYPTO’93},
   pages={480--491},
   year={1994},
   organization={Springer}
