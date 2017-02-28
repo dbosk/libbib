@@ -3,6 +3,7 @@
 \RequirePackage{amsmath}
 \RequirePackage{xparse}
 \RequirePackage{mleftright}
+\RequirePackage[mathscr]{euscript}
 \RequirePackage{mfirstuc-english}
 \NewDocumentCommand{\libbib@capitalize}{m}{#1}
 \PassOptionsToPackage{single}{acro}
@@ -48,6 +49,7 @@
   \DeclareMathOperator{\Q}{\mathbb{Q}}
   \DeclareMathOperator{\R}{\mathbb{R}}
   %\DeclareMathOperator{\C}{\mathbb{C}}
+  \DeclareMathOperator{\powerset}{\mathscr{P}}
   \ProvideDocumentCommand{\textand}{}{\ensuremath{\qquad\text{and}\qquad}}
   \ProvideDocumentCommand{\Prob}{o o m}{\ensuremath{%
     \Pr%
