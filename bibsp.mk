@@ -47,6 +47,8 @@ include ${INCLUDE_BIBSP}/privacy.mk
 include ${INCLUDE_BIBSP}/reputation.mk
 include ${INCLUDE_BIBSP}/mpc.mk
 include ${INCLUDE_BIBSP}/passwd.mk
+include ${INCLUDE_BIBSP}/protests.mk
+include ${INCLUDE_BIBSP}/voting.mk
 
 define bibsp_display
 .PHONY: $(1)
