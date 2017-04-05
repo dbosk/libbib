@@ -15,6 +15,8 @@ LIBBIB+=privacy.bib
 LIBBIB+=reputation.bib
 LIBBIB+=surveillance.bib
 LIBBIB+=mpc.bib
+LIBBIB+=voting.bib
+LIBBIB+=protests.bib
 
 LIBBIB+=libbib.sty
 
