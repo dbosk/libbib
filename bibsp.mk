@@ -19,6 +19,7 @@ BIBSP_BIB+=passwd.bib
 BIBSP_BIB+=protests.bib
 BIBSP_BIB+=voting.bib
 BIBSP_BIB+=stats.bib
+BIBSP_BIB+=adhocnets.bib
 
 BIBSP_STY+=libbib.sty
 BIBSP_STY+=bibsp.sty
@@ -51,6 +52,7 @@ include ${INCLUDE_BIBSP}/passwd.mk
 include ${INCLUDE_BIBSP}/protests.mk
 include ${INCLUDE_BIBSP}/voting.mk
 include ${INCLUDE_BIBSP}/stats.mk
+include ${INCLUDE_BIBSP}/adhocnets.mk
 
 define bibsp_display
 .PHONY: $(1)
