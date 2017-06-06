@@ -82,3 +82,6 @@ URL-FSThresholdSignatures=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.
 
 BIBSP_REFKEY+=Schnorr
 URL-Schnorr=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.1007%2FBF00196725.pdf
+
+BIBSP_REFKEY+=FiatShamirHeuristic
+URL-FiatShamirHeuristic=http://dx.doi.org/10.1007/3-540-47721-7_12
