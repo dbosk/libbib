@@ -13,6 +13,9 @@ BIBSP_TOPIC+=	adhocnets
 
 BIBSP_TOPIC+=	otrmsg otpkx ppes
 
+INCLUDE_LIBBIB?=.
+INCLUDE_BIBSP?=	${INCLUDE_LIBBIB}
+
 
 ### BIB FILES ###
 
@@ -28,9 +31,6 @@ $(foreach topic,${BIBSP_TOPIC},$(eval $(call bibsp_bibfiles,${topic})))
 BIBSP_STY+=libbib.sty
 BIBSP_STY+=bibsp.sty
 
-INCLUDE_BIBSP?=		.
-INCLUDE_LIBBIB?=	${INCLUDE_BIBSP}
-
 ${BIBSP_BIB} ${BIBSP_STY}:
 	[ -e "./$@" ] || ln -s ${INCLUDE_BIBSP}/$@ ./$@
 
@@ -43,7 +43,7 @@ clean-bibsp:
 ### INCLUDE FILES ###
 
 define bibsp_includes
-include 		${INCLUDE_BIBSP}/$(1).mk
+include 		$${INCLUDE_BIBSP}/$(1).mk
 endef
 
 $(foreach topic,${BIBSP_TOPIC},$(eval $(call bibsp_includes,${topic})))
