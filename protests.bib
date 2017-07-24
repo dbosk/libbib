@@ -51,6 +51,50 @@
 	urldate = {2017-07-21},
 }
 
+@online{TheXManMarch,
+	title = {The [?]-Man March},
+	url = {https://www.wired.com/2003/06/crowd-spc/},
+  titleaddon = {{WIRED}},
+  author = {Farouk El-Baz},
+	urldate = {2017-07-21},
+  year = {2003},
+  month = {6},
+}
+
+@article{PropagandaTruthDuelInCrowdCounts,
+	title = {Propaganda, Truth Duel in Crowd Counts},
+	issn = {0458-3035},
+	url = {http://www.latimes.com/la-me-crowdcounts-1991oct22-story.html},
+	journaltitle = {Los Angeles Times},
+	urldate = {2017-07-24},
+	date = {1991-10-22},
+	langid = {american},
+}
+
+@article{HowWillWeKnowTrumpInauguralCrowdSize,
+	title = {How Will We Know Trump’s Inaugural Crowd Size?},
+	issn = {1072-7825},
+	url = {https://www.theatlantic.com/technology/archive/2017/01/how-will-we-know-trumps-inaugural-crowd-size/513938/},
+	abstract = {It involves satellites and weather balloons.},
+	journaltitle = {The Atlantic},
+	author = {Meyer, Robinson},
+	urldate = {2017-07-24},
+	date = {2017-01-20},
+}
+
+@article{BBCHowToCountProtestNumbers,
+	title = {Protest numbers: How are they counted?},
+	url = {http://www.bbc.com/news/magazine-12879582},
+	shorttitle = {Protest numbers},
+  abstract = {The number of protesters in London on Saturday has been estimated 
+    anywhere from 250,000 to 500,000. So is it possible to count?},
+	journaltitle = {{BBC} News},
+	urldate = {2017-07-24},
+	date = {2011-03-28},
+	langid = {british},
+}
+
+
 @INPROCEEDINGS{CVCrowdCounting,
   title={Privacy preserving crowd monitoring: Counting people without people 
     models or tracking},
@@ -82,6 +126,46 @@
         segmentation;Privacy;Robustness},
   doi={10.1109/CVPR.2008.4587569},
   ISSN={1063-6919},
+}
+
+@inproceedings{WhyMACRandomizationIsNotEnough,
+	location = {New York, {NY}, {USA}},
+  title = {Why {MAC} Address Randomization is Not Enough: An Analysis of Wi-Fi 
+    Network Discovery Mechanisms},
+	isbn = {978-1-4503-4233-9},
+	url = {http://doi.acm.org/10.1145/2897845.2897883},
+	doi = {10.1145/2897845.2897883},
+	series = {{ASIA} {CCS} '16},
+	shorttitle = {Why {MAC} Address Randomization is Not Enough},
+  abstract = {We present several novel techniques to track (unassociated) 
+    mobile devices by abusing features of the Wi-Fi standard. This shows that 
+        using random {MAC} addresses, on its own, does not guarantee privacy.  
+        First, we show that information elements in probe requests can be used 
+        to fingerprint devices. We then combine these fingerprints with 
+        incremental sequence numbers, to create a tracking algorithm that does 
+        not rely on unique identifiers such as {MAC} addresses. Based on 
+        real-world datasets, we demonstrate that our algorithm can correctly 
+        track as much as 50\% of devices for at least 20 minutes. We also show 
+        that commodity Wi-Fi devices use predictable scrambler seeds. These can 
+        be used to improve the performance of our tracking algorithm. Finally, 
+    we present two attacks that reveal the real {MAC} address of a device, even 
+        if {MAC} address randomization is used. In the first one, we create 
+          fake hotspots to induce clients to connect using their real {MAC} 
+    address. The second technique relies on the new 802.11u standard, commonly 
+        referred to as Hotspot 2.0, where we show that Linux and Windows send 
+        Access Network Query Protocol ({ANQP}) requests using their real {MAC} 
+    address.},
+	pages = {413--424},
+  booktitle = {Proceedings of the 11th {ACM} Asia Conference on Computer and 
+    Communications Security},
+	publisher = {{ACM}},
+  author = {Vanhoef, Mathy and Matte, Célestin and Cunche, Mathieu and Cardoso, 
+    Leonardo S. and Piessens, Frank},
+	urldate = {2017-07-24},
+	date = {2016},
+  keywords = {802.11, 802.11u, anonymity, fingerprinting, hotspot 2.0, karma 
+    attack, {MAC} address randomization, privacy, pseudonym, scrambler, 
+    tracking, wi-fi, wifi},
 }
 
 @INPROCEEDINGS{WifiCrowdCounting,
