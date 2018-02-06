@@ -331,14 +331,12 @@
   \ifthenelse{\equal{#2}{}}{}{_{#2}}%
 }}
 \ProvideDocumentCommand{\PubKey}{s m}{\ensuremath{%
-  \IfBooleanT{#1}{\hat}k%
+  \IfBooleanT{#1}{\hat}pk%
   \ifthenelse{\equal{#2}{}}{}{_{#2}}%
-  ^{\mathsf{Pub}}%
 }}
 \ProvideDocumentCommand{\PriKey}{s m}{\ensuremath{%
-  \IfBooleanT{#1}{\hat}k%
+  \IfBooleanT{#1}{\hat}sk%
   \ifthenelse{\equal{#2}{}}{}{_{#2}}%
-  ^{\mathsf{Pri}}%
 }}
 \ProvideDocumentCommand{\MACKey}{s m}{\ensuremath{%
   \IfBooleanT{#1}{\hat}k%
@@ -351,11 +349,11 @@
   ^{\mathsf{MA}}%
 }}
 \ProvideDocumentCommand{\SignKey}{s m}{\ensuremath{%
-  \IfBooleanT{#1}{\hat}s%
+  \IfBooleanT{#1}{\hat}sk%
   \ifthenelse{\equal{#2}{}}{}{_{#2}}%
 }}
 \ProvideDocumentCommand{\VerifKey}{s m}{\ensuremath{%
-  \IfBooleanT{#1}{\hat}v%
+  \IfBooleanT{#1}{\hat}vk%
   \ifthenelse{\equal{#2}{}}{}{_{#2}}%
 }}
 
