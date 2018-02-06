@@ -74,6 +74,34 @@
 % Crypto
 %%%%%%%%%%%%%%%%%%%%%%
 % General algorithmic parts
+\ProvideDocumentCommand{\NewCryptoScheme}{m m}{%
+  \ProvideDocumentCommand{#1}{s o}{%
+    \ensuremath{%
+      \operatorname{%
+        \IfBooleanTF{##1}{%
+          \overline{{\mathsf{#2}}}%
+        }{%
+          {\mathsf{#2}}%
+        }%
+      }%
+      \IfValueT{##2}{\!.\!##2}%
+    }%
+  }%
+}
+\ProvideDocumentCommand{\NewCryptoFunction}{m m}{%
+  \ProvideDocumentCommand{#1}{s o o}{%
+    \operatorname{%
+      \IfBooleanTF{##1}{%
+        \overline{\mathsf{#2}}%
+      }{%
+        \mathsf{#2}%
+      }%
+    }%
+    \IfValueT{##3}{##3}%
+    \IfValueT{##2}{\mleft(##2\mright)}%
+  }%
+}
+%
 \ProvideDocumentCommand{\Scheme}{s m o o}{\ensuremath{%
     \operatorname{%
       \IfBooleanTF{#1}{%
