@@ -105,6 +105,11 @@
     }%
   }%
 }
+\ProvideDocumentCommand{\NewCryptoSet}{m m}{%
+  \ProvideDocumentCommand{#1}{}{%
+    \ensuremath{\mathcal{#2}}%
+  }%
+}
 %
 \ProvideDocumentCommand{\Scheme}{s m o o}{\ensuremath{%
     \operatorname{%
