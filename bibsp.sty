@@ -90,7 +90,7 @@
     }%
   }%
 }
-\ProvideDocumentCommand{\NewCryptoFunction}{m m}{%
+\ProvideDocumentCommand{\NewAlgorithm}{m m}{%
   \ProvideDocumentCommand{#1}{s o o}{%
     \ensuremath{%
       \operatorname{%
@@ -105,7 +105,27 @@
     }%
   }%
 }
+\ProvideDocumentCommand{\NewFunction}{m m}{%
+  \ProvideDocumentCommand{#1}{s o o}{%
+    \ensuremath{%
+      \operatorname{%
+        \IfBooleanTF{##1}{%
+          \overline{#2}%
+        }{%
+          #2%
+        }%
+      }%
+      \IfValueT{##3}{##3}%
+      \IfValueT{##2}{\mleft(##2\mright)}%
+    }%
+  }%
+}
 \ProvideDocumentCommand{\NewCryptoSet}{m m}{%
+  \ProvideDocumentCommand{#1}{}{%
+    \ensuremath{\mathcal{#2}}%
+  }%
+}
+\ProvideDocumentCommand{\NewCryptoEntity}{m m}{%
   \ProvideDocumentCommand{#1}{}{%
     \ensuremath{\mathcal{#2}}%
   }%
@@ -114,10 +134,10 @@
 % Proofs of knowledge
 %
 \ProvideDocumentCommand{\PK}{m m}{\ensuremath{%
-    PK\mleft\{\mleft(#1\mright) : #2\mright\}%
+    \operatorname{PK}\mleft\{\mleft(#1\mright) : #2\mright\}%
   }}
 \ProvideDocumentCommand{\SPK}{m m m}{\ensuremath{%
-    SPK\mleft\{\mleft(#1\mright) : #2\mright\}%
+    \operatorname{SPK}\mleft\{\mleft(#1\mright) : #2\mright\}%
     \mleft(#3\mright)%
   }}
 %%%%
