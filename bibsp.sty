@@ -44,15 +44,17 @@
 %%%%%%%%%%%%%%%%%%%%%%
 % Protocols
 %%%%%%%%%%%%%%%%%%%%%%
+\newlength{\ProtoArrowLength}
+\setlength{\ProtoArrowLength}{0.15\linewidth}
 \ProvideDocumentCommand{\ProtoSendRight}{o m}{\ensuremath{%
     \IfValueTF{#1}%
     {\xrightarrow[\hspace{#1}]{#2}}%
-    {\xrightarrow[\hspace{0.2\linewidth}]{#2}}%
+    {\xrightarrow[\hspace{\ProtoArrowLength}]{#2}}%
   }}
 \ProvideDocumentCommand{\ProtoSendLeft}{o m}{\ensuremath{%
     \IfValueTF{#1}%
     {\xleftarrow[\hspace{#1}]{#2}}%
-    {\xleftarrow[\hspace{0.2\linewidth}]{#2}}%
+    {\xleftarrow[\hspace{\ProtoArrowLength}]{#2}}%
   }}
 %%%%%%%%%%%%%%%%%%%%%%
 % General maths
