@@ -15,3 +15,6 @@ URL-DistanceBounding=https://link.springer.com/chapter/10.1007/3-540-48285-7_30
 
 BIBSP_REFKEY+=DistanceHijacking
 URL-DistanceHijacking=http://ieeexplore.ieee.org/abstract/document/6234408/
+
+BIBSP_REFKEY+=ImpersonationFraud
+URL-ImpersonationFraud=https://link.springer.com/chapter/10.1007/978-3-642-04474-8_21
