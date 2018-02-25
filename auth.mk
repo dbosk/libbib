@@ -10,6 +10,10 @@ URL-HowToWinTheCloneWars=http://doi.acm.org/10.1145/1180405.1180431
 BIBSP_REFKEY+=Psignatures
 URL-Psignatures=https://doi.org/10.1007/978-3-540-78524-8_20
 
+BIBSP_REFKEY+=AnonPass
+#URL-AnonPass=http://ieeexplore.ieee.org/abstract/document/6547118/
+URL-AnonPass=https://eprint.iacr.org/2013/317
+
 BIBSP_REFKEY+=MafiaFraud
 URL-MafiaFraud=https://link.springer.com/chapter/10.1007/3-540-48184-2_3
 
