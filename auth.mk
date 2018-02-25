@@ -10,6 +10,9 @@ URL-HowToWinTheCloneWars=http://doi.acm.org/10.1145/1180405.1180431
 BIBSP_REFKEY+=Psignatures
 URL-Psignatures=https://doi.org/10.1007/978-3-540-78524-8_20
 
+BIBSP_REFKEY+=MafiaFraud
+URL-MafiaFraud=https://link.springer.com/chapter/10.1007/3-540-48184-2_3
+
 BIBSP_REFKEY+=DistanceBounding
 URL-DistanceBounding=https://link.springer.com/chapter/10.1007/3-540-48285-7_30
 
@@ -18,3 +21,10 @@ URL-DistanceHijacking=http://ieeexplore.ieee.org/abstract/document/6234408/
 
 BIBSP_REFKEY+=ImpersonationFraud
 URL-ImpersonationFraud=https://link.springer.com/chapter/10.1007/978-3-642-04474-8_21
+
+BIBSP_REFKEY+=DB-BMV
+#URL-DB-BMV=https://content.iospress.com/articles/journal-of-computer-security/jcs518
+URL-DB-BMV=https://eprint.iacr.org/2013/465
+
+BIBSP_REFKEY+=DB-DFKO
+URL-DB-DFKO=https://link.springer.com/chapter/10.1007%2F978-3-642-24861-0_4
