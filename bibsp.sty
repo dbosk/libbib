@@ -56,6 +56,11 @@
     {\xleftarrow[\hspace{#1}]{#2}}%
     {\xleftarrow[\hspace{\ProtoArrowLength}]{#2}}%
   }}
+\ProvideDocumentCommand{\Proto}{m m}{\ensuremath{%
+    \mleft\langle%
+    #1; #2%
+    \mright\rangle%
+  }}
 %%%%%%%%%%%%%%%%%%%%%%
 % General maths
 %%%%%%%%%%%%%%%%%%%%%%
