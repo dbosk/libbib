@@ -86,5 +86,8 @@ URL-Schnorr=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.1007%2FBF00196
 BIBSP_REFKEY+=FiatShamirHeuristic
 URL-FiatShamirHeuristic=http://dx.doi.org/10.1007/3-540-47721-7_12
 
+BIBSP_REFKEY+=PedersenCommitment
+URL-PedersenCommitment=https://link.springer.com/chapter/10.1007/3-540-46766-1_9
+
 BIBSP_REFKEY+=PKnotation
 URL-PKnotation=https://link.springer.com/chapter/10.1007%2FBFb0052252
