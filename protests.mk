@@ -6,3 +6,9 @@ URL-2016DemonstrationsInSeoul=http://bigstory.ap.org/article/317ea62bddbd4132ab1
 
 BIBSP_REFKEY+=CVCrowdCounting
 URL-CVCrowdCounting=https://dx.doi.org/10.1109/CVPR.2008.4587569
+
+BIBSP_REFKEY+=UrbanCount
+URL-UrbanCount=http://ieeexplore.ieee.org/document/8117189/
+
+BIBSP_REFKEY+=DiVote
+URL-DiVote=http://urn.kb.se/resolve?urn=urn:nbn:se:kth:diva-187737
