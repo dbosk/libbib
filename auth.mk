@@ -32,3 +32,6 @@ URL-DB-BMV=https://eprint.iacr.org/2013/465
 
 BIBSP_REFKEY+=DB-DFKO
 URL-DB-DFKO=https://link.springer.com/chapter/10.1007%2F978-3-642-24861-0_4
+
+BIBSP_REFKEY+=DBonSmartphones
+URL-DBonSmartphones=https://hal.inria.fr/hal-01244606
