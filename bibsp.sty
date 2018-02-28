@@ -128,8 +128,12 @@
           \mathsf{#2}%
         }%
       }%
-      \IfValueT{##3}{##3}%
-      \IfValueT{##2}{\mleft(##2\mright)}%
+      \IfValueTF{##3}{%
+        ##2%
+        \mleft(##3\mright)%
+      }{%
+        \IfValueT{##2}{\mleft(##2\mright)}%
+      }%
     }%
   }%
 }
@@ -143,8 +147,12 @@
           #2%
         }%
       }%
-      \IfValueT{##3}{##3}%
-      \IfValueT{##2}{\mleft(##2\mright)}%
+      \IfValueTF{##3}{%
+        ##2%
+        \mleft(##3\mright)%
+      }{%
+        \IfValueT{##2}{\mleft(##2\mright)}%
+      }%
     }%
   }%
 }
