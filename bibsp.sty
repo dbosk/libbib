@@ -1,49 +1,67 @@
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
-\ProvidesPackage{bibsp}[2015/07/16 v0.1 LaTeX/BibTeX library]
-\RequirePackage{amsmath}
+\ProvidesPackage{bibsp}[2018/03/10 v1.0 Bibliographic Security/Privacy Library]
 \RequirePackage{xparse}
+\RequirePackage{amsmath}
 \RequirePackage{mleftright}
-\RequirePackage[mathscr]{euscript}
-\RequirePackage{mfirstuc-english}
-\PassOptionsToPackage{single}{acro}
-\PassOptionsToPackage{label}{acro}
-\PassOptionsToPackage{uc-cmd=\makefirstuc}{acro}
-\RequirePackage{acro}
-\RequirePackage{textcomp}
-\RequirePackage{ifthen}
 \PassOptionsToPackage{compress}{cleveref}
 \RequirePackage{cleveref}
+\PassOptionsToPackage{single}{acro}
+\PassOptionsToPackage{label}{acro}
+\RequirePackage{mfirstuc-english}
+\PassOptionsToPackage{uc-cmd=\makefirstuc}{acro}
+\RequirePackage{acro}
+\PassOptionsToPackage{mathscr}{euscript}
+\RequirePackage{euscript}
+\RequirePackage{textcomp}
+\RequirePackage{ifthen}
 \DeclareOption{lncs}{%
-  \acsetup{uc-cmd=\capitalisewords}
-  \MFUhyphentrue
-  \let\ac\Ac
-  \let\acf\Acf
-  \let\acl\Acl
-  \let\acp\Acp
-  \let\aclp\Aclp
-  \let\acfp\Acfp
   \crefname{chapter}{Chap.}{Chap.}
-  \Crefname{chapter}{Chapter}{Chapters}
-  \crefname{section}{Sect.}{Sect.}
-  \Crefname{section}{Section}{Sections}
-  \crefname{figure}{Fig.}{Fig.}
-  \Crefname{figure}{Figure}{Figures}
-  \crefname{table}{Tab.}{Tab.}
-  \Crefname{table}{Table}{Tables}
-  \crefname{definition}{Def.}{Def.}
-  \Crefname{definition}{Definition}{Definitions}
-  \crefname{theorem}{Thm.}{Thm.}
-  \Crefname{theorem}{Theorem}{Theorems}
-  \crefname{lemma}{Lem.}{Lem.}
-  \Crefname{lemma}{Lemma}{Lemmas}
-  \crefname{corollary}{Cor.}{Cor.}
-  \Crefname{corollary}{Corollary}{Corollaries}
-  \crefname{proposition}{Prop.}{Prop.}
-  \Crefname{proposition}{Proposition}{Propositions}
+	\Crefname{chapter}{Chapter}{Chapters}
+	\crefname{section}{Sect.}{Sect.}
+	\Crefname{section}{Section}{Sections}
+	\crefname{figure}{Fig.}{Fig.}
+	\Crefname{figure}{Figure}{Figures}
+	\crefname{table}{Tab.}{Tab.}
+	\Crefname{table}{Table}{Tables}
+	\crefname{definition}{Def.}{Def.}
+	\Crefname{definition}{Definition}{Definitions}
+	\crefname{theorem}{Thm.}{Thm.}
+	\Crefname{theorem}{Theorem}{Theorems}
+	\crefname{lemma}{Lem.}{Lem.}
+	\Crefname{lemma}{Lemma}{Lemmas}
+	\crefname{corollary}{Cor.}{Cor.}
+	\Crefname{corollary}{Corollary}{Corollaries}
+	\crefname{proposition}{Prop.}{Prop.}
+	\Crefname{proposition}{Proposition}{Propositions}
+	\acsetup{uc-cmd=\capitalisewords}
+	\MFUhyphentrue
+	\let\ac\Ac
+	\let\acf\Acf
+	\let\acl\Acl
+	\let\acp\Acp
+	\let\aclp\Aclp
+	\let\acfp\Acfp
 }
-%%%%%%%%%%%%%%%%%%%%%%
-% Protocols
-%%%%%%%%%%%%%%%%%%%%%%
+\DeclareMathOperator{\NN}{\mathbb{N}}
+\DeclareMathOperator{\ZZ}{\mathbb{Z}}
+\DeclareMathOperator{\QQ}{\mathbb{Q}}
+\DeclareMathOperator{\RR}{\mathbb{R}}
+\DeclareMathOperator{\CC}{\mathbb{C}}
+\ifdefined\powerset%
+  \relax%
+\else%
+  \DeclareMathOperator{\powerset}{\mathscr{P}}%
+\fi
+\DeclareMathOperator{\GF}{\mathrm{GF}}
+\DeclareMathOperator{\F}{\mathbb{F}}
+\DeclareMathOperator{\ord}{ord}
+\ProvideDocumentCommand{\card}{m}{\ensuremath{|#1|}}
+\ProvideDocumentCommand{\gen}{m}{\mleft\langle #1\mright\rangle}
+\ProvideDocumentCommand{\Proto}{m m}{\ensuremath{%
+    \mleft\langle%
+    #1; #2%
+    \mright\rangle%
+  }}
 \newlength{\ProtoArrowLength}
 \setlength{\ProtoArrowLength}{0.15\linewidth}
 \ProvideDocumentCommand{\ProtoSendRight}{o m}{\ensuremath{%
@@ -56,45 +74,6 @@
     {\xleftarrow[\hspace{#1}]{#2}}%
     {\xleftarrow[\hspace{\ProtoArrowLength}]{#2}}%
   }}
-\ProvideDocumentCommand{\Proto}{m m}{\ensuremath{%
-    \mleft\langle%
-    #1; #2%
-    \mright\rangle%
-  }}
-%%%%%%%%%%%%%%%%%%%%%%
-% General maths
-%%%%%%%%%%%%%%%%%%%%%%
-%\ProvideDocumentCommand{\ord}{m}{\ensuremath{|#1|}}
-\DeclareMathOperator{\N}{\mathbb{N}}
-\DeclareMathOperator{\Z}{\mathbb{Z}}
-\DeclareMathOperator{\Q}{\mathbb{Q}}
-\DeclareMathOperator{\R}{\mathbb{R}}
-%\DeclareMathOperator{\C}{\mathbb{C}}
-\ifdefined\powerset%
-  \relax%
-\else%
-  \DeclareMathOperator{\powerset}{\mathscr{P}}%
-\fi
-\ProvideDocumentCommand{\textand}{}{\ensuremath{\qquad\text{and}\qquad}}
-\ProvideDocumentCommand{\Prob}{o o m}{\ensuremath{%
-  \Pr%
-  \IfValueT{#1}{\ifthenelse{\equal{#1}{}}{}{_{#1}}}%
-  \IfValueT{#2}{^{#2}}%
-  \mleft[%
-    \ifthenelse{\equal{#3}{}}{\cdot}{#3}%
-  \mright]%
-}}
-
-%%%%%%%%%%%%%%%%%%%%%%
-% Algebra
-%%%%%%%%%%%%%%%%%%%%%%
-% Galois fields (finite fields)
-\DeclareMathOperator{\GF}{\mathrm{GF}}
-\DeclareMathOperator{\F}{\mathbb{F}}
-\DeclareMathOperator{\ord}{ord}
-\ProvideDocumentCommand{\card}{m}{\ensuremath{|#1|}}
-\ProvideDocumentCommand{\gen}{m}{\mleft\langle #1\mright\rangle}
-
 %%%%%%%%%%%%%%%%%%%%%%
 % Crypto
 %%%%%%%%%%%%%%%%%%%%%%
@@ -1207,6 +1186,5 @@
       user experience%
     },
 }
-
 \ProcessOptions\relax
 \endinput

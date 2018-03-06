@@ -36,6 +36,7 @@
 \clearpage
 
 @
+
 \section{Introduction}%
 \label{Intro}
 
@@ -271,14 +272,38 @@ $(foreach topic,${BIBSP_TOPIC},$(eval $(call bibsp_includes,${topic})))
 @
 
 
-
-
 \section{Mathematical notation}
 
-<<main package notation>>=
+We need to add some mathematical notation that we always use but so far is not 
+implemented in any other package.
+<<main package content>>=
+<<basic sets>>
 <<power-set symbol>>
+<<algebra>>
 @
 
+\paragraph{Basic sets}
+
+We need the basic sets for the numbers.
+\DescribeMacro{\NN}
+The natural numbers, denoted \(\NN\), can be achieved with "\NN".
+\DescribeMacro{\ZZ}
+The integers, denoted \(\ZZ\), can be achieved with "\ZZ".
+\DescribeMacro{\QQ}
+The rational numbers, denoted \(\QQ\), can be achieved with "\QQ".
+\DescribeMacro{\RR}
+The real numbers, denoted \(\RR\), can be achieved with "\RR".
+\DescribeMacro{\CC}
+Finally, the complex numbers, denoted \(\CC\), can be achieved with "\CC".
+
+These commands are simply implemented as follows:
+<<basic sets>>=
+\DeclareMathOperator{\NN}{\mathbb{N}}
+\DeclareMathOperator{\ZZ}{\mathbb{Z}}
+\DeclareMathOperator{\QQ}{\mathbb{Q}}
+\DeclareMathOperator{\RR}{\mathbb{R}}
+\DeclareMathOperator{\CC}{\mathbb{C}}
+@
 
 \paragraph{The power-set symbol}
 
@@ -295,9 +320,32 @@ However, many do not, but we still want to have it accessible.
 
 We will use the font from the euscript package:
 <<required packages>>=
-\PassOptionsToPackage[mathscr]{euscript}
+\PassOptionsToPackage{mathscr}{euscript}
 \RequirePackage{euscript}
 @
+
+\paragraph{Algebra}
+
+<<maths>>=
+\ProvideDocumentCommand{\textand}{}{\ensuremath{\qquad\text{and}\qquad}}
+\ProvideDocumentCommand{\Prob}{o o m}{\ensuremath{%
+  \Pr%
+  \IfValueT{#1}{\ifthenelse{\equal{#1}{}}{}{_{#1}}}%
+  \IfValueT{#2}{^{#2}}%
+  \mleft[%
+    \ifthenelse{\equal{#3}{}}{\cdot}{#3}%
+  \mright]%
+}}
+@
+
+<<algebra>>=
+\DeclareMathOperator{\GF}{\mathrm{GF}}
+\DeclareMathOperator{\F}{\mathbb{F}}
+\DeclareMathOperator{\ord}{ord}
+\ProvideDocumentCommand{\card}{m}{\ensuremath{|#1|}}
+\ProvideDocumentCommand{\gen}{m}{\mleft\langle #1\mright\rangle}
+@
+
 
 
 \section{Protocols}
@@ -364,35 +412,6 @@ We provide "\ProtoSendLeft" and "\ProtoSendRight".
 @
 
 <<main package content>>=
-%%%%%%%%%%%%%%%%%%%%%%
-% General maths
-%%%%%%%%%%%%%%%%%%%%%%
-%\ProvideDocumentCommand{\ord}{m}{\ensuremath{|#1|}}
-\DeclareMathOperator{\N}{\mathbb{N}}
-\DeclareMathOperator{\Z}{\mathbb{Z}}
-\DeclareMathOperator{\Q}{\mathbb{Q}}
-\DeclareMathOperator{\R}{\mathbb{R}}
-%\DeclareMathOperator{\C}{\mathbb{C}}
-\ProvideDocumentCommand{\textand}{}{\ensuremath{\qquad\text{and}\qquad}}
-\ProvideDocumentCommand{\Prob}{o o m}{\ensuremath{%
-  \Pr%
-  \IfValueT{#1}{\ifthenelse{\equal{#1}{}}{}{_{#1}}}%
-  \IfValueT{#2}{^{#2}}%
-  \mleft[%
-    \ifthenelse{\equal{#3}{}}{\cdot}{#3}%
-  \mright]%
-}}
-
-%%%%%%%%%%%%%%%%%%%%%%
-% Algebra
-%%%%%%%%%%%%%%%%%%%%%%
-% Galois fields (finite fields)
-\DeclareMathOperator{\GF}{\mathrm{GF}}
-\DeclareMathOperator{\F}{\mathbb{F}}
-\DeclareMathOperator{\ord}{ord}
-\ProvideDocumentCommand{\card}{m}{\ensuremath{|#1|}}
-\ProvideDocumentCommand{\gen}{m}{\mleft\langle #1\mright\rangle}
-
 %%%%%%%%%%%%%%%%%%%%%%
 % Crypto
 %%%%%%%%%%%%%%%%%%%%%%
