@@ -86,15 +86,20 @@ the filenames.
 We will create a variable [[BIBSP_LINK]] for this purpose, starting with our 
 package.
 <<bibsp variables>>=
-BIBSP_LINK+=  bibsp.sty libbib.sty
-@ (We add [[libbib.sty]] for backwards compatibility, that was the name before 
-it changed to [[bibsp.sty]].)
-Now, if such a file exists in the current directory, we don't want to do 
+BIBSP_LINK+=  bibsp.sty
+@ Now, if such a file exists in the current directory, we don't want to do 
 anything.
 Otherwise, we want to create a link to it.
 <<bibsp targets>>=
 ${BIBSP_LINK}:
 	[ -e "./$@" ] || ln -s ${INCLUDE_BIBSP}/$@ ./$@
+@
+
+We must also provide a default value for [[INCLUDE_BIBSP]], in case it is not 
+set.
+We let the default be the current directory.
+<<bibsp variables>>=
+INCLUDE_BIBSP?=.
 @
 
 We would also like to automate cleaning up these links.
@@ -232,9 +237,6 @@ BIBSP_TOPIC+=	adhocnets
 BIBSP_TOPIC+=	ecurrency
 
 BIBSP_TOPIC+=	otrmsg otpkx ppes
-
-INCLUDE_LIBBIB?=.
-INCLUDE_BIBSP?=	${INCLUDE_LIBBIB}
 @
 
 <<bibsp targets>>=

@@ -1,4 +1,5 @@
-BIBSP_LINK+=  bibsp.sty libbib.sty
+BIBSP_LINK+=  bibsp.sty
+INCLUDE_BIBSP?=.
 BIBSP_TOPIC+=	auth passwd ac
 BIBSP_TOPIC+=	anon
 BIBSP_TOPIC+=	crypto be mpc
@@ -14,9 +15,6 @@ BIBSP_TOPIC+=	adhocnets
 BIBSP_TOPIC+=	ecurrency
 
 BIBSP_TOPIC+=	otrmsg otpkx ppes
-
-INCLUDE_LIBBIB?=.
-INCLUDE_BIBSP?=	${INCLUDE_LIBBIB}
 ${BIBSP_LINK}:
 	[ -e "./$@" ] || ln -s ${INCLUDE_BIBSP}/$@ ./$@
 .PHONY: distclean
