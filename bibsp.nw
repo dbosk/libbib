@@ -439,6 +439,11 @@ arrows in protocols figures, \eg \cref{ProtocolFigure}.
   & \(c\gets \ZZ_q\)
   \\
 
+  % null
+  & \ProtoSendLeft[1em]{x}
+  &
+  \\
+
   \bottomrule
   \end{tabular}
   \caption{%
@@ -463,6 +468,11 @@ arrows in protocols figures, \eg \cref{ProtocolFigure}.
   % null
   & \(\ProtoSendRight{c}\)
   & \(c\gets \ZZ_q\)
+  \\
+
+  % null
+  & \ProtoSendLeft[1em]{x}
+  &
   \\
 
   \bottomrule
