@@ -68,6 +68,47 @@ be indispensable:
 @ The mleftright package provides "\mleft" and "\mright", which fixes a bug in 
 the standard "\left" and "\right" commands.
 
+We also provide a makefile [[<<bibsp.mk>>]] which can be used to easily add 
+bibsp as a dependency.
+<<bibsp.mk>>=
+<<bibsp variables>>
+<<bibsp targets>>
+<<bibsp includes>>
+@ Since we know one file that we will use, [[<<bibsp.sty>>]] above, we can 
+provide its desired targets.
+
+When we include [[bibsp.mk]] in a makefile, we want it to provide a local link 
+to the directory [[INCLUDE_BIBSP]].
+(Note that the current working-directory is where the \emph{including} makefile 
+is residing, not in this repo.)
+We will do this for many files, so we might as well add a variable to hold all 
+the filenames.
+We will create a variable [[BIBSP_LINK]] for this purpose, starting with our 
+package.
+<<bibsp variables>>=
+BIBSP_LINK+=  bibsp.sty libbib.sty
+@ (We add [[libbib.sty]] for backwards compatibility, that was the name before 
+it changed to [[bibsp.sty]].)
+Now, if such a file exists in the current directory, we don't want to do 
+anything.
+Otherwise, we want to create a link to it.
+<<bibsp targets>>=
+${BIBSP_LINK}:
+	[ -e "./$@" ] || ln -s ${INCLUDE_BIBSP}/$@ ./$@
+@
+
+We would also like to automate cleaning up these links.
+We'd like to do this on [[distclean]] and not on every [[clean]].
+Note also that we only want to remove the symbolic links that we have created, 
+so we must look for the symbolic links and ignore any other files that happens 
+to have the same name.
+<<bibsp targets>>=
+.PHONY: distclean
+distclean: clean-bibsp
+clean-bibsp:
+	find ${BIBSP_LINK} -type l | xargs ${RM}
+@
+
 
 \section{Publisher-specific options}
 
@@ -173,6 +214,90 @@ Springer's requirements for its LNCS series.
 @
 
 
+\section{Topics}
+
+<<bibsp variables>>=
+BIBSP_TOPIC+=	auth passwd ac
+BIBSP_TOPIC+=	anon
+BIBSP_TOPIC+=	crypto be mpc
+BIBSP_TOPIC+=	privacy meta surveillance hr
+BIBSP_TOPIC+=	protests voting
+BIBSP_TOPIC+=	osn
+BIBSP_TOPIC+=	reputation
+BIBSP_TOPIC+=	location
+BIBSP_TOPIC+=	stats
+BIBSP_TOPIC+=	blockchain depend
+BIBSP_TOPIC+=	nfc
+BIBSP_TOPIC+=	adhocnets
+BIBSP_TOPIC+=	ecurrency
+
+BIBSP_TOPIC+=	otrmsg otpkx ppes
+
+INCLUDE_LIBBIB?=.
+INCLUDE_BIBSP?=	${INCLUDE_LIBBIB}
+@
+
+<<bibsp targets>>=
+### BIB FILES ###
+
+define bibsp_bibfiles
+BIBSP_BIB+=		$(1).bib
+endef
+
+$(foreach topic,${BIBSP_TOPIC},$(eval $(call bibsp_bibfiles,${topic})))
+
+
+### OPEN FILES ###
+
+define bibsp_display
+.PHONY: $(1)
+$(1):
+	xdg-open ${URL-$(1)}
+endef
+
+$(foreach ref,${BIBSP_REFKEY},$(eval $(call bibsp_display,${ref})))
+@
+
+<<bibsp includes>>=
+### INCLUDE FILES ###
+
+define bibsp_includes
+include 		$${INCLUDE_BIBSP}/$(1).mk
+endef
+
+$(foreach topic,${BIBSP_TOPIC},$(eval $(call bibsp_includes,${topic})))
+@
+
+
+
+
+\section{Mathematical notation}
+
+<<main package notation>>=
+<<power-set symbol>>
+@
+
+
+\paragraph{The power-set symbol}
+
+\DescribeMacro{\powerset}
+Some packages defines the power-set symbol, \(\powerset\).
+However, many do not, but we still want to have it accessible.
+<<power-set symbol>>=
+\ifdefined\powerset%
+  \relax%
+\else%
+  \DeclareMathOperator{\powerset}{\mathscr{P}}%
+\fi
+@
+
+We will use the font from the euscript package:
+<<required packages>>=
+\PassOptionsToPackage[mathscr]{euscript}
+\RequirePackage{euscript}
+@
+
+
 \section{Protocols}
 
 There are two things we want concerning protocols.
@@ -226,33 +351,6 @@ We provide "\ProtoSendLeft" and "\ProtoSendRight".
     {\xleftarrow[\hspace{#1}]{#2}}%
     {\xleftarrow[\hspace{\ProtoArrowLength}]{#2}}%
   }}
-@
-
-
-\section{Mathematical notation}
-
-<<main package notation>>=
-<<power-set symbol>>
-@
-
-
-\paragraph{The power-set symbol}
-
-\DescribeMacro{\powerset}
-Some packages defines the power-set symbol, \(\powerset\).
-However, many do not, but we still want to have it accessible.
-<<power-set symbol>>=
-\ifdefined\powerset%
-  \relax%
-\else%
-  \DeclareMathOperator{\powerset}{\mathscr{P}}%
-\fi
-@
-
-We will use the font from the euscript package:
-<<required packages>>=
-\PassOptionsToPackage[mathscr]{euscript}
-\RequirePackage{euscript}
 @
 
 
@@ -1405,70 +1503,6 @@ We will use the font from the euscript package:
       user experience%
     },
 }
-@
-
-<<bibsp.mk>>=
-BIBSP_TOPIC+=	auth passwd ac
-BIBSP_TOPIC+=	anon
-BIBSP_TOPIC+=	crypto be mpc
-BIBSP_TOPIC+=	privacy meta surveillance hr
-BIBSP_TOPIC+=	protests voting
-BIBSP_TOPIC+=	osn
-BIBSP_TOPIC+=	reputation
-BIBSP_TOPIC+=	location
-BIBSP_TOPIC+=	stats
-BIBSP_TOPIC+=	blockchain depend
-BIBSP_TOPIC+=	nfc
-BIBSP_TOPIC+=	adhocnets
-BIBSP_TOPIC+=	ecurrency
-
-BIBSP_TOPIC+=	otrmsg otpkx ppes
-
-INCLUDE_LIBBIB?=.
-INCLUDE_BIBSP?=	${INCLUDE_LIBBIB}
-
-
-### BIB FILES ###
-
-define bibsp_bibfiles
-BIBSP_BIB+=		$(1).bib
-endef
-
-$(foreach topic,${BIBSP_TOPIC},$(eval $(call bibsp_bibfiles,${topic})))
-
-
-### STY FILES ###
-
-BIBSP_STY+=libbib.sty
-BIBSP_STY+=bibsp.sty
-
-${BIBSP_BIB} ${BIBSP_STY}:
-	[ -e "./$@" ] || ln -s ${INCLUDE_BIBSP}/$@ ./$@
-
-.PHONY: clean-depends distclean
-clean-depends distclean: clean-bibsp
-clean-bibsp:
-	find ${BIBSP_BIB} ${BIBSP_STY} -type l | xargs ${RM}
-
-
-### INCLUDE FILES ###
-
-define bibsp_includes
-include 		$${INCLUDE_BIBSP}/$(1).mk
-endef
-
-$(foreach topic,${BIBSP_TOPIC},$(eval $(call bibsp_includes,${topic})))
-
-
-### OPEN FILES ###
-
-define bibsp_display
-.PHONY: $(1)
-$(1):
-	xdg-open ${URL-$(1)}
-endef
-
-$(foreach ref,${BIBSP_REFKEY},$(eval $(call bibsp_display,${ref})))
 @
 
 

@@ -1,3 +1,4 @@
+BIBSP_LINK+=  bibsp.sty libbib.sty
 BIBSP_TOPIC+=	auth passwd ac
 BIBSP_TOPIC+=	anon
 BIBSP_TOPIC+=	crypto be mpc
@@ -16,8 +17,12 @@ BIBSP_TOPIC+=	otrmsg otpkx ppes
 
 INCLUDE_LIBBIB?=.
 INCLUDE_BIBSP?=	${INCLUDE_LIBBIB}
-
-
+${BIBSP_LINK}:
+	[ -e "./$@" ] || ln -s ${INCLUDE_BIBSP}/$@ ./$@
+.PHONY: distclean
+distclean: clean-bibsp
+clean-bibsp:
+	find ${BIBSP_LINK} -type l | xargs ${RM}
 ### BIB FILES ###
 
 define bibsp_bibfiles
@@ -25,29 +30,6 @@ BIBSP_BIB+=		$(1).bib
 endef
 
 $(foreach topic,${BIBSP_TOPIC},$(eval $(call bibsp_bibfiles,${topic})))
-
-
-### STY FILES ###
-
-BIBSP_STY+=libbib.sty
-BIBSP_STY+=bibsp.sty
-
-${BIBSP_BIB} ${BIBSP_STY}:
-	[ -e "./$@" ] || ln -s ${INCLUDE_BIBSP}/$@ ./$@
-
-.PHONY: clean-depends distclean
-clean-depends distclean: clean-bibsp
-clean-bibsp:
-	find ${BIBSP_BIB} ${BIBSP_STY} -type l | xargs ${RM}
-
-
-### INCLUDE FILES ###
-
-define bibsp_includes
-include 		$${INCLUDE_BIBSP}/$(1).mk
-endef
-
-$(foreach topic,${BIBSP_TOPIC},$(eval $(call bibsp_includes,${topic})))
 
 
 ### OPEN FILES ###
@@ -59,3 +41,10 @@ $(1):
 endef
 
 $(foreach ref,${BIBSP_REFKEY},$(eval $(call bibsp_display,${ref})))
+### INCLUDE FILES ###
+
+define bibsp_includes
+include 		$${INCLUDE_BIBSP}/$(1).mk
+endef
+
+$(foreach topic,${BIBSP_TOPIC},$(eval $(call bibsp_includes,${topic})))
