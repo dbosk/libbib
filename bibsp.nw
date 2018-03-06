@@ -299,6 +299,9 @@ $(foreach topic,${BIBSP_TOPIC},$(eval $(call bibsp_includes,${topic})))
 @
 
 
+\appendix
+
+
 \section{Mathematical notation}
 
 We need to add some mathematical notation that we always use but so far is not 
