@@ -32,11 +32,16 @@ PKG_NAME= 				bibsp
 PKG_PREFIX= 			${HOME}
 PKG_TARBALL_FILES= 		${PKG_FILES-main} ${PKG_FILES-docs} Makefile
 
-PKG_DIR-main= 			/texmf/tex/latex/bibsp
-PKG_FILES-main= 		bibsp.sty ${BIBSP_BIB}
+PKG_INSTALL_DIR-main= 	/texmf/tex/latex/bibsp
+PKG_INSTALL_FILES-main= bibsp.sty ${BIBSP_BIB}
 
-PKG_DIR-docs= 			/texmf/doc/latex/bibsp
-PKG_FILES-docs= 		bibsp.pdf
+PKG_INSTALL_DIR-docs= 	/texmf/doc/latex/bibsp
+PKG_INSTALL_FILES-docs= bibsp.pdf
+
+do-install-docs:
+	for f in ${PKG_INSTALL_FILES-docs}; do \
+		cp $f ${PKG_PREFIX-docs} ${PKG_INSTALL_DIRS-docs}; \
+	done
 
 
 INCLUDE_MAKEFILES=./makefiles
