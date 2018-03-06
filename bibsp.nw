@@ -440,7 +440,7 @@ arrows in protocols figures, \eg \cref{ProtocolFigure}.
   \\
 
   % null
-  & \ProtoSendLeft[1em]{x}
+  & \ProtoSendLeft[1em]{y}
   &
   \\
 
@@ -471,7 +471,7 @@ arrows in protocols figures, \eg \cref{ProtocolFigure}.
   \\
 
   % null
-  & \ProtoSendLeft[1em]{x}
+  & \ProtoSendLeft[1em]{y}
   &
   \\
 
