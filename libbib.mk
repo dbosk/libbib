@@ -1,1 +1,0 @@
-bibsp.mk
