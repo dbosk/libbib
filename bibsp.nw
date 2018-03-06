@@ -277,8 +277,15 @@ endef
 $(foreach topic,${BIBSP_TOPIC},$(eval $(call bibsp_bibfiles,${topic})))
 @
 
+\DescribeVar{BIBSP\textunderscore REFKEY}
+Now, for each bibliographic entry in "topic.bib", we must add its citation key 
+to the list [[BIBSP_REFKEY]].
+\DescribeVar{URL-refkey}
+Then we will add the URL of the citation key "refkey" to the variable 
+[[URL-refkey]].
+Then we can use the list [[BIBSP_REFKEY]] to generate phony targets that will 
+open the paper referenced by the citation key.
 <<targets for opening paper URLs>>=
-### OPEN FILES ###
 define bibsp_display
 .PHONY: $(1)
 $(1):
@@ -288,9 +295,9 @@ endef
 $(foreach ref,${BIBSP_REFKEY},$(eval $(call bibsp_display,${ref})))
 @
 
+Finally, for this to work, we must include all the "topic.mk" files, since 
+that's where the [[BIBSP_REFKEY]] variables is populated.
 <<bibsp includes>>=
-### INCLUDE FILES ###
-
 define bibsp_includes
 include 		$${INCLUDE_BIBSP}/$(1).mk
 endef
