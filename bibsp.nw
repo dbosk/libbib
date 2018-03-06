@@ -1560,8 +1560,6 @@ We provide "\ProtoSendLeft" and "\ProtoSendRight".
 
 \printbibliography{}
 
-\PrintIndex
-
 \section*{An index of the code blocks}
 \nowebchunks
 
