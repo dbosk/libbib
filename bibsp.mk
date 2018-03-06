@@ -21,17 +21,7 @@ ${BIBSP_LINK}:
 distclean: clean-bibsp
 clean-bibsp:
 	find ${BIBSP_LINK} -type l | xargs ${RM}
-### BIB FILES ###
-
-define bibsp_bibfiles
-BIBSP_BIB+=		$(1).bib
-endef
-
-$(foreach topic,${BIBSP_TOPIC},$(eval $(call bibsp_bibfiles,${topic})))
-
-
 ### OPEN FILES ###
-
 define bibsp_display
 .PHONY: $(1)
 $(1):
@@ -39,6 +29,11 @@ $(1):
 endef
 
 $(foreach ref,${BIBSP_REFKEY},$(eval $(call bibsp_display,${ref})))
+define bibsp_bibfiles
+BIBSP_LINK+=		$(1).bib
+endef
+
+$(foreach topic,${BIBSP_TOPIC},$(eval $(call bibsp_bibfiles,${topic})))
 ### INCLUDE FILES ###
 
 define bibsp_includes

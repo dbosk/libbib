@@ -174,7 +174,8 @@ what Springer recommends for its LNCS series.
 @
 
 
-\section{Acronyms}
+\section{Acronyms}%
+\label{Acronyms}
 
 We usually make heavy use of acronyms, especially in cryptography.
 The probably best available package for handling acronyms is the acro package.
@@ -220,38 +221,64 @@ Springer's requirements for its LNCS series.
 @
 
 
-\section{Topics}
+\section{Topics framework}
 
-<<bibsp variables>>=
-BIBSP_TOPIC+=	auth passwd ac
-BIBSP_TOPIC+=	anon
-BIBSP_TOPIC+=	crypto be mpc
-BIBSP_TOPIC+=	privacy meta surveillance hr
-BIBSP_TOPIC+=	protests voting
-BIBSP_TOPIC+=	osn
-BIBSP_TOPIC+=	reputation
-BIBSP_TOPIC+=	location
-BIBSP_TOPIC+=	stats
-BIBSP_TOPIC+=	blockchain depend
-BIBSP_TOPIC+=	nfc
-BIBSP_TOPIC+=	adhocnets
-BIBSP_TOPIC+=	ecurrency
+In addition to providing TeXnical tools, bibsp provides a bibliographic library 
+(based on BibTeX and BibLaTeX) covering a variety of topics related to Security 
+and Privacy.
+We will now describe the framework for how those parts will be presented.
 
-BIBSP_TOPIC+=	otrmsg otpkx ppes
+\DescribeFile{topic.bib}
+Each topic will provide its own bibliography file ("topic.bib").
+It will also provide a set of acronyms which might automatically cite the 
+relevant papers in the bibliography.
+Finally, it might also provide some TeXnical commands to make writing on this 
+topic easier.
+\DescribeVar{BIBSP\textunderscore TOPIC}
+To add a topic, it must be added to the variable "BIBSP_TOPIC" in
+[[<<bibsp variables>>]].
+
+We will use the acro package as we did above (\cref{Acronyms}).
+We will use the biblatex package for citations.
+<<required packages>>=
+\RequirePackage{biblatex}
+@ Each topic will then add to the following package main content.
+<<main package content>>=
+<<topic bibliographies>>
+<<topic acronyms>>
+<<topic commands>>
+@ Each entry in [[<<topic bibliographies>>]] should be a "\addbibresource" 
+command to add the bibliography to biblatex.
+[[<<topic acronyms>>]] will contain "\DeclareAcronym" statements for the acro 
+package.
+
+\DescribeFile{topic.mk}
+Along with each bibliography file (.bib), each topic should add a corresponding 
+makefile (.mk).
+We want these makefiles to contain URLs to the PDFs or online versions of the 
+documents they reference.
+We also want to make the bibliography (.bib) files available for inclusion in 
+parent projects.
+In particular, we want the following.
+<<bibsp targets>>=
+<<targets for opening paper URLs>>
+<<targets for linking bibliographies>>
 @
 
-<<bibsp targets>>=
-### BIB FILES ###
-
+We can start with the latter, [[<<targets for linking bibliographies>>]].
+We already provided [[BIBSP_LINK]] above, so we can simply use that.
+So, for every topic in the list [[BIBSP_TOPIC]], we simply add its bibliography 
+file ("topic.bib") to [[BIBSP_LINK]].
+<<targets for linking bibliographies>>=
 define bibsp_bibfiles
-BIBSP_BIB+=		$(1).bib
+BIBSP_LINK+=		$(1).bib
 endef
 
 $(foreach topic,${BIBSP_TOPIC},$(eval $(call bibsp_bibfiles,${topic})))
+@
 
-
+<<targets for opening paper URLs>>=
 ### OPEN FILES ###
-
 define bibsp_display
 .PHONY: $(1)
 $(1):
@@ -508,6 +535,24 @@ The commands are implemented as follows.
 
 
 \section{Other}
+
+<<bibsp variables>>=
+BIBSP_TOPIC+=	auth passwd ac
+BIBSP_TOPIC+=	anon
+BIBSP_TOPIC+=	crypto be mpc
+BIBSP_TOPIC+=	privacy meta surveillance hr
+BIBSP_TOPIC+=	protests voting
+BIBSP_TOPIC+=	osn
+BIBSP_TOPIC+=	reputation
+BIBSP_TOPIC+=	location
+BIBSP_TOPIC+=	stats
+BIBSP_TOPIC+=	blockchain depend
+BIBSP_TOPIC+=	nfc
+BIBSP_TOPIC+=	adhocnets
+BIBSP_TOPIC+=	ecurrency
+
+BIBSP_TOPIC+=	otrmsg otpkx ppes
+@
 
 <<required packages>>=
 \RequirePackage{textcomp}
