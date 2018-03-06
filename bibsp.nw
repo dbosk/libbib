@@ -416,8 +416,71 @@ There are a few packages, \eg the [[msc]] and [[cryptocode]] packages.
 However, it's usually easier to work with the tabular environment.
 But we would like to have some semantic commands for sending messages back and 
 forth.
-We provide "\ProtoSendLeft" and "\ProtoSendRight".
 
+\DescribeMacro{\ProtoSendLeft}
+\DescribeMacro{\ProtoSendRight}
+We provide "\ProtoSendLeft" and "\ProtoSendRight" to have semantic names for the 
+arrows in protocols figures, \eg \cref{ProtocolFigure}.
+\Cref{ProtocolFigure} is implemented with the following code:
+\begin{verbatim}
+\begin{figure}
+  \centering
+  \begin{tabular}{lcl}
+  \(A(x, q)\) & & \(B(y, q)\) \\
+  \toprule
+
+  \(r\gets \ZZ_q\)
+  & \(\ProtoSendLeft{r}\)
+  &
+  \\
+
+  % null
+  & \(\ProtoSendRight{c}\)
+  & \(c\gets \ZZ_q\)
+  \\
+
+  \bottomrule
+  \end{tabular}
+  \caption{%
+    The interactive protocol \(\Proto{A(x)}{B(y)}(q)\) between algorithm \(A\) 
+    with private input \(x\) and algorithm \(B\) with private input \(y\) and 
+    common input \(q\).
+  }\label{ProtocolFigure}
+\end{figure}
+\end{verbatim}
+
+\begin{figure}
+  \centering
+  \begin{tabular}{lcl}
+  \(A(x, q)\) & & \(B(y, q)\) \\
+  \toprule
+
+  \(r\gets \ZZ_q\)
+  & \(\ProtoSendLeft{r}\)
+  &
+  \\
+
+  % null
+  & \(\ProtoSendRight{c}\)
+  & \(c\gets \ZZ_q\)
+  \\
+
+  \bottomrule
+  \end{tabular}
+  \caption{%
+    The interactive protocol \(\Proto{A(x)}{B(y)}(q)\) between algorithm \(A\) 
+    with private input \(x\) and algorithm \(B\) with private input \(y\) and 
+    common input \(q\).
+  }\label{ProtocolFigure}
+\end{figure}
+
+\DescribeMacro{\ProtoArrowLength}
+The default length of the arrow is set by the length "\ProtoArrowLength".
+However, each "\ProtoSendLeft" or "\ProtoSendRight" can be provided with an 
+optional argument, which is a length and overrides the setting of 
+"\ProtoArrowLength".
+
+The commands are implemented as follows.
 <<protocol diagram arrows>>=
 \newlength{\ProtoArrowLength}
 \setlength{\ProtoArrowLength}{0.15\linewidth}
