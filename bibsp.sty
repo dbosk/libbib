@@ -42,20 +42,21 @@
 	\let\aclp\Aclp
 	\let\acfp\Acfp
 }
+\ProvideDocumentCommand{\textand}{}{\ensuremath{\qquad\text{and}\qquad}}
 \DeclareMathOperator{\NN}{\mathbb{N}}
 \DeclareMathOperator{\ZZ}{\mathbb{Z}}
 \DeclareMathOperator{\QQ}{\mathbb{Q}}
 \DeclareMathOperator{\RR}{\mathbb{R}}
 \DeclareMathOperator{\CC}{\mathbb{C}}
+\ProvideDocumentCommand{\card}{m}{\ensuremath{|#1|}}
 \ifdefined\powerset%
   \relax%
 \else%
   \DeclareMathOperator{\powerset}{\mathscr{P}}%
 \fi
 \DeclareMathOperator{\GF}{\mathrm{GF}}
-\DeclareMathOperator{\F}{\mathbb{F}}
+\DeclareMathOperator{\FF}{\mathbb{F}}
 \DeclareMathOperator{\ord}{ord}
-\ProvideDocumentCommand{\card}{m}{\ensuremath{|#1|}}
 \ProvideDocumentCommand{\gen}{m}{\mleft\langle #1\mright\rangle}
 \ProvideDocumentCommand{\Proto}{m m}{\ensuremath{%
     \mleft\langle%
