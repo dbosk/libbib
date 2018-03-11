@@ -5,8 +5,7 @@ NOWEAVEFLAGS= 	-n -delay -t2
 
 bibsp.pdf: bibsp.tex preamble.tex bibsp.sty
 bibsp.pdf: abstract.tex LICENSE
-
-bibsp.tex: bibsp.nw
+bibsp.pdf: bibsp.tex
 
 
 .PHONY: all
@@ -38,10 +37,10 @@ PKG_INSTALL_FILES-main= bibsp.sty ${BIBSP_BIB}
 PKG_INSTALL_DIR-docs= 	/texmf/doc/latex/bibsp
 PKG_INSTALL_FILES-docs= bibsp.pdf
 
-do-install-docs:
-	for f in ${PKG_INSTALL_FILES-docs}; do \
-		cp $f ${PKG_PREFIX-docs} ${PKG_INSTALL_DIRS-docs}; \
-	done
+#do-install-docs:
+#	for f in ${PKG_INSTALL_FILES-docs}; do \
+#		cp $f ${PKG_PREFIX-docs} ${PKG_INSTALL_DIRS-docs}; \
+#	done
 
 
 INCLUDE_MAKEFILES=./makefiles
