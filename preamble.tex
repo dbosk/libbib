@@ -7,11 +7,38 @@
 \usepackage[single]{acro}
 \usepackage[abbreviations]{foreign}
 
-\usepackage{doc}
-\usepackage{dox}
-\doxitem{Option}{option}{options}
-\doxitem{Var}{variable}{variables}
-\doxitem{File}{file}{files}
+%\usepackage{doc}
+\ProvideDocumentCommand{\cmd}{m}{\texttt{\string#1}}
+\ProvideDocumentCommand{\meta}{m}{\(\langle\)\emph{#1}\(\rangle\)}
+\ProvideDocumentCommand{\marg}{m}{%
+  {\ttfamily\{}\meta{#1}{\ttfamily\}}%
+}
+\ProvideDocumentCommand{\oarg}{m}{%
+  {\ttfamily[}\meta{#1}{\ttfamily]}%
+}
+\usepackage{fancyvrb}
+\DefineShortVerb{\"}
+%\usepackage{marginnote}
+\reversemarginpar
+%\setlength{\marginparpush}{0pt}
+%\setlength{\marginparwidth}{8pc}
+\ProvideDocumentCommand{\NewDescribe}{m}{%
+  \ProvideDocumentCommand{#1}{m}{%
+    \cmd{##1}\index{##1}%
+    \marginpar{\raggedleft\cmd{##1}}%
+  }%
+}
+\NewDescribe{\DescribeMacro}
+\NewDescribe{\DescribeEnv}
+\NewDescribe{\DescribeOpt}
+\NewDescribe{\DescribeVar}
+\NewDescribe{\DescribeFile}
+%\usepackage{dox}
+%\doxitem{Macro}{macro}{macros}
+%\doxitem{Env}{environment}{environments}
+%\doxitem{Option}{option}{options}
+%\doxitem{Var}{variable}{variables}
+%\doxitem{File}{file}{files}
 
 \usepackage[natbib,style=alphabetic,maxbibnames=99]{biblatex}
 \addbibresource{bibsp.bib}
