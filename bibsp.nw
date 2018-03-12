@@ -304,6 +304,7 @@ $(foreach topic,${BIBSP_TOPIC},$(eval $(call bibsp_includes,${topic})))
 @
 
 
+
 \chapter{Mathematical notation}
 
 We need to add some mathematical notation that we always use but so far is not 
@@ -1153,6 +1154,66 @@ BIBSP_TOPIC+=   auth passwd
 @
 
 
+\section{Passwords}
+
+We add the password bibliography for automatic inclusion by [[bibsp]].
+<<topic bibliographies>>=
+\addbibresource{passwd.bib}
+@
+
+The first paper treats security and usability of password composition policies.
+We first add the BibTeX entry.
+<<passwd.bib>>=
+@@inproceedings{OfPasswordsAndPeople,
+  author={Komanduri, Saranga and
+    Shay, Richard and
+    Kelley, Patrick Gage and
+    Mazurek, Michelle L. and
+    Bauer, Lujo and
+    Christin Nicolas and
+    Cranor, Lorrie Faith and
+    Egelman, Serge},
+  title={Of passwords and people:
+    Measuring the effect of password-composition policies},
+  booktitle={CHI},
+  year={2011},
+  URL={http://cups.cs.cmu.edu/rshay/pubs/passwords_and_people2011.pdf},
+}
+@ And then provide the citation key and the paper's \ac{URL} so that we can 
+automatically fetch the paper.
+<<passwd.mk>>=
+BIBSP_REFKEY+=OfPasswordsAndPeople
+URL-OfPasswordsAndPeople=http://cups.cs.cmu.edu/rshay/pubs/passwords_and_people2011.pdf
+@
+
+The second paper is a follow-up to the first.
+<<passwd.bib>>=
+@@inproceedings{CanLongPasswordsBeSecureAndUsable,
+  title={Can long passwords be secure and usable?},
+  author={Shay, Richard and
+    Komanduri, Saranga and
+    Durity, Adam L and
+    Huh, Phillip Seyoung and
+    Mazurek, Michelle L and
+    Segreti, Sean M and
+    Ur, Blase and
+    Bauer, Lujo and
+    Christin, Nicolas and
+    Cranor, Lorrie Faith},
+  booktitle={Proceedings of the 32nd annual ACM conference on Human factors in 
+    computing systems},
+  pages={2927--2936},
+  year={2014},
+  organization={ACM},
+  URL={http://lorrie.cranor.org/pubs/longpass-chi2014.pdf},
+}
+@ Now the citation key and \ac{URL}.
+<<passwd.mk>>=
+BIBSP_REFKEY+=CanLongPasswordsBeSecureAndUsable
+URL-CanLongPasswordsBeSecureAndUsablp=http://lorrie.cranor.org/pubs/longpass-chi2014.pdf
+@
+
+
 \section{Distance bounding}
 
 <<topic acronyms>>=
@@ -1205,68 +1266,6 @@ BIBSP_TOPIC+=   auth passwd
 @
 
 
-
-\chapter{Access control}
-
-<<bibsp variables>>=
-BIBSP_TOPIC+=   ac
-@
-
-<<topic acronyms>>=
-\DeclareAcronym{AC}{%
-  short = {AC},
-  long = {access control},
-  short-indefinite = {an},
-  long-indefinite = {an},
-}
-% Access Control Models
-\DeclareAcronym{IBAC}{%
-  short = {IBAC},
-  long = {identity-based access control},
-  short-indefinite = {an},
-  long-indefinite = {an},
-}
-\DeclareAcronym{ABAC}{%
-  short = {ABAC},
-  long = {attribute-based access control},
-  short-indefinite = {an},
-  long-indefinite = {an},
-}
-\DeclareAcronym{RBAC}{%
-  short = {RBAC},
-  long = {role-based access control},
-  short-indefinite = {an},
-  long-indefinite = {a},
-}
-\DeclareAcronym{DAC}{%
-  short = {DAC},
-  long = {discretionary access control}
-}
-\DeclareAcronym{acMAC}{%
-  short = {MAC},
-  long = {mandatory access control}
-}
-\DeclareAcronym{IFC}{%
-  short = {IFC},
-  short-indefinite = {an},
-  long = {information-flow control},
-  long-indefinite = {an},
-}
-\DeclareAcronym{BLP}{%
-  short = {BLP},
-  long = {Bell-LaPadula},
-  cite = {Bell-LaPadula}
-}
-% Access control objects
-\DeclareAcronym{ACL}{%
-  short = {ACL},
-  long = {access-control list},
-  short-indefinite = {an},
-  long-indefinite = {an},
-}
-@
-
-
 \section{Location-based services}
 
 <<bibsp variables>>=
@@ -1295,11 +1294,88 @@ BIBSP_TOPIC+=   location
     },
   long-indefinite = {a},
 }
-
 @
 
 
-\chapter{Other}
+
+
+\chapter{Access control}
+
+<<bibsp variables>>=
+BIBSP_TOPIC+=   ac
+@
+
+<<topic acronyms>>=
+\DeclareAcronym{AC}{%
+  short = {AC},
+  long = {access control},
+  short-indefinite = {an},
+  long-indefinite = {an},
+}
+\DeclareAcronym{DAC}{%
+  short = {DAC},
+  long = {discretionary access control}
+}
+\DeclareAcronym{acMAC}{%
+  short = {MAC},
+  long = {mandatory access control}
+}
+@
+
+\section{Access-control models}
+
+<<topic acronyms>>=
+\DeclareAcronym{IBAC}{%
+  short = {IBAC},
+  long = {identity-based access control},
+  short-indefinite = {an},
+  long-indefinite = {an},
+}
+\DeclareAcronym{RBAC}{%
+  short = {RBAC},
+  long = {role-based access control},
+  short-indefinite = {an},
+  long-indefinite = {a},
+  %cite = {RBAC},
+}
+\DeclareAcronym{ABAC}{%
+  short = {ABAC},
+  long = {attribute-based access control},
+  short-indefinite = {an},
+  long-indefinite = {an},
+  %cite = {ABAC},
+}
+@
+
+<<topic acronyms>>=
+\DeclareAcronym{ACL}{%
+  short = {ACL},
+  long = {access-control list},
+  short-indefinite = {an},
+  long-indefinite = {an},
+}
+@
+
+\section{Information flow}
+
+<<topic acronyms>>=
+\DeclareAcronym{IFC}{%
+  short = {IFC},
+  short-indefinite = {an},
+  long = {information-flow control},
+  long-indefinite = {an},
+}
+\DeclareAcronym{BLP}{%
+  short = {BLP},
+  long = {Bell-LaPadula},
+  cite = {Bell-LaPadula}
+}
+@
+
+
+\appendix
+
+\chapter{Undocumented}
 
 <<bibsp variables>>=
 BIBSP_TOPIC+=	anon

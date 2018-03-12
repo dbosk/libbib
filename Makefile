@@ -21,6 +21,13 @@ all: bibsp.mk
 bibsp.mk: bibsp.nw
 
 
+.PHONY: all
+all: passwd.bib
+
+passwd.bib: bibsp.nw
+	${NOTANGLE} ${NOTANGLEFLAGS} -R$@ $< | ${CPIF} $@
+
+
 .PHONY: clean
 clean:
 	${RM} bibsp.pdf bibsp.tex
