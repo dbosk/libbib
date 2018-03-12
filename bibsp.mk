@@ -24,6 +24,18 @@ ${BIBSP_LINK}:
 distclean: clean-bibsp
 clean-bibsp:
 	find ${BIBSP_LINK} -type l | xargs ${RM}
+define target_topic_bib
+${INCLUDE_BIBSP}/$(1).bib: ${INCLUDE_BIBSP}/bibsp.nw
+	${NOTANGLE} ${NOTANGLEFLAGS} -R$@ $< | ${CPIF} $@
+endef
+
+$(foreach t,${BIBSP_TOPIC},$(eval $(call target_topic_bib,$t)))
+define target_topic_mk
+${INCLUDE_BIBSP}/$(1).mk: ${INCLUDE_BIBSP}/bibsp.nw
+	${NOTANGLE} ${NOTANGLEFLAGS} -R$@ $< | ${CPIF} $@
+endef
+
+$(foreach t,${BIBSP_TOPIC},$(eval $(call target_topic_bib,$t)))
 define bibsp_display
 .PHONY: $(1)
 $(1):

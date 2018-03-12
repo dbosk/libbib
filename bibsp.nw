@@ -229,13 +229,37 @@ and Privacy.
 We will now describe the framework for how those parts will be presented.
 
 Each topic will provide its own bibliography file (\DescribeFile{topic.bib}).
-It will also provide a set of acronyms which might automatically cite the 
-relevant papers in the bibliography.
+It will also provide an include file for make (\DescribeFile{topic.mk}), which 
+maps citation keys to \acp{URL}, this allows us to automatically fetch papers.
+Each topic will also provide a set of acronyms which might automatically cite 
+the relevant papers in the bibliography (added to \DescribeFile{bibsp.sty}).
 Finally, it might also provide some TeXnical commands to make writing on this 
-topic easier.
+topic easier (also added to \DescribeFile{bibsp.sty}).
 To add a topic, it must be added to the variable 
 \DescribeVar{BIBSP\textunderscore TOPIC} in
 [[<<bibsp variables>>]].
+We will need to add two targets to [[bibsp.mk]].
+<<bibsp targets>>=
+<<target to make topic.bib>>
+<<target to make topic.mk>>
+@ The variable [[BIBSP_TOPIC]] will contain a list of all the topics.
+Thus we can use it to create targets for the files.
+<<target to make topic.bib>>=
+define target_topic_bib
+${INCLUDE_BIBSP}/$(1).bib: ${INCLUDE_BIBSP}/bibsp.nw
+	${NOTANGLE} ${NOTANGLEFLAGS} -R$@ $< | ${CPIF} $@
+endef
+
+$(foreach t,${BIBSP_TOPIC},$(eval $(call target_topic_bib,$t)))
+@ We do the same for the make include file.
+<<target to make topic.mk>>=
+define target_topic_mk
+${INCLUDE_BIBSP}/$(1).mk: ${INCLUDE_BIBSP}/bibsp.nw
+	${NOTANGLE} ${NOTANGLEFLAGS} -R$@ $< | ${CPIF} $@
+endef
+
+$(foreach t,${BIBSP_TOPIC},$(eval $(call target_topic_bib,$t)))
+@
 
 We will use the acro package as we did above (\cref{Acronyms}).
 We will use the biblatex package for citations.
@@ -253,10 +277,8 @@ command to add the bibliography to biblatex.
 @ [[<<topic acronyms>>]] will contain "\DeclareAcronym" statements for the acro 
 package.
 
-Along with each bibliography file ("topic.bib"), each topic should add a 
-corresponding makefile, \DescribeFile{topic.mk}.
-We want these makefiles to contain URLs to the PDFs or online versions of the 
-documents they reference.
+We want these make include files to contain \acp{URL} to the PDFs or online 
+versions of the documents they reference.
 We also want to make the bibliography (.bib) files available for inclusion in 
 parent projects.
 In particular, we want the following.
