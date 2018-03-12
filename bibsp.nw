@@ -610,6 +610,7 @@ arguments:
 \begin{center}
 \cs{\meta{macro}}\oarg{sub/supscripts}\oarg{argument}.
 \end{center}
+If only one optional argument is given, it's interpreted as the \meta{argument}.
 
 The "\NewAlgorithm" and "\NewFunction" are implemented as follows.
 <<topic commands>>=
@@ -653,6 +654,12 @@ The "\NewAlgorithm" and "\NewFunction" are implemented as follows.
 }
 @
 
+Finally, we provide two commands for creating macros representing sets or other 
+cryptographic entities, \eg adversarial algorithms.
+\DescribeMacro{\NewCryptoSet}\marg{macro}\marg{name} (and 
+\DescribeMacro{\NewCryptoEntity}\marg{macro}\marg{name}) takes two arguments, 
+one the name of the macro and the second the display name.
+The resulting \cs{\meta{macro}} doesn't take any options.
 <<topic commands>>=
 \ProvideDocumentCommand{\NewCryptoSet}{m m}{%
   \ProvideDocumentCommand{#1}{}{%
@@ -666,12 +673,40 @@ The "\NewAlgorithm" and "\NewFunction" are implemented as follows.
 }
 @
 
-\subsection{Proofs of knowledge}
+<<topic acronyms>>=
+\DeclareAcronym{PPT}{%
+  short = {PPT},
+  long = {probabilistic polynomial-time},
+}
+\DeclareAcronym{PPTM}{%
+  short = {PPTM},
+  long = {probabilitstic polynomial-time Turing machine},
+}
+@
+
+<<topic acronyms>>=
+\DeclareAcronym{PRP}{%
+  short = {PRP},
+  long = {%
+      pseudo-random permutation%
+    }
+}
+\DeclareAcronym{PRF}{%
+  short = {PRF},
+  long = {%
+      pseudo-random function%
+    }
+}
+\DeclareAcronym{VRF}{%
+  short = {VRF},
+  long = {verifiable random function},
+}
+@
+
+
+\section{Proofs of knowledge}
 
 <<topic commands>>=
-%
-% Proofs of knowledge
-%
 \ProvideDocumentCommand{\PK}{o o}{\ensuremath{%
     \operatorname{PK}%
     \IfValueT{#1}{%
@@ -697,172 +732,10 @@ The "\NewAlgorithm" and "\NewFunction" are implemented as follows.
   }}
 @
 
-
-\subsection{Encryption/decryption}
-
-<<topic commands>>=
-\ProvideDocumentCommand{\indcpa}{}{\ensuremath{\text{IND-CPA}}}
-\ProvideDocumentCommand{\indcca}{}{\ensuremath{\text{IND-CCA}}}
-\ProvideDocumentCommand{\indsfcca}{}{\ensuremath{\text{IND-SFCCA}}}
-\ProvideDocumentCommand{\intptxt}{}{\ensuremath{\text{INT-PTXT}}}
-\ProvideDocumentCommand{\intctxt}{}{\ensuremath{\text{INT-CTXT}}}
-\ProvideDocumentCommand{\intsfctxt}{}{\ensuremath{\text{INT-SFCTXT}}}
-\ProvideDocumentCommand{\nmcpa}{}{\ensuremath{\text{NM-CPA}}}
-\ProvideDocumentCommand{\nmcca}{}{\ensuremath{\text{NM-CCA}}}
-\ProvideDocumentCommand{\sufcma}{}{\ensuremath{\text{SUF-CMA}}}
-\ProvideDocumentCommand{\denss}{}{\ensuremath{\text{DEN-SS}}}
-\ProvideDocumentCommand{\rgets}{}{\overset{\text{\textcent}}{\gets}}
-%\DeclareMathOperator{\AdvOp}{\mathbf{Adv}}
-%\ProvideDocumentCommand{\Adv}{m m o}{%
-%  \IfValueTF{#3}{%
-%    \ensuremath{\AdvOp^{#1}_{#2}\mleft( #3 \mright)}%
-%  }{%
-%    \ensuremath{\AdvOp^{#1}_{#2}\mleft( \cdot \mright)}%
-%  }%
-%}
-%\DeclareMathOperator{\ExpOp}{\mathbf{Exp}}
-%\ProvideDocumentCommand{\Exp}{m m o}{%
-%  \IfValueTF{#3}{%
-%    \ensuremath{\ExpOp^{#1}_{#2}\mleft( #3 \mright)}%
-%  }{%
-%    \ensuremath{\ExpOp^{#1}_{#2}\mleft( \cdot \mright)}%
-%  }%
-%}
-\ProvideDocumentCommand{\Key}{s m}{\ensuremath{%
-  \IfBooleanT{#1}{\hat}k%
-  %\IfValueT{#2}{^{#2}}%
-  \ifthenelse{\equal{#2}{}}{}{_{#2}}%
-}}
-\ProvideDocumentCommand{\PubKey}{s m}{\ensuremath{%
-  \IfBooleanT{#1}{\hat}pk%
-  \ifthenelse{\equal{#2}{}}{}{_{#2}}%
-}}
-\ProvideDocumentCommand{\PriKey}{s m}{\ensuremath{%
-  \IfBooleanT{#1}{\hat}sk%
-  \ifthenelse{\equal{#2}{}}{}{_{#2}}%
-}}
-\ProvideDocumentCommand{\MACKey}{s m}{\ensuremath{%
-  \IfBooleanT{#1}{\hat}k%
-  \ifthenelse{\equal{#2}{}}{}{_{#2}}%
-  ^{\mathsf{MA}}%
-}}
-\ProvideDocumentCommand{\TagKey}{s m}{\ensuremath{%
-  \IfBooleanT{#1}{\hat}k%
-  \ifthenelse{\equal{#2}{}}{}{_{#2}}%
-  ^{\mathsf{MA}}%
-}}
-\ProvideDocumentCommand{\SignKey}{s m}{\ensuremath{%
-  \IfBooleanT{#1}{\hat}sk%
-  \ifthenelse{\equal{#2}{}}{}{_{#2}}%
-}}
-\ProvideDocumentCommand{\VerifKey}{s m}{\ensuremath{%
-  \IfBooleanT{#1}{\hat}vk%
-  \ifthenelse{\equal{#2}{}}{}{_{#2}}%
-}}
-
-\DeclareAcronym{PPT}{%
-  short = {PPT},
-  long = {probabilistic polynomial-time},
-}
-\DeclareAcronym{PPTM}{%
-  short = {PPTM},
-  long = {probabilitstic polynomial-time Turing machine},
-}
-% Crypto properties
-\DeclareAcronym{IND-CPA}{%
-  short = {IND-CPA},
-  long = {indistinguishability under chosen-plaintext attack},
-  cite = {AuthEncryption}
-}
-\DeclareAcronym{IND-CCA}{%
-  short = {IND-CCA},
-  long = {indistinguishability under chosen-ciphertext attack},
-  cite = {AuthEncryption}
-}
-\DeclareAcronym{IND-SFCCA}{%
-  short = {IND-SFCCA},
-  long = {indistinguishability under statefully chosen-ciphertext attack},
-  cite = {StatefulDecryption}
-}
-\DeclareAcronym{WUF-CMA}{%
-  short = {WUF-CMA},
-  long = {weak unforgeability under chosen-message attack},
-  cite = {AuthEncryption}
-}
-\DeclareAcronym{SUF-CMA}{%
-  short = {SUF-CMA},
-  long = {strong unforgeability under chosen-message attack},
-  cite = {AuthEncryption}
-}
-\DeclareAcronym{INT-PTXT}{%
-  short = {INT-PTXT},
-  long = {integrity of plaintexts},
-  cite = {AuthEncryption}
-}
-\DeclareAcronym{INT-SFPTXT}{%
-  short = {INT-SFPTXT},
-  long = {integrity of stateful plaintexts},
-  cite = {StatefulDecryption}
-}
-\DeclareAcronym{INT-CTXT}{%
-  short = {INT-CTXT},
-  long = {integrity of ciphertexts},
-  cite = {AuthEncryption}
-}
-\DeclareAcronym{INT-SFCTXT}{%
-  short = {INT-SFCTXT},
-  long = {integrity of stateful ciphertexts},
-  cite = {StatefulDecryption}
-}
-\DeclareAcronym{DEN-SS}{%
-  short = {DEN-SS},
-  long = {deniability under surveillance-state attack},
-  cite = {OTPKX}
-}
-% Computational problems
-\DeclareAcronym{DLP}{%
-  short = {DLP},
-  long = {Discrete Logarithm Problem}
-}
-\DeclareAcronym{DH}{
-  short = {DH},
-  long = {Diffie-Hellman},
-  cite = {DiffieHellman}
-}
-\DeclareAcronym{DHP}{%
-  short = {DHP},
-  long = {Diffie-Hellman Problem},
-  cite = {DiffieHellman}
-}
-\DeclareAcronym{DDH}{%
-  short = {DDH},
-  long = {Decisional Diffie-Hellman},
-  cite = {DiffieHellman}
-}
-\DeclareAcronym{DC}{%
-  short = {DC},
-  long = {Dining Cryptographers},
-  cite = {DiningCryptographers}
-}
-\DeclareAcronym{DCP}{%
-  short = {DCP},
-  long = {Dining Cryptographers Problem},
-  cite = {DiningCryptographers}
-}
-\DeclareAcronym{SMP}{%
-  short = {SMP},
-  long = {Socialist Millionaires' Problem}
-}
-% Cryptographic mechanisms
-\DeclareAcronym{OTP}{%
-  short = {OTP},
-  long = {One-Time Pad}
-}
+<<topic acronyms>>=
 \DeclareAcronym{ZKP}{%
   short = {ZKP},
-  long = {%
-      zero-knowledge proof%
-    }
+  long = {zero-knowledge proof},
 }
 \DeclareAcronym{PK}{%
   short = {PK},
@@ -874,268 +747,25 @@ The "\NewAlgorithm" and "\NewFunction" are implemented as follows.
 }
 \DeclareAcronym{NIZK}{%
   short = {NIZK},
-  long = {%
-    non-interactive zero-knowledge%
-  },
-}
-\DeclareAcronym{MA}{%
-  short = {MA},
-  long = {%
-      message authentication%
-    }
-}
-\DeclareAcronym{MAC}{%
-  short = {MAC},
-  long = {%
-      message-authentication code%
-    }
-}
-\DeclareAcronym{HMAC}{%
-  short = {HMAC},
-  short-indefinite = {an},
-  long = {%
-      hash-based message-authentication code%
-    },
-  long-indefinite = {a},
-  cite = {HMAC},
-}
-\DeclareAcronym{PRP}{%
-  short = {PRP},
-  long = {%
-      pseudo-random permutation%
-    }
-}
-\DeclareAcronym{PRF}{%
-  short = {PRF},
-  long = {%
-      pseudo-random function%
-    }
-}
-\DeclareAcronym{VRF}{%
-  short = {VRF},
-  long = {verifiable random function},
-}
-\DeclareAcronym{PRNG}{%
-  short = {PRNG},
-  long = {%
-      pseudo-random number-generator%
-    }
-}
-\DeclareAcronym{RNG}{%
-  short = {RNG},
-  long = {%
-      random-number generator%
-    }
-}
-\DeclareAcronym{KEM}{%
-  short = {KEM},
-  long = {%
-      key-encapsulation mechanism%
-    }
-}
-\DeclareAcronym{DEM}{%
-  short = {DEM},
-  long = {%
-      data-encryption mechanism%
-    }
-}
-\DeclareAcronym{EtM}{%
-  short = {EtM},
-  long = {%
-      encrypt-then-MAC
-    },
-  cite = {AuthEncryption}
-}
-\DeclareAcronym{PIR}{%
-  short = {PIR},
-  long = {%
-      private information retrieval%
-    },
-  %cite = {PIR}
-}
-\DeclareAcronym{OT}{%
-  short = {OT},
-  short-indefinite = {an},
-  long = {%
-      oblivious transfer%
-    },
-  long-indefinite = {an},
-  cite = {ObliviousTransfer}
-}
-% Key-exchange mechanisms
-\DeclareAcronym{KE}{%
-  short = {KE},
-  long = {%
-      key-exchange%
-    }
-}
-\DeclareAcronym{DHKE}{%
-  short = {DHKE},
-  long = {%
-      Diffie-Hellman key-exchange%
-    },
-  cite = {DiffieHellman}
-}
-\DeclareAcronym{AKE}{%
-  short = {AKE},
-  long = {%
-      authenticated key-exchange
-    },
-  cite = {AuthKeyExchange}
-}
-% Cryptographic properties
-\DeclareAcronym{PFS}{%
-  short = {PFS},
-  long = {%
-      perfect forward-secrecy%
-    }
-}
-% Types of encryption
-\DeclareAcronym{PKC}{%
-  short = {PKC},
-  long = {%
-      public-key cryptography%
-    }
-}
-\DeclareAcronym{PKE}{%
-  short = {PKE},
-  long = {%
-      public-key encryption%
-    }
-}
-\DeclareAcronym{SKE}{%
-  short = {SKE},
-  long = {%
-      symmetric-key encryption%
-    }
-}
-\DeclareAcronym{BE}{%
-  short = {BE},
-  long = {%
-      broadcast encryption%
-    },
-  cite = {BroadcastEncryption}
-}
-\DeclareAcronym{ANOBE}{%
-  short = {ANOBE},
-  short-indefinite = {an},
-  long = {%
-      anonymous broadcast encryption%
-    },
-  long-indefinite = {an},
-  cite = {ANOBE}
-}
-\DeclareAcronym{oANOBE}{%
-  short = {oANOBE},
-  long = {%
-      outsider-anonymous broadcast encryption%
-    },
-  cite = {oANOBE}
-}
-\DeclareAcronym{IBE}{%
-  short = {IBE},
-  long = {%
-      identity-based encryption%
-    }
-}
-\DeclareAcronym{ABE}{%
-  short = {ABE},
-  long = {%
-      attribute-based encryption%
-    },
-  short-indefinite = {an},
-  long-indefinite = {an},
-}
-\DeclareAcronym{CP-ABE}{%
-  short = {CP-ABE},
-  long = {%
-      ciphertext-policy attribute-based encryption%
-    },
-  cite = {CP-ABE}
-}
-\DeclareAcronym{KP-ABE}{%
-  short = {KP-ABE},
-  long = {%
-      key-policy attribute-based encryption%
-    },
-  cite = {KP-ABE},
-}
-\DeclareAcronym{PE}{%
-  short = {PE},
-  long = {%
-      predicate encryption%
-    }
-}
-\DeclareAcronym{PRE}{%
-  short = {PRE},
-  long = {%
-      proxy re-encryption%
-    },
-  cite = {AtomicProxyCrypto}
-}
-\DeclareAcronym{FHE}{%
-  short = {FHE},
-  long = {%
-      fully homomorphic encryption%
-    },
-}
-\DeclareAcronym{SHE}{%
-  short = {SHE},
-  long = {%
-      somewhat homomorphic encryption%
-    },
-}
-\DeclareAcronym{SHA}{%
-  short = {SHA},
-  long = {Secure Hash Algorithm},
-  cite = {SHA},
-}
-% Protocols
-\DeclareAcronym{OTR}{%
-  short = {OTR},
-  long = {Off-the-Record},
-  cite = {otr2004}
-}
-% Anonymity
-\DeclareAcronym{DP}{%
-  short = {DP},
-  long = {differential privacy},
-  cite = {DifferentialPrivacy},
-}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Multi-party computation
-%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\DeclareAcronym{MPC}{%
-  short = {MPC},
-  short-indefinite = {an},
-  long = {%
-      secure multiparty computation%
-    },
-  long-indefinite = {a},
-}
-\DeclareAcronym{SMC}{%
-  short = {MPC},
-  short-indefinite = {an},
-  long = {%
-      secure multiparty computation%
-    },
-  long-indefinite = {a},
+  long = {non-interactive zero-knowledge},
 }
 @
-
 
 
 \chapter{Authentication}
 
 <<bibsp variables>>=
-BIBSP_TOPIC+=   auth passwd
+BIBSP_TOPIC+=   auth
 @
 
+We provide references in [[<<auth.bib>>]] and add it to biblatex for inclusion.
 <<topic bibliographies>>=
 \addbibresource{auth.bib}
 @
 
+\DescribeAcro{eID}
+\DescribeAcro{PKI}
+\DescribeAcro{CA}
 <<topic acronyms>>=
 \DeclareAcronym{eID}{%
   short = {eID},
@@ -1155,6 +785,10 @@ BIBSP_TOPIC+=   auth passwd
 
 
 \section{Passwords}
+
+<<bibsp variables>>=
+BIBSP_TOPIC+=   passwd
+@
 
 We add the password bibliography for automatic inclusion by [[bibsp]].
 <<topic bibliographies>>=
@@ -1489,6 +1123,390 @@ BIBSP_TOPIC+=	otrmsg otpkx ppes
 }
 
 @
+
+\section{Encryption/decryption}
+
+<<topic commands>>=
+\ProvideDocumentCommand{\indcpa}{}{\ensuremath{\text{IND-CPA}}}
+\ProvideDocumentCommand{\indcca}{}{\ensuremath{\text{IND-CCA}}}
+\ProvideDocumentCommand{\indsfcca}{}{\ensuremath{\text{IND-SFCCA}}}
+\ProvideDocumentCommand{\intptxt}{}{\ensuremath{\text{INT-PTXT}}}
+\ProvideDocumentCommand{\intctxt}{}{\ensuremath{\text{INT-CTXT}}}
+\ProvideDocumentCommand{\intsfctxt}{}{\ensuremath{\text{INT-SFCTXT}}}
+\ProvideDocumentCommand{\nmcpa}{}{\ensuremath{\text{NM-CPA}}}
+\ProvideDocumentCommand{\nmcca}{}{\ensuremath{\text{NM-CCA}}}
+\ProvideDocumentCommand{\sufcma}{}{\ensuremath{\text{SUF-CMA}}}
+\ProvideDocumentCommand{\denss}{}{\ensuremath{\text{DEN-SS}}}
+\ProvideDocumentCommand{\rgets}{}{\overset{\text{\textcent}}{\gets}}
+%\DeclareMathOperator{\AdvOp}{\mathbf{Adv}}
+%\ProvideDocumentCommand{\Adv}{m m o}{%
+%  \IfValueTF{#3}{%
+%    \ensuremath{\AdvOp^{#1}_{#2}\mleft( #3 \mright)}%
+%  }{%
+%    \ensuremath{\AdvOp^{#1}_{#2}\mleft( \cdot \mright)}%
+%  }%
+%}
+%\DeclareMathOperator{\ExpOp}{\mathbf{Exp}}
+%\ProvideDocumentCommand{\Exp}{m m o}{%
+%  \IfValueTF{#3}{%
+%    \ensuremath{\ExpOp^{#1}_{#2}\mleft( #3 \mright)}%
+%  }{%
+%    \ensuremath{\ExpOp^{#1}_{#2}\mleft( \cdot \mright)}%
+%  }%
+%}
+\ProvideDocumentCommand{\Key}{s m}{\ensuremath{%
+  \IfBooleanT{#1}{\hat}k%
+  %\IfValueT{#2}{^{#2}}%
+  \ifthenelse{\equal{#2}{}}{}{_{#2}}%
+}}
+\ProvideDocumentCommand{\PubKey}{s m}{\ensuremath{%
+  \IfBooleanT{#1}{\hat}pk%
+  \ifthenelse{\equal{#2}{}}{}{_{#2}}%
+}}
+\ProvideDocumentCommand{\PriKey}{s m}{\ensuremath{%
+  \IfBooleanT{#1}{\hat}sk%
+  \ifthenelse{\equal{#2}{}}{}{_{#2}}%
+}}
+\ProvideDocumentCommand{\MACKey}{s m}{\ensuremath{%
+  \IfBooleanT{#1}{\hat}k%
+  \ifthenelse{\equal{#2}{}}{}{_{#2}}%
+  ^{\mathsf{MA}}%
+}}
+\ProvideDocumentCommand{\TagKey}{s m}{\ensuremath{%
+  \IfBooleanT{#1}{\hat}k%
+  \ifthenelse{\equal{#2}{}}{}{_{#2}}%
+  ^{\mathsf{MA}}%
+}}
+\ProvideDocumentCommand{\SignKey}{s m}{\ensuremath{%
+  \IfBooleanT{#1}{\hat}sk%
+  \ifthenelse{\equal{#2}{}}{}{_{#2}}%
+}}
+\ProvideDocumentCommand{\VerifKey}{s m}{\ensuremath{%
+  \IfBooleanT{#1}{\hat}vk%
+  \ifthenelse{\equal{#2}{}}{}{_{#2}}%
+}}
+
+% Crypto properties
+\DeclareAcronym{IND-CPA}{%
+  short = {IND-CPA},
+  long = {indistinguishability under chosen-plaintext attack},
+  cite = {AuthEncryption}
+}
+\DeclareAcronym{IND-CCA}{%
+  short = {IND-CCA},
+  long = {indistinguishability under chosen-ciphertext attack},
+  cite = {AuthEncryption}
+}
+\DeclareAcronym{IND-SFCCA}{%
+  short = {IND-SFCCA},
+  long = {indistinguishability under statefully chosen-ciphertext attack},
+  cite = {StatefulDecryption}
+}
+\DeclareAcronym{WUF-CMA}{%
+  short = {WUF-CMA},
+  long = {weak unforgeability under chosen-message attack},
+  cite = {AuthEncryption}
+}
+\DeclareAcronym{SUF-CMA}{%
+  short = {SUF-CMA},
+  long = {strong unforgeability under chosen-message attack},
+  cite = {AuthEncryption}
+}
+\DeclareAcronym{INT-PTXT}{%
+  short = {INT-PTXT},
+  long = {integrity of plaintexts},
+  cite = {AuthEncryption}
+}
+\DeclareAcronym{INT-SFPTXT}{%
+  short = {INT-SFPTXT},
+  long = {integrity of stateful plaintexts},
+  cite = {StatefulDecryption}
+}
+\DeclareAcronym{INT-CTXT}{%
+  short = {INT-CTXT},
+  long = {integrity of ciphertexts},
+  cite = {AuthEncryption}
+}
+\DeclareAcronym{INT-SFCTXT}{%
+  short = {INT-SFCTXT},
+  long = {integrity of stateful ciphertexts},
+  cite = {StatefulDecryption}
+}
+\DeclareAcronym{DEN-SS}{%
+  short = {DEN-SS},
+  long = {deniability under surveillance-state attack},
+  cite = {OTPKX}
+}
+% Computational problems
+\DeclareAcronym{DLP}{%
+  short = {DLP},
+  long = {Discrete Logarithm Problem}
+}
+\DeclareAcronym{DH}{
+  short = {DH},
+  long = {Diffie-Hellman},
+  cite = {DiffieHellman}
+}
+\DeclareAcronym{DHP}{%
+  short = {DHP},
+  long = {Diffie-Hellman Problem},
+  cite = {DiffieHellman}
+}
+\DeclareAcronym{DDH}{%
+  short = {DDH},
+  long = {Decisional Diffie-Hellman},
+  cite = {DiffieHellman}
+}
+\DeclareAcronym{DC}{%
+  short = {DC},
+  long = {Dining Cryptographers},
+  cite = {DiningCryptographers}
+}
+\DeclareAcronym{DCP}{%
+  short = {DCP},
+  long = {Dining Cryptographers Problem},
+  cite = {DiningCryptographers}
+}
+\DeclareAcronym{SMP}{%
+  short = {SMP},
+  long = {Socialist Millionaires' Problem}
+}
+% Cryptographic mechanisms
+\DeclareAcronym{OTP}{%
+  short = {OTP},
+  long = {One-Time Pad}
+}
+\DeclareAcronym{MA}{%
+  short = {MA},
+  long = {%
+      message authentication%
+    }
+}
+\DeclareAcronym{MAC}{%
+  short = {MAC},
+  long = {%
+      message-authentication code%
+    }
+}
+\DeclareAcronym{HMAC}{%
+  short = {HMAC},
+  short-indefinite = {an},
+  long = {%
+      hash-based message-authentication code%
+    },
+  long-indefinite = {a},
+  cite = {HMAC},
+}
+\DeclareAcronym{PRNG}{%
+  short = {PRNG},
+  long = {%
+      pseudo-random number-generator%
+    }
+}
+\DeclareAcronym{RNG}{%
+  short = {RNG},
+  long = {%
+      random-number generator%
+    }
+}
+\DeclareAcronym{KEM}{%
+  short = {KEM},
+  long = {%
+      key-encapsulation mechanism%
+    }
+}
+\DeclareAcronym{DEM}{%
+  short = {DEM},
+  long = {%
+      data-encryption mechanism%
+    }
+}
+\DeclareAcronym{EtM}{%
+  short = {EtM},
+  long = {%
+      encrypt-then-MAC
+    },
+  cite = {AuthEncryption}
+}
+\DeclareAcronym{PIR}{%
+  short = {PIR},
+  long = {%
+      private information retrieval%
+    },
+  %cite = {PIR}
+}
+\DeclareAcronym{OT}{%
+  short = {OT},
+  short-indefinite = {an},
+  long = {%
+      oblivious transfer%
+    },
+  long-indefinite = {an},
+  cite = {ObliviousTransfer}
+}
+% Key-exchange mechanisms
+\DeclareAcronym{KE}{%
+  short = {KE},
+  long = {%
+      key-exchange%
+    }
+}
+\DeclareAcronym{DHKE}{%
+  short = {DHKE},
+  long = {%
+      Diffie-Hellman key-exchange%
+    },
+  cite = {DiffieHellman}
+}
+\DeclareAcronym{AKE}{%
+  short = {AKE},
+  long = {%
+      authenticated key-exchange
+    },
+  cite = {AuthKeyExchange}
+}
+% Cryptographic properties
+\DeclareAcronym{PFS}{%
+  short = {PFS},
+  long = {%
+      perfect forward-secrecy%
+    }
+}
+% Types of encryption
+\DeclareAcronym{PKC}{%
+  short = {PKC},
+  long = {%
+      public-key cryptography%
+    }
+}
+\DeclareAcronym{PKE}{%
+  short = {PKE},
+  long = {%
+      public-key encryption%
+    }
+}
+\DeclareAcronym{SKE}{%
+  short = {SKE},
+  long = {%
+      symmetric-key encryption%
+    }
+}
+\DeclareAcronym{BE}{%
+  short = {BE},
+  long = {%
+      broadcast encryption%
+    },
+  cite = {BroadcastEncryption}
+}
+\DeclareAcronym{ANOBE}{%
+  short = {ANOBE},
+  short-indefinite = {an},
+  long = {%
+      anonymous broadcast encryption%
+    },
+  long-indefinite = {an},
+  cite = {ANOBE}
+}
+\DeclareAcronym{oANOBE}{%
+  short = {oANOBE},
+  long = {%
+      outsider-anonymous broadcast encryption%
+    },
+  cite = {oANOBE}
+}
+\DeclareAcronym{IBE}{%
+  short = {IBE},
+  long = {%
+      identity-based encryption%
+    }
+}
+\DeclareAcronym{ABE}{%
+  short = {ABE},
+  long = {%
+      attribute-based encryption%
+    },
+  short-indefinite = {an},
+  long-indefinite = {an},
+}
+\DeclareAcronym{CP-ABE}{%
+  short = {CP-ABE},
+  long = {%
+      ciphertext-policy attribute-based encryption%
+    },
+  cite = {CP-ABE}
+}
+\DeclareAcronym{KP-ABE}{%
+  short = {KP-ABE},
+  long = {%
+      key-policy attribute-based encryption%
+    },
+  cite = {KP-ABE},
+}
+\DeclareAcronym{PE}{%
+  short = {PE},
+  long = {%
+      predicate encryption%
+    }
+}
+\DeclareAcronym{PRE}{%
+  short = {PRE},
+  long = {%
+      proxy re-encryption%
+    },
+  cite = {AtomicProxyCrypto}
+}
+\DeclareAcronym{FHE}{%
+  short = {FHE},
+  long = {%
+      fully homomorphic encryption%
+    },
+}
+\DeclareAcronym{SHE}{%
+  short = {SHE},
+  long = {%
+      somewhat homomorphic encryption%
+    },
+}
+\DeclareAcronym{SHA}{%
+  short = {SHA},
+  long = {Secure Hash Algorithm},
+  cite = {SHA},
+}
+% Protocols
+\DeclareAcronym{OTR}{%
+  short = {OTR},
+  long = {Off-the-Record},
+  cite = {otr2004}
+}
+% Anonymity
+\DeclareAcronym{DP}{%
+  short = {DP},
+  long = {differential privacy},
+  cite = {DifferentialPrivacy},
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Multi-party computation
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\DeclareAcronym{MPC}{%
+  short = {MPC},
+  short-indefinite = {an},
+  long = {%
+      secure multiparty computation%
+    },
+  long-indefinite = {a},
+}
+\DeclareAcronym{SMC}{%
+  short = {MPC},
+  short-indefinite = {an},
+  long = {%
+      secure multiparty computation%
+    },
+  long-indefinite = {a},
+}
+@
+
+
 
 
 

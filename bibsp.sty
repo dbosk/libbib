@@ -45,6 +45,46 @@
 }
 \addbibresource{auth.bib}
 \addbibresource{passwd.bib}
+\DeclareAcronym{PPT}{%
+  short = {PPT},
+  long = {probabilistic polynomial-time},
+}
+\DeclareAcronym{PPTM}{%
+  short = {PPTM},
+  long = {probabilitstic polynomial-time Turing machine},
+}
+\DeclareAcronym{PRP}{%
+  short = {PRP},
+  long = {%
+      pseudo-random permutation%
+    }
+}
+\DeclareAcronym{PRF}{%
+  short = {PRF},
+  long = {%
+      pseudo-random function%
+    }
+}
+\DeclareAcronym{VRF}{%
+  short = {VRF},
+  long = {verifiable random function},
+}
+\DeclareAcronym{ZKP}{%
+  short = {ZKP},
+  long = {zero-knowledge proof},
+}
+\DeclareAcronym{PK}{%
+  short = {PK},
+  long = {proof of knowledge},
+}
+\DeclareAcronym{ZKPK}{%
+  short = {ZKPK},
+  long = {zero-knowledge proof of knowledge},
+}
+\DeclareAcronym{NIZK}{%
+  short = {NIZK},
+  long = {non-interactive zero-knowledge},
+}
 \DeclareAcronym{eID}{%
   short = {eID},
   short-indefinite = {an},
@@ -453,9 +493,6 @@
     \ensuremath{\mathcal{#2}}%
   }%
 }
-%
-% Proofs of knowledge
-%
 \ProvideDocumentCommand{\PK}{o o}{\ensuremath{%
     \operatorname{PK}%
     \IfValueT{#1}{%
@@ -538,14 +575,6 @@
   \ifthenelse{\equal{#2}{}}{}{_{#2}}%
 }}
 
-\DeclareAcronym{PPT}{%
-  short = {PPT},
-  long = {probabilistic polynomial-time},
-}
-\DeclareAcronym{PPTM}{%
-  short = {PPTM},
-  long = {probabilitstic polynomial-time Turing machine},
-}
 % Crypto properties
 \DeclareAcronym{IND-CPA}{%
   short = {IND-CPA},
@@ -636,26 +665,6 @@
   short = {OTP},
   long = {One-Time Pad}
 }
-\DeclareAcronym{ZKP}{%
-  short = {ZKP},
-  long = {%
-      zero-knowledge proof%
-    }
-}
-\DeclareAcronym{PK}{%
-  short = {PK},
-  long = {proof of knowledge},
-}
-\DeclareAcronym{ZKPK}{%
-  short = {ZKPK},
-  long = {zero-knowledge proof of knowledge},
-}
-\DeclareAcronym{NIZK}{%
-  short = {NIZK},
-  long = {%
-    non-interactive zero-knowledge%
-  },
-}
 \DeclareAcronym{MA}{%
   short = {MA},
   long = {%
@@ -676,22 +685,6 @@
     },
   long-indefinite = {a},
   cite = {HMAC},
-}
-\DeclareAcronym{PRP}{%
-  short = {PRP},
-  long = {%
-      pseudo-random permutation%
-    }
-}
-\DeclareAcronym{PRF}{%
-  short = {PRF},
-  long = {%
-      pseudo-random function%
-    }
-}
-\DeclareAcronym{VRF}{%
-  short = {VRF},
-  long = {verifiable random function},
 }
 \DeclareAcronym{PRNG}{%
   short = {PRNG},
