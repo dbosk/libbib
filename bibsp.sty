@@ -388,9 +388,6 @@
     {\xleftarrow[\hspace{\ProtoArrowLength}]{#2}}%
   }}
 \ProvideDocumentCommand{\concat}{}{\mathbin{\|}}
-\ProvideDocumentCommand{\method}{m m}{\ensuremath{%
-    \operatorname{#1.\!#2}%
-  }}
 \ProvideDocumentCommand{\NewCryptoScheme}{m m}{%
   \ProvideDocumentCommand{#1}{s o}{%
     \ensuremath{%
@@ -405,6 +402,9 @@
     }%
   }%
 }
+\ProvideDocumentCommand{\method}{m m}{\ensuremath{%
+    \operatorname{#1.\!#2}%
+  }}
 \ProvideDocumentCommand{\NewAlgorithm}{m m}{%
   \ProvideDocumentCommand{#1}{s o o}{%
     \ensuremath{%
