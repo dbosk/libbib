@@ -7,14 +7,18 @@
 \usepackage[single]{acro}
 \usepackage[abbreviations]{foreign}
 
-%\usepackage{doc}
+\usepackage{makeidx}
+\makeindex
+\ProvideDocumentCommand{\cs}{m}{\texttt{\textbackslash #1}}
 \ProvideDocumentCommand{\cmd}{m}{\texttt{\string#1}}
-\ProvideDocumentCommand{\meta}{m}{\(\langle\)\emph{#1}\(\rangle\)}
+\ProvideDocumentCommand{\meta}{m}{%
+  \ensuremath{\langle}\emph{#1}\ensuremath{\rangle}%
+}
 \ProvideDocumentCommand{\marg}{m}{%
-  {\ttfamily\{}\meta{#1}{\ttfamily\}}%
+  \texttt{\{}\meta{#1}\texttt{\}}%
 }
 \ProvideDocumentCommand{\oarg}{m}{%
-  {\ttfamily[}\meta{#1}{\ttfamily]}%
+  \texttt[\meta{#1}\texttt]%
 }
 \usepackage{fancyvrb}
 \DefineShortVerb{\"}
@@ -22,13 +26,16 @@
 \reversemarginpar
 %\setlength{\marginparpush}{0pt}
 %\setlength{\marginparwidth}{8pc}
+\ProvideDocumentCommand{\DescribeMacro}{m}{%
+  \cmd{#1}\index{\string#1@\cmd{#1}|emph}%
+  \marginpar{\raggedleft\cmd{#1}}%
+}
 \ProvideDocumentCommand{\NewDescribe}{m}{%
   \ProvideDocumentCommand{#1}{m}{%
-    \cmd{##1}\index{##1}%
+    \texttt{##1}\index{##1@\texttt{##1}|emph}%
     \marginpar{\raggedleft\cmd{##1}}%
   }%
 }
-\NewDescribe{\DescribeMacro}
 \NewDescribe{\DescribeEnv}
 \NewDescribe{\DescribeOpt}
 \NewDescribe{\DescribeVar}

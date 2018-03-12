@@ -1506,9 +1506,10 @@ BIBSP_TOPIC+=	otrmsg otpkx ppes
 
 
 
-\printbibliography{}
+\printbibliography
 
 \chapter*{An index of the code blocks}
 \nowebchunks
 
+\printindex
 \end{document}
