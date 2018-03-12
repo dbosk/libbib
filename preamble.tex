@@ -12,7 +12,7 @@
 \ProvideDocumentCommand{\cs}{m}{\texttt{\textbackslash #1}}
 \ProvideDocumentCommand{\cmd}{m}{\texttt{\string#1}}
 \ProvideDocumentCommand{\meta}{m}{%
-  \ensuremath{\langle}\emph{#1}\ensuremath{\rangle}%
+  \ensuremath{\langle}\normalfont{\emph{#1}}\ensuremath{\rangle}%
 }
 \ProvideDocumentCommand{\marg}{m}{%
   \texttt{\{}\meta{#1}\texttt{\}}%
@@ -25,7 +25,7 @@
 %\usepackage{marginnote}
 \reversemarginpar
 %\setlength{\marginparpush}{0pt}
-%\setlength{\marginparwidth}{8pc}
+\setlength{\marginparwidth}{8pc}
 \ProvideDocumentCommand{\DescribeMacro}{m}{%
   \cmd{#1}\index{\string#1@\cmd{#1}|emph}%
   \marginpar{\raggedleft\cmd{#1}}%

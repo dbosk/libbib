@@ -547,12 +547,31 @@ BIBSP_TOPIC+=   be
 BIBSP_TOPIC+=   mpc
 @
 
-\subsection{Algorithmic notation}
 
+\section{Algorithmic notation}
+
+When doing applied cryptography, we must use several schemes at the same time.
+A useful notation is that of classes and methods.
+\NewCryptoScheme{\SchemeS}{S}
+Say that we have two schemes \(\SchemeS, \SchemeS*\).
+\NewAlgorithm{\Sign}{Sign}
+Also say that each of these schemes provide a signature algorithm, \(\Sign\).
+Then we can differentiate between them by the notation \(\SchemeS[\Sign]\) and 
+\(\SchemeS*[\Sign]\).
+
+We provide a command \DescribeMacro{\NewCryptoScheme}\marg{macro}\marg{name} 
+which creates a command \cs{\meta{macro}}.
+\Eg the schemes \(\SchemeS, \SchemeS*\) were generated using
+\begin{center}
+"\NewCryptoScheme{\SchemeS}{S}"
+\end{center}
+and \cmd{\SchemeS} produces \(\SchemeS\) and \(\cmd{\SchemeS*}\) produces 
+\(\SchemeS*\).
+Each scheme macro accepts an optional star (to give it the overline) and an 
+optional argument interpreted as a method, \eg "\SchemeS[\Sign]" produces 
+\(\SchemeS[\Sign]\).
+The "\NewCryptoScheme" command is implemented as follows:
 <<topic commands>>=
-\ProvideDocumentCommand{\method}{m m}{\ensuremath{%
-    \operatorname{#1.\!#2}%
-  }}
 \ProvideDocumentCommand{\NewCryptoScheme}{m m}{%
   \ProvideDocumentCommand{#1}{s o}{%
     \ensuremath{%
@@ -567,6 +586,32 @@ BIBSP_TOPIC+=   mpc
     }%
   }%
 }
+@
+
+We also provide \DescribeMacro{\method}\marg{class}\marg{method} to simply 
+provide a nice method notation between \meta{class} and \meta{method}.
+The result will be treated as a mathematical operator.
+<<topic commands>>=
+\ProvideDocumentCommand{\method}{m m}{\ensuremath{%
+    \operatorname{#1.\!#2}%
+  }}
+@
+
+The algorithm \(\Sign\) was produced using 
+\DescribeMacro{\NewAlgorithm}\marg{macro}\marg{name}, more specifically,
+\begin{center}
+"\NewAlgorithm{\Sign}{Sign}".
+\end{center}
+Analogous to algorithms, we also provide \DescribeMacro{\NewFunction} for 
+mathematical functions, the only difference lies in the typeface.
+An algorithm (or function) command, takes an optional star and then two optional 
+arguments:
+\begin{center}
+\cs{\meta{macro}}\oarg{sub/supscripts}\oarg{argument}.
+\end{center}
+
+The "\NewAlgorithm" and "\NewFunction" are implemented as follows.
+<<topic commands>>=
 \ProvideDocumentCommand{\NewAlgorithm}{m m}{%
   \ProvideDocumentCommand{#1}{s o o}{%
     \ensuremath{%
@@ -605,6 +650,9 @@ BIBSP_TOPIC+=   mpc
     }%
   }%
 }
+@
+
+<<topic commands>>=
 \ProvideDocumentCommand{\NewCryptoSet}{m m}{%
   \ProvideDocumentCommand{#1}{}{%
     \ensuremath{\mathcal{#2}}%

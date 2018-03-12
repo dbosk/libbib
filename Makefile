@@ -23,7 +23,7 @@ bibsp.mk: bibsp.nw
 
 .PHONY: clean
 clean:
-	${RM} bibsp.sty bibsp.pdf bibsp.tex
+	${RM} bibsp.pdf bibsp.tex
 
 
 PKG_PACKAGES= 			main docs
