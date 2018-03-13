@@ -25,7 +25,7 @@ bibsp.mk: bibsp.nw
 all: passwd.bib
 
 passwd.bib: bibsp.nw
-	${NOTANGLE} ${NOTANGLEFLAGS} -R$@ $< | ${CPIF} $@
+	${NOTANGLE} ${NOTANGLEFLAGS} -R$@ $< > $@
 
 
 .PHONY: clean
