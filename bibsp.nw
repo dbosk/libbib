@@ -999,7 +999,7 @@ We add the password bibliography for automatic inclusion by [[bibsp]].
 The first paper treats security and usability of password composition policies.
 We first add the BibTeX entry.
 <<passwd.bib>>=
-@@inproceedings{OfPasswordsAndPeople,
+@inproceedings{OfPasswordsAndPeople,
   author={Komanduri, Saranga and
     Shay, Richard and
     Kelley, Patrick Gage and
@@ -1023,7 +1023,7 @@ URL-OfPasswordsAndPeople=http://cups.cs.cmu.edu/rshay/pubs/passwords_and_people2
 
 The second paper is a follow-up to the first.
 <<passwd.bib>>=
-@@inproceedings{CanLongPasswordsBeSecureAndUsable,
+@inproceedings{CanLongPasswordsBeSecureAndUsable,
   title={Can long passwords be secure and usable?},
   author={Shay, Richard and
     Komanduri, Saranga and
@@ -1132,8 +1132,6 @@ BIBSP_TOPIC+=   location
 @
 
 
-
-
 \chapter{Access control}
 
 <<bibsp variables>>=
@@ -1156,6 +1154,7 @@ BIBSP_TOPIC+=   ac
   long = {mandatory access control}
 }
 @
+
 
 \section{Access-control models}
 
@@ -1190,6 +1189,7 @@ BIBSP_TOPIC+=   ac
   long-indefinite = {an},
 }
 @
+
 
 \section{Information flow}
 
