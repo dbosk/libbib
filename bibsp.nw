@@ -541,11 +541,73 @@ The commands are implemented as follows.
 \chapter{Cryptography}
 
 The topic of cryptography is a very big one.
-It provides the following subtopics.
+It provides several subtopics in addition to the main one.
 <<bibsp variables>>=
 BIBSP_TOPIC+=   crypto
-BIBSP_TOPIC+=   be
-BIBSP_TOPIC+=   mpc
+@ We provide the general bibliography [[<<crypto.bib>>]].
+<<topic bibliographies>>=
+\addbibresource{crypto.bib}
+@
+
+We can start by adding some good textbooks and references on cryptography.
+\Textcite{Stinson2006cta}, \DescribeBibkey{Stinson2006cta}, provides an easy 
+read, a good introduction.
+<<crypto.bib>>=
+@book{Stinson2006cta,
+  author={Stinson, Douglas R.},
+  title={Cryptography: Theory and Practice},
+  publisher={Chapman {\&} Hall/CRC},
+  address={Boca Raton},
+  year={2006},
+  edition={3},
+  ISBN={1-58488-508-4 (Hardcover)},
+  keywords={Kryptering},
+}
+@
+
+Then we have the reference works by \textcite{GoldreichFOC-1,GoldreichFOC-2}, 
+\DescribeBibkey{GoldreichFOC-1} and \DescribeBibkey{GoldreichFOC-2}.
+<<crypto.bib>>=
+@book{GoldreichFOC-1,
+  author={Goldreich, Oded},
+  title={Foundations of cryptography, Vol.~1: Basic tools},
+  publisher={Cambridge Univ.\ Press},
+  address={Cambridge},
+  year={2001},
+  ISBN={0-521-79172-3},
+}
+@book{GoldreichFOC-2,
+  author={Goldreich, Oded},
+  title={Foundations of cryptography, Vol.~2: Basic applications},
+  publisher={Cambridge Univ.\ Press},
+  address={Cambridge},
+  year={2004},
+  ISBN={0-521-83084-2:},
+}
+@
+
+Finally, we have the book by \textcite{KatzLindell-v2}, 
+\DescribeBibkey{KatzLindell-v2}.
+(And its first version~\cite{KatzLindell-v1}, \DescribeBibkey{KatzLindell-v1}.)
+<<crypto.bib>>=
+@book{KatzLindell-v1,
+  title={Introduction to modern cryptography},
+  author={Katz, Jonathan and Lindell, Yehuda},
+  publisher={Chapman {\&} Hall/CRC},
+  address={Boca Raton},
+  year={2008},
+  edition={1},
+  ISBN={9781584885511},
+}
+@book{KatzLindell-v2,
+  title={Introduction to modern cryptography},
+  author={Katz, Jonathan and Lindell, Yehuda.},
+  publisher={Chapman {\&} Hall/CRC},
+  address={Boca Raton},
+  year={2014},
+  edition={2},
+  ISBN={9781466570269},
+}
 @
 
 
@@ -673,6 +735,14 @@ The resulting \cs{\meta{macro}} doesn't take any options.
 }
 @
 
+
+\section{Algorithmic terminology}
+
+There are many terms from the area of complexity theory that we rely on in 
+cryptography, many of them also deserve acronyms.
+The first ones that comes to mind are
+\ac{PPT}, given by \DescribeAcro{PPT}, and
+\ac{PPTM}, given by \DescribeAcro{PPTM}.
 <<topic acronyms>>=
 \DeclareAcronym{PPT}{%
   short = {PPT},
@@ -684,18 +754,21 @@ The resulting \cs{\meta{macro}} doesn't take any options.
 }
 @
 
+
+\section{Cryptographic primitives}
+
+There are some basic primitives that we use quite often too:
+\ac{PRP}, provided by \DescribeAcro{PRP};
+\ac{PRF}, provided by \DescribeAcro{PRF};
+\ac{VRF}, provided by \DescribeAcro{VRF}.
 <<topic acronyms>>=
 \DeclareAcronym{PRP}{%
   short = {PRP},
-  long = {%
-      pseudo-random permutation%
-    }
+  long = {pseudo-random permutation}
 }
 \DeclareAcronym{PRF}{%
   short = {PRF},
-  long = {%
-      pseudo-random function%
-    }
+  long = {pseudo-random function}
 }
 \DeclareAcronym{VRF}{%
   short = {VRF},
@@ -703,9 +776,53 @@ The resulting \cs{\meta{macro}} doesn't take any options.
 }
 @
 
+We also provide some more specific acronyms, with citations.
+We start with the \ac{DY-VRF}, \DescribeAcro{DY-VRF} with the citation 
+\DescribeBibkey{DY-VRF}.
+<<topic acronyms>>=
+\DeclareAcronym{DY-VRF}{%
+  short = {DY-VRF},
+  long = {Dodis-Yampolskiy verifiable random function},
+  cite = {DY-VRF},
+}
+@
+<<crypto.bib>>=
+@inproceedings{DY-VRF,
+  title={A verifiable random function with short proofs and keys},
+  author={Dodis, Yevgeniy and Yampolskiy, Aleksandr},
+  booktitle={International Workshop on Public Key Cryptography},
+  pages={416--431},
+  year={2005},
+  organization={Springer}
+}
+@
+
 
 \section{Proofs of knowledge}
 
+We will use the notation of \textcite{PKnotation} for proofs of knowledge.
+And also provide the previous citation, \DescribeBibkey{PKnotation}.
+<<crypto.bib>>=
+@inproceedings{PKnotation,
+  title={Efficient group signature schemes for large groups},
+  author={Camenisch, Jan and Stadler, Markus},
+  booktitle={Annual International Cryptology Conference, CRYPTO'97},
+  pages={410--424},
+  year={1997},
+  organization={Springer}
+}
+@ And the URL for download.
+<<crypto.mk>>=
+BIBSP_REFKEY+=PKnotation
+URL-PKnotation=https://link.springer.com/chapter/10.1007%2FBFb0052252
+@
+
+We provide \DescribeMacro{\PK}\oarg{secrets}\oarg{predicates}.
+\Eg the Schnorr Identification Scheme~\cite{Schnorr} can be written as 
+\(\PK[\alpha][y = g^\alpha]\), \ie "\PK[\alpha][y = g^\alpha]".
+We similarly use 
+\DescribeMacro{\SPK}\oarg{secrets}\oarg{predicates}\oarg{message} for 
+\ac{NIZKPK}.
 <<topic commands>>=
 \ProvideDocumentCommand{\PK}{o o}{\ensuremath{%
     \operatorname{PK}%
@@ -732,24 +849,108 @@ The resulting \cs{\meta{macro}} doesn't take any options.
   }}
 @
 
+We also provide some acronyms:
+\DescribeAcro{PK} for \ac{PK};
+\DescribeAcro{ZKP} for \ac{ZKP};
+\DescribeAcro{NIZK} for \ac{NIZK};
+\DescribeAcro{ZKPK} for \ac{ZKPK};
+\DescribeAcro{NIZKPK} for \ac{NIZKPK}.
 <<topic acronyms>>=
-\DeclareAcronym{ZKP}{%
-  short = {ZKP},
-  long = {zero-knowledge proof},
-}
 \DeclareAcronym{PK}{%
   short = {PK},
   long = {proof of knowledge},
 }
-\DeclareAcronym{ZKPK}{%
-  short = {ZKPK},
-  long = {zero-knowledge proof of knowledge},
+\DeclareAcronym{ZKP}{%
+  short = {ZKP},
+  long = {zero-knowledge proof},
 }
 \DeclareAcronym{NIZK}{%
   short = {NIZK},
   long = {non-interactive zero-knowledge},
 }
+\DeclareAcronym{ZKPK}{%
+  short = {ZKPK},
+  long = {zero-knowledge proof-of-knowledge},
+}
+\DeclareAcronym{NIZKPK}{%
+  short = {NIZKPK},
+  long = {non-interactive zero-knowledge proof-of-knowledge},
+}
 @
+
+\(\PK\) for discrete logarithms can be implemented using the Schnorr 
+Identification Scheme~\cite{Schnorr}, mentioned above as well.
+<<crypto.bib>>=
+@Article{Schnorr,
+  author="Schnorr, C. P.",
+  title="Efficient signature generation by smart cards",
+  journal="Journal of Cryptology",
+  volume="4",
+  number="3",
+  year="1991",
+  pages="161--174",
+  issn="1432-1378",
+  doi="10.1007/BF00196725",
+  url="http://dx.doi.org/10.1007/BF00196725",
+}
+@
+<<crypto.mk>>=
+BIBSP_REFKEY+=Schnorr
+URL-Schnorr=http://link.springer.com/content/pdf/10.1007%2FBF00196725.pdf
+@
+
+We can use the Fiat-Shamir heuristic~\cite{FiatShamirHeuristic} to turn any 
+\(\PK\) into \(\SPK\).
+<<crypto.bib>>=
+@Inbook{FiatShamirHeuristic,
+  author="Fiat, Amos
+      and Shamir, Adi",
+  editor="Odlyzko, Andrew M.",
+  title="How To Prove Yourself: Practical Solutions to Identification and 
+      Signature Problems",
+  bookTitle="Advances in Cryptology --- CRYPTO' 86: Proceedings",
+  year="1987",
+  publisher="Springer Berlin Heidelberg",
+  address="Berlin, Heidelberg",
+  pages="186--194",
+  isbn="978-3-540-47721-1",
+  doi="10.1007/3-540-47721-7_12",
+  url="http://dx.doi.org/10.1007/3-540-47721-7_12"
+}
+@
+<<crypto.mk>>=
+BIBSP_REFKEY+=FiatShamirHeuristic
+URL-FiatShamirHeuristic=http://dx.doi.org/10.1007/3-540-47721-7_12
+@
+
+
+\section{Commitments}
+
+We have two properties for commitments, binding and hiding.
+Each property can have varying strength, \ie a commitment scheme can either be
+\begin{itemize}
+\item perfectly or computationally binding and
+\item perfectly, statistically or computationally hiding.
+\end{itemize}
+
+We have the Pedersen commitment scheme~\cite{PedersenCommitment}, which is 
+computationally binding and perfectly hiding.
+<<crypto.bib>>=
+@inproceedings{PedersenCommitment,
+  title={Non-interactive and information-theoretic secure verifiable secret 
+    sharing},
+  author={Pedersen, Torben Pryds},
+  booktitle={Annual International Cryptology Conference},
+  pages={129--140},
+  year={1991},
+  organization={Springer}
+}
+@
+<<crypto.mk>>=
+BIBSP_REFKEY+=PedersenCommitment
+URL-PedersenCommitment=https://link.springer.com/chapter/10.1007/3-540-46766-1_9
+@
+
 
 
 \chapter{Authentication}
@@ -1125,6 +1326,11 @@ BIBSP_TOPIC+=	otrmsg otpkx ppes
 @
 
 \section{Encryption/decryption}
+
+<<bibsp variables>>=
+BIBSP_TOPIC+=   be
+BIBSP_TOPIC+=   mpc
+@
 
 <<topic commands>>=
 \ProvideDocumentCommand{\indcpa}{}{\ensuremath{\text{IND-CPA}}}
@@ -1506,8 +1712,707 @@ BIBSP_TOPIC+=	otrmsg otpkx ppes
 }
 @
 
+<<crypto.bib>>=
+@article{ShannonSecrecy,
+  title={Communication theory of secrecy systems},
+  author={Shannon, Claude E},
+  journal={Bell system technical journal},
+  volume={28},
+  number={4},
+  pages={656--715},
+  year={1949},
+  publisher={Wiley Online Library}
+}
+
+@article{InfoTheory,
+  title={A Mathematical Theory of Communication},
+  author={Shannon, Claude E},
+  journal={Bell system technical journal},
+  volume={27},
+  number={7, 10},
+  pages={379--423, 623--656},
+  year={1948},
+  publisher={Wiley Online Library}
+}
+
+@incollection{HMAC,
+  author="Bellare, Mihir
+      and Canetti, Ran
+      and Krawczyk, Hugo",
+  editor="Koblitz, Neal",
+  title="Keying Hash Functions for Message Authentication",
+  booktitle="Advances in Cryptology --- CRYPTO '96: Prooceedings of the 16th 
+      Annual International Cryptology Conference",
+  year="1996",
+  publisher="Springer Berlin Heidelberg",
+  address="Berlin, Heidelberg",
+  pages="1--15",
+  isbn="978-3-540-68697-2",
+  doi="10.1007/3-540-68697-5_1",
+  url="http://dx.doi.org/10.1007/3-540-68697-5_1"
+}
+
+@techreport{HMAC-std,
+  title={The Keyed-Hash Message Authentication Code (HMAC)},
+  type={Federal Information Processing Standards Publication},
+  number={198-1},
+  institution={National Institute of Standards and Technology},
+  year={2008},
+  month={7},
+  URL={http://csrc.nist.gov/publications/fips/fips198-1/FIPS-198-1_final.pdf},
+}
+
+@inproceedings{ElGamal,
+  author="ElGamal, Taher",
+  editor="Blakley, George Robert
+      and Chaum, David",
+  title="A Public Key Cryptosystem and a Signature Scheme Based on Discrete 
+      Logarithms",
+  booktitle="Advances in Cryptology: Proceedings of CRYPTO 84",
+  year="1985",
+  publisher="Springer Berlin Heidelberg",
+  address="Berlin, Heidelberg",
+  pages="10--18",
+  isbn="978-3-540-39568-3",
+  doi="10.1007/3-540-39568-7_2",
+  url="http://dx.doi.org/10.1007/3-540-39568-7_2",
+}
+
+@incollection{DeniableEncryption,
+  title={Deniable encryption},
+  author={Canetti, Ran and Dwork, Cynthia and Naor, Moni and Ostrovsky, 
+    Rafail},
+  booktitle={CRYPTO'97},
+  pages={90--104},
+  year={1997},
+  publisher={Springer}
+}
+
+@article{DiffieHellman,
+  title={New directions in cryptography},
+  author={Diffie, Whitfield and Hellman, Martin E},
+  journal={IEEE Transactions on Information Theory},
+  volume={22},
+  number={6},
+  pages={644--654},
+  year={1976},
+  publisher={IEEE}
+}
+@article{AuthKeyExchange,
+  title={Authentication and authenticated key exchanges},
+  author={Diffie, Whitfield and Van Oorschot, Paul C and Wiener, Michael 
+    J},
+  journal={Designs, codes and cryptography},
+  volume={2},
+  number={2},
+  pages={107--125},
+  year={1992},
+  publisher={Springer},
+}
+
+@article{AuthEncryption,
+  title={Authenticated encryption: Relations among notions and analysis of the 
+    generic composition paradigm},
+  author={Bellare, Mihir and Namprempre, Chanathip},
+  journal={Journal of Cryptology},
+  volume={21},
+  number={4},
+  pages={469--491},
+  year={2008},
+  publisher={Springer},
+}
+@article{StatefulDecryption,
+  title={Breaking and provably repairing the SSH authenticated encryption 
+    scheme: A case study of the Encode-then-Encrypt-and-MAC paradigm},
+  author={Bellare, Mihir and Kohno, Tadayoshi and Namprempre, Chanathip},
+  journal={ACM Transactions on Information and System Security (TISSEC)},
+  volume={7},
+  number={2},
+  pages={206--241},
+  year={2004},
+  publisher={ACM}
+}
+
+@incollection{KeyPrivacy,
+  title={Key-Privacy in Public-Key Encryption},
+  author={Bellare, Mihir and Boldyreva, Alexandra and Desai, Anand and 
+    Pointcheval, David},
+  booktitle={ASIACRYPT 2001},
+  editor={Boyd, Colin},
+  series={Lecture Notes in Computer Science},
+  volume={2248},
+  pages={566--582},
+  publisher={Springer Berlin Heidelberg},
+  year={2001},
+  doi={10.1007/3-540-45682-1_33},
+  isbn={978-3-540-42987-6},
+  url={http://dx.doi.org/10.1007/3-540-45682-1_33},
+  language={English}
+}
+@incollection{RobustEncryption,
+  author={Abdalla, Michel and Bellare, Mihir and Neven, Gregory},
+  title={Robust Encryption},
+  booktitle={Theory of Cryptography},
+  editor={Micciancio, Daniele},
+  series={Lecture Notes in Computer Science},
+  volume={5978},
+  pages={480-497},
+  year={2010},
+  publisher={Springer Berlin Heidelberg},
+  doi={10.1007/978-3-642-11799-2_28},
+  isbn={978-3-642-11798-5},
+  url={http://dx.doi.org/10.1007/978-3-642-11799-2_28},
+  language={English}
+}
+
+@incollection{RandomnessReuse,
+  title={Randomness reuse: Extensions and improvements},
+  author={Barbosa, Manuel and Farshim, Pooya},
+  booktitle={Cryptography and Coding},
+  pages={257--276},
+  year={2007},
+  publisher={Springer},
+  URL={http://repositorium.sdum.uminho.pt/bitstream/1822/7286/1/reuse.pdf}
+}
+
+@incollection{KD-KEM,
+  title={A New Paradigm of Hybrid Encryption Scheme},
+  author={Kurosawa, Kaoru and Desmedt, Yvo},
+  booktitle={CRYPTO 2004},
+  editor={Franklin, Matt},
+  series={Lecture Notes in Computer Science},
+  volume={3152},
+  pages={426-442},
+  year={2004},
+  publisher={Springer Berlin Heidelberg},
+  isbn={978-3-540-22668-0},
+  doi={10.1007/978-3-540-28628-8_26},
+  url={http://dx.doi.org/10.1007/978-3-540-28628-8_26},
+  keywords={hybrid encryption; KEM; standard model},
+  language={English}
+}
+
+@incollection{Signcryption,
+  title={Digital signcryption or how to achieve
+    cost (signature \& encryption) \(\ll\) cost (signature) + cost 
+    (encryption)},
+  author={Zheng, Yuliang},
+  booktitle={CRYPTO'97},
+  pages={165--179},
+  year={1997},
+  publisher={Springer}
+}
+
+@article{ImprovedProxyReencryption,
+  title = {Improved Proxy Re-encryption Schemes with Applications to Secure 
+    Distributed Storage},
+  author = {Ateniese, Giuseppe and Fu, Kevin and Green, Matthew and 
+    Hohenberger, Susan},
+  journal = {ACM Trans. Inf. Syst. Secur.},
+  issue_date = {February 2006},
+  volume = {9},
+  number = {1},
+  month = feb,
+  year = {2006},
+  issn = {1094-9224},
+  pages = {1--30},
+  numpages = {30},
+  url = {http://doi.acm.org/10.1145/1127345.1127346},
+  doi = {10.1145/1127345.1127346},
+  acmid = {1127346},
+  publisher = {ACM},
+  address = {New York, NY, USA},
+  keywords = {Proxy re-encryption, bilinear maps, double decryption, key translation},
+} 
+
+@article{UnidirectionalCCAProxyReencryption,
+  title={Unidirectional Chosen-Ciphertext Secure Proxy Re-Encryption},
+  author={Libert, B. and Vergnaud, D.},
+  journal={Information Theory, IEEE Transactions on},
+  volume={57},
+  number={3},
+  pages={1786-1802},
+  year={2011},
+  keywords={cryptography;Canetti-Hohenberger security model;adversarial 
+    model;bilinear groups;chosen-ciphertext security;complexity 
+        assumptions;cryptographic primitive;noninteractive temporary 
+        delegations;plaintext encryption;unidirectional proxy 
+        reencryption;Analytical models;Encryption;Games;Public 
+        key;Receivers;Asymmetric cryptography;chosen-ciphertext security;proxy 
+        re-encryption;standard model;unidirectionality},
+  doi={10.1109/TIT.2011.2104470},
+  ISSN={0018-9448},
+  month={March},
+}
+
+@article{CCAAnonymousProxyReencryption,
+  title = "Chosen-ciphertext secure anonymous conditional proxy re-encryption with keyword search ",
+  author = "Liming Fang and Willy Susilo and Chunpeng Ge and Jiandong Wang",
+  journal = "Theoretical Computer Science",
+  volume = "462",
+  pages = "39--58",
+  year = "2012",
+  issn = "0304-3975",
+  doi = "http://dx.doi.org/10.1016/j.tcs.2012.08.017",
+  url = "http://www.sciencedirect.com/science/article/pii/S0304397512007906",
+  keywords = "Public key encryption",
+  keywords = "Conditional proxy re-encryption",
+  keywords = "Keyword search",
+  keywords = "Anonymity",
+  keywords = "Chosen-ciphertext security "
+}
+
+@inproceedings{CCAProxyReencryption,
+  title = {Chosen-ciphertext Secure Proxy Re-encryption},
+  author = {Canetti, Ran and Hohenberger, Susan},
+  booktitle = {Proceedings of the 14th ACM Conference on Computer and 
+    Communications Security},
+  series = {CCS '07},
+  pages = {185--194},
+  publisher = {ACM},
+  address = {New York, NY, USA},
+  year = {2007},
+  doi = {10.1145/1315245.1315269},
+  isbn = {978-1-59593-703-2},
+  url = {http://doi.acm.org.focus.lib.kth.se/10.1145/1315245.1315269},
+  numpages = {10},
+  location = {Alexandria, Virginia, USA},
+  acmid = {1315269},
+  keywords = {chosen-ciphertext security, encryption, obfuscation, 
+    re-encryption},
+} 
+
+@article{CCAKeyPrivateProxyReencryption,
+  title = "Achieving key privacy without losing {CCA} security in proxy 
+      re-encryption",
+  author = "Jun Shao and Peng Liu and Yuan Zhou",
+  journal = "Journal of Systems and Software",
+  volume = "85",
+  number = "3",
+  pages = "655 - 665",
+  year = "2012",
+  issn = "0164-1212",
+  doi = "http://dx.doi.org/10.1016/j.jss.2011.09.034",
+  url = "http://www.sciencedirect.com/science/article/pii/S0164121211002421",
+  keywords = "Proxy re-encryption",
+  keywords = "Chosen ciphertext security",
+  keywords = "Key privacy",
+  keywords = "Standard model",
+}
+
+@incollection{AtomicProxyCrypto,
+  title={Divertible protocols and atomic proxy cryptography},
+  author={Blaze, Matt and Bleumer, Gerrit and Strauss, Martin},
+  booktitle={EUROCRYPT'98},
+  editor={Nyberg, Kaisa},
+  series={Lecture Notes in Computer Science},
+  volume={1403},
+  pages={127-144},
+  publisher={Springer Berlin Heidelberg},
+  year={1998},
+  isbn={978-3-540-64518-4},
+  doi={10.1007/BFb0054122},
+  url={http://dx.doi.org/10.1007/BFb0054122},
+  language={English}
+}
+
+@inproceedings{CP-ABE,
+  title={Ciphertext-Policy Attribute-Based Encryption},
+  author={Bethencourt, J. and Sahai, A. and Waters, B.},
+  booktitle={Security and Privacy, 2007},
+  pages={321-334},
+  year={2007},
+  keywords={authorisation;cryptography;distributed processing;storage 
+    management;ciphertext-policy attribute-based encryption;collusion attack;data 
+        confidentiality;distributed system;policy enforcement;role-based access 
+        control;trusted storage server;Access 
+        control;Certification;Cryptography;Data security;File 
+        servers;Measurement;Monitoring;Personnel;Public key;Secure storage},
+  doi={10.1109/SP.2007.11},
+  ISSN={1081-6011},
+  month={May},
+}
+@inproceedings{KP-ABE,
+  title = {Attribute-based Encryption for Fine-grained Access Control of 
+    Encrypted Data},
+  author = {Goyal, Vipul and Pandey, Omkant and Sahai, Amit and Waters, Brent},
+  booktitle = {CCS'06},
+  series = {CCS},
+  pages = {89--98},
+  publisher = {ACM},
+  address = {New York, NY, USA},
+  year = {2006},
+  isbn = {1-59593-518-5},
+  location = {Alexandria, Virginia, USA},
+  numpages = {10},
+  url = {http://doi.acm.org.focus.lib.kth.se/10.1145/1180405.1180418},
+  doi = {10.1145/1180405.1180418},
+  acmid = {1180418},
+  keywords = {access control, attribute-based encryption, audit logs, broadcast 
+    encryption, delegation, hierarchical identity-based encryption},
+}
+@incollection{DABE,
+  title={Decentralizing Attribute-Based Encryption},
+  author={Lewko, Allison and Waters, Brent},
+  booktitle={EUROCRYPT 2011},
+  editor={Paterson, Kenneth G.},
+  series={Lecture Notes in Computer Science},
+  volume={6632},
+  pages={568-588},
+  publisher={Springer Berlin Heidelberg},
+  year={2011},
+  isbn={978-3-642-20464-7},
+  doi={10.1007/978-3-642-20465-4_31},
+  url={http://dx.doi.org/10.1007/978-3-642-20465-4_31},
+  language={English}
+}
+
+@incollection{DualSystemEncryption,
+  author={Waters, Brent},
+  title={Dual System Encryption: Realizing Fully Secure IBE and HIBE under 
+    Simple Assumptions},
+  isbn={978-3-642-03355-1},
+  booktitle={CRYPTO 2009},
+  editor={Halevi, Shai},
+  series={Lecture Notes in Computer Science},
+  volume={5677},
+  pages={619--636},
+  publisher={Springer Berlin Heidelberg},
+  year={2009},
+  doi={10.1007/978-3-642-03356-8_36},
+  url={http://dx.doi.org/10.1007/978-3-642-03356-8_36},
+  language={English}
+}
+@incollection{NewDualSystemEncryption,
+  title={New Techniques for Dual System Encryption and Fully Secure HIBE with 
+    Short Ciphertexts},
+  author={Lewko, Allison and Waters, Brent},
+  isbn={978-3-642-11798-5},
+  booktitle={Theory of Cryptography},
+  editor={Micciancio, Daniele},
+  series={Lecture Notes in Computer Science},
+  volume={5978},
+  pages={455--479},
+  publisher={Springer Berlin Heidelberg},
+  year={2010},
+  doi={10.1007/978-3-642-11799-2_27},
+  url={http://dx.doi.org/10.1007/978-3-642-11799-2_27},
+  language={English}
+}
+
+@incollection{FSThresholdSignatures,
+  title={Forward-Secure Threshold Signature Schemes},
+  author={Abdalla, Michel and Miner, Sara and Namprempre, Chanathip},
+  booktitle={Topics in Cryptology — CT-RSA 2001},
+  editor={Naccache, David},
+  series={Lecture Notes in Computer Science},
+  volume={2020},
+  pages={441-456},
+  year={2001},
+  publisher={Springer Berlin Heidelberg},
+  isbn={978-3-540-41898-6},
+  doi={10.1007/3-540-45353-9_32},
+  url={http://dx.doi.org/10.1007/3-540-45353-9_32},
+  keywords={threshold cryptography; forward security; signature schemes; 
+    proactive cryptography},
+  language={English}
+}
+
+@inbook{UniqueGroupSignatures,
+  author="Franklin, Matthew
+      and Zhang, Haibin",
+  editor="Foresti, Sara
+      and Yung, Moti
+      and Martinelli, Fabio",
+  chapter="Unique Group Signatures",
+  title="Computer Security -- ESORICS 2012: 17th European Symposium on Research in Computer Security, Pisa, Italy, September 10-12, 2012. Proceedings",
+  year="2012",
+  publisher="Springer Berlin Heidelberg",
+  address="Berlin, Heidelberg",
+  pages="643--660",
+  isbn="978-3-642-33167-1",
+  doi="10.1007/978-3-642-33167-1_37",
+  url="http://dx.doi.org/10.1007/978-3-642-33167-1_37"
+}
+@Inbook{UniqueRingSignatures,
+  author="Franklin, Matthew
+      and Zhang, Haibin",
+  editor="Sadeghi, Ahmad-Reza",
+  chapter="Unique Ring Signatures: A Practical Construction",
+  title="Financial Cryptography and Data Security: 17th International Conference, FC 2013, Okinawa, Japan, April 1-5, 2013, Revised Selected Papers",
+  year="2013",
+  publisher="Springer Berlin Heidelberg",
+  address="Berlin, Heidelberg",
+  pages="162--170",
+  isbn="978-3-642-39884-1",
+  doi="10.1007/978-3-642-39884-1_13",
+  url="http://dx.doi.org/10.1007/978-3-642-39884-1_13"
+}
+@article{ListSignatures,
+  author = "Sébastien Canard and Berry Schoenmakers and Martijn Stam and 
+      Jacques Traoré",
+  title = "List signature schemes",
+  journal = "Discrete Applied Mathematics",
+  volume = "154",
+  number = "2",
+  pages = "189--201",
+  year = "2006",
+  note = "Coding and Cryptography",
+  issn = "0166-218X",
+  doi = "http://dx.doi.org/10.1016/j.dam.2005.08.003",
+  url = "http://www.sciencedirect.com/science/article/pii/S0166218X05002283",
+  keywords = "Electronic voting schemes",
+  keywords = "Group signature schemes",
+  keywords = "List signature schemes ",
+  abstract = "A group signature scheme allows group members to issue signatures 
+      on behalf of the group, while hiding for each signature which group 
+      member actually issued it. Such scheme also involves a group manager, who 
+      is able to open any group signature by showing which group member issued 
+      it. We introduce the concept of list signatures as a variant of group 
+      signatures which sets a limit on the number of signatures each group 
+      member may issue. These limits must be enforced without having the group 
+      manager open signatures of honest group members—which excludes the 
+      trivial solution in which the group manager opens every signature to see 
+      whether some group members exceed their limits. Furthermore, we consider 
+      the problem of publicly identifying group members who exceed their 
+      limits, also without involving the group manager."
+}
+
+@inproceedings{di2006deniable,
+  title={Deniable authentication and key exchange},
+  author={Di Raimondo, Mario and Gennaro, Rosario and Krawczyk, Hugo},
+  booktitle={CCS'06},
+  pages={400--409},
+  year={2006},
+  organization={ACM}
+}
+
+@article{nonmalleable,
+  title={Nonmalleable cryptography},
+  author={Dolev, Danny and Dwork, Cynthia and Naor, Moni},
+  journal={SIAM review},
+  volume={45},
+  number={4},
+  pages={727--784},
+  year={2003},
+  publisher={SIAM}
+}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% STANDARDS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+@techreport{blockmodes,
+  author={Dworkin, Morris},
+  title={Recommendation for Block Cipher Modes of Operation: Methods and 
+    Techniques},
+  type={Special Publication},
+  number={800-38A},
+  institution={National Institute of Standards and Technology},
+  year={2001},
+  URL={http://csrc.nist.gov/publications/nistpubs/800-38a/sp800-38a.pdf},
+}
+@inproceedings{aes,
+  title={The block cipher Rijndael},
+  author={Daemen, Joan and Rijmen, Vincent},
+  booktitle={Smart Card Research and Applications},
+  pages={277--284},
+  year={2000},
+  organization={Springer},
+}
+
+@techreport{shs,
+  title={Secure Hash Standard (SHS)},
+  type={Federal Information Processing Standards Publication},
+  number={180-4},
+  institution={National Institute of Standards and Technology},
+  year={2012},
+  month={3},
+  URL={http://csrc.nist.gov/publications/fips/fips180-4/fips-180-4.pdf},
+}
+
+@article{smp,
+  title={A fair and efficient solution to the socialist millionaires’ problem},
+  author={Boudot, Fabrice and Schoenmakers, Berry and Traore, Jacques},
+  journal={Discrete Applied Mathematics},
+  volume={111},
+  number={1},
+  pages={23--36},
+  year={2001},
+  publisher={Elsevier}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MECHANISMS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@inproceedings{BroadcastEncryption,
+  title={Broadcast encryption},
+  author={Fiat, Amos and Naor, Moni},
+  booktitle={CRYPTO’93},
+  pages={480--491},
+  year={1994},
+  organization={Springer}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% NEW PAPERS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+@inproceedings{camenisch2004signature,
+  title={Signature schemes and anonymous credentials from bilinear maps},
+  author={Camenisch, Jan and Lysyanskaya, Anna},
+  booktitle={Advances in Cryptology--CRYPTO 2004},
+  pages={56--72},
+  year={2004},
+  organization={Springer}
+}
+
+
+@incollection{cramer1999securecomp,
+  title={Introduction to secure computation},
+  author={Cramer, Ronald},
+  booktitle={Lectures on Data Security},
+  pages={16--62},
+  year={1999},
+  publisher={Springer}
+}
+
+@INPROCEEDINGS{Cinderella,
+  author={A. Delignat-Lavaud and C. Fournet and M. Kohlweiss and B. Parno},
+  booktitle={2016 IEEE Symposium on Security and Privacy (SP)},
+  title={Cinderella: Turning Shabby X.509 Certificates into Elegant Anonymous 
+    Credentials with the Magic of Verifiable Computation},
+  year={2016},
+  pages={235-254},
+%  abstract={Despite advances in security engineering, authentication in 
+%    applications such as email and the Web still primarily relies on the X.509 
+%        public key infrastructure introduced in 1988. This PKI has many issues 
+%        but is nearly impossible to replace. Leveraging recent progress in 
+%        verifiable computation, we propose a novel use of existing X.509 
+%        certificates and infrastructure. Instead of receiving and validating 
+%        chains of certificates, our applications receive and verify proofs of 
+%        their knowledge, their validity, and their compliance with application 
+%        policies. This yields smaller messages (by omitting certificates), 
+%    stronger privacy (by hiding certificate contents), and stronger integrity 
+%        (by embedding additional checks, e.g. for revocation). X.509 
+%        certificate validation is famously complex and error-prone, as it 
+%        involves parsing ASN.1 data structures and interpreting them against 
+%        diverse application policies. To manage this diversity, we propose a 
+%        new format for writing application policies by composing X.509 
+%        templates, and we provide a template compiler that generates C code for 
+%        validating certificates within a given policy. We then use the Geppetto 
+%        cryptographic compiler to produce a zero-knowledge verifiable 
+%        computation scheme for that policy. To optimize the resulting scheme, 
+%    we develop new C libraries for RSA-PKCS#1 signatures and ASN.1 parsing, 
+%    carefully tailored for cryptographic verifiability. We evaluate our 
+%        approach by providing two real-world applications of verifiable 
+%        computation: a drop-in replacement for certificates within TLS, and 
+%        access control for the Helios voting protocol. For TLS, we support 
+%        fine-grained validation policies, with revocation checking and 
+%        selective disclosure of certificate contents, effectively turning X.509 
+%        certificates into anonymous credentials. For Helios, we obtain 
+%        additional privacy and verifiability guarantees for voters equipped 
+%        with X.509 certificates, such as those readily available from some 
+%        national ID cards.},
+  keywords={data privacy;formal verification;message authentication;public key 
+    cryptography;ASN.1 data structure;ASN.1 parsing;C code;C 
+        libraries;Cinderella;Geppetto cryptographic compiler;PKI;RSA-PKCS;X.509 
+        certificate validation;X.509 public key infrastructure;anonymous 
+        credentials;authentication;cryptographic verifiability;fine-grained 
+        validation policy;privacy;security engineering;template 
+        compiler;zero-knowledge verifiable 
+        computation;Authentication;Privacy;Protocols;Public 
+        key;Servers;Helios;PKI;TLS;Verifiable computation},
+  doi={10.1109/SP.2016.22},
+  month={5},
+}
+@
+
+<<crypto.mk>>=
+BIBSP_REFKEY+=HMAC HMAC-std
+URL-HMAC=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.1007%2F3-540-68697-5_1.pdf
+URL-HMAC-std=https://csrc.nist.gov/publications/fips/fips198-1/FIPS-198-1_final.pdf
+
+BIBSP_REFKEY+=ElGamal
+URL-ElGamal=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.1007%2F3-540-39568-7_2.pdf
+
+BIBSP_REFKEY+=ShannonSecrecy
+URL-ShannonSecrecy=http://luca-giuzzi.unibs.it/corsi/Support/papers-cryptography/Communication_Theory_of_Secrecy_Systems.pdf
+
+BIBSP_REFKEY+=InfoTheory
+URL-InfoTheory=http://lanethames.com/dataStore/ECE/InfoTheory/shannon.pdf
+
+BIBSP_REFKEY+=KeyPrivacy
+URL-KeyPrivacy=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.1007%2F3-540-45682-1_33.pdf
+
+BIBSP_REFKEY+=RobustEncryption
+URL-RobustEncryption=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.1007%2F978-3-642-11799-2_28.pdf
+
+BIBSP_REFKEY+=RandomnessReuse
+URL-RandomnessReuse=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.1007%2F978-3-540-77272-9_16.pdf
+
+BIBSP_REFKEY+=KD-KEM
+URL-KD-KEM=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.1007%2F978-3-540-28628-8_26.pdf
+
+BIBSP_REFKEY+=DeniableEncryption
+URL-DeniableEncryption=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.1007%2FBFb0052229.pdf
+
+BIBSP_REFKEY+=AuthEncryption
+URL-AuthEncryption=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.1007%2Fs00145-008-9026-x.pdf
+
+BIBSP_REFKEY+=StatefulDecryption
+URL-StatefulDecryption=http://delivery.acm.org${LIBRARY_EXT}/10.1145/1000000/996945/p206-bellare.pdf
+
+BIBSP_REFKEY+=Signcryption
+URL-Signcryption=http://www.signcryption.org/publications/pdffiles/yz-signcrypt-full.pdf
+
+BIBSP_REFKEY+=DiffieHellman
+URL-DiffieHellman=http://ieeexplore.ieee.org${LIBRARY_EXT}/ielx5/18/22693/01055638.pdf
+
+BIBSP_REFKEY+=AuthKeyExchange
+URL-AuthKeyExchange=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.1007%2FBF00124891.pdf
+
+BIBSP_REFKEY+=BroadcastEncryption
+URL-BroadcastEncryption=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.1007%2F3-540-48329-2_40.pdf
+
+BIBSP_REFKEY+=ImprovedProxyReencryption
+URL-ImprovedProxyReencryption=http://delivery.acm.org${LIBRARY_EXT}/10.1145/1130000/1127346/p1-ateniese.pdf
+
+BIBSP_REFKEY+=UnidirectionalCCAProxyReencryption
+URL-UnidirectionalCCAProxyReencryption=http://ieeexplore.ieee.org${LIBRARY_EXT}/ielx5/18/5714236/05714278.pdf
+
+BIBSP_REFKEY+=CCAAnonymousProxyReencryption
+URL-CCAAnonymousProxyReencryption=http://www.sciencedirect.com${LIBRARY_EXT}/science/article/pii/S0304397512007906/pdf?md5=c704f3ac051e640541beed0822d6074a&pid=1-s2.0-S0304397512007906-main.pdf
+
+BIBSP_REFKEY+=CCAProxyReencryption
+URL-CCAProxyReencryption=http://delivery.acm.org${LIBRARY_EXT}/10.1145/1320000/1315269/p185-canetti.pdf
+
+BIBSP_REFKEY+=CCAKeyPrivateProxyReencryption
+URL-CCAKeyPrivateProxyReencryption=http://www.sciencedirect.com${LIBRARY_EXT}/science/article/pii/S0164121211002421/pdfft?md5=2b8b698b0339fa063fef7bd6d027b976&pid=1-s2.0-S0164121211002421-main.pdf
+
+BIBSP_REFKEY+=AnonProxyReencrypt
+URL-AnonProxyReencrypt=http://ndc.zjgsu.edu.cn/~jshao/papers/SCN2011-Anonymous%20proxy%20re-encryption.pdf
+
+BIBSP_REFKEY+=CP-ABE
+URL-CP-ABE=http://ieeexplore.ieee.org${LIBRARY_EXT}/ielx5/4223200/4223201/04223236.pdf
+
+BIBSP_REFKEY+=KP-ABE
+URL-KP-ABE=http://delivery.acm.org${LIBRARY_EXT}/10.1145/1190000/1180418/p89-goyal.pdf
+
+BIBSP_REFKEY+=DABE
+URL-DABE=http://download.springer.com${LIBRARY_EXT}/static/pdf/576/chp%253A10.1007%252F978-3-642-20465-4_31.pdf
+
+BIBSP_REFKEY+=DualSystemEncryption
+URL-DualSystemEncryption=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.1007%2F978-3-642-03356-8_36.pdf
+
+BIBSP_REFKEY+=NewDualSystemEncryption
+URL-NewDualSystemEncryption=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.1007%2F978-3-642-11799-2_27.pdf
+
+BIBSP_REFKEY+=FSThresholdSignatures
+URL-FSThresholdSignatures=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.1007%2F3-540-45353-9_32.pdf
+@
 
 
 \chapter{Blockchains}

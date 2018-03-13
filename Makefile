@@ -21,10 +21,13 @@ all: bibsp.mk
 bibsp.mk: bibsp.nw
 
 
-.PHONY: all
-all: passwd.bib
+BIBSP_TOPIC+= 	passwd
+BIBSP_TOPIC+= 	crypto
 
-passwd.bib: bibsp.nw
+.PHONY: all
+all: $(foreach t,${BIBSP_TOPIC}, ${t}.bib ${t}.mk)
+
+$(foreach t,${BIBSP_TOPIC}, ${t}.bib ${t}.mk): bibsp.nw
 	${NOTANGLE} ${NOTANGLEFLAGS} -R$@ $< > $@
 
 

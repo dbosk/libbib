@@ -40,11 +40,14 @@
 \NewDescribe{\DescribeOpt}
 \NewDescribe{\DescribeVar}
 \NewDescribe{\DescribeFile}
-\NewDescribe{\DescribeAcro}
+\ProvideDocumentCommand{\DescribeAcro}{m}{%
+  \cmd{\ac}\texttt{\{#1\}}\index{#1@\texttt{#1}|emph}%
+  \marginpar{\raggedleft\cmd{#1}}%
+}%
 \NewDescribe{\DescribeBibkey}
 
 \usepackage[natbib,style=alphabetic,maxbibnames=99]{biblatex}
-\addbibresource{bibsp.bib}
+%\addbibresource{bibsp.bib}
 
 \usepackage{subcaption}
 
