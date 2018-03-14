@@ -1131,6 +1131,32 @@ BIBSP_TOPIC+=   location
 }
 @
 
+<<location.bib>>=
+@inproceedings{PROPS,
+  title={PROPS: A PRivacy-preserving lOcation Proof System},
+  author={Gambs, S. and Killijian, M.-O. and Roy, M. and Traore, M.},
+  booktitle={Reliable Distributed Systems (SRDS), 2014 IEEE 33rd International 
+    Symposium on},
+  pages={1-10},
+  month={10},
+  year={2014},
+  keywords={data privacy;groupware;mobile computing;theorem proving;user 
+    interfaces;PROPS;collaborative manner;mobile user;privacy-preserving 
+        location proof system;private manner;secure location-based 
+        service;ubiquitous computing;Computer architecture;Cryptography;Global 
+        Positioning System;Privacy;Protocols;Testing;collaborative 
+        algorithms;distance bounding;location based services;location proof 
+        system;privacy},
+  doi={10.1109/SRDS.2014.37},
+  URL={http://ieeexplore.ieee.org/ielx7/6979347/6983362/06983374.pdf}
+}
+@
+
+<<location.mk>>=
+BIBSP_REFKEY+=PROPS
+URL-PROPS=http://ieeexplore.ieee.org/ielx7/6979347/6983362/06983374.pdf
+@
+
 
 \chapter{Access control}
 
@@ -1210,22 +1236,7 @@ BIBSP_TOPIC+=   ac
 
 \appendix
 
-\chapter{Undocumented}
-
-<<bibsp variables>>=
-BIBSP_TOPIC+=	anon
-BIBSP_TOPIC+=	privacy meta surveillance hr
-BIBSP_TOPIC+=	protests voting
-BIBSP_TOPIC+=	osn
-BIBSP_TOPIC+=	reputation
-BIBSP_TOPIC+=	stats
-BIBSP_TOPIC+=	blockchain depend
-BIBSP_TOPIC+=	nfc
-BIBSP_TOPIC+=	adhocnets
-BIBSP_TOPIC+=	ecurrency
-
-BIBSP_TOPIC+=	otrmsg otpkx ppes
-@
+\chapter{Undocumented in bibsp.sty}
 
 <<required packages>>=
 \RequirePackage{textcomp}
@@ -1325,12 +1336,123 @@ BIBSP_TOPIC+=	otrmsg otpkx ppes
 
 @
 
-\section{Encryption/decryption}
+
+\chapter{Anonymity}
 
 <<bibsp variables>>=
-BIBSP_TOPIC+=   be
-BIBSP_TOPIC+=   mpc
+BIBSP_TOPIC+=	anon
 @
+
+<<anon.bib>>=
+@article{DiningCryptographers,
+  title={The dining cryptographers problem: Unconditional sender and 
+    recipient untraceability},
+  author={Chaum, David},
+  journal={Journal of Cryptology},
+  volume={1},
+  number={1},
+  pages={65--75},
+  year={1988},
+  publisher={Springer}
+}
+
+@article{UntraceableEmail,
+  title={Untraceable electronic mail, return addresses, and digital pseudonyms},
+  author={Chaum, David L},
+  journal={Communications of the ACM},
+  volume={24},
+  number={2},
+  pages={84--90},
+  year={1981},
+  publisher={ACM}
+}
+
+@article{SecurityWithoutIdentification,
+  title={Security without identification: Transaction systems to make big brother obsolete},
+  author={Chaum, David},
+  journal={Communications of the ACM},
+  volume={28},
+  number={10},
+  pages={1030--1044},
+  year={1985},
+  publisher={ACM}
+}
+
+@inproceedings{Tor,
+  title={Tor: The Second-Generation Onion Router},
+  author={Dingledine, Roger and Mathewson, Nick and Syverson, Paul F.},
+  booktitle={USENIX Security Symposium},
+  pages={303--320},
+  year={2004}
+}
+
+@inproceedings{AnonymityLovesCompany,
+  title = {Anonymity Loves Company: Usability and the Network Effect},
+  author = {Roger Dingledine and Nick Mathewson},
+  booktitle = {WEIS 2006},
+  editor = {Ross Anderson},
+  year = {2006},
+  month = {June},
+  location = {Cambridge, UK},
+  URL = {http://freehaven.net/doc/wupss04/usability.pdf},
+  www_section = {Economics},
+  bookurl = {http://weis2006.econinfosec.org/},
+  www_tags = {selected},
+}
+
+@incollection{SystemsForAnonymousCommunication,
+  title = {{Systems for Anonymous Communication}},
+  author = {George Danezis and Claudia Diaz and Paul F. Syverson},
+  booktitle = {CRC Handbook of Financial Cryptography and Security},
+  editor = {B.  Rosenberg and D.  Stinson},
+  year = {2010},
+  month = {8},
+  pages = {341--390},
+  publisher = {Chapman \& Hall},
+  series = {CRC Cryptography and Network Security Series},
+  www_tags = {selected},
+  www_section = {Anonymous communication},
+  www_pdf_url = {https://www.cosic.esat.kuleuven.be/publications/article-1335.pdf},
+}
+
+@Inbook{TowardsMeasuringAnonymity,
+  author="D{\'i}az, Claudia
+      and Seys, Stefaan
+      and Claessens, Joris
+      and Preneel, Bart",
+  editor="Dingledine, Roger
+      and Syverson, Paul",
+  title="Towards Measuring Anonymity",
+  bookTitle="Privacy Enhancing Technologies: Second International Workshop, PET 2002 San Francisco, CA, USA, April 14--15, 2002 Revised Papers",
+  year="2003",
+  publisher="Springer Berlin Heidelberg",
+  address="Berlin, Heidelberg",
+  pages="54--68",
+  isbn="978-3-540-36467-2",
+  doi="10.1007/3-540-36467-6_5",
+  url="http://dx.doi.org/10.1007/3-540-36467-6_5"
+}
+@
+
+<<anon.mk>>=
+BIBSP_REFKEY+=DiningCryptographers
+URL-DiningCryptographers=http://delivery.acm.org/10.1145/360000/358563/p84-chaum.pdf
+
+BIBSP_REFKEY+=UntraceableEmail
+URL-UntraceableEmail=http://dl.acm.org/ft_gateway.cfm?id=358563&ftid=45837&dwn=1&CFID=845331413&CFTOKEN=54016627
+
+BIBSP_REFKEY+=SecurityWithoutIdentification
+URL-SecurityWithoutIdentification=http://delivery.acm.org/10.1145/10000/4373/p1030-chaum.pdf
+
+BIBSP_REFKEY+=Tor
+URL-Tor=http://freehaven.net/anonbib/cache/tor-design.pdf
+
+BIBSP_REFKEY+=TowardsMeasuringAnonymity
+URL-TowardsMeasuringAnonymity=http://www.academia.edu/download/40412595/Towards_Measuring_Anonymity20151126-1621-1mi6po3.pdf
+@
+
+
+\chapter{Cryptography}
 
 <<topic commands>>=
 \ProvideDocumentCommand{\indcpa}{}{\ensuremath{\text{IND-CPA}}}
@@ -1391,7 +1513,9 @@ BIBSP_TOPIC+=   mpc
   \IfBooleanT{#1}{\hat}vk%
   \ifthenelse{\equal{#2}{}}{}{_{#2}}%
 }}
+@
 
+<<topic acronyms>>=
 % Crypto properties
 \DeclareAcronym{IND-CPA}{%
   short = {IND-CPA},
@@ -2415,7 +2539,109 @@ URL-FSThresholdSignatures=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.
 @
 
 
+\section{Broadcast encryption}
+
+<<bibsp variables>>=
+BIBSP_TOPIC+=   be
+@
+
+<<be.bib>>=
+@inproceedings{ANOBE,
+  title={Anonymous broadcast encryption: Adaptive security and efficient 
+    constructions in the standard model},
+  author={Libert, Benoît and Paterson, Kenneth G and Quaglia, Elizabeth A},
+  booktitle={PKC 2012},
+  pages={206--224},
+  year={2012},
+  publisher={Springer},
+  URL={http://eprint.iacr.org/2011/476},
+}
+
+@incollection{oANOBE,
+  title={Outsider-Anonymous Broadcast Encryption with Sublinear Ciphertexts},
+  author={Fazio, Nelly and Perera, IrippugeMilinda},
+  booktitle={PKC 2012},
+  editor={Fischlin, Marc and Buchmann, Johannes and Manulis, Mark},
+  series={Lecture Notes in Computer Science},
+  volume={7293},
+  pages={225-242},
+  year={2012},
+  publisher={Springer Berlin Heidelberg},
+  isbn={978-3-642-30056-1},
+  doi={10.1007/978-3-642-30057-8_14},
+  url={http://dx.doi.org/10.1007/978-3-642-30057-8_14},
+  keywords={Recipient Privacy; Broadcast Encryption; Anonymous IBE; Subset Cover 
+    Framework},
+  language={English}
+}
+
+@inproceedings{PseudonymousBE,
+  title={Cryptographic treatment of private user profiles},
+  author={G{\"u}nther, Felix and Manulis, Mark and Strufe, Thorsten},
+  booktitle={Financial Cryptography and Data Security},
+  pages={40--54},
+  year={2012},
+  publisher={Springer}
+}
+@
+
+<<be.mk>>=
+BIBSP_REFKEY+=ANOBE
+URL-ANOBE=http://eprint.iacr.org/2011/476.pdf
+
+BIBSP_REFKEY+=PseudonymousBE
+URL-PseudonymousBE=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.1007%2F978-3-642-29889-9_5.pdf
+
+BIBSP_REFKEY+=oANOBE
+URL-oANOBE=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.1007%2F978-3-642-30057-8_14.pdf
+@
+
+
+\section{Secure multi-party computation}
+
+<<bibsp variables>>=
+BIBSP_TOPIC+=   mpc
+@
+
+<<mpc.bib>>=
+@Inbook{MPCgoesLive,
+  author="Bogetoft, Peter
+      and Christensen, Dan Lund
+      and Damg{\aa}rd, Ivan
+      and Geisler, Martin
+      and Jakobsen, Thomas
+      and Kr{\o}igaard, Mikkel
+      and Nielsen, Janus Dam
+      and Nielsen, Jesper Buus
+      and Nielsen, Kurt
+      and Pagter, Jakob
+      and Schwartzbach, Michael
+      and Toft, Tomas",
+  editor="Dingledine, Roger
+      and Golle, Philippe",
+  title="Secure Multiparty Computation Goes Live",
+  booktitle="Financial Cryptography and Data Security: FC 2009",
+  year="2009",
+  publisher="Springer Berlin Heidelberg",
+  address="Berlin, Heidelberg",
+  pages="325--343",
+  isbn="978-3-642-03549-4",
+  doi="10.1007/978-3-642-03549-4_20",
+  url="http://dx.doi.org/10.1007/978-3-642-03549-4_20"
+}
+@
+
+<<mpc.mk>>=
+BIBSP_REFKEY+=MPCgoesLive
+URL-MPCgoesLive=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.1007%2F978-3-642-03549-4_20.pdf
+@
+
+
 \chapter{Blockchains}
+
+<<bibsp variables>>=
+BIBSP_TOPIC+=	blockchain
+@
 
 <<topic acronyms>>=
 \DeclareAcronym{tposet}{%
@@ -2423,6 +2649,56 @@ URL-FSThresholdSignatures=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.
   long = {transactional partially ordered set},
   cite = {BlockchainFreeCryptocurrencies},
 }
+@
+
+<<blockchain.bib>>=
+@misc{Bitcoin,
+  title={Bitcoin: A peer-to-peer electronic cash system},
+  author={Nakamoto, Satoshi},
+  year={2008},
+  URL={https://bitcoin.org/bitcoin.pdf},
+}
+
+@misc{OmniLedger,
+  author = {Eleftherios Kokoris-Kogias and Philipp Jovanovic and  Linus Gasser 
+    and Nicolas Gailly and Ewa Syta and Bryan Ford},
+  title = {OmniLedger: A Secure, Scale-Out, Decentralized Ledger via Sharding},
+  howpublished = {Cryptology ePrint Archive, Report 2017/406},
+  year = {2017},
+  url = {https://eprint.iacr.org/2017/406},
+  note = {To appear in 39th IEEE S\&P 2018},
+}
+
+@misc{BlockchainFreeCryptocurrencies,
+  author = {Xavier Boyen and Christopher Carr and Thomas Haines},
+  title = {Blockchain-Free Cryptocurrencies: A Framework for Truly 
+    Decentralised Fast Transactions},
+  howpublished = {Cryptology ePrint Archive, Report 2016/871},
+  year = {2016},
+  note = {\url{http://eprint.iacr.org/2016/871}},
+}
+
+@misc{FairProofOfWork,
+  author = {Colin Boyd and Christopher Carr},
+  title = {Fair Client Puzzles from the Bitcoin Blockchain},
+  howpublished = {Cryptology ePrint Archive, Report 2016/680},
+  year = {2016},
+  note = {\url{http://eprint.iacr.org/2016/680}},
+}
+@
+
+<<blockchain.mk>>=
+BIBSP_REFKEY+= 	Bitcoin
+URL-Bitcoin= 	https://bitcoin.org/bitcoin.pdf
+
+BIBSP_REFKEY+= 	OmniLedger
+URL-OmniLedger=https://eprint.iacr.org/2017/406
+
+BIBSP_REFKEY+=	BlockchainFreeCryptocurrencies
+URL-BlockchainFreeCryptocurrencies=https://eprint.iacr.org/2016/871.pdf
+
+BIBSP_REFKEY+=	FairProofOfWork
+URL-FairProofOfWork=https://eprint.iacr.org/2016/680.pdf
 @
 
 
@@ -2551,6 +2827,1983 @@ URL-FSThresholdSignatures=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.
 }
 @
 
+
+\chapter{Privacy and meta data}
+
+<<bibsp variables>>=
+BIBSP_TOPIC+=	privacy
+@
+
+<<topic bibliographies>>=
+\addbibresource{privacy.bib}
+@
+
+<<privacy.bib>>=
+@article{DifferentialPrivacy,
+  title={The algorithmic foundations of differential privacy},
+  author={Dwork, Cynthia and Roth, Aaron},
+  journal={Foundations and Trends in Theoretical Computer Science},
+  volume={9},
+  number={3-4},
+  pages={211--407},
+  year={2014}
+}
+
+@inproceedings{DataTrack,
+  author = {Angulo, Julio and Fischer-H\"{u}bner, Simone and Pulls, Tobias and 
+    W\"{a}stlund, Erik},
+  title = {Usable Transparency with the Data Track: A Tool for Visualizing Data 
+    Disclosures},
+  booktitle = {Proceedings of the 33rd Annual ACM Conference Extended Abstracts 
+    on Human Factors in Computing Systems},
+  series = {CHI EA '15},
+  year = {2015},
+  isbn = {978-1-4503-3146-3},
+  location = {Seoul, Republic of Korea},
+  pages = {1803--1808},
+  numpages = {6},
+  url = {http://doi.acm.org.focus.lib.kth.se/10.1145/2702613.2732701},
+  doi = {10.1145/2702613.2732701},
+  acmid = {2732701},
+  publisher = {ACM},
+  address = {New York, NY, USA},
+  keywords = {information visualisations, privacy, usability, usable 
+    transparency},
+} 
+@
+
+<<privacy.mk>>=
+BIBSP_REFKEY+=DifferentialPrivacy
+URL-DifferentialPrivacy=https://www.cis.upenn.edu/~aaroth/Papers/privacybook.pdf
+
+BIBSP_REFKEY+=DataTrack
+URL-DataTrack=http://doi.acm.org/10.1145/2702613.2732701
+@
+
+<<bibsp variables>>=
+BIBSP_TOPIC+= meta
+@
+
+<<topic bibliographies>>=
+\addbibresource{meta.bib}
+@
+
+<<meta.bib>>=
+@INPROCEEDINGS{DevilInMetadata,
+  author={Greschbach, B. and Kreitz, G. and Buchegger, S.},
+  booktitle={PERCOM Workshops, 2012},
+  title={The devil is in the metadata --- New privacy challenges in 
+    Decentralised Online Social Networks},
+  year={2012},
+  month={3},
+  pages={333-339},
+  keywords={Internet;data privacy;meta data;social networking 
+    (online);DOSN;Facebook;Google+;Twitter;access right management;content 
+        storage;data aggregation;decentralised online social networks;inherent 
+        privacy flaws design;logically centralised 
+        services;metadata;peer-to-peer architecture;powerful attacker;Access 
+        control;Data privacy;Encryption;Peer to peer computing;Privacy;Social 
+        network services},
+  doi={10.1109/PerComW.2012.6197506},
+}
+
+@article{OnlineTrackingInfersPregnancy,
+  author={Kashmir Hill},
+  title={How Target Figured Out A Teen Girl Was Pregnant Before Her Father 
+    Did},
+  journal={Forbes},
+  year={2012},
+  month={2},
+  URL={http://www.forbes.com/sites/kashmirhill/2012/02/16/how-target-figured-out-a-teen-girl-was-pregnant-before-her-father-did/},
+}
+@
+
+<<meta.mk>>=
+BIBSP_REFKEY+=DevilInMetadata
+URL-DevilInMetadata=http://peerson.net/papers/sesocMetaPrivacy.pdf
+
+BIBSP_REFKEY+=OnlineTrackingInfersPregnancy
+URL-OnlineTrackingInfersPregnancy=http://www.forbes.com/sites/kashmirhill/2012/02/16/how-target-figured-out-a-teen-girl-was-pregnant-before-her-father-did/
+@
+
+
+\chapter{Surveillance}
+
+<<bibsp variables>>=
+BIBSP_TOPIC+= surveillance
+@
+
+<<topic bibliographies>>=
+\addbibresource{surveillance.bib}
+@
+
+<<surveillance.bib>>=
+@article{Quantum,
+  author={Laura Poitras and Marcel Rosenbach and Christoph Scheuermann and
+    Holger Stark and Christian Ströcker},
+  title={Quantum Spying: GCHQ Used Fake LinkedIn Pages to Target Engineers},
+  journal={Der Spiegel},
+  year={2013},
+  month={11},
+  URL={http://www.spiegel.de/international/world/ghcq-targets-engineers-with-fake-linkedin-pages-a-932821.html},
+}
+@article{TAO,
+  author={Jacob Appelbaum and Laura Poitras and Marcel Rosenbach and
+    Christian Stöcker and Jörg Schindler and Holger Stark},
+  title={Inside TAO: Documents Reveal Top NSA Hacking Unit},
+  journal={Der Spiegel},
+  year={2013},
+  month={12},
+  URL={http://www.spiegel.de/international/world/the-nsa-uses-powerful-toolbox-in-effort-to-spy-on-global-networks-a-940969.html},
+}
+@article{BoundlessInformant,
+  author={Glenn Greenwald and Ewen MacAskill},
+  title={Boundless Informant: the NSA's secret tool to track global 
+    surveillance data},
+  journal={The Guardian},
+  year={2013},
+  month={6},
+  URL={http://www.theguardian.com/world/2013/jun/08/nsa-boundless-informant-global-datamining},
+}
+@article{XKeyscore,
+  author={Glenn Greenwald},
+  title={XKeyscore: NSA tool collects `nearly everything a user does on the 
+    internet'},
+  journal={The Guardian},
+  year={2013},
+  month={7},
+  URL={http://www.theguardian.com/world/2013/jul/31/nsa-top-secret-program-online-data},
+}
+@incollection{XKeyscoreCapabilities,
+  title={Details on XKeyscore from an internal GCHQ website},
+  booktitle={The NSA in Germany: Snowden's Documents Available for Download},
+  publisher={Der Spiegel},
+  year={2014},
+  month={6},
+  URL={http://www.spiegel.de/international/the-germany-file-of-edward-snowden-documents-available-for-download-a-975917.html},
+}
+@article{Prism,
+  author={Glenn Greenwald and Ewen MacAskill},
+  title={NSA Prism program taps in to user data of Apple, Google and others},
+  journal={The Guardian},
+  year={2013},
+  month={6},
+  URL={http://www.theguardian.com/world/2013/jun/06/us-tech-giants-nsa-data},
+}
+@article{Fibretap,
+  author={Ewen MacAskill and Julian Borger and Nick Hopkins and Nick Davies and 
+    James Ball},
+  title={GCHQ taps fibre-optic cables for secret access to world's 
+    communications},
+  journal={The Guardian},
+  year={2013},
+  month={6},
+  URL={http://www.theguardian.com/uk/2013/jun/21/gchq-cables-secret-world-communications-nsa},
+}
+@article{Upstream,
+  author={Craig Timberg},
+  title={NSA slide shows surveillance of undersea cables},
+  journal={The Washington Post},
+  year={2013},
+  month={7},
+  URL={http://www.washingtonpost.com/business/economy/the-nsa-slide-you-havent-seen/2013/07/10/32801426-e8e6-11e2-aa9f-c03a72e2d342_story.html},
+}
+@article{privacy-conscious,
+  author={J. Appelbaum and A. Gibson and J. Goetz and V. Kabisch and
+    L. Kampf and L. Ryge},
+  title={NSA targets the privacy-conscious},
+  journal={Das Erste},
+  year={2014},
+  month={7},
+  URL={http://daserste.ndr.de/panorama/aktuell/nsa230_page-1.html},
+}
+@article{Belgacom,
+  title={Belgacom Attack: Britain's GCHQ Hacked Belgian Telecoms Firm},
+  journal={Der Spiegel},
+  year={2013},
+  month={9},
+  URL={http://www.spiegel.de/international/europe/british-spy-agency-gchq-hacked-belgian-telecoms-firm-a-923406.html},
+}
+@article{metadatakill,
+  author={Hubert Gude and Andy Müller-Maguhn and Laura Poitras and Marcel 
+    Rosenbach and Jörg Schindler and Fidelius Schmid},
+  title={Spying Together: Germany's Deep Cooperation with the NSA},
+  journal={Der Spiegel},
+  year={2014},
+  month={6},
+  URL={http://www.spiegel.de/international/germany/the-german-bnd-and-american-nsa-cooperate-more-closely-than-thought-a-975445-2.html},
+}
+
+% XXX imported from otrmsg, needs integration
+@online{nsa1,
+  author={Schneier, Bruce},
+  title={How the NSA Attacks Tor/Firefox Users With QUANTUM and FOXACID},
+  year={2013},
+  month={10},
+  URL={https://www.schneier.com/blog/archives/2013/10/how_the_nsa_att.html},
+  note={Accessed on 5th Nov 2014},
+}
+@online{nsa2,
+  author={Schneier, Bruce},
+  title={More about the NSA's Tailored Access Operations Unit},
+  year={2013},
+  month={12},
+  URL={https://www.schneier.com/blog/archives/2013/12/more_about_the.html},
+  note={Accessed on 5th Nov 2014},
+}
+
+@article{landau2013making,
+  title={Making sense from Snowden},
+  author={Landau, Susan},
+  journal={IEEE Security \& Privacy Magazine},
+  number={4},
+  pages={54--63},
+  year={2013}
+}
+@article{landau2014highlights,
+  title={Highlights from Making Sense of Snowden, Part II: What's Significant 
+    in the NSA Revelations},
+  author={Landau, Susan},
+  journal={Security \& Privacy, IEEE},
+  volume={12},
+  number={1},
+  pages={62--64},
+  year={2014},
+  publisher={IEEE}
+}
+@incollection{spiegelotr,
+  author={Unknown},
+  title={Intercept with OTR encrypted chat},
+  booktitle={NSA Documents: Attacks on VPN, SSL, TLS, SSH, Tor},
+  publisher={Der Spiegel},
+  year={2014},
+  month={12},
+  URL={http://www.spiegel.de/international/world/nsa-documents-attacks-on-vpn-ssl-tls-ssh-tor-a-1010525.html},
+}
+@inproceedings{spiegelhiddenservices,
+  author={Unknown},
+  title={Tor Hidden Services: How Hidden is `Hidden'?},
+  booktitle={NSA Documents: Attacks on VPN, SSL, TLS, SSH, Tor},
+  publisher={Der Spiegel},
+  year={2014},
+  month={12},
+  URL={http://www.spiegel.de/international/world/nsa-documents-attacks-on-vpn-ssl-tls-ssh-tor-a-1010525.html},
+  note={Analytics on security of TOR hidden services},
+}
+@article{NSAStoringCiphertexts,
+  title={Leaked NSA Doc Says It Can Collect And Keep Your Encrypted Data As 
+    Long As It Takes To Crack It},
+  author={Andy Greenberg},
+  journal={Forbes},
+  year={2013},
+  month={6},
+  URL={http://www.forbes.com/sites/andygreenberg/2013/06/20/leaked-nsa-doc-says-it-can-collect-and-keep-your-encrypted-data-as-long-as-it-takes-to-crack-it/},
+  note={Fetched 5th June 2015},
+}
+
+@article{FranceBanCrypto,
+  title={France mulls tighter noose around crypto: Gendarmes seek powers to 
+    decrypt tout le monde},
+  author={Richard Chirqwin},
+  journal={The Register},
+  month={12},
+  year={2015},
+  URL={http://www.theregister.co.uk/2015/12/06/france_mulls_tighter_noose_around_crypto/},
+}
+@article{EUCensorExtremists,
+  title={New anti-terrorism unit will tackle extremist content on the web},
+  author={Lee Munson},
+  journal={Naked Security},
+  month={3},
+  year={2015},
+  URL={https://nakedsecurity.sophos.com/2015/03/13/new-anti-terrorism-unit-will-tackle-extremist-content-on-the-web/},
+}
+
+@article{BackDoorEncryption,
+  title={US and European officials reignite 'back door' encryption debate after 
+    Paris},
+  author={Sam Thielman},
+  journal={The Guardian},
+  month={11},
+  year={2015},
+  URL={http://www.theguardian.com/technology/2015/nov/18/us-europe-reignite-debate-back-door-encryption-paris-attacks},
+}
+
+@article{PirateBayBlock,
+  title = {The {Pirate Bay} Must Be Blocked in {Sweden}, Court of Appeal 
+    Rules},
+  author = {Andy},
+  url = {https://torrentfreak.com/the-pirate-bay-must-be-blocked-in-sweden-court-of-appeal-rules-170213/},
+  abstract = {A Court of Appeal has ordered The Pirate Bay and streaming portal 
+    Swefilmer to be blocked by an ISP in Sweden. The landmark ruling, in favor 
+        of Universal Music, Sony Music, Warner Music, and the Swedish film 
+        industry, will see local ISP Bredbandsbolaget forced to block the sites 
+        for the next three years.},
+  urldate = {2017-02-26},
+  journal = {TorrentFreak},
+  month = feb,
+  year = {2017}
+}
+
+@article{AppleVsFBI,
+  author={Bruce Schneier},
+  title={Decrypting an iPhone for the FBI},
+  journal={Schneier on Security},
+  month={2},
+  year={2016},
+  URL={https://www.schneier.com/blog/archives/2016/02/decrypting_an_i.html},
+  note={Fetched on 4th April 2016},
+}
+@article{iPhoneBackdoor,
+  author={Joseph Bonneau},
+  title={A Technical Perspective on the Apple iPhone Case},
+  journal={Electronic Frontier Foundation Deeplinks},
+  month={2},
+  year={2016},
+  URL={https://www.eff.org/deeplinks/2016/02/technical-perspective-apple-iphone-case},
+  note={Fetched on 5th June 2016},
+}
+@article{TurkeyBansTwitter,
+  author={Vijaya Gadde},
+  title={Challenging the access ban in Turkey},
+  journal={Twitter Inc.},
+  month={3},
+  year={2014},
+  URL={https://blog.twitter.com/2014/challenging-the-access-ban-in-turkey},
+  note={Fetched on 14th June 2016},
+}
+
+@article{KeysUnderDoormats,
+  title={Keys under doormats: mandating insecurity by requiring government 
+    access to all data and communications},
+  author={Abelson, Harold and Anderson, Ross and Bellovin, Steven M and 
+    Benaloh, Josh and Blaze, Matt and Diffie, Whitfield and Gilmore, John and 
+        Green, Matthew and Landau, Susan and Neumann, Peter G and others},
+  journal={Journal of Cybersecurity},
+  year={2015},
+  publisher={The Oxford University Press},
+  URL={https://dspace.mit.edu/bitstream/handle/1721.1/97690/MIT-CSAIL-TR-2015-026.pdf?sequence=8},
+}
+@
+
+<<surveillance.mk>>=
+BIBSP_REFKEY+=KeysUnderDoormats
+URL-KeysUnderDoormats=https://dspace.mit.edu/bitstream/handle/1721.1/97690/MIT-CSAIL-TR-2015-026.pdf?sequence=8
+@
+
+
+\chapter{Human rights}
+
+<<bibsp variables>>=
+BIBSP_TOPIC+= hr
+@
+
+<<topic bibliographies>>=
+\addbibresource{hr.bib}
+@
+
+<<hr.bib>>=
+@misc{Kingphish,
+  title = {Operation {Kingphish}: {Uncovering} a Campaign of Cyber Attacks 
+    against Civil Society in Qatar and Nepal},
+	shorttitle = {Operation {Kingphish}},
+  author = {{Nex}},
+  journal = {Medium},
+  month = feb,
+  year = {2017},
+	url = {https://medium.com/amnesty-insights/operation-kingphish-uncovering-a-campaign-of-cyber-attacks-against-civil-society-in-qatar-and-aa40c9e08852#.46qsnor4p},
+  abstract = {Over the course of 2016 — and particularly intensifying towards 
+    the end of the year — several individuals known to Amnesty International…},
+  urldate = {2017-02-19},
+}
+
+@misc{NilePhish,
+  title = {{Nile} {Phish}: {Large}-Scale Phishing Campaign Targeting Egyptian 
+    Civil Society},
+  shorttitle = {{Nile} {Phish}},
+  author = {Scott-Railton, John
+    and Raoof, Ramy
+    and Marczak, Bill
+    and Meynier, Etienne},
+  url = {https://citizenlab.org/2017/02/nilephish-report/},
+	abstract = {This report discusses the targeting of Egyptian NGOs by Nile Phish, a large-scale phishing campaign. Almost all of the targets we identified are also implicated in Case 173, a sprawling legal case brought by the Egyptian government against NGOs, which has been referred to as an “unprecedented crackdown” on Egypt’s civil society. Nile Phish operators demonstrate an intimate knowledge of Egyptian NGOs, and are able to roll out phishing attacks within hours of government actions, such as arrests.},
+  urldate = {2017-04-13},
+	journal = {The Citizen Lab},
+	month = feb,
+  year = {2017},
+}
+@
+
+<<hr.mk>>=
+BIBSP_REFKEY+=Kingphish
+URL-Kingphish=https://medium.com/amnesty-insights/operation-kingphish-uncovering-a-campaign-of-cyber-attacks-against-civil-society-in-qatar-and-aa40c9e08852#.46qsnor4p
+
+BIBSP_REFKEY+=NilePhish
+URL-NilePhish=https://citizenlab.org/2017/02/nilephish-report/
+@
+
+
+\chapter{Protesting and voting}
+
+<<bibsp variables>>=
+BIBSP_TOPIC+=	protests
+@
+
+<<topic bibliographies>>=
+\addbibresource{protests.bib}
+@
+
+<<protests.bib>>=
+@inbook{FutureProtests,
+  title = {Applying Privacy-Enhancing Technologies: One Alternative Future of 
+    Protests},
+  author = {Daniel Bosk
+    and Guillermo Rodriguez-Cano
+    and Benjamin Greschbach
+    and Sonja Buchegger},
+  booktitle = {Protests in the Information Age: Social Movements, Digital 
+    Practices and Surveillance},
+  editor = {Lucas Melgaço and Jeffrey Monaghan},
+  publisher = {Routledge},
+  year = {2018},
+}
+
+@article{2017WomensMarchesInUS,
+  title = {The Exhausting Work of Tallying {America}'s Largest Protest},
+  author = {Waddell, Kaveh},
+  journal = {The Atlantic},
+  month = {1},
+  year = {2017},
+  issn = {1072-7825},
+  url = {https://www.theatlantic.com/technology/archive/2017/01/womens-march-protest-count/514166/},
+  abstract = {A pair of political-science professors are combing through news 
+    stories and individual reports to estimate the number of people who 
+        demonstrated on Saturday.},
+  urldate = {2017-04-05},
+}
+
+@article{2016DemonstrationsInSeoul,
+  title = {Counting 1 million crowds at anti-president rallies in {Seoul}},
+  author = {Kim Tong-Hyung
+    and Youkyung Lee},
+  journal = {Associated Press: The Big Story},
+  publisher = {The Associated Press},
+  month = {11},
+  year = {2016},
+	url = {http://bigstory.ap.org/article/317ea62bddbd4132ab1467863a532ab9/counting-1-million-crowds-anti-president-rallies-seoul},
+  abstract = {SEOUL, South Korea (AP) — South Korea is seeing its biggest wave 
+    of street demonstrations in decades, but nobody is sure how many people are 
+        taking to the streets each week. For the fifth straight weekend, masses 
+        of protesters \dots},
+  urldate = {2017-04-05},
+}
+
+@online{AlJazeeraOnVenezuela2017,
+  author = {{Al-Jazeera}},
+	title = {Huge marches as Venezuela marks 50 days of protest},
+	url = {http://www.aljazeera.com/news/2017/05/venezuelan-opposition-marks-50-days-protests-170520174956348.html},
+  abstract = {Protesters take to Venezuela's streets to mark 50 days of 
+    protests against President Nicolas Maduro.},
+	urldate = {2017-08-01},
+  date = {2017-05-21},
+}
+
+@article{VenezuelanStateWorkersCalledToParticipate,
+	title = {Venezuela to vote on constituent assembly after months of protests},
+	issn = {0029-7712},
+	url = {http://www.theguardian.com/world/2017/jul/29/venezuela-government-maduro-vote-end-democracy},
+	abstract = {Critics warn that a vote to create the 545-member assembly with power to rewrite constitution will damage democracy},
+	journaltitle = {The Observer},
+	author = {Brodzinsky, Sibylla},
+	urldate = {2017-08-01},
+	date = {2017-07-29},
+	langid = {british},
+	keywords = {Americas, Colombia, Nicolás Maduro, Venezuela, World news},
+	file = {Snapshot:/home/dbosk/.mozilla/firefox/l71doja4.default/zotero/storage/Z6XEQEG8/venezuela-government-maduro-vote-end-democracy.html:text/html}
+}
+
+@online{2017VenezuelaProtestFrequency,
+	title = {Months of Deadly Anti-Government Protests in Venezuela - The Atlantic},
+	url = {https://www.theatlantic.com/photo/2017/06/months-of-anti-government-protests-continue-in-venezuela/530031/},
+	abstract = {Beginning on April 1, anti-government demonstrators have staged daily protests across Venezuela, leaving thousands arrested, hundreds injured, and 66 dead.},
+	author = {Taylor, Alan},
+	urldate = {2017-08-01},
+  date = {2017-06-12},
+	file = {Snapshot:/home/dbosk/.mozilla/firefox/l71doja4.default/zotero/storage/2IIHDQ3J/530031.html:text/html}
+}
+
+@article{VenezuelanGovtBansProtesting,
+	title = {Venezuelans plan country-wide protests in open defiance of government ban},
+	issn = {0261-3077},
+	url = {http://www.theguardian.com/world/2017/jul/28/venezuela-protests-government-ban-nicolas-maduro},
+	abstract = {‘We will exercise our right to protest every say until it is no longer necessary’},
+	journaltitle = {The Guardian},
+	author = {Brodzinsky, Sibylla and López, Virginia},
+	urldate = {2017-08-01},
+	date = {2017-07-28},
+	langid = {british},
+	keywords = {Americas, Nicolás Maduro, Venezuela, World news},
+	file = {Snapshot:/home/dbosk/.mozilla/firefox/l71doja4.default/zotero/storage/K8N8Q6U8/venezuela-protests-government-ban-nicolas-maduro.html:text/html}
+}
+
+@article{BBConVenezuelaProtestBan,
+  author = {{BBC} News},
+	title = {Venezuela crisis: Bans on protests that 'disturb' election},
+	url = {http://www.bbc.com/news/world-latin-america-40744851},
+	shorttitle = {Venezuela crisis},
+	abstract = {Demonstrations that could "disturb or affect" Sunday's controversial vote are outlawed.},
+	journaltitle = {{BBC} News},
+	urldate = {2017-08-01},
+	date = {2017-07-28},
+	langid = {british},
+	file = {Snapshot:/home/dbosk/.mozilla/firefox/l71doja4.default/zotero/storage/6NEBRKZ2/world-latin-america-40744851.html:text/html}
+}
+
+@online{HowToEstimateCrowdSize,
+	title = {How Is Crowd Size Estimated?},
+	url = {https://www.livescience.com/8578-crowd-size-estimated.html},
+  abstract = {Reports of the number of people that attended Glenn Beck's Aug. 
+    28 rally have varied wildly. How is crowd size estimated – and who does the 
+        counting?},
+	titleaddon = {Live Science},
+  author = {Remy Melina},
+  year = {2010},
+  month = {9},
+	urldate = {2017-07-20},
+}
+
+@online{TheCrowdNumbersGame,
+  title = {The protest-crowd numbers game - Salon.com},
+  author = {Michelle Goldberg},
+  titleaddon = {Salon},
+  year = {2003},
+  month = {1},
+	url = {http://www.salon.com/2003/01/24/crowds/},
+	urldate = {2017-07-21},
+}
+
+@online{TheXManMarch,
+	title = {The [?]-Man March},
+	url = {https://www.wired.com/2003/06/crowd-spc/},
+  titleaddon = {{WIRED}},
+  author = {Farouk El-Baz},
+	urldate = {2017-07-21},
+  year = {2003},
+  month = {6},
+}
+
+@article{PropagandaTruthDuelInCrowdCounts,
+	title = {Propaganda, Truth Duel in Crowd Counts},
+	issn = {0458-3035},
+	url = {http://www.latimes.com/la-me-crowdcounts-1991oct22-story.html},
+	journaltitle = {Los Angeles Times},
+	urldate = {2017-07-24},
+	date = {1991-10-22},
+	langid = {american},
+}
+
+@article{HowWillWeKnowTrumpInauguralCrowdSize,
+	title = {How Will We Know Trump’s Inaugural Crowd Size?},
+	issn = {1072-7825},
+	url = {https://www.theatlantic.com/technology/archive/2017/01/how-will-we-know-trumps-inaugural-crowd-size/513938/},
+	abstract = {It involves satellites and weather balloons.},
+	journaltitle = {The Atlantic},
+	author = {Meyer, Robinson},
+	urldate = {2017-07-24},
+	date = {2017-01-20},
+}
+
+@article{BBCHowToCountProtestNumbers,
+	title = {Protest numbers: How are they counted?},
+  author = {{BBC Magazine}},
+	url = {http://www.bbc.com/news/magazine-12879582},
+	shorttitle = {Protest numbers},
+  abstract = {The number of protesters in London on Saturday has been estimated 
+    anywhere from 250,000 to 500,000. So is it possible to count?},
+	journaltitle = {{BBC} News},
+  year = {2011},
+  month = {3},
+	urldate = {2017-07-24},
+	date = {2011-03-28},
+	langid = {british},
+}
+
+
+@INPROCEEDINGS{CVCrowdCounting,
+  title={Privacy preserving crowd monitoring: Counting people without people 
+    models or tracking},
+  author={A. B. Chan and Zhang-Sheng John Liang and N.  Vasconcelos},
+  booktitle={2008 IEEE Conference on Computer Vision and Pattern Recognition},
+  year={2008},
+  month={6},
+  pages={1-7},
+  abstract={We present a privacy-preserving system for estimating the size of 
+    inhomogeneous crowds, composed of pedestrians that travel in different 
+        directions, without using explicit object segmentation or tracking.  
+        First, the crowd is segmented into components of homogeneous motion, 
+    using the mixture of dynamic textures motion model. Second, a set of simple 
+        holistic features is extracted from each segmented region, and the 
+        correspondence between features and the number of people per segment is 
+        learned with Gaussian process regression. We validate both the crowd 
+        segmentation algorithm, and the crowd counting system, on a large 
+        pedestrian dataset (2000 frames of video, containing 49,885 total 
+                            pedestrian instances). Finally, we present results 
+        of the system running on a full hour of video.},
+  keywords={Gaussian processes;estimation theory;feature extraction;image 
+    motion analysis;image segmentation;image texture;regression analysis;video 
+        signal processing;Gaussian process regression;crowd monitoring;crowd 
+        segmentation;dynamic textures motion model;holistic feature 
+        extraction;inhomogeneous crowds estimation;people 
+        counting;privacy-preserving system;Computer vision;Computerized 
+        monitoring;Event detection;Feature extraction;Gaussian 
+        processes;Layout;Object detection;Object 
+        segmentation;Privacy;Robustness},
+  doi={10.1109/CVPR.2008.4587569},
+  ISSN={1063-6919},
+}
+
+@inproceedings{WhyMACRandomizationIsNotEnough,
+	location = {New York, {NY}, {USA}},
+  title = {Why {MAC} Address Randomization is Not Enough: An Analysis of Wi-Fi 
+    Network Discovery Mechanisms},
+	isbn = {978-1-4503-4233-9},
+	url = {http://doi.acm.org/10.1145/2897845.2897883},
+	doi = {10.1145/2897845.2897883},
+	series = {{ASIA} {CCS} '16},
+	shorttitle = {Why {MAC} Address Randomization is Not Enough},
+  abstract = {We present several novel techniques to track (unassociated) 
+    mobile devices by abusing features of the Wi-Fi standard. This shows that 
+        using random {MAC} addresses, on its own, does not guarantee privacy.  
+        First, we show that information elements in probe requests can be used 
+        to fingerprint devices. We then combine these fingerprints with 
+        incremental sequence numbers, to create a tracking algorithm that does 
+        not rely on unique identifiers such as {MAC} addresses. Based on 
+        real-world datasets, we demonstrate that our algorithm can correctly 
+        track as much as 50\% of devices for at least 20 minutes. We also show 
+        that commodity Wi-Fi devices use predictable scrambler seeds. These can 
+        be used to improve the performance of our tracking algorithm. Finally, 
+    we present two attacks that reveal the real {MAC} address of a device, even 
+        if {MAC} address randomization is used. In the first one, we create 
+          fake hotspots to induce clients to connect using their real {MAC} 
+    address. The second technique relies on the new 802.11u standard, commonly 
+        referred to as Hotspot 2.0, where we show that Linux and Windows send 
+        Access Network Query Protocol ({ANQP}) requests using their real {MAC} 
+    address.},
+	pages = {413--424},
+  booktitle = {Proceedings of the 11th {ACM} Asia Conference on Computer and 
+    Communications Security},
+	publisher = {{ACM}},
+  author = {Vanhoef, Mathy and Matte, Célestin and Cunche, Mathieu and Cardoso, 
+    Leonardo S. and Piessens, Frank},
+	urldate = {2017-07-24},
+	date = {2016},
+  keywords = {802.11, 802.11u, anonymity, fingerprinting, hotspot 2.0, karma 
+    attack, {MAC} address randomization, privacy, pseudonym, scrambler, 
+    tracking, wi-fi, wifi},
+}
+
+@INPROCEEDINGS{WifiCrowdCounting,
+  author={W. Xi and J. Zhao and X. Y. Li and K. Zhao and S. Tang and X. Liu and 
+    Z. Jiang},
+  booktitle={IEEE INFOCOM 2014 - IEEE Conference on Computer Communications},
+  title={Electronic frog eye: Counting crowd using WiFi},
+  year={2014},
+  pages={361-369},
+  abstract={
+    Crowd counting, which count or accurately estimate the number of human 
+        beings within a region, is critical in many applications, such as 
+        guided tour, crowd control and marketing research and analysis. A crowd 
+        counting solution should be scalable and be minimally intrusive (i.e., 
+                                                                         device-free) 
+        to users. Image-based solutions are device-free, but cannot work well 
+        in a dim or dark environment. Non-image based solutions usually require 
+        every human being carrying device, and are inaccurate and unreliable in 
+        practice. In this paper, we present FCC, a device-Free Crowd Counting 
+        approach based on Channel State Information (CSI). Our design is 
+        motivated by our observation that CSI is highly sensitive to 
+        environment variation, like a frog eye. We theoretically discuss the 
+        relationship between the number of moving people and the variation of 
+        wireless channel state. A major challenge in our design of FCC is to 
+        find a stable monotonic function to characterize the relationship 
+        between the crowd number and various features of CSI. To this end, we 
+        propose a metric, the Percentage of nonzero Elements (PEM), in the 
+        dilated CSI Matrix. The monotonic relationship can be explicitly 
+        formulated by the Grey Verhulst Model, which is used for crowd counting 
+        without a labor-intensive site survey. We implement FCC using 
+        off-the-shelf IEEE 802.11n devices and evaluate its performance via 
+        extensive experiments in typical real-world scenarios. Our results 
+        demonstrate that FCC outperforms the state-of-art approaches with much 
+        better accuracy, scalability and reliability.
+  },
+  keywords={image processing;matrix algebra;wireless LAN;wireless channels;Grey 
+    Verhulst model;IEEE 802.11n devices;PEM;Wi-Fi;channel state 
+        information;crowd counting;dilated CSI matrix;electronic frog 
+        eye;image-based solutions;percentage of nonzero elements;wireless 
+        channel state;Cameras;Computer 
+        science;Computers;Conferences;Educational institutions;FCC;Performance 
+        evaluation},
+  doi={10.1109/INFOCOM.2014.6847958},
+  ISSN={0743-166X},
+  month={4},
+}
+
+@INPROCEEDINGS{NNCrowdCounting,
+  author={Cong Zhang and Hongsheng Li and X. Wang and Xiaokang Yang},
+  booktitle={2015 IEEE Conference on Computer Vision and Pattern Recognition 
+    (CVPR)},
+  title={Cross-scene crowd counting via deep convolutional neural networks},
+  year={2015},
+  pages={833-841},
+  abstract={
+    Cross-scene crowd counting is a challenging task where no laborious data 
+        annotation is required for counting people in new target surveillance 
+        crowd scenes unseen in the training set. The performance of most existing 
+        crowd counting methods drops significantly when they are applied to an 
+        unseen scene. To address this problem, we propose a deep convolutional 
+        neural network (CNN) for crowd counting, and it is trained alternatively 
+        with two related learning objectives, crowd density and crowd count. This 
+        proposed switchable learning approach is able to obtain better local 
+        optimum for both objectives. To handle an unseen target crowd scene, we 
+        present a data-driven method to fine-tune the trained CNN model for the 
+        target scene. A new dataset including 108 crowd scenes with nearly 
+        200,000 head annotations is introduced to better evaluate the accuracy of 
+        cross-scene crowd counting methods. Extensive experiments on the proposed 
+        and another two existing datasets demonstrate the effectiveness and 
+        reliability of our approach.
+  },
+  keywords={
+    learning (artificial intelligence);natural scenes;neural nets;video 
+        retrieval;video surveillance;cross-scene crowd counting;crowd count;crowd 
+        density;data-driven method;deep-convolutional neural networks;head 
+        annotations;learning objectives;local optimum;switchable learning 
+        approach;target crowd scene;target surveillance crowd scenes;trained CNN 
+        model;Adaptation 
+        models;Estimation;Head;Surveillance;Switches;Training;Videos
+  },
+  doi={10.1109/CVPR.2015.7298684},
+  ISSN={1063-6919},
+  month={6},
+}
+
+@ARTICLE{5580105,
+author={Y. L. Hou and G. K. H. Pang},
+journal={IEEE Transactions on Systems, Man, and Cybernetics - Part A: Systems and Humans},
+title={People Counting and Human Detection in a Challenging Situation},
+year={2011},
+volume={41},
+number={1},
+pages={24-33},
+abstract={Reliable people counting and human detection is an important problem in visual surveillance. In recent years, the field has seen many advances, but the solutions have restrictions: people must be moving, the background must be simple, and the image resolution must be high. This paper aims to develop an effective method for estimating the number of people and locate each individual in a low resolution image with complicated scenes. The contribution of this paper is threefold. First, postprocessing steps are performed on background subtraction results to estimate the number of people in a complicated scene, which includes people who are moving only slightly. Second, an Expectation Maximization (EM)-based method has been developed to locate individuals in a low resolution scene. In this method, a new cluster model is used to represent each person in the scene. The method does not require a very accurate foreground contour. Third, the number of people is used as a priori for locating individuals based on feature points. Hence, the methods for estimating the number of people and for locating individuals are connected. The developed methods have been validated based on a 4-hour video, with the number of people in the scene ranging from 36 to 222. The best result for estimating the number of people has an average error of 10% over 51 test cases. Based on the estimated number of people, some results of the EM-based method have also been shown.},
+keywords={expectation-maximisation algorithm;image resolution;object detection;pattern clustering;video surveillance;background subtraction;cluster model;expectation maximization-based method;human detection;image resolution;people counting;postprocessing steps;visual surveillance;Artificial neural networks;Clustering algorithms;Feature extraction;Gaussian distribution;Humans;Image resolution;Pixel;Expectation-maximum;human detection;neural network;people counting},
+doi={10.1109/TSMCA.2010.2064299},
+ISSN={1083-4427},
+month={Jan},}
+
+@inproceedings{Elassal2016UnsupervisedCC,
+  title={Unsupervised Crowd Counting},
+  author={Nada Elassal and James H. Elder},
+  booktitle={ACCV},
+  year={2016}
+}
+
+@inproceedings{Han2017ImageCC,
+  title={Image Crowd Counting Using Convolutional Neural Network and Markov Random Field},
+  author={Kang Han and Wanggen Wan and Haiyan Yao and Li Hou},
+  year={2017}
+}
+
+@online{CrowdCount,
+  title = {Crowd Count: Real-time crowd sizing},
+  author = {CrowdCount},
+  year = {2016},
+  urldate = {2017-04-05},
+  URL = {http://crowdcount.org/},
+}
+
+@online{CrowdSize,
+	title = {Crowdsize {iPhone} Application},
+  author = {CrowdSize},
+  year = {2016},
+	url = {http://www.crowdsize.com/},
+	urldate = {2017-07-24},
+}
+
+@misc{CataloniaDemonstrations,
+  title = {Barcelona protesters demand release of jailed separatist leaders},
+  author = {Sam Edwards},
+  journal = {The Independent},
+  year = {2017},
+  month = {11},
+  urldate = {2018-02-02},
+  date = {2017-11-11},
+  note = {[Online; accessed 2. Feb. 2018]},
+  url = {https://www.independent.co.uk/news/world/europe/barcelona-protesters-demand-release-of-jailed-separatist-leaders-catalonia-latest-a8050116.html},
+}
+
+@inproceedings{DiVote,
+ title={DiVote: A Distributed Voting Protocol for Mobile Device-to-Device 
+   Communication},
+ author={Danielis, Peter and Kouyoumdjieva, Sylvia T and Karlsson, Gunnar},
+ booktitle={Teletraffic Congress (ITC 28), 2016 28th International},
+ volume={1},
+ pages={69--77},
+ year={2016},
+ organization={IEEE}
+}
+
+@inproceedings{UrbanCount,
+ title={UrbanCount: Mobile Crowd Counting in Urban Environments},
+ author={Danielis, Peter and Kouyoumdjieva, Sylvia T and Karlsson, Gunnar},
+ booktitle={8th IEEE Annual Information Technology, Electronics and Mobile 
+   Communication Conference (IEMCON), October 03-05, 2017, Univ British 
+       Columbia, Vancouver, Canada},
+ pages={640--648},
+ year={2017},
+ organization={Institute of Electrical and Electronics Engineers (IEEE)}
+}
+@
+
+<<protests.mk>>=
+BIBSP_REFKEY+=2017WomensMarchesInUS
+URL-2017WomensMarchesInUS=https://www.theatlantic.com/technology/archive/2017/01/womens-march-protest-count/514166/
+
+BIBSP_REFKEY+=2016DemonstrationsInSeoul
+URL-2016DemonstrationsInSeoul=http://bigstory.ap.org/article/317ea62bddbd4132ab1467863a532ab9/counting-1-million-crowds-anti-president-rallies-seoul
+
+BIBSP_REFKEY+=CVCrowdCounting
+URL-CVCrowdCounting=https://dx.doi.org/10.1109/CVPR.2008.4587569
+
+BIBSP_REFKEY+=UrbanCount
+URL-UrbanCount=http://ieeexplore.ieee.org/document/8117189/
+
+BIBSP_REFKEY+=DiVote
+URL-DiVote=http://urn.kb.se/resolve?urn=urn:nbn:se:kth:diva-187737
+@
+
+<<bibsp variables>>=
+BIBSP_TOPIC+= voting
+@
+
+<<topic bibliographies>>=
+\addbibresource{voting.bib}
+@
+
+<<voting.bib>>=
+@article{VerifyingPrivacyPropertiesOfVotingProtocols,
+  title={Verifying privacy-type properties of electronic voting protocols},
+  author={Delaune, St{\'e}phanie and Kremer, Steve and Ryan, Mark},
+  journal={Journal of Computer Security},
+  volume={17},
+  number={4},
+  pages={435--487},
+  year={2009},
+  publisher={IOS Press}
+}
+@
+
+<<voting.mk>>=
+BIBSP_REFKEY+=VerifyingPrivacyPropertiesOfVotingProtocols
+URL-VerifyingPrivacyPropertiesOfVotingProtocols=https://dx.doi.org/10.3233/JCS-2009-0340
+@
+
+
+\chapter{Online social networks}
+
+<<bibsp variables>>=
+BIBSP_TOPIC+=	osn
+@
+
+<<osn.bib>>=
+@inproceedings{Peerson,
+  title={PeerSoN: P2P social networking: early experiences and insights},
+  author={Buchegger, Sonja and Schi{\"o}berg, Doris and Vu, Le-Hung and 
+    Datta, Anwitaman},
+  booktitle={Proceedings of the Second ACM EuroSys Workshop on Social 
+    Network Systems},
+  pages={46--52},
+  year={2009},
+  organization={ACM}
+}
+
+@inproceedings{DECENT,
+  title={DECENT: A decentralized architecture for enforcing privacy in online 
+    social networks},
+  author={Jahid, Sonia and Nilizadeh, Shirin and Mittal, Prateek and Borisov, 
+    Nikita and Kapadia, Apu},
+  booktitle={PERCOM Workshops, 2012},
+  pages={326--332},
+  year={2012},
+  organization={IEEE},
+}
+
+@inproceedings{Cachet,
+  title={Cachet: a decentralized architecture for privacy preserving social 
+    networking with caching},
+  author={Nilizadeh, Shirin and Jahid, Sonia and Mittal, Prateek and Borisov, 
+    Nikita and Kapadia, Apu},
+  booktitle={Proceedings of the 8th international conference on Emerging 
+    networking experiments and technologies},
+  pages={337--348},
+  year={2012},
+  organization={ACM}
+}
+
+@inproceedings{Persona,
+  title = {Persona: An Online Social Network with User-Defined Privacy},
+  author = {Randy Baden and Adam Bender and Neil Spring and Bobby Bhattacharjee 
+    and Daniel Starin},
+  booktitle = {SIGCOMM},
+  year = {2009},
+}
+
+@article{DataAvailability,
+  author = {Rzadca, Krzysztof and Datta, Anwitaman and Kreitz, Gunnar and 
+    Buchegger, Sonja},
+  title = {Game-Theoretic Mechanisms to Increase Data Availability in 
+    Decentralized Storage Systems},
+  journal = {ACM Transactions on Autonomous and Adaptive Systems},
+  year = {2015},
+  note = {(accepted)},
+  keywords = {p2p, p2p_storage, game theory, price of 
+    anarchy},
+  URL={http://www.mimuw.edu.pl/~krzadca/papers/mech-taas2015.pdf},
+}
+
+@inproceedings{ReplicaPlacement,
+  author = {Rzadca, Krzysztof and Datta, Anwitaman and Buchegger, Sonja},
+  title = {Replica Placement in P2P Storage: Complexity and Game Theoretic 
+    Analyses},
+  booktitle = {ICDCS 2010},
+  year = {2010},
+  pages = {599-609},
+  address = {Los Alamitos, Washington, Tokyo},
+  publisher = {IEEE Computer Society},
+  doi = {10.1109/ICDCS.2010.67},
+  URL={http://www.mimuw.edu.pl/~krzadca/papers/serenity_icdcs.pdf},
+  keywords = {p2p, p2p_storage, game theory, price of anarchy},
+}
+
+@inproceedings{Gossple,
+  author = {Bertier, Marin and Frey, Davide and Guerraoui, Rachid and 
+    Kermarrec, Anne-Marie and Leroy, Vincent},
+  title = {The GOSSPLE Anonymous Social Network},
+  booktitle = {Proceedings of the ACM/IFIP/USENIX 11th International Conference 
+    on Middleware},
+  series = {Middleware},
+  year = {2010},
+  isbn = {978-3-642-16954-0},
+  location = {Bangalore, India},
+  pages = {191--211},
+  numpages = {21},
+  url = {http://dl.acm.org.focus.lib.kth.se/citation.cfm?id=2023718.2023732},
+  acmid = {2023732},
+  publisher = {Springer-Verlag},
+  address = {Berlin, Heidelberg},
+} 
+
+@incollection{ThresholdUserSearch,
+  title={User Search with Knowledge Thresholds in Decentralized Online Social 
+    Networks},
+  author={Greschbach, Benjamin and Kreitz, Gunnar and Buchegger, Sonja},
+  booktitle={Privacy and Identity Management for Emerging Services and 
+    Technologies},
+  editor={Hansen, Marit and Hoepman, Jaap-Henk and Leenes, Ronald and 
+    Whitehouse, Diane},
+  series={IFIP Advances in Information and Communication Technology},
+  volume={421},
+  pages={188-202},
+  publisher={Springer Berlin Heidelberg},
+  year={2014},
+  isbn={978-3-642-55136-9},
+  doi={10.1007/978-3-642-55137-6_15},
+  url={http://dx.doi.org/10.1007/978-3-642-55137-6_15},
+  keywords={Decentralized Online Social Networks; Privacy; User Search},
+  language={English}
+}
+
+@online{DifficultyOfPrivateContactDiscovery,
+  title={The Difficulty Of Private Contact Discovery},
+  author={Moxie Marlinspike},
+  year={2014},
+  month={1},
+  publisher={Open Whisper Systems},
+  URL={https://whispersystems.org/blog/contact-discovery/},
+}
+
+@inproceedings{Vuvuzela,
+  author = {van den Hooff, Jelle and Lazar, David and Zaharia, Matei and 
+    Zeldovich, Nickolai},
+  title = {Vuvuzela: Scalable Private Messaging Resistant to Traffic Analysis},
+  booktitle = {Proceedings of the 25th Symposium on Operating Systems Principles},
+  series = {SOSP '15},
+  year = {2015},
+  isbn = {978-1-4503-3834-9},
+  location = {Monterey, California},
+  pages = {137--152},
+  numpages = {16},
+  url = {http://doi.acm.org/10.1145/2815400.2815417},
+  doi = {10.1145/2815400.2815417},
+  acmid = {2815417},
+  publisher = {ACM},
+  address = {New York, NY, USA},
+} 
+
+@inproceedings{Alpenhorn,
+  author = {Lazar, David and Zeldovich, Nickolai},
+  title = {Alpenhorn: Bootstrapping Secure Communication Without Leaking 
+    Metadata},
+  booktitle = {Proceedings of the 12th USENIX Conference on Operating Systems 
+    Design and Implementation},
+  series = {OSDI'16},
+  year = {2016},
+  isbn = {978-1-931971-33-1},
+  location = {Savannah, GA, USA},
+  pages = {571--586},
+  numpages = {16},
+  url = {https://www.usenix.org/system/files/conference/osdi16/osdi16-lazar.pdf},
+  acmid = {3026921},
+  publisher = {USENIX Association},
+  address = {Berkeley, CA, USA},
+} 
+@
+
+<<osn.mk>>=
+BIBSP_REFKEY+=ReplicaPlacement
+URL-ReplicaPlacement=http://www.mimuw.edu.pl/~krzadca/papers/serenity_icdcs.pdf
+
+BIBSP_REFKEY+=DataAvailability
+URL-DataAvailability=http://www.mimuw.edu.pl/~krzadca/papers/mech-taas2015.pdf
+
+BIBSP_REFKEY+=Peerson DECENT Cachet Persona
+URL-Peerson=http://peerson.net/papers/sns09peerson.pdf
+URL-DECENT=http://ieeexplore.ieee.org${LIBRARY_EXT}/ielx5/6192378/6197445/06197504.pdf
+URL-Cachet=http://delivery.acm.org${LIBRARY_EXT}/10.1145/2420000/2413215/p337-nilizadeh.pdf
+URL-Persona=http://delivery.acm.org${LIBRARY_EXT}/10.1145/1600000/1592585/p135-baden.pdf
+
+BIBSP_REFKEY+=ThresholdUserSearch
+URL-ThresholdUserSearch=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.1007%2F978-3-642-55137-6_15.pdf
+@
+
+
+\chapter{Reputation systems}
+
+<<bibsp variables>>=
+BIBSP_TOPIC+=	reputation
+
+<<reputation.bib>>=
+@incollection{SybilAttack,
+  title={The Sybil Attack},
+  author={Douceur, John R.},
+  booktitle={Peer-to-Peer Systems},
+  editor={Druschel, Peter and Kaashoek, Frans and Rowstron, Antony},
+  series={Lecture Notes in Computer Science},
+  volume={2429},
+  pages={251--260},
+  year={2002},
+  publisher={Springer Berlin Heidelberg},
+  isbn={978-3-540-44179-3},
+  doi={10.1007/3-540-45748-8_24},
+  url={http://dx.doi.org/10.1007/3-540-45748-8_24},
+  language={English}
+}
+@
+
+<<reputation.mk>>=
+BIBSP_REFKEY+=SybilAttack
+URL-SybilAttack=http://link.springer.com/content/pdf/10.1007%2F3-540-45748-8_24.pdf
+@
+
+
+\chapter{Statistics}
+
+<<bibsp variables>>=
+BIBSP_TOPIC+=	stats
+@
+
+<<stats.bib>>=
+@online{WHODeathStats,
+  author = {{World Health Organization}},
+  title = {The top 10 causes of death},
+	url = {http://www.who.int/mediacentre/factsheets/fs310/en/},
+	abstract = {In 2012, an estimated 56 million people died worldwide. Discover what have remained the top major killers during the past decade.},
+  urldate = {2017-03-29},
+  year = {2017},
+  month = {1},
+}
+
+@online{OurWorldInData-Terrorism,
+  author = {Max Roser and Mohamed Nagdy},
+	title = {Terrorism},
+	url = {https://ourworldindata.org/terrorism/},
+	abstract = {Terrorism is usually understood as the use or threat of violence to further a political cause. There is no universally agreed definition of terrorism making it a difficult object to quantify. For clarity, the Data Quality \& Definitions section below carefully outlines the definition used in cons},
+  urldate = {2017-03-29},
+  journal = {Our World In Data},
+  year = {2016},
+}
+
+@report{FreedomInTheWorld2017,
+  title = {Populists and Autocrats: The Dual Threat to Global Democracy},
+  author = {Arch Puddington and Tyler Roylance},
+  type = {Freedom in the World},
+  number = {2017},
+  year = {2017},
+  institution = {FreedomHouse},
+  URL = {https://freedomhouse.org/report/freedom-world/freedom-world-2017},
+}
+
+@report{BotsAndAutomationDuringUSElection,
+  author = {Bence Kollanyi
+    and Howard, Philip N.
+    and Woolley, Samuel C.},
+  title = {Bots and Automation over Twitter during the U.S.\ Election},
+  type = {Data Memo},
+  number = {2016.4},
+  year = {2016},
+  location = {Oxford, UK},
+  publisher = {Project on Computational Propaganda},
+  institution = {Univ.\ of Oxford},
+  URL = {https://www.politicalbots.org},
+}
+@
+
+<<stats.mk>>=
+BIBSP_REFKEY+=WHODeathStats
+URL-WHODeathStats=http://www.who.int/mediacentre/factsheets/fs310/en/
+
+BIBSP_REFKEY+=OurWorldInData-Terrorism
+URL-OurWorldInData-Terrorism=https://ourworldindata.org/terrorism/
+
+BIBSP_REFKEY+=FreedomInTheWorld2017
+URL-FreedomInTheWorld2017=https://freedomhouse.org/report/freedom-world/freedom-world-2017
+
+BIBSP_REFKEY+=BotsAndAutomationDuringUSElection
+URL-BotsAndAutomationDuringUSElection=https://www.politicalbots.org/?p=787
+@
+
+
+\chapter{Dependable systems}
+
+<<bibsp variables>>=
+BIBSP_TOPIC+= depend
+@
+
+<<depend.bib>>=
+@article{ByzantineGenerals,
+ author = {Lamport, Leslie and Shostak, Robert and Pease, Marshall},
+ title = {The Byzantine Generals Problem},
+ journal = {ACM Trans. Program. Lang. Syst.},
+ issue_date = {July 1982},
+ volume = {4},
+ number = {3},
+ month = jul,
+ year = {1982},
+ issn = {0164-0925},
+ pages = {382--401},
+ numpages = {20},
+ url = {http://doi.acm.org/10.1145/357172.357176},
+ doi = {10.1145/357172.357176},
+ acmid = {357176},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+} 
+@
+
+<<depend.mk>>=
+BIBSP_REFKEY+=ByzantineGenerals
+URL-ByzantineGenerals=http://doi.acm.org/10.1145/357172.357176
+@
+
+
+\chapter{\acl{NFC}}
+
+<<bibsp variables>>=
+BIBSP_TOPIC+=	nfc
+@
+
+<<nfc.bib>>=
+@manual{NFCController,
+	title={NXP NFC controller PN544	for mobile phones and	portable equipment},
+	organization={NXP Semiconductors},
+	number={9397 750 16890},
+	year={2010},
+	url={http://www.nxp.com/documents/leaflet/75016890.pdf},
+}
+@inproceedings{RFIDProximity,
+  author = {Koscher, Karl and Juels, Ari and Brajkovic, Vjekoslav and Kohno, 
+    Tadayoshi},
+  title = {EPC RFID Tag Security Weaknesses and Defenses: Passport Cards, 
+    Enhanced Drivers Licenses, and Beyond},
+  booktitle = {Proceedings of the 16th ACM Conference on Computer and 
+    Communications Security},
+  series = {CCS '09},
+  year = {2009},
+  isbn = {978-1-60558-894-0},
+  location = {Chicago, Illinois, USA},
+  pages = {33--42},
+  numpages = {10},
+  url = {http://doi.acm.org/10.1145/1653662.1653668},
+  doi = {10.1145/1653662.1653668},
+  acmid = {1653668},
+  publisher = {ACM},
+  address = {New York, NY, USA},
+  keywords = {authentication, cloning, epc, passport card, rfid, 
+    whti},
+}
+@
+
+<<nfc.mk>>=
+BIBSP_REFKEY+=  NFCController
+URL-NFCController=http://www.nxp.com/documents/leaflet/75016890.pdf
+
+BIBSP_REFKEY+=  RFIDProximity
+URL-RFIDProximity=https://dl.acm.org/citation.cfm?id=1653668
+@
+
+
+
+\chapter{Ad-hoc networks}
+
+<<bibsp variables>>=
+BIBSP_TOPIC+=	adhocnets
+@
+
+<<adhocnets.bib>>=
+@Inbook{AdHocNetworksBook,
+  author="Gerla, Mario",
+  editor="Mohapatra, Prasant
+      and Krishnamurthy, Srikanth V.",
+  title="Ad Hoc Networks",
+  bookTitle="Ad Hoc Networks: Technologies and Protocols",
+  year="2005",
+  publisher="Springer US",
+  address="Boston, MA",
+  pages="1--22",
+  isbn="978-0-387-22690-3",
+  doi="10.1007/0-387-22690-7_1",
+  url="http://dx.doi.org/10.1007/0-387-22690-7_1"
+}
+
+@article{D2D,
+title = "An overview of device-to-device communication in cellular networks",
+journal = "ICT Express",
+year = "2017",
+issn = "2405-9595",
+doi = "https://doi.org/10.1016/j.icte.2017.08.002",
+url = "http://www.sciencedirect.com/science/article/pii/S2405959517301467",
+author = "Udit Narayana Kar and Debarshi Kumar Sanyal",
+keywords = "Device-to-device communication (D2D), Cellular network, 5G, Resource management, LTE direct"
+}
+
+@online{Briar,
+ title = {Briar: a messaging app designed for activists},
+ author = {Briar},
+ year = {2016},
+ urldate = {2018-02-25},
+ URL = {https://briarproject.org/how-it-works.html},
+}
+
+@online{FireChat,
+ title = {FireChat: a messaging app without Internet access or cellular data},
+ author = {FireChat},
+ year = {2016},
+ urldate = {2018-02-25},
+ URL = {https://www.opengarden.com/firechat.html},
+}
+@
+
+<<adhocnets.mk>>=
+BIBSP_REFS+=AdHocNetworksBook
+URL-AdHocNetworksBook=https://link.springer.com/book/10.1007%2Fb99485
+
+BIBSP_REFS+=D2D
+URL-D2D=https://doi.org/10.1016/j.icte.2017.08.002
+
+BIBSP_REFS+=Briar
+URL-Briar=https://briarproject.org/how-it-works.html
+
+BIBSP_REFS+=FireChat
+URL-FireChat=https://www.opengarden.com/firechat.html
+@
+
+
+
+\chapter{Electronic currencies}
+
+<<bibsp variables>>=
+BIBSP_TOPIC+=	ecurrency
+@
+
+<<ecurrency.bib>>=
+@Inbook{ecash,
+  author="Chaum, David",
+  editor="Chaum, David
+      and Rivest, Ronald L.
+      and Sherman, Alan T.",
+  title="Blind Signatures for Untraceable Payments",
+  bookTitle="Advances in Cryptology: Proceedings of Crypto 82",
+  year="1983",
+  publisher="Springer US",
+  address="Boston, MA",
+  pages="199--203",
+  abstract="Automation of the way we pay for goods and services is already underway, as can be seen by the variety and growth of electronic banking services available to consumers. The ultimate structure of the new electronic payments system may have a substantial impact on personal privacy as well as on the nature and extent of criminal use of payments. Ideally a new payments system should address both of these seemingly conflicting sets of concerns.",
+  isbn="978-1-4757-0602-4",
+  doi="10.1007/978-1-4757-0602-4_18",
+  url="https://doi.org/10.1007/978-1-4757-0602-4_18"
+}
+@
+
+<<ecurrency.mk>>=
+BIBSP_REFKEY+=	ecash
+URL-ecash=https://link-springer-com/chapter/10.1007/978-1-4757-0602-4_18
+@
+
+
+
+\chapter{Own papers, should be merged}
+
+<<bibsp variables>>=
+BIBSP_TOPIC+=	otrmsg otpkx ppes
+@
+
+<<otrmsg.bib>>=
+@inproceedings{OTPKX,
+  title={Towards Perfectly Secure and Deniable Communication Using an NFC-Based 
+    Key-Exchange Scheme},
+  author={Bosk, Daniel and Kjellqvist, Martin and Buchegger, Sonja},
+  booktitle={Secure IT Systems},
+  editor={Buchegger, Sonja and Dam, Mads},
+  series={Lecture Notes in Computer Science},
+  volume={9417},
+  pages={72--87},
+  year={2015},
+  publisher={Springer International Publishing},
+  isbn={978-3-319-26501-8},
+  doi={10.1007/978-3-319-26502-5_6},
+  URL={http://dx.doi.org/10.1007/978-3-319-26502-5_6},
+  keywords={Deniability; Deniable encryption; Authenticated encryption; Perfect 
+    secrecy; Off-the-record; Key-exchange; Nearfield communication; 
+    Surveillance},
+}
+
+@online{otr,
+  author={Ian Goldberg and {OTR Development Team}},
+  title={Off-the-Record Messaging},
+  note={Accessed on 7th June 2015},
+  URL={https://otr.cypherpunks.ca/}
+}
+@inproceedings{otr2004,
+  title={Off-the-record communication, or, why not to use PGP},
+  author={Borisov, Nikita and Goldberg, Ian and Brewer, Eric},
+  booktitle={Proceedings of the 2004 ACM workshop on Privacy in the 
+    electronic society},
+  pages={77--84},
+  year={2004},
+  organization={ACM}
+}
+@inproceedings{otr2007,
+  title={Improved user authentication in off-the-record messaging},
+  author={Alexander, Chris and Goldberg, Ian},
+  booktitle={Proceedings of the 2007 ACM workshop on Privacy in 
+    electronic society},
+  pages={41--47},
+  year={2007},
+  organization={ACM}
+}
+
+@inproceedings{di2005secure,
+  title={Secure off-the-record messaging},
+  author={Di Raimondo, Mario and Gennaro, Rosario and Krawczyk, Hugo},
+  booktitle={Proceedings of the 2005 ACM workshop on Privacy in the 
+    electronic society},
+  pages={81--89},
+  year={2005},
+  organization={ACM}
+}
+@inproceedings{multiotr2009,
+  title={Multi-party off-the-record messaging},
+  author={Goldberg, Ian and Ustao{\u{g}}lu, Berkant and Van Gundy, Matthew 
+    D and Chen, Hao},
+  booktitle={Proceedings of the 16th ACM conference on Computer and 
+    communications security},
+  pages={358--368},
+  year={2009},
+  organization={ACM}
+}
+@inproceedings{TextSecureAnalysis,
+  title={How Secure is TextSecure?},
+  author={Frosch, Tilman and Mainka, Christian and Bader, Christoph and 
+    Bergsma, Florian and Schwenk, Joerg and Holz, Thorsten},
+  booktitle={Proc. {IEEE} European Symposium on Security and Privacy (EuroS\&P) 
+    2016},
+  year={2016},
+  month={3},
+  publisher={IEEE},
+  note={Full version as IACR ePrint 2014/904},
+  URL={http://eprint.iacr.org/2014/904},
+}
+
+@inproceedings{SignalProtocolAnalysis,
+  title = {A formal security analysis of the {Signal} messaging protocol},
+  author = {Katriel Cohn-Gordon and Cas Cremers and Benjamin Dowling and Luke 
+    Garratt and Douglas Stebila},
+  booktitle = {Proc. {IEEE} European Symposium on Security and Privacy 
+    (EuroS\&P) 2017},
+  year = {2017},
+  month = {4},
+  publisher = {IEEE},
+  note={To appear, full version as IACR ePrint 2016/1013},
+  URL = {http://eprint.iacr.org/2016/1013},
+}
+
+@online{pidgin,
+  author={{Pidgin Project}},
+  title={Pidgin, the universal chat client},
+  URL={https://pidgin.im/},
+  note={Accessed on 5th Nov 2014},
+}
+
+@online{TextSecureApp,
+  author={{Open Whisper Systems}},
+  title={TextSecure Private Messenger},
+  URL={https://play.google.com/store/apps/details?id=org.thoughtcrime.securesms&hl=en},
+  note={Accessed on 5th Nov 2014},
+}
+@online{SignalApp,
+  author={{Open Whisper Systems}},
+  title={Signal Private Messenger},
+  URL={https://play.google.com/store/apps/details?id=org.thoughtcrime.securesms&hl=en},
+  note={Accessed on 18th April 2016},
+}
+@online{TSasynch,
+  author={Marlinspike, Moxie},
+  title={Forward Secrecy for Asynchronous Messages},
+  year={2013},
+  month={8},
+  URL={https://whispersystems.org/blog/asynchronous-security/},
+  note={Accessed on 5th Nov 2014},
+}
+@online{TSdeniable,
+  author={Marlinspike, Moxie},
+  title={Simplifying OTR deniability},
+  year={2013},
+  month={7},
+  URL={https://whispersystems.org/blog/simplifying-otr-deniability/},
+  note={Accessed on 5th Nov 2014},
+}
+@online{TSratchet,
+  author={Marlinspike, Moxie},
+  title={Advanced cryptographic ratcheting},
+  year={2013},
+  month={11},
+  URL={https://whispersystems.org/blog/advanced-ratcheting/},
+  note={Accessed on 5th Nov 2014},
+}
+@online{TSgroups,
+  author={Marlinspike, Moxie},
+  title={Private Group Messaging},
+  year={2014},
+  month={5},
+  URL={https://whispersystems.org/blog/private-groups/},
+}
+@online{GnuPG,
+  author={{The GnuPG Project}},
+  title={The GNU Privacy Guard},
+  URL={https://www.gnupg.org/},
+  note={Accessed on 7th June 2015},
+}
+@
+
+<<otrmsg.mk>>=
+BIBSP_REFKEY+=OTPKX
+URL-OTPKX=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.1007%2F978-3-319-26502-5_6.pdf
+
+BIBSP_REFKEY+=TextSecureAnalysis
+URL-TextSecureAnalysis=http://eprint.iacr.org/2014/904
+
+BIBSP_REFKEY+=SignalProtocolAnalysis
+URL-SignalProtocolAnalysis=http://eprint.iacr.org/2016/1013
+@
+
+<<otpkx.bib>>=
+@inproceedings{AndroidLowEntropyMyth,
+  title={Android low entropy demystified},
+  author={Ding, Yu and Peng, Zhuo and Zhou, Yuanyuan and Zhang, Chao},
+  booktitle={Communications (ICC), 2014 IEEE International Conference on},
+  pages={659--664},
+  year={2014},
+  organization={IEEE},
+  URL={http://accepted.100871.net/jni.pdf},
+}
+@incollection{JavaRandomness,
+  title={Randomly failed! The state of randomness in current Java 
+    implementations},
+  author={Michaelis, Kai and Meyer, Christopher and Schwenk, J{\"o}rg},
+  booktitle={Topics in Cryptology--CT-RSA 2013},
+  pages={129--144},
+  year={2013},
+  publisher={Springer},
+  URL={https://hgi.rub.de/media/nds/veroeffentlichungen/2013/03/25/paper_2.pdf},
+}
+@inproceedings{UniversalityOTP,
+  title={On the (non)universality of the one-time pad},
+  author={Dodis, Y. and Spencer, J.},
+  booktitle={Foundations of Computer Science, 2002. Proceedings. The 43rd 
+    Annual IEEE Symposium on},
+  year={2002},
+  month={},
+  pages={376-385},
+  keywords={cryptography;message authentication;random processes;simulation;BPP 
+    simulation;cryptographic primitives;cryptographic 
+        sources;cryptography;encryption;extractable sources;general 
+        cryptographic use;imperfect random source;imperfect random 
+        sources;message authentication;nearly perfect randomness;one-time pad 
+        universality;probabilistic algorithms;randomization;secret keys;secure 
+        cryptographic primitives;shared secret key;simulatable 
+        sources;symmetric-key encryption;symmetric-key primitive;weak random 
+        sources;Approximation algorithms;Atherosclerosis;Computational 
+        modeling;Computer science;Cryptographic 
+        protocols;Cryptography;Distributed computing;History;Message 
+        authentication;Testing}, doi={10.1109/SFCS.2002.1181962}, 
+  ISSN={0272-5428},
+  URL={http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.10.1921&rep=rep1&type=pdf},
+}
+@
+
+<<otpkx.mk>>=
+BIBSP_REFKEY+=AndroidLowEntropyMyth
+URL-AndroidLowEntropyMyth=http://accepted.100871.net/jni.pdf
+
+BIBSP_REFKEY+=JavaRandomness
+URL-JavaRandomness=https://hgi.rub.de/media/nds/veroeffentlichungen/2013/03/25/paper_2.pdf
+
+BIBSP_REFKEY+=UniversalityOTP
+URL-UniversalityOTP=http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.10.1921&rep=rep1&type=pdf
+@
+
+<<ppes.bib>>=
+@inproceedings{EventsInvitations,
+  title={Event Invitations in Privacy-Preserving DOSNs: Formalization and 
+    Protocol Design},
+  author={Rodr{\i}guez-Cano, Guillermo and Greschbach, Benjamin and 
+    Buchegger, Sonja},
+  booktitle={Secure IT Systems, 19th Nordic Conference, NordSec 2014},
+  editor={Karin Bernsmed and Simone Fischer-Hübner},
+  pages={291--292},
+  publisher={Springer},
+  year={2014},
+  URL={http://urn.kb.se/resolve?urn=urn:nbn:se:kth:diva-153741},
+}
+
+@inproceedings{PreDudle,
+  title={Privacy-enhanced event scheduling},
+  author={Kellermann, Benjamin and Bohme, Rainer},
+  booktitle={Computational Science and Engineering 2009, CSE'09},
+  volume={3},
+  pages={52--59},
+  year={2009},
+  organization={IEEE},
+  URL={http://dud.inf.tu-dresden.de/~ben/kellermann09_privacy-enhanced_event_scheduling.pdf},
+}
+
+@inproceedings{Dudle,
+  title={Privacy-enhanced web-based event scheduling with majority 
+    agreement},
+  author={Kellermann, Benjamin},
+  booktitle={Future Challenges in Security and Privacy for Academia and 
+    Industry, SEC 2011},
+  pages={235--246},
+  year={2011},
+  publisher={Springer},
+  URL={http://dud.inf.tu-dresden.de/~ben/kellermann11_privacy-enhanced_web-based_event_scheduling_with_majority_agreement.pdf},
+}
+
+@inproceedings{herlea2001securely,
+  title={On securely scheduling a meeting},
+  author={Herlea, Thomas and Claessens, Joris and Preneel, Bart and Neven, Gregory and Piessens, Frank and De Decker, Bart},
+  booktitle={Trusted Information, SEC 2001},
+  pages={183--198},
+  year={2001},
+  publisher={Springer}
+}
+
+@article{repsystemssurvery,
+  title={A survey of attack and defense techniques for reputation systems},
+  author={Hoffman, Kevin and Zage, David and Nita-Rotaru, Cristina},
+  journal={ACM Computing Surveys (CSUR)},
+  volume={42},
+  number={1},
+  pages={1--31},
+  year={2009},
+  publisher={ACM},
+  URL={http://ds2.cs.purdue.edu/papers/p2p-reputation-survey.pdf},
+}
+@
+
+<<ppes.mk>>=
+BIBSP_REFKEY+=EventsInvitations
+URL-EventsInvitations=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.1007%2F978-3-319-18621-4_13.pdf
+
+BIBSP_REFKEY+=Dudle
+URL-Dudle=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.1007%2F978-3-642-21424-0_19.pdf
+
+BIBSP_REFKEY+=PreDudle
+URL-PreDudle=http://ieeexplore.ieee.org${LIBRARY_EXT}/ielx5/5282954/5282955/05283251.pdf
+@
+
+
+\chapter{Authentication}
+
+<<auth.bib>>=
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ANONYMOUS CREDENTIALS
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+@inproceedings{CLsignatures,
+  title={Signature schemes and anonymous credentials from bilinear maps},
+  author={Camenisch, Jan and Lysyanskaya, Anna},
+  booktitle={Annual International Cryptology Conference},
+  pages={56--72},
+  year={2004},
+  organization={Springer}
+}
+
+@inproceedings{HowToWinTheCloneWars,
+  author = {Camenisch, Jan and Hohenberger, Susan and Kohlweiss, Markulf and Lysyanskaya, Anna and Meyerovich, Mira},
+  title = {How to Win the Clonewars: Efficient Periodic N-times Anonymous Authentication},
+  booktitle = {Proceedings of the 13th ACM Conference on Computer and Communications Security},
+  series = {CCS '06},
+  year = {2006},
+  isbn = {1-59593-518-5},
+  location = {Alexandria, Virginia, USA},
+  pages = {201--210},
+  numpages = {10},
+  doi = {10.1145/1180405.1180431},
+  acmid = {1180431},
+  publisher = {ACM},
+  address = {New York, NY, USA},
+  keywords = {n-anonymous authentication, clone detection, credentials},
+} 
+
+@Inbook{Psignatures,
+  author="Belenkiy, Mira
+      and Chase, Melissa
+      and Kohlweiss, Markulf
+      and Lysyanskaya, Anna",
+  editor="Canetti, Ran",
+  title="P-signatures and Noninteractive Anonymous Credentials",
+  bookTitle="Theory of Cryptography: Fifth Theory of Cryptography Conference, TCC 2008, New York, USA, March 19-21, 2008. Proceedings",
+  year="2008",
+  publisher="Springer Berlin Heidelberg",
+  address="Berlin, Heidelberg",
+  pages="356--374",
+  abstract="In this paper, we introduce P-signatures. A P-signature scheme 
+  consists of a signature scheme, a commitment scheme, and (1) an interactive 
+  protocol for obtaining a signature on a committed value; (2) a non-interactive 
+  proof system for proving that the contents of a commitment has been signed; 
+  (3) a noninteractive proof system for proving that a pair of commitments are 
+  commitments to the same value. We give a definition of security for 
+  P-signatures and show how they can be realized under appropriate assumptions 
+  about groups with a bilinear map. We make extensive use of the powerful suite 
+  of non-interactive proof techniques due to Groth and Sahai. Our P-signatures 
+  enable, for the first time, the design of a practical non-interactive 
+  anonymous credential system whose security does not rely on the random oracle 
+  model. In addition, they may serve as a useful building block for other 
+  privacy-preserving authentication mechanisms.",
+  isbn="978-3-540-78524-8",
+  doi="10.1007/978-3-540-78524-8_20",
+}
+
+@inproceedings{AnonPass,
+  title={Anon-pass: Practical anonymous subscriptions},
+  author={Lee, Michael Z and Dunn, Alan M and Waters, Brent and Witchel, Emmett 
+    and Katz, Jonathan},
+  booktitle={Security and Privacy (SP), 2013 IEEE Symposium on},
+  pages={319--333},
+  year={2013},
+  organization={IEEE}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% DISTANCE BOUNDING
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+@inproceedings{MafiaFraud,
+  title={Special uses and abuses of the Fiat-Shamir passport protocol},
+  author={Desmedt, Yvo and Goutier, Claude and Bengio, Samy},
+  booktitle={Conference on the Theory and Application of Cryptographic Techniques},
+  pages={21--39},
+  year={1987},
+  organization={Springer}
+}
+
+@inproceedings{TerroristFraud,
+  title={Major security problems with the ‘unforgeable’(feige)-fiat-shamir 
+    proofs of identity and how to overcome them},
+  author={Desmedt, Yvo},
+  booktitle={Proceedings of SECURICOM},
+  volume={88},
+  pages={15--17},
+  year={1988}
+}
+
+@inproceedings{DistanceBounding,
+  title={Distance-bounding protocols},
+  author={Brands, Stefan and Chaum, David},
+  booktitle={Workshop on the Theory and Application of of Cryptographic 
+    Techniques},
+  pages={344--359},
+  year={1993},
+  organization={Springer}
+}
+
+@inproceedings{DistanceHijacking,
+  title={Distance hijacking attacks on distance bounding protocols},
+  author={Cremers, Cas and Rasmussen, Kasper B and Schmidt, Benedikt and Capkun, 
+    Srdjan},
+  booktitle={Security and Privacy (SP), 2012 IEEE Symposium on},
+  pages={113--127},
+  year={2012},
+  organization={IEEE},
+}
+
+@inproceedings{ImpersonationFraud,
+  title={An efficient distance bounding RFID authentication protocol: balancing 
+    false-acceptance rate and memory requirement},
+  author={Avoine, Gildas and Tchamkerten, Aslan},
+  booktitle={International Conference on Information Security},
+  pages={250--261},
+  year={2009},
+  organization={Springer}
+}
+
+@article{DB-BMV,
+  title={Practical and provably secure distance-bounding},
+  author={Boureanu, Ioana and Mitrokotsa, Aikaterini and Vaudenay, Serge},
+  journal={Journal of Computer Security},
+  volume={23},
+  number={2},
+  pages={229--257},
+  year={2015},
+  publisher={IOS Press}
+}
+
+@inproceedings{DB-DFKO,
+  title={A formal approach to distance-bounding RFID protocols},
+  author={D{\"u}rholz, Ulrich and Fischlin, Marc and Kasper, Michael and Onete, 
+    Cristina},
+  booktitle={International Conference on Information Security},
+  pages={47--62},
+  year={2011},
+  organization={Springer}
+}
+
+@inproceedings{DBonSmartphones,
+  TITLE = {{The Not-so-distant Future: Distance-Bounding Protocols on 
+    Smartphones}},
+  AUTHOR = {Gambs, S{\'e}bastien and Eduardo Rosar Kos Lassance, Carlos and 
+    Onete, Cristina},
+  URL = {https://hal.inria.fr/hal-01244606},
+  BOOKTITLE = {{14th Smart Card Research and Advanced Application 
+    Conference}},
+  ADDRESS = {Bochum, Germany},
+  YEAR = {2015},
+  MONTH = Nov,
+  HAL_ID = {hal-01244606},
+  HAL_VERSION = {v1},
+}
+
+@inproceedings{ProProx,
+  title={Sound proof of proximity of knowledge},
+  author={Vaudenay, Serge},
+  booktitle={International Conference on Provable Security},
+  pages={105--126},
+  year={2015},
+  organization={Springer}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% P2P OSN AUTHENTICATION
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+@INPROCEEDINGS{P2PPasswords,
+  title={Passwords in peer-to-peer},
+  author={Kreitz, G. and Bodriagov, O. and Greschbach, B. and Rodriguez-Cano, 
+    G. and Buchegger, S.},
+  booktitle={Peer-to-Peer Computing (P2P), 2012 IEEE 12th International 
+    Conference on},
+  pages={167-178},
+  month={Sept},
+  year={2012},
+  keywords={Internet;authorisation;cryptography;peer-to-peer 
+    computing;Internet;P2P authentication;cryptographic keys;e-mail;password 
+        logins;peer-to-peer systems;security questions;user accounts;user 
+        authentication;username-password 
+        pair;Authentication;Cryptography;Electronic mail;Peer to peer 
+        computing;Protocols;Standards},
+  doi={10.1109/P2P.2012.6335797},
+  url={http://ieeexplore.ieee.org/ielx5/6329089/6335787/06335797.pdf},
+}
+@
+
+<<auth.mk>>=
+BIBSP_REFKEY+=P2PPasswords
+URL-P2PPasswords=http://ieeexplore.ieee.org/ielx5/6329089/6335787/06335797.pdf
+
+BIBSP_REFKEY+=CLsignatures
+URL-CLsignatures=https://link.springer.com/chapter/10.1007/978-3-540-28628-8_4
+
+BIBSP_REFKEY+=HowToWinTheCloneWars
+URL-HowToWinTheCloneWars=http://doi.acm.org/10.1145/1180405.1180431
+
+BIBSP_REFKEY+=Psignatures
+URL-Psignatures=https://doi.org/10.1007/978-3-540-78524-8_20
+
+BIBSP_REFKEY+=AnonPass
+#URL-AnonPass=http://ieeexplore.ieee.org/abstract/document/6547118/
+URL-AnonPass=https://eprint.iacr.org/2013/317
+
+BIBSP_REFKEY+=MafiaFraud
+URL-MafiaFraud=https://link.springer.com/chapter/10.1007/3-540-48184-2_3
+
+BIBSP_REFKEY+=DistanceBounding
+URL-DistanceBounding=https://link.springer.com/chapter/10.1007/3-540-48285-7_30
+
+BIBSP_REFKEY+=DistanceHijacking
+URL-DistanceHijacking=http://ieeexplore.ieee.org/abstract/document/6234408/
+
+BIBSP_REFKEY+=ImpersonationFraud
+URL-ImpersonationFraud=https://link.springer.com/chapter/10.1007/978-3-642-04474-8_21
+
+BIBSP_REFKEY+=DB-BMV
+#URL-DB-BMV=https://content.iospress.com/articles/journal-of-computer-security/jcs518
+URL-DB-BMV=https://eprint.iacr.org/2013/465
+
+BIBSP_REFKEY+=DB-DFKO
+URL-DB-DFKO=https://link.springer.com/chapter/10.1007%2F978-3-642-24861-0_4
+
+BIBSP_REFKEY+=DBonSmartphones
+URL-DBonSmartphones=https://hal.inria.fr/hal-01244606
+
+BIBSP_REFKEY+=ProProx
+URL-ProProx=https://link.springer.com/chapter/10.1007/978-3-319-26059-4_6
+@
+
+
+\chapter{Access control}
+
+<<ac.bib>>=
+@techreport{Bell-LaPadula,
+  title={Secure computer systems: Mathematical foundations},
+  author={Bell, D Elliott and LaPadula, Leonard J},
+  year={1973},
+  institution={MITRE CORP BEDFORD MA}
+}
+
+@inproceedings{TowardsPPACwHPHCHD,
+  title={Towards privacy-preserving access control with hidden policies, hidden 
+    credentials and hidden decisions},
+  author={Harbach, Marian and Fahl, Sascha and Brenner, Michael and Muders, 
+    Thomas and Smith, Matthew},
+  booktitle={Privacy, Security and Trust (PST), 2012},
+  pages={17--24},
+  year={2012},
+  organization={IEEE},
+  URL={http://ieeexplore.ieee.org/ielx5/6287257/6297910/06297915.pdf?tp=&arnumber=6297915&isnumber=6297910},
+}
+
+@article{AccessControl,
+  title={Access control: principle and practice},
+  author={Sandhu, Ravi S and Samarati, Pierangela},
+  journal={Communications Magazine, IEEE},
+  volume={32},
+  number={9},
+  pages={40--48},
+  year={1994},
+  publisher={IEEE},
+  URL={http://ieeexplore.ieee.org/ielx1/35/7577/00312842.pdf?tp=&arnumber=312842&isnumber=7577},
+}
+
+@inproceedings{PEAC,
+  title={Access control in decentralized online social networks: Applying 
+    a policy-hiding cryptographic scheme and evaluating its performance},
+  author={Bodriagov, Oleksandr and Kreitz, Gunnar and Buchegger, Sonja},
+  booktitle={PERCOM Workshops, 2014},
+  pages={622--628},
+  year={2014},
+  organization={IEEE},
+  URL={http://peerson.net/papers/sesocPredicateEncryption.pdf},
+}
+
+@inproceedings{PPACinPubFS,
+  title={Privacy-Preserving Access Control in Publicly Readable Storage 
+  Systems},
+  author={Bosk, Daniel
+      and Buchegger, Sonja},
+  editor={Aspinall, David
+      and Camenisch, Jan
+      and Hansen, Marit
+      and Fischer-H{\"u}bner, Simone
+      and Raab, Charles},
+  booktitle={Privacy and Identity Management. Time for a Revolution? 10th IFIP 
+  WG 9.2, 9.5, 9.6/11.7, 11.4, 11.6/SIG 9.2.2 International Summer School, 
+  Edinburgh, UK, August 16-21, 2015, Revised Selected Papers},
+  year={2016},
+  publisher={Springer International Publishing},
+  address={Cham},
+  pages={327--342},
+  isbn={978-3-319-41763-9},
+  doi={10.1007/978-3-319-41763-9_22},
+  url={http://github.com/dbosk/anobe/},
+}
+
+@inproceedings{TunableACinP2P,
+  title={Tunable privacy for access controlled data in peer-to-peer systems},
+  author={Narendula, R. and Papaioannou, T.G. and Miklos, Z. and Aberer, K.},
+  booktitle={Teletraffic Congress (ITC), 2010 22nd International},
+  pages={1-8},
+  month={Sept},
+  year={2010},
+  keywords={access control;data privacy;information theory;peer-to-peer 
+    computing;P2P systems;PANACEA;access controlled data;content 
+        distribution;information theory;innovative resource indexing;open 
+        environments;open storage grid;peer-to-peer systems;probabilistic 
+        theory;tunable privacy;Access control;Entropy;Indexes;Peer to peer 
+        computing;Privacy;Probabilistic logic;Publishing},
+  doi={10.1109/ITC.2010.5608723},
+}
+
+@phdthesis{PPACTechniquesInDistSys,
+  title={Privacy-preserving access control techniques in distributed systems},
+  author={Jinguang Han},
+  school={School of Computer Science and Software Engineering, University of 
+    Wollongong},
+  year={2013},
+  URL={http://ro.uow.edu.au/theses/4319},
+}
+@
+
+<<ac.mk>>=
+BIBSP_REFKEY+=Bell-LaPadula
+URL-Bell-LaPadula=http://www.dtic.mil/docs/citations/AD0770768
+
+BIBSP_REFKEY+=TowardsPPACwHPHCHD
+URL-TowardsPPACwHPHCHD=http://ieeexplore.ieee.org/ielx5/6287257/6297910/06297915.pdf?tp=&arnumber=6297915&isnumber=6297910
+
+BIBSP_REFKEY+=AccessControl
+URL-AccessControl=http://ieeexplore.ieee.org/ielx1/35/7577/00312842.pdf?tp=&arnumber=312842&isnumber=7577
+
+BIBSP_REFKEY+=PEAC
+URL-PEAC=http://peerson.net/papers/sesocPredicateEncryption.pdf
+
+BIBSP_REFKEY+=DistStorAccessControl
+URL-DistStorAccessControl=https://github.com/dbosk/anobe/releases/download/v0.1/anobe-paper.pdf
+
+BIBSP_REFKEY+=TunableACinP2P
+URL-TunableACinP2P=http://ieeexplore.ieee.org.focus.lib.kth.se/ielx5/5602002/5608706/05608723.pdf
+
+BIBSP_REFKEY+=PPACTechniquesInDistSys
+URL-PPACTechniquesInDistSys=http://ro.uow.edu.au/cgi/viewcontent.cgi?article=5326&context=theses
+@
 
 
 \printbibliography

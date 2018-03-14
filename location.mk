@@ -1,2 +1,2 @@
 BIBSP_REFKEY+=PROPS
-URL-PROPS=http://ieeexplore.ieee.org${LIBRARY_EXT}/ielx7/6979347/6983362/06983374.pdf
+URL-PROPS=http://ieeexplore.ieee.org/ielx7/6979347/6983362/06983374.pdf

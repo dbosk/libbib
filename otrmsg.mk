@@ -6,5 +6,3 @@ URL-TextSecureAnalysis=http://eprint.iacr.org/2014/904
 
 BIBSP_REFKEY+=SignalProtocolAnalysis
 URL-SignalProtocolAnalysis=http://eprint.iacr.org/2016/1013
-
-

@@ -21,8 +21,29 @@ all: bibsp.mk
 bibsp.mk: bibsp.nw
 
 
-BIBSP_TOPIC+= 	passwd
 BIBSP_TOPIC+= 	crypto
+BIBSP_TOPIC+= 	be mpc
+BIBSP_TOPIC+= 	auth
+BIBSP_TOPIC+= 	passwd
+BIBSP_TOPIC+= 	location
+BIBSP_TOPIC+= 	nfc
+BIBSP_TOPIC+= 	ac
+BIBSP_TOPIC+= 	anon
+BIBSP_TOPIC+= 	privacy
+BIBSP_TOPIC+= 	meta
+BIBSP_TOPIC+= 	surveillance
+BIBSP_TOPIC+= 	hr
+BIBSP_TOPIC+= 	protests
+BIBSP_TOPIC+= 	voting
+BIBSP_TOPIC+= 	stats
+BIBSP_TOPIC+= 	osn
+BIBSP_TOPIC+= 	reputation
+BIBSP_TOPIC+= 	blockchain
+BIBSP_TOPIC+= 	ecurrency
+BIBSP_TOPIC+= 	depend
+BIBSP_TOPIC+= 	adhocnets
+
+BIBSP_TOPIC+= 	otrmsg otpkx ppes
 
 .PHONY: all
 all: $(foreach t,${BIBSP_TOPIC}, ${t}.bib ${t}.mk)
