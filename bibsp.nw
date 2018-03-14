@@ -1391,10 +1391,20 @@ URL-Psigs=https://doi.org/10.1007/978-3-540-78524-8_20
 
 \section{Location-based services}
 
+Another property that we might want to verify is the physical location of 
+something.
+This is indeed related to \ac{DB} protocols.
 <<bibsp variables>>=
 BIBSP_TOPIC+=   location
+@ We add the bibliography.
+<<topic bibliographies>>=
+\addbibresource{location.bib}
 @
 
+\Textcite{PROPS}, \DescribeBibkey{PROPS}, provide a privacy-preserving \ac{LP} 
+system, \DescribeAcro{LP}, called \ac{PROPS}, \DescribeAcro{PROPS}.
+It's a decentralized system, where a prover collects \acp{LPS}, 
+\DescribeAcro{LPS}, from witnesses.
 <<topic acronyms>>=
 \DeclareAcronym{PROPS}{%
   short = {PROPS},
@@ -1404,25 +1414,16 @@ BIBSP_TOPIC+=   location
 \DeclareAcronym{LP}{%
   short = {LP},
   short-indefinite = {an},
-  long = {%
-      location proof%
-    },
+  long = {location proof},
   long-indefinite = {a},
 }
 \DeclareAcronym{LPS}{%
   short = {LPS},
   short-indefinite = {an},
-  long = {%
-      location-proof share%
-    },
+  long = {location-proof share},
   long-indefinite = {a},
 }
 @
-
-<<topic bibliographies>>=
-\addbibresource{location.bib}
-@
-
 <<location.bib>>=
 @inproceedings{PROPS,
   title={PROPS: A PRivacy-preserving lOcation Proof System},
@@ -1443,7 +1444,6 @@ BIBSP_TOPIC+=   location
   URL={http://ieeexplore.ieee.org/ielx7/6979347/6983362/06983374.pdf}
 }
 @
-
 <<location.mk>>=
 BIBSP_REFKEY+=PROPS
 URL-PROPS=http://ieeexplore.ieee.org/ielx7/6979347/6983362/06983374.pdf
