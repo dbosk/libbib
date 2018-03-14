@@ -1162,80 +1162,74 @@ URL-PROPS=http://ieeexplore.ieee.org/ielx7/6979347/6983362/06983374.pdf
 @
 
 
-\chapter{Access control}
+\chapter{Ad-hoc networks}
 
 <<bibsp variables>>=
-BIBSP_TOPIC+=   ac
+BIBSP_TOPIC+=	adhocnets
 @
 
-<<topic acronyms>>=
-\DeclareAcronym{AC}{%
-  short = {AC},
-  long = {access control},
-  short-indefinite = {an},
-  long-indefinite = {an},
-}
-\DeclareAcronym{DAC}{%
-  short = {DAC},
-  long = {discretionary access control}
-}
-\DeclareAcronym{acMAC}{%
-  short = {MAC},
-  long = {mandatory access control}
-}
+<<topic bibliographies>>=
+\addbibresource{adhocnets.bib}
 @
 
-
-\section{Access-control models}
-
-<<topic acronyms>>=
-\DeclareAcronym{IBAC}{%
-  short = {IBAC},
-  long = {identity-based access control},
-  short-indefinite = {an},
-  long-indefinite = {an},
+<<adhocnets.bib>>=
+@Inbook{AdHocNetworksBook,
+  author="Gerla, Mario",
+  editor="Mohapatra, Prasant
+      and Krishnamurthy, Srikanth V.",
+  title="Ad Hoc Networks",
+  bookTitle="Ad Hoc Networks: Technologies and Protocols",
+  year="2005",
+  publisher="Springer US",
+  address="Boston, MA",
+  pages="1--22",
+  isbn="978-0-387-22690-3",
+  doi="10.1007/0-387-22690-7_1",
+  url="http://dx.doi.org/10.1007/0-387-22690-7_1"
 }
-\DeclareAcronym{RBAC}{%
-  short = {RBAC},
-  long = {role-based access control},
-  short-indefinite = {an},
-  long-indefinite = {a},
-  %cite = {RBAC},
-}
-\DeclareAcronym{ABAC}{%
-  short = {ABAC},
-  long = {attribute-based access control},
-  short-indefinite = {an},
-  long-indefinite = {an},
-  %cite = {ABAC},
-}
-@
 
-<<topic acronyms>>=
-\DeclareAcronym{ACL}{%
-  short = {ACL},
-  long = {access-control list},
-  short-indefinite = {an},
-  long-indefinite = {an},
+@article{D2D,
+title = "An overview of device-to-device communication in cellular networks",
+journal = "ICT Express",
+year = "2017",
+issn = "2405-9595",
+doi = "https://doi.org/10.1016/j.icte.2017.08.002",
+url = "http://www.sciencedirect.com/science/article/pii/S2405959517301467",
+author = "Udit Narayana Kar and Debarshi Kumar Sanyal",
+keywords = "Device-to-device communication (D2D), Cellular network, 5G, Resource management, LTE direct"
+}
+
+@online{Briar,
+ title = {Briar: a messaging app designed for activists},
+ author = {Briar},
+ year = {2016},
+ urldate = {2018-02-25},
+ URL = {https://briarproject.org/how-it-works.html},
+}
+
+@online{FireChat,
+ title = {FireChat: a messaging app without Internet access or cellular data},
+ author = {FireChat},
+ year = {2016},
+ urldate = {2018-02-25},
+ URL = {https://www.opengarden.com/firechat.html},
 }
 @
 
+<<adhocnets.mk>>=
+BIBSP_REFS+=AdHocNetworksBook
+URL-AdHocNetworksBook=https://link.springer.com/book/10.1007%2Fb99485
 
-\section{Information flow}
+BIBSP_REFS+=D2D
+URL-D2D=https://doi.org/10.1016/j.icte.2017.08.002
 
-<<topic acronyms>>=
-\DeclareAcronym{IFC}{%
-  short = {IFC},
-  short-indefinite = {an},
-  long = {information-flow control},
-  long-indefinite = {an},
-}
-\DeclareAcronym{BLP}{%
-  short = {BLP},
-  long = {Bell-LaPadula},
-  cite = {Bell-LaPadula}
-}
+BIBSP_REFS+=Briar
+URL-Briar=https://briarproject.org/how-it-works.html
+
+BIBSP_REFS+=FireChat
+URL-FireChat=https://www.opengarden.com/firechat.html
 @
+
 
 
 \appendix
@@ -4101,72 +4095,6 @@ URL-RFIDProximity=https://dl.acm.org/citation.cfm?id=1653668
 
 
 
-\chapter{Ad-hoc networks}
-
-<<bibsp variables>>=
-BIBSP_TOPIC+=	adhocnets
-@
-
-<<adhocnets.bib>>=
-@Inbook{AdHocNetworksBook,
-  author="Gerla, Mario",
-  editor="Mohapatra, Prasant
-      and Krishnamurthy, Srikanth V.",
-  title="Ad Hoc Networks",
-  bookTitle="Ad Hoc Networks: Technologies and Protocols",
-  year="2005",
-  publisher="Springer US",
-  address="Boston, MA",
-  pages="1--22",
-  isbn="978-0-387-22690-3",
-  doi="10.1007/0-387-22690-7_1",
-  url="http://dx.doi.org/10.1007/0-387-22690-7_1"
-}
-
-@article{D2D,
-title = "An overview of device-to-device communication in cellular networks",
-journal = "ICT Express",
-year = "2017",
-issn = "2405-9595",
-doi = "https://doi.org/10.1016/j.icte.2017.08.002",
-url = "http://www.sciencedirect.com/science/article/pii/S2405959517301467",
-author = "Udit Narayana Kar and Debarshi Kumar Sanyal",
-keywords = "Device-to-device communication (D2D), Cellular network, 5G, Resource management, LTE direct"
-}
-
-@online{Briar,
- title = {Briar: a messaging app designed for activists},
- author = {Briar},
- year = {2016},
- urldate = {2018-02-25},
- URL = {https://briarproject.org/how-it-works.html},
-}
-
-@online{FireChat,
- title = {FireChat: a messaging app without Internet access or cellular data},
- author = {FireChat},
- year = {2016},
- urldate = {2018-02-25},
- URL = {https://www.opengarden.com/firechat.html},
-}
-@
-
-<<adhocnets.mk>>=
-BIBSP_REFS+=AdHocNetworksBook
-URL-AdHocNetworksBook=https://link.springer.com/book/10.1007%2Fb99485
-
-BIBSP_REFS+=D2D
-URL-D2D=https://doi.org/10.1016/j.icte.2017.08.002
-
-BIBSP_REFS+=Briar
-URL-Briar=https://briarproject.org/how-it-works.html
-
-BIBSP_REFS+=FireChat
-URL-FireChat=https://www.opengarden.com/firechat.html
-@
-
-
-
 \chapter{Electronic currencies}
 
 <<bibsp variables>>=
@@ -4740,6 +4668,86 @@ URL-ProProx=https://link.springer.com/chapter/10.1007/978-3-319-26059-4_6
 
 
 \chapter{Access control}
+
+<<bibsp variables>>=
+BIBSP_TOPIC+=   ac
+@
+
+<<topic acronyms>>=
+\DeclareAcronym{AC}{%
+  short = {AC},
+  long = {access control},
+  short-indefinite = {an},
+  long-indefinite = {an},
+}
+\DeclareAcronym{DAC}{%
+  short = {DAC},
+  long = {discretionary access control}
+}
+\DeclareAcronym{acMAC}{%
+  short = {MAC},
+  long = {mandatory access control}
+}
+@
+
+
+\section{Access-control models}
+
+<<topic acronyms>>=
+\DeclareAcronym{IBAC}{%
+  short = {IBAC},
+  long = {identity-based access control},
+  short-indefinite = {an},
+  long-indefinite = {an},
+}
+\DeclareAcronym{RBAC}{%
+  short = {RBAC},
+  long = {role-based access control},
+  short-indefinite = {an},
+  long-indefinite = {a},
+  %cite = {RBAC},
+}
+\DeclareAcronym{ABAC}{%
+  short = {ABAC},
+  long = {attribute-based access control},
+  short-indefinite = {an},
+  long-indefinite = {an},
+  %cite = {ABAC},
+}
+@
+
+<<topic acronyms>>=
+\DeclareAcronym{ACL}{%
+  short = {ACL},
+  long = {access-control list},
+  short-indefinite = {an},
+  long-indefinite = {an},
+}
+@
+
+
+\section{Information flow}
+
+<<topic acronyms>>=
+\DeclareAcronym{IFC}{%
+  short = {IFC},
+  short-indefinite = {an},
+  long = {information-flow control},
+  long-indefinite = {an},
+}
+\DeclareAcronym{BLP}{%
+  short = {BLP},
+  long = {Bell-LaPadula},
+  cite = {Bell-LaPadula}
+}
+@
+
+
+\section{Bibliography}
+
+<<topic bibliographies>>=
+\addbibresource{ac.bib}
+@
 
 <<ac.bib>>=
 @techreport{Bell-LaPadula,
