@@ -1,19 +1,3 @@
-BIBSP_REFKEY+=P2PPasswords
-URL-P2PPasswords=http://ieeexplore.ieee.org/ielx5/6329089/6335787/06335797.pdf
-
-BIBSP_REFKEY+=CLsignatures
-URL-CLsignatures=https://link.springer.com/chapter/10.1007/978-3-540-28628-8_4
-
-BIBSP_REFKEY+=HowToWinTheCloneWars
-URL-HowToWinTheCloneWars=http://doi.acm.org/10.1145/1180405.1180431
-
-BIBSP_REFKEY+=Psignatures
-URL-Psignatures=https://doi.org/10.1007/978-3-540-78524-8_20
-
-BIBSP_REFKEY+=AnonPass
-#URL-AnonPass=http://ieeexplore.ieee.org/abstract/document/6547118/
-URL-AnonPass=https://eprint.iacr.org/2013/317
-
 BIBSP_REFKEY+=MafiaFraud
 URL-MafiaFraud=https://link.springer.com/chapter/10.1007/3-540-48184-2_3
 
@@ -38,3 +22,17 @@ URL-DBonSmartphones=https://hal.inria.fr/hal-01244606
 
 BIBSP_REFKEY+=ProProx
 URL-ProProx=https://link.springer.com/chapter/10.1007/978-3-319-26059-4_6
+BIBSP_REFKEY+=CLsignatures
+URL-CLsignatures=https://link.springer.com/chapter/10.1007/978-3-540-28628-8_4
+
+BIBSP_REFKEY+=HowToWinTheCloneWars
+URL-HowToWinTheCloneWars=http://doi.acm.org/10.1145/1180405.1180431
+
+BIBSP_REFKEY+=Psignatures
+URL-Psignatures=https://doi.org/10.1007/978-3-540-78524-8_20
+
+BIBSP_REFKEY+=AnonPass
+#URL-AnonPass=http://ieeexplore.ieee.org/abstract/document/6547118/
+URL-AnonPass=https://eprint.iacr.org/2013/317
+BIBSP_REFKEY+=P2PPasswords
+URL-P2PPasswords=http://ieeexplore.ieee.org/ielx5/6329089/6335787/06335797.pdf

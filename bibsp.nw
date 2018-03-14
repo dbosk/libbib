@@ -1100,6 +1100,214 @@ URL-CanLongPasswordsBeSecureAndUsablp=http://lorrie.cranor.org/pubs/longpass-chi
 }
 @
 
+<<auth.bib>>=
+@inproceedings{MafiaFraud,
+  title={Special uses and abuses of the Fiat-Shamir passport protocol},
+  author={Desmedt, Yvo and Goutier, Claude and Bengio, Samy},
+  booktitle={Conference on the Theory and Application of Cryptographic Techniques},
+  pages={21--39},
+  year={1987},
+  organization={Springer}
+}
+
+@inproceedings{TerroristFraud,
+  title={Major security problems with the ‘unforgeable’(feige)-fiat-shamir 
+    proofs of identity and how to overcome them},
+  author={Desmedt, Yvo},
+  booktitle={Proceedings of SECURICOM},
+  volume={88},
+  pages={15--17},
+  year={1988}
+}
+
+@inproceedings{DistanceBounding,
+  title={Distance-bounding protocols},
+  author={Brands, Stefan and Chaum, David},
+  booktitle={Workshop on the Theory and Application of of Cryptographic 
+    Techniques},
+  pages={344--359},
+  year={1993},
+  organization={Springer}
+}
+
+@inproceedings{DistanceHijacking,
+  title={Distance hijacking attacks on distance bounding protocols},
+  author={Cremers, Cas and Rasmussen, Kasper B and Schmidt, Benedikt and Capkun, 
+    Srdjan},
+  booktitle={Security and Privacy (SP), 2012 IEEE Symposium on},
+  pages={113--127},
+  year={2012},
+  organization={IEEE},
+}
+
+@inproceedings{ImpersonationFraud,
+  title={An efficient distance bounding RFID authentication protocol: balancing 
+    false-acceptance rate and memory requirement},
+  author={Avoine, Gildas and Tchamkerten, Aslan},
+  booktitle={International Conference on Information Security},
+  pages={250--261},
+  year={2009},
+  organization={Springer}
+}
+
+@article{DB-BMV,
+  title={Practical and provably secure distance-bounding},
+  author={Boureanu, Ioana and Mitrokotsa, Aikaterini and Vaudenay, Serge},
+  journal={Journal of Computer Security},
+  volume={23},
+  number={2},
+  pages={229--257},
+  year={2015},
+  publisher={IOS Press}
+}
+
+@inproceedings{DB-DFKO,
+  title={A formal approach to distance-bounding RFID protocols},
+  author={D{\"u}rholz, Ulrich and Fischlin, Marc and Kasper, Michael and Onete, 
+    Cristina},
+  booktitle={International Conference on Information Security},
+  pages={47--62},
+  year={2011},
+  organization={Springer}
+}
+
+@inproceedings{DBonSmartphones,
+  TITLE = {{The Not-so-distant Future: Distance-Bounding Protocols on 
+    Smartphones}},
+  AUTHOR = {Gambs, S{\'e}bastien and Eduardo Rosar Kos Lassance, Carlos and 
+    Onete, Cristina},
+  URL = {https://hal.inria.fr/hal-01244606},
+  BOOKTITLE = {{14th Smart Card Research and Advanced Application 
+    Conference}},
+  ADDRESS = {Bochum, Germany},
+  YEAR = {2015},
+  MONTH = Nov,
+  HAL_ID = {hal-01244606},
+  HAL_VERSION = {v1},
+}
+
+@inproceedings{ProProx,
+  title={Sound proof of proximity of knowledge},
+  author={Vaudenay, Serge},
+  booktitle={International Conference on Provable Security},
+  pages={105--126},
+  year={2015},
+  organization={Springer}
+}
+@
+
+<<auth.mk>>=
+BIBSP_REFKEY+=MafiaFraud
+URL-MafiaFraud=https://link.springer.com/chapter/10.1007/3-540-48184-2_3
+
+BIBSP_REFKEY+=DistanceBounding
+URL-DistanceBounding=https://link.springer.com/chapter/10.1007/3-540-48285-7_30
+
+BIBSP_REFKEY+=DistanceHijacking
+URL-DistanceHijacking=http://ieeexplore.ieee.org/abstract/document/6234408/
+
+BIBSP_REFKEY+=ImpersonationFraud
+URL-ImpersonationFraud=https://link.springer.com/chapter/10.1007/978-3-642-04474-8_21
+
+BIBSP_REFKEY+=DB-BMV
+#URL-DB-BMV=https://content.iospress.com/articles/journal-of-computer-security/jcs518
+URL-DB-BMV=https://eprint.iacr.org/2013/465
+
+BIBSP_REFKEY+=DB-DFKO
+URL-DB-DFKO=https://link.springer.com/chapter/10.1007%2F978-3-642-24861-0_4
+
+BIBSP_REFKEY+=DBonSmartphones
+URL-DBonSmartphones=https://hal.inria.fr/hal-01244606
+
+BIBSP_REFKEY+=ProProx
+URL-ProProx=https://link.springer.com/chapter/10.1007/978-3-319-26059-4_6
+@
+
+
+\section{Anonymous credentials}
+
+<<auth.bib>>=
+@inproceedings{CLsignatures,
+  title={Signature schemes and anonymous credentials from bilinear maps},
+  author={Camenisch, Jan and Lysyanskaya, Anna},
+  booktitle={Annual International Cryptology Conference},
+  pages={56--72},
+  year={2004},
+  organization={Springer}
+}
+
+@inproceedings{HowToWinTheCloneWars,
+  author = {Camenisch, Jan and Hohenberger, Susan and Kohlweiss, Markulf and Lysyanskaya, Anna and Meyerovich, Mira},
+  title = {How to Win the Clonewars: Efficient Periodic N-times Anonymous Authentication},
+  booktitle = {Proceedings of the 13th ACM Conference on Computer and Communications Security},
+  series = {CCS '06},
+  year = {2006},
+  isbn = {1-59593-518-5},
+  location = {Alexandria, Virginia, USA},
+  pages = {201--210},
+  numpages = {10},
+  doi = {10.1145/1180405.1180431},
+  acmid = {1180431},
+  publisher = {ACM},
+  address = {New York, NY, USA},
+  keywords = {n-anonymous authentication, clone detection, credentials},
+} 
+
+@Inbook{Psignatures,
+  author="Belenkiy, Mira
+      and Chase, Melissa
+      and Kohlweiss, Markulf
+      and Lysyanskaya, Anna",
+  editor="Canetti, Ran",
+  title="P-signatures and Noninteractive Anonymous Credentials",
+  bookTitle="Theory of Cryptography: Fifth Theory of Cryptography Conference, TCC 2008, New York, USA, March 19-21, 2008. Proceedings",
+  year="2008",
+  publisher="Springer Berlin Heidelberg",
+  address="Berlin, Heidelberg",
+  pages="356--374",
+  abstract="In this paper, we introduce P-signatures. A P-signature scheme 
+  consists of a signature scheme, a commitment scheme, and (1) an interactive 
+  protocol for obtaining a signature on a committed value; (2) a non-interactive 
+  proof system for proving that the contents of a commitment has been signed; 
+  (3) a noninteractive proof system for proving that a pair of commitments are 
+  commitments to the same value. We give a definition of security for 
+  P-signatures and show how they can be realized under appropriate assumptions 
+  about groups with a bilinear map. We make extensive use of the powerful suite 
+  of non-interactive proof techniques due to Groth and Sahai. Our P-signatures 
+  enable, for the first time, the design of a practical non-interactive 
+  anonymous credential system whose security does not rely on the random oracle 
+  model. In addition, they may serve as a useful building block for other 
+  privacy-preserving authentication mechanisms.",
+  isbn="978-3-540-78524-8",
+  doi="10.1007/978-3-540-78524-8_20",
+}
+
+@inproceedings{AnonPass,
+  title={Anon-pass: Practical anonymous subscriptions},
+  author={Lee, Michael Z and Dunn, Alan M and Waters, Brent and Witchel, Emmett 
+    and Katz, Jonathan},
+  booktitle={Security and Privacy (SP), 2013 IEEE Symposium on},
+  pages={319--333},
+  year={2013},
+  organization={IEEE}
+}
+@
+
+<<auth.mk>>=
+BIBSP_REFKEY+=CLsignatures
+URL-CLsignatures=https://link.springer.com/chapter/10.1007/978-3-540-28628-8_4
+
+BIBSP_REFKEY+=HowToWinTheCloneWars
+URL-HowToWinTheCloneWars=http://doi.acm.org/10.1145/1180405.1180431
+
+BIBSP_REFKEY+=Psignatures
+URL-Psignatures=https://doi.org/10.1007/978-3-540-78524-8_20
+
+BIBSP_REFKEY+=AnonPass
+#URL-AnonPass=http://ieeexplore.ieee.org/abstract/document/6547118/
+URL-AnonPass=https://eprint.iacr.org/2013/317
+@
+
 
 \section{Location-based services}
 
@@ -4432,173 +4640,6 @@ URL-PreDudle=http://ieeexplore.ieee.org${LIBRARY_EXT}/ielx5/5282954/5282955/0528
 \chapter{Authentication}
 
 <<auth.bib>>=
-%%%%%%%%%%%%%%%%%%%%%%%%%%
-% ANONYMOUS CREDENTIALS
-%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-@inproceedings{CLsignatures,
-  title={Signature schemes and anonymous credentials from bilinear maps},
-  author={Camenisch, Jan and Lysyanskaya, Anna},
-  booktitle={Annual International Cryptology Conference},
-  pages={56--72},
-  year={2004},
-  organization={Springer}
-}
-
-@inproceedings{HowToWinTheCloneWars,
-  author = {Camenisch, Jan and Hohenberger, Susan and Kohlweiss, Markulf and Lysyanskaya, Anna and Meyerovich, Mira},
-  title = {How to Win the Clonewars: Efficient Periodic N-times Anonymous Authentication},
-  booktitle = {Proceedings of the 13th ACM Conference on Computer and Communications Security},
-  series = {CCS '06},
-  year = {2006},
-  isbn = {1-59593-518-5},
-  location = {Alexandria, Virginia, USA},
-  pages = {201--210},
-  numpages = {10},
-  doi = {10.1145/1180405.1180431},
-  acmid = {1180431},
-  publisher = {ACM},
-  address = {New York, NY, USA},
-  keywords = {n-anonymous authentication, clone detection, credentials},
-} 
-
-@Inbook{Psignatures,
-  author="Belenkiy, Mira
-      and Chase, Melissa
-      and Kohlweiss, Markulf
-      and Lysyanskaya, Anna",
-  editor="Canetti, Ran",
-  title="P-signatures and Noninteractive Anonymous Credentials",
-  bookTitle="Theory of Cryptography: Fifth Theory of Cryptography Conference, TCC 2008, New York, USA, March 19-21, 2008. Proceedings",
-  year="2008",
-  publisher="Springer Berlin Heidelberg",
-  address="Berlin, Heidelberg",
-  pages="356--374",
-  abstract="In this paper, we introduce P-signatures. A P-signature scheme 
-  consists of a signature scheme, a commitment scheme, and (1) an interactive 
-  protocol for obtaining a signature on a committed value; (2) a non-interactive 
-  proof system for proving that the contents of a commitment has been signed; 
-  (3) a noninteractive proof system for proving that a pair of commitments are 
-  commitments to the same value. We give a definition of security for 
-  P-signatures and show how they can be realized under appropriate assumptions 
-  about groups with a bilinear map. We make extensive use of the powerful suite 
-  of non-interactive proof techniques due to Groth and Sahai. Our P-signatures 
-  enable, for the first time, the design of a practical non-interactive 
-  anonymous credential system whose security does not rely on the random oracle 
-  model. In addition, they may serve as a useful building block for other 
-  privacy-preserving authentication mechanisms.",
-  isbn="978-3-540-78524-8",
-  doi="10.1007/978-3-540-78524-8_20",
-}
-
-@inproceedings{AnonPass,
-  title={Anon-pass: Practical anonymous subscriptions},
-  author={Lee, Michael Z and Dunn, Alan M and Waters, Brent and Witchel, Emmett 
-    and Katz, Jonathan},
-  booktitle={Security and Privacy (SP), 2013 IEEE Symposium on},
-  pages={319--333},
-  year={2013},
-  organization={IEEE}
-}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%
-% DISTANCE BOUNDING
-%%%%%%%%%%%%%%%%%%%%%%%%%
-
-@inproceedings{MafiaFraud,
-  title={Special uses and abuses of the Fiat-Shamir passport protocol},
-  author={Desmedt, Yvo and Goutier, Claude and Bengio, Samy},
-  booktitle={Conference on the Theory and Application of Cryptographic Techniques},
-  pages={21--39},
-  year={1987},
-  organization={Springer}
-}
-
-@inproceedings{TerroristFraud,
-  title={Major security problems with the ‘unforgeable’(feige)-fiat-shamir 
-    proofs of identity and how to overcome them},
-  author={Desmedt, Yvo},
-  booktitle={Proceedings of SECURICOM},
-  volume={88},
-  pages={15--17},
-  year={1988}
-}
-
-@inproceedings{DistanceBounding,
-  title={Distance-bounding protocols},
-  author={Brands, Stefan and Chaum, David},
-  booktitle={Workshop on the Theory and Application of of Cryptographic 
-    Techniques},
-  pages={344--359},
-  year={1993},
-  organization={Springer}
-}
-
-@inproceedings{DistanceHijacking,
-  title={Distance hijacking attacks on distance bounding protocols},
-  author={Cremers, Cas and Rasmussen, Kasper B and Schmidt, Benedikt and Capkun, 
-    Srdjan},
-  booktitle={Security and Privacy (SP), 2012 IEEE Symposium on},
-  pages={113--127},
-  year={2012},
-  organization={IEEE},
-}
-
-@inproceedings{ImpersonationFraud,
-  title={An efficient distance bounding RFID authentication protocol: balancing 
-    false-acceptance rate and memory requirement},
-  author={Avoine, Gildas and Tchamkerten, Aslan},
-  booktitle={International Conference on Information Security},
-  pages={250--261},
-  year={2009},
-  organization={Springer}
-}
-
-@article{DB-BMV,
-  title={Practical and provably secure distance-bounding},
-  author={Boureanu, Ioana and Mitrokotsa, Aikaterini and Vaudenay, Serge},
-  journal={Journal of Computer Security},
-  volume={23},
-  number={2},
-  pages={229--257},
-  year={2015},
-  publisher={IOS Press}
-}
-
-@inproceedings{DB-DFKO,
-  title={A formal approach to distance-bounding RFID protocols},
-  author={D{\"u}rholz, Ulrich and Fischlin, Marc and Kasper, Michael and Onete, 
-    Cristina},
-  booktitle={International Conference on Information Security},
-  pages={47--62},
-  year={2011},
-  organization={Springer}
-}
-
-@inproceedings{DBonSmartphones,
-  TITLE = {{The Not-so-distant Future: Distance-Bounding Protocols on 
-    Smartphones}},
-  AUTHOR = {Gambs, S{\'e}bastien and Eduardo Rosar Kos Lassance, Carlos and 
-    Onete, Cristina},
-  URL = {https://hal.inria.fr/hal-01244606},
-  BOOKTITLE = {{14th Smart Card Research and Advanced Application 
-    Conference}},
-  ADDRESS = {Bochum, Germany},
-  YEAR = {2015},
-  MONTH = Nov,
-  HAL_ID = {hal-01244606},
-  HAL_VERSION = {v1},
-}
-
-@inproceedings{ProProx,
-  title={Sound proof of proximity of knowledge},
-  author={Vaudenay, Serge},
-  booktitle={International Conference on Provable Security},
-  pages={105--126},
-  year={2015},
-  organization={Springer}
-}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%
 % P2P OSN AUTHENTICATION
 %%%%%%%%%%%%%%%%%%%%%%%%%
@@ -4626,44 +4667,6 @@ URL-PreDudle=http://ieeexplore.ieee.org${LIBRARY_EXT}/ielx5/5282954/5282955/0528
 <<auth.mk>>=
 BIBSP_REFKEY+=P2PPasswords
 URL-P2PPasswords=http://ieeexplore.ieee.org/ielx5/6329089/6335787/06335797.pdf
-
-BIBSP_REFKEY+=CLsignatures
-URL-CLsignatures=https://link.springer.com/chapter/10.1007/978-3-540-28628-8_4
-
-BIBSP_REFKEY+=HowToWinTheCloneWars
-URL-HowToWinTheCloneWars=http://doi.acm.org/10.1145/1180405.1180431
-
-BIBSP_REFKEY+=Psignatures
-URL-Psignatures=https://doi.org/10.1007/978-3-540-78524-8_20
-
-BIBSP_REFKEY+=AnonPass
-#URL-AnonPass=http://ieeexplore.ieee.org/abstract/document/6547118/
-URL-AnonPass=https://eprint.iacr.org/2013/317
-
-BIBSP_REFKEY+=MafiaFraud
-URL-MafiaFraud=https://link.springer.com/chapter/10.1007/3-540-48184-2_3
-
-BIBSP_REFKEY+=DistanceBounding
-URL-DistanceBounding=https://link.springer.com/chapter/10.1007/3-540-48285-7_30
-
-BIBSP_REFKEY+=DistanceHijacking
-URL-DistanceHijacking=http://ieeexplore.ieee.org/abstract/document/6234408/
-
-BIBSP_REFKEY+=ImpersonationFraud
-URL-ImpersonationFraud=https://link.springer.com/chapter/10.1007/978-3-642-04474-8_21
-
-BIBSP_REFKEY+=DB-BMV
-#URL-DB-BMV=https://content.iospress.com/articles/journal-of-computer-security/jcs518
-URL-DB-BMV=https://eprint.iacr.org/2013/465
-
-BIBSP_REFKEY+=DB-DFKO
-URL-DB-DFKO=https://link.springer.com/chapter/10.1007%2F978-3-642-24861-0_4
-
-BIBSP_REFKEY+=DBonSmartphones
-URL-DBonSmartphones=https://hal.inria.fr/hal-01244606
-
-BIBSP_REFKEY+=ProProx
-URL-ProProx=https://link.springer.com/chapter/10.1007/978-3-319-26059-4_6
 @
 
 
