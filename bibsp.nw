@@ -1263,6 +1263,12 @@ BIBSP_REFKEY+=DBonSmartphones
 URL-DBonSmartphones=https://hal.inria.fr/hal-01244606
 @
 
+Hardware is starting to come though.
+There is 3DB-access\footnote{%
+  URL: \url{https://3db-access.com}.
+} who provides \iac{DB} chip with \SI{10}{\centi\metre} precision up to 
+\SI{150}{\metre}.
+
 
 \section{Anonymous credentials}
 
