@@ -4,7 +4,7 @@ BIBSP_TOPIC+=   crypto
 BIBSP_TOPIC+=   auth
 BIBSP_TOPIC+=   passwd
 BIBSP_TOPIC+=   location
-BIBSP_TOPIC+=   ac
+BIBSP_TOPIC+=	adhocnets
 BIBSP_TOPIC+=	anon
 BIBSP_TOPIC+=   be
 BIBSP_TOPIC+=   mpc
@@ -21,9 +21,9 @@ BIBSP_TOPIC+=	reputation
 BIBSP_TOPIC+=	stats
 BIBSP_TOPIC+= depend
 BIBSP_TOPIC+=	nfc
-BIBSP_TOPIC+=	adhocnets
 BIBSP_TOPIC+=	ecurrency
 BIBSP_TOPIC+=	otrmsg otpkx ppes
+BIBSP_TOPIC+=   ac
 ${BIBSP_LINK}:
 	[ -e "./$@" ] || ln -s ${INCLUDE_BIBSP}/$@ ./$@
 .PHONY: distclean
