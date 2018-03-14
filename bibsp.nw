@@ -955,18 +955,26 @@ URL-PedersenCommitment=https://link.springer.com/chapter/10.1007/3-540-46766-1_9
 
 \chapter{Authentication}
 
+Authentication concerns ensuring that a claimed property indeed holds.
+\Eg in user authentication, the verifier wants to ensure that the user indeed 
+corresponds to the claimed identity.
+There are, however, a variety of properties that we might be interested in 
+verifying.
+
+We add the topic.
 <<bibsp variables>>=
 BIBSP_TOPIC+=   auth
-@
-
-We provide references in [[<<auth.bib>>]] and add it to biblatex for inclusion.
+@ And also provide references in [[<<auth.bib>>]].
+We the bibliography to biblatex for inclusion.
 <<topic bibliographies>>=
 \addbibresource{auth.bib}
 @
 
-\DescribeAcro{eID}
-\DescribeAcro{PKI}
-\DescribeAcro{CA}
+We need some basic terminology, which happens to be acronyms:
+\ac{eID}, \DescribeAcro{eID};
+\ac{CA}, \DescribeAcro{CA};
+and more generally \iac{PKI}, \DescribeAcro{PKI}.
+They are defined as follows.
 <<topic acronyms>>=
 \DeclareAcronym{eID}{%
   short = {eID},
@@ -974,153 +982,30 @@ We provide references in [[<<auth.bib>>]] and add it to biblatex for inclusion.
   long = {electronic ID},
   long-indefinite = {an},
 }
-\DeclareAcronym{PKI}{%
-  short = {PKI},
-  long = {public-key infrastructure},
-}
 \DeclareAcronym{CA}{%
   short = {CA},
   long = {certificate authority},
 }
-@
-
-
-\section{Passwords}
-
-The topic most people associate with authentication is passwords, or 
-password-based authentication.
-We devote a separate topic to passwords.
-<<bibsp variables>>=
-BIBSP_TOPIC+=   passwd
-@ We add the password bibliography for automatic inclusion by [[bibsp]].
-<<topic bibliographies>>=
-\addbibresource{passwd.bib}
-@
-
-The first paper treats security and usability of password composition policies.
-We first add the BibTeX entry.
-<<passwd.bib>>=
-@inproceedings{OfPasswordsAndPeople,
-  author={Komanduri, Saranga and
-    Shay, Richard and
-    Kelley, Patrick Gage and
-    Mazurek, Michelle L. and
-    Bauer, Lujo and
-    Christin Nicolas and
-    Cranor, Lorrie Faith and
-    Egelman, Serge},
-  title={Of passwords and people:
-    Measuring the effect of password-composition policies},
-  booktitle={CHI},
-  year={2011},
-  URL={http://cups.cs.cmu.edu/rshay/pubs/passwords_and_people2011.pdf},
+\DeclareAcronym{PKI}{%
+  short = {PKI},
+  long = {public-key infrastructure},
 }
-@ And then provide the citation key and the paper's \ac{URL} so that we can 
-automatically fetch the paper.
-<<passwd.mk>>=
-BIBSP_REFKEY+=OfPasswordsAndPeople
-URL-OfPasswordsAndPeople=http://cups.cs.cmu.edu/rshay/pubs/passwords_and_people2011.pdf
-@
-
-The second paper is a follow-up to the first.
-<<passwd.bib>>=
-@inproceedings{CanLongPasswordsBeSecureAndUsable,
-  title={Can long passwords be secure and usable?},
-  author={Shay, Richard and
-    Komanduri, Saranga and
-    Durity, Adam L and
-    Huh, Phillip Seyoung and
-    Mazurek, Michelle L and
-    Segreti, Sean M and
-    Ur, Blase and
-    Bauer, Lujo and
-    Christin, Nicolas and
-    Cranor, Lorrie Faith},
-  booktitle={Proceedings of the 32nd annual ACM conference on Human factors in 
-    computing systems},
-  pages={2927--2936},
-  year={2014},
-  organization={ACM},
-  URL={http://lorrie.cranor.org/pubs/longpass-chi2014.pdf},
-}
-@ Now the citation key and \ac{URL}.
-<<passwd.mk>>=
-BIBSP_REFKEY+=CanLongPasswordsBeSecureAndUsable
-URL-CanLongPasswordsBeSecureAndUsablp=http://lorrie.cranor.org/pubs/longpass-chi2014.pdf
 @
 
 
 \section{Distance bounding}
 
+\Ac{DB} was first suggested by \textcite{DistanceBounding} as a technique to 
+prove that a secret key was within physical proximity.
+We provide the acronym \DescribeAcro{DB}
 <<topic acronyms>>=
 \DeclareAcronym{DB}{%
   short = {DB},
   long = {distance bounding},
   cite = {DistanceBounding},
 }
-
-\DeclareAcronym{DBMF}{%
-  short = {MF},
-  short-indefinite = {an},
-  long = {Mafia fraud},
-  cite = {MafiaFraud},
-}
-\DeclareAcronym{DBDF}{%
-  short = {DF},
-  long = {distance fraud},
-  cite = {DistanceBounding},
-}
-\DeclareAcronym{DBDH}{%
-  short = {DH},
-  long = {distance hijacking},
-  cite = {DistanceHijacking},
-}
-\DeclareAcronym{DBTF}{%
-  short = {TF},
-  long = {terrorist fraud},
-  cite = {TerroristFraud},
-}
-\DeclareAcronym{DBIF}{%
-  short = {IF},
-  short-indefinite = {an},
-  long = {impersonation fraud},
-  long-indefinite = {an},
-  cite = {ImpersonationFraud},
-}
-\DeclareAcronym{DBIV}{%
-  short = {IV},
-  short-indefinite = {an},
-  long = {impersonating verifier},
-  long-indefinite = {an},
-  %cite = {PRIVO},
-}
-
-\DeclareAcronym{DBPK}{%
-  short = {DBPK},
-  long = {distance-bounding proof-of-knowledge},
-}
-@
-
+@ which automatically cites the paper:
 <<auth.bib>>=
-@inproceedings{MafiaFraud,
-  title={Special uses and abuses of the Fiat-Shamir passport protocol},
-  author={Desmedt, Yvo and Goutier, Claude and Bengio, Samy},
-  booktitle={Conference on the Theory and Application of Cryptographic Techniques},
-  pages={21--39},
-  year={1987},
-  organization={Springer}
-}
-
-@inproceedings{TerroristFraud,
-  title={Major security problems with the ‘unforgeable’(feige)-fiat-shamir 
-    proofs of identity and how to overcome them},
-  author={Desmedt, Yvo},
-  booktitle={Proceedings of SECURICOM},
-  volume={88},
-  pages={15--17},
-  year={1988}
-}
-
 @inproceedings{DistanceBounding,
   title={Distance-bounding protocols},
   author={Brands, Stefan and Chaum, David},
@@ -1130,7 +1015,60 @@ URL-CanLongPasswordsBeSecureAndUsablp=http://lorrie.cranor.org/pubs/longpass-chi
   year={1993},
   organization={Springer}
 }
+@
+<<auth.mk>>=
+BIBSP_REFKEY+=DistanceBounding
+URL-DistanceBounding=https://link.springer.com/chapter/10.1007/3-540-48285-7_30
 
+@
+
+\subsection{Basic properties}
+
+In their paper, \citeauthor{DistanceBounding} introduce the property \ac{DBDF}, 
+\DescribeAcro{DBDF}.
+<<topic acronyms>>=
+\DeclareAcronym{DBDF}{%
+  short = {DF},
+  long = {distance fraud},
+  cite = {DistanceBounding},
+}
+@ They also discuss the property \ac{DBMF}, \DescribeAcro{DBMF}.
+<<topic acronyms>>=
+\DeclareAcronym{DBMF}{%
+  short = {MF},
+  short-indefinite = {an},
+  long = {Mafia fraud},
+  cite = {MafiaFraud},
+}
+@ However, this property was actually first defined in an earlier paper.
+<<auth.bib>>=
+@inproceedings{MafiaFraud,
+  title={Special uses and abuses of the Fiat-Shamir passport protocol},
+  author={Desmedt, Yvo and Goutier, Claude and Bengio, Samy},
+  booktitle={Conference on the Theory and Application of Cryptographic Techniques},
+  pages={21--39},
+  year={1987},
+  organization={Springer}
+}
+@
+<<auth.mk>>=
+BIBSP_REFKEY+=MafiaFraud
+URL-MafiaFraud=https://link.springer.com/chapter/10.1007/3-540-48184-2_3
+@
+
+\Textcite{DistanceHijacking} introduced \ac{DBDH}, \DescribeAcro{DBDH}, which is 
+an attack against parallel executions of some protocols (or the presence of 
+multiple provers).
+This attack allows a malicious prover to use an honest prover to do the \ac{DB} 
+phase of the protocol.
+<<topic acronyms>>=
+\DeclareAcronym{DBDH}{%
+  short = {DH},
+  long = {distance hijacking},
+  cite = {DistanceHijacking},
+}
+@
+<<auth.bib>>=
 @inproceedings{DistanceHijacking,
   title={Distance hijacking attacks on distance bounding protocols},
   author={Cremers, Cas and Rasmussen, Kasper B and Schmidt, Benedikt and Capkun, 
@@ -1140,7 +1078,58 @@ URL-CanLongPasswordsBeSecureAndUsablp=http://lorrie.cranor.org/pubs/longpass-chi
   year={2012},
   organization={IEEE},
 }
+@
+<<auth.mk>>=
+BIBSP_REFKEY+=DistanceHijacking
+URL-DistanceHijacking=http://ieeexplore.ieee.org/abstract/document/6234408/
+@
 
+It's generally difficult to prevent someone from sharing a credential with 
+others, \eg a subscription or pass.
+However, we can assume that Alice is more reluctant to allow Bob to impersonate 
+her forever, than she is to allow Bob to impersonate her only once.
+This is captured by \ac{DBTF}, \DescribeAcro{DBTF}.
+<<topic acronyms>>=
+\DeclareAcronym{DBTF}{%
+  short = {TF},
+  long = {terrorist fraud},
+  cite = {TerroristFraud},
+}
+@
+<<auth.bib>>=
+@inproceedings{TerroristFraud,
+  title={Major security problems with the ‘unforgeable’(feige)-fiat-shamir 
+    proofs of identity and how to overcome them},
+  author={Desmedt, Yvo},
+  booktitle={Proceedings of SECURICOM},
+  volume={88},
+  pages={15--17},
+  year={1988}
+}
+@
+<<auth.mk>>=
+BIBSP_REFKEY+=TerroristFraud
+URL-TerroristFraud=https://scholar.google.fr/scholar?hl=en&as_sdt=0%2C5&q=+%09+Major+Security+Problems+with+the+%22Unforgeable%22+%28Feige%29-Fiat-Shamir+Proofs+of+Identity+and+How+to+Overcome+Them&btnG=
+@
+
+<<topic acronyms>>=
+\DeclareAcronym{DBIF}{%
+  short = {IF},
+  short-indefinite = {an},
+  long = {impersonation fraud},
+  long-indefinite = {an},
+  cite = {ImpersonationFraud},
+}
+\DeclareAcronym{DBPK}{%
+  short = {DBPK},
+  long = {distance-bounding proof-of-knowledge},
+}
+@
+
+Finally, we have the property of \ac{DBIF}, \DescribeAcro{DBIF}.
+This means that a malicious prover can make an honest verifier believe he is 
+someone else --- without any help, as in the \ac{DBTF} case.
+<<auth.bib>>=
 @inproceedings{ImpersonationFraud,
   title={An efficient distance bounding RFID authentication protocol: balancing 
     false-acceptance rate and memory requirement},
@@ -1150,7 +1139,31 @@ URL-CanLongPasswordsBeSecureAndUsablp=http://lorrie.cranor.org/pubs/longpass-chi
   year={2009},
   organization={Springer}
 }
+@
+<<auth.mk>>=
+BIBSP_REFKEY+=ImpersonationFraud
+URL-ImpersonationFraud=https://link.springer.com/chapter/10.1007/978-3-642-04474-8_21
+@
 
+
+\subsection{Formal models for \acl{DB}}
+
+There are two (competing) formal models of \ac{DB}:
+the \ac{DB-BMV} model, \DescribeAcro{DB-BMV}, and the \ac{DB-DFKO} model, 
+\DescribeAcro{DB-DFKO}.
+<<topic acronyms>>=
+\DeclareAcronym{DB-BMV}{%
+  short = {BMV},
+  long = {Boureanu-Mitrokotsa-Vaudenay},
+  cite = {DB-BMV},
+}
+\DeclareAcronym{DB-DFKO}{%
+  short = {DFKO},
+  long = {Dürholz-Fischlin-Kasper-Onete},
+  cite = {DB-DFKO},
+}
+@
+<<auth.bib>>=
 @article{DB-BMV,
   title={Practical and provably secure distance-bounding},
   author={Boureanu, Ioana and Mitrokotsa, Aikaterini and Vaudenay, Serge},
@@ -1161,7 +1174,6 @@ URL-CanLongPasswordsBeSecureAndUsablp=http://lorrie.cranor.org/pubs/longpass-chi
   year={2015},
   publisher={IOS Press}
 }
-
 @inproceedings{DB-DFKO,
   title={A formal approach to distance-bounding RFID protocols},
   author={D{\"u}rholz, Ulrich and Fischlin, Marc and Kasper, Michael and Onete, 
@@ -1171,7 +1183,66 @@ URL-CanLongPasswordsBeSecureAndUsablp=http://lorrie.cranor.org/pubs/longpass-chi
   year={2011},
   organization={Springer}
 }
+@
+<<auth.mk>>=
+BIBSP_REFKEY+=DB-BMV
+#URL-DB-BMV=https://content.iospress.com/articles/journal-of-computer-security/jcs518
+URL-DB-BMV=https://eprint.iacr.org/2013/465
 
+BIBSP_REFKEY+=DB-DFKO
+URL-DB-DFKO=https://link.springer.com/chapter/10.1007%2F978-3-642-24861-0_4
+@
+
+
+\subsection{Public-key \acl{DB}}
+
+While the majority of \ac{DB} protocols proposed over the years since 
+\citeyear{DistanceBounding} have all been symmetric, \ie the verifier must be 
+trusted, there are a (very) few works on public-key \ac{DB}.
+
+One scheme in this class is \ac{ProProx}, \DescribeAcro{ProProx}, which is 
+\iac{PPK}, \DescribeAcro{PPK}.
+(Note that \textcite{ProProx} used \aca{PPK} as acronym.)
+<<topic acronyms>>=
+\DeclareAcronym{ProProx}{%
+  short = {ProProx},
+  long = {ProProx},
+  cite = {ProProx},
+}
+\DeclareAcronym{PPK}{%
+  short = {PPK},
+  alt = {PoPoK},
+  long = {proof of proximity of knowledge},
+  cite = {ProProx},
+}
+@
+<<auth.bib>>=
+@inproceedings{ProProx,
+  title={Sound proof of proximity of knowledge},
+  author={Vaudenay, Serge},
+  booktitle={International Conference on Provable Security},
+  pages={105--126},
+  year={2015},
+  organization={Springer}
+}
+@
+<<auth.mk>>=
+BIBSP_REFKEY+=ProProx
+URL-ProProx=https://link.springer.com/chapter/10.1007/978-3-319-26059-4_6
+@
+
+
+\subsection{Physical implementations}
+
+During the \ac{DB} phase, we measure the round-trip time of electromagnetic 
+waves.
+This means that we must add as little overhead from processing as possible 
+during this step.
+This means that we need dedicated hardware.
+
+\Textcite{DBonSmartphones} evaluated how well one could do to implement \ac{DB} 
+protocols on smartphones without hardware support.
+<<auth.bib>>=
 @inproceedings{DBonSmartphones,
   TITLE = {{The Not-so-distant Future: Distance-Bounding Protocols on 
     Smartphones}},
@@ -1186,42 +1257,10 @@ URL-CanLongPasswordsBeSecureAndUsablp=http://lorrie.cranor.org/pubs/longpass-chi
   HAL_ID = {hal-01244606},
   HAL_VERSION = {v1},
 }
-
-@inproceedings{ProProx,
-  title={Sound proof of proximity of knowledge},
-  author={Vaudenay, Serge},
-  booktitle={International Conference on Provable Security},
-  pages={105--126},
-  year={2015},
-  organization={Springer}
-}
 @
-
 <<auth.mk>>=
-BIBSP_REFKEY+=MafiaFraud
-URL-MafiaFraud=https://link.springer.com/chapter/10.1007/3-540-48184-2_3
-
-BIBSP_REFKEY+=DistanceBounding
-URL-DistanceBounding=https://link.springer.com/chapter/10.1007/3-540-48285-7_30
-
-BIBSP_REFKEY+=DistanceHijacking
-URL-DistanceHijacking=http://ieeexplore.ieee.org/abstract/document/6234408/
-
-BIBSP_REFKEY+=ImpersonationFraud
-URL-ImpersonationFraud=https://link.springer.com/chapter/10.1007/978-3-642-04474-8_21
-
-BIBSP_REFKEY+=DB-BMV
-#URL-DB-BMV=https://content.iospress.com/articles/journal-of-computer-security/jcs518
-URL-DB-BMV=https://eprint.iacr.org/2013/465
-
-BIBSP_REFKEY+=DB-DFKO
-URL-DB-DFKO=https://link.springer.com/chapter/10.1007%2F978-3-642-24861-0_4
-
 BIBSP_REFKEY+=DBonSmartphones
 URL-DBonSmartphones=https://hal.inria.fr/hal-01244606
-
-BIBSP_REFKEY+=ProProx
-URL-ProProx=https://link.springer.com/chapter/10.1007/978-3-319-26059-4_6
 @
 
 
@@ -1368,6 +1407,71 @@ BIBSP_TOPIC+=   location
 <<location.mk>>=
 BIBSP_REFKEY+=PROPS
 URL-PROPS=http://ieeexplore.ieee.org/ielx7/6979347/6983362/06983374.pdf
+@
+
+
+\section{Passwords}
+
+The topic most people associate with authentication is passwords, or 
+password-based authentication.
+We devote a separate topic to passwords.
+<<bibsp variables>>=
+BIBSP_TOPIC+=   passwd
+@ We add the password bibliography for automatic inclusion by [[bibsp]].
+<<topic bibliographies>>=
+\addbibresource{passwd.bib}
+@
+
+The first paper treats security and usability of password composition policies.
+We first add the BibTeX entry.
+<<passwd.bib>>=
+@inproceedings{OfPasswordsAndPeople,
+  author={Komanduri, Saranga and
+    Shay, Richard and
+    Kelley, Patrick Gage and
+    Mazurek, Michelle L. and
+    Bauer, Lujo and
+    Christin Nicolas and
+    Cranor, Lorrie Faith and
+    Egelman, Serge},
+  title={Of passwords and people:
+    Measuring the effect of password-composition policies},
+  booktitle={CHI},
+  year={2011},
+  URL={http://cups.cs.cmu.edu/rshay/pubs/passwords_and_people2011.pdf},
+}
+@ And then provide the citation key and the paper's \ac{URL} so that we can 
+automatically fetch the paper.
+<<passwd.mk>>=
+BIBSP_REFKEY+=OfPasswordsAndPeople
+URL-OfPasswordsAndPeople=http://cups.cs.cmu.edu/rshay/pubs/passwords_and_people2011.pdf
+@
+
+The second paper is a follow-up to the first.
+<<passwd.bib>>=
+@inproceedings{CanLongPasswordsBeSecureAndUsable,
+  title={Can long passwords be secure and usable?},
+  author={Shay, Richard and
+    Komanduri, Saranga and
+    Durity, Adam L and
+    Huh, Phillip Seyoung and
+    Mazurek, Michelle L and
+    Segreti, Sean M and
+    Ur, Blase and
+    Bauer, Lujo and
+    Christin, Nicolas and
+    Cranor, Lorrie Faith},
+  booktitle={Proceedings of the 32nd annual ACM conference on Human factors in 
+    computing systems},
+  pages={2927--2936},
+  year={2014},
+  organization={ACM},
+  URL={http://lorrie.cranor.org/pubs/longpass-chi2014.pdf},
+}
+@ Now the citation key and \ac{URL}.
+<<passwd.mk>>=
+BIBSP_REFKEY+=CanLongPasswordsBeSecureAndUsable
+URL-CanLongPasswordsBeSecureAndUsablp=http://lorrie.cranor.org/pubs/longpass-chi2014.pdf
 @
 
 
