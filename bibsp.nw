@@ -1131,6 +1131,10 @@ BIBSP_TOPIC+=   location
 }
 @
 
+<<topic bibliographies>>=
+\addbibresource{location.bib}
+@
+
 <<location.bib>>=
 @inproceedings{PROPS,
   title={PROPS: A PRivacy-preserving lOcation Proof System},
@@ -1341,6 +1345,10 @@ BIBSP_TOPIC+=   ac
 
 <<bibsp variables>>=
 BIBSP_TOPIC+=	anon
+@
+
+<<topic bibliographies>>=
+\addbibresource{anon.bib}
 @
 
 <<anon.bib>>=
@@ -2545,6 +2553,10 @@ URL-FSThresholdSignatures=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.
 BIBSP_TOPIC+=   be
 @
 
+<<topic bibliographies>>=
+\addbibresource{be.bib}
+@
+
 <<be.bib>>=
 @inproceedings{ANOBE,
   title={Anonymous broadcast encryption: Adaptive security and efficient 
@@ -2603,6 +2615,10 @@ URL-oANOBE=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.1007%2F978-3-64
 BIBSP_TOPIC+=   mpc
 @
 
+<<topic bibliographies>>=
+\addbibresource{mpc.bib}
+@
+
 <<mpc.bib>>=
 @Inbook{MPCgoesLive,
   author="Bogetoft, Peter
@@ -2649,6 +2665,10 @@ BIBSP_TOPIC+=	blockchain
   long = {transactional partially ordered set},
   cite = {BlockchainFreeCryptocurrencies},
 }
+@
+
+<<topic bibliographies>>=
+\addbibresource{blockchain.bib}
 @
 
 <<blockchain.bib>>=
@@ -3713,6 +3733,10 @@ URL-VerifyingPrivacyPropertiesOfVotingProtocols=https://dx.doi.org/10.3233/JCS-2
 BIBSP_TOPIC+=	osn
 @
 
+<<topic bibliographies>>=
+\addbibresource{osn.bib}
+@
+
 <<osn.bib>>=
 @inproceedings{Peerson,
   title={PeerSoN: P2P social networking: early experiences and insights},
@@ -3890,6 +3914,10 @@ URL-ThresholdUserSearch=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.10
 <<bibsp variables>>=
 BIBSP_TOPIC+=	reputation
 
+<<topic bibliographies>>=
+\addbibresource{reputation.bib}
+@
+
 <<reputation.bib>>=
 @incollection{SybilAttack,
   title={The Sybil Attack},
@@ -3918,6 +3946,10 @@ URL-SybilAttack=http://link.springer.com/content/pdf/10.1007%2F3-540-45748-8_24.
 
 <<bibsp variables>>=
 BIBSP_TOPIC+=	stats
+@
+
+<<topic bibliographies>>=
+\addbibresource{stats.bib}
 @
 
 <<stats.bib>>=
@@ -3987,6 +4019,10 @@ URL-BotsAndAutomationDuringUSElection=https://www.politicalbots.org/?p=787
 BIBSP_TOPIC+= depend
 @
 
+<<topic bibliographies>>=
+\addbibresource{depend.bib}
+@
+
 <<depend.bib>>=
 @article{ByzantineGenerals,
  author = {Lamport, Leslie and Shostak, Robert and Pease, Marshall},
@@ -4018,6 +4054,10 @@ URL-ByzantineGenerals=http://doi.acm.org/10.1145/357172.357176
 
 <<bibsp variables>>=
 BIBSP_TOPIC+=	nfc
+@
+
+<<topic bibliographies>>=
+\addbibresource{nfc.bib}
 @
 
 <<nfc.bib>>=
@@ -4133,6 +4173,10 @@ URL-FireChat=https://www.opengarden.com/firechat.html
 BIBSP_TOPIC+=	ecurrency
 @
 
+<<topic bibliographies>>=
+\addbibresource{ecurrency.bib}
+@
+
 <<ecurrency.bib>>=
 @Inbook{ecash,
   author="Chaum, David",
@@ -4163,6 +4207,12 @@ URL-ecash=https://link-springer-com/chapter/10.1007/978-1-4757-0602-4_18
 
 <<bibsp variables>>=
 BIBSP_TOPIC+=	otrmsg otpkx ppes
+@
+
+<<topic bibliographies>>=
+\addbibresource{otrmsg.bib}
+\addbibresource{otpkx.bib}
+\addbibresource{ppes.bib}
 @
 
 <<otrmsg.bib>>=
