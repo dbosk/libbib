@@ -987,11 +987,12 @@ We provide references in [[<<auth.bib>>]] and add it to biblatex for inclusion.
 
 \section{Passwords}
 
+The topic most people associate with authentication is passwords, or 
+password-based authentication.
+We devote a separate topic to passwords.
 <<bibsp variables>>=
 BIBSP_TOPIC+=   passwd
-@
-
-We add the password bibliography for automatic inclusion by [[bibsp]].
+@ We add the password bibliography for automatic inclusion by [[bibsp]].
 <<topic bibliographies>>=
 \addbibresource{passwd.bib}
 @
