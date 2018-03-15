@@ -277,6 +277,12 @@ endef
 $(foreach topic,${BIBSP_TOPIC},$(eval $(call bibsp_bibfiles,${topic})))
 @
 
+Since [[bibsp.sty]] will contain an "\addbibresource" for each bibliography 
+"topic.bib", we must also add them as dependencies for [[bibsp.sty]].
+<<targets for linking bibliographies>>=
+bibsp.sty: $(foreach b,${BIBSP_TOPIC},${b}.bib)
+@
+
 Now, for each bibliographic entry in "topic.bib", we must add its citation key 
 to the list \DescribeVar{BIBSP\textunderscore REFKEY}.
 Then we will add the URL of the citation key "refkey" to the variable 
