@@ -8,10 +8,13 @@ papers, where relevant.
 ## Documentation
 
 The bibsp package `bibsp.sty` will provide acronyms and commands useful when 
-writing papers in the area of Security and Privacy. Its documentation can be 
-found in `bibsp.pdf`, which can be built by running `make bibsp.pdf`. This 
-requires the submodule `makefiles` acquired by running `git submodule update 
---init`.
+writing papers in the area of Security and Privacy. It also provides a 
+bibliography in various .bib files (automatically included when using 
+`bibsp.sty`).
+
+The documentation can be found in `bibsp.pdf`, which can be built by running 
+`make bibsp.pdf`. This requires the submodule `makefiles` acquired by running 
+`git submodule update --init`.
 
 
 ## Compilation
