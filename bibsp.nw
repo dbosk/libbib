@@ -1515,6 +1515,45 @@ URL-CanLongPasswordsBeSecureAndUsablp=http://lorrie.cranor.org/pubs/longpass-chi
 @
 
 
+\chapter{Organizations}
+
+There are a lot of organizations which uses acronyms.
+<<topic acronyms>>=
+\DeclareAcronym{UN}{%
+  short = {UN},
+  long = {United Nations},
+}
+@
+
+Then we have some of the world's spy agencies:
+<<topic acronyms>>=
+\DeclareAcronym{NSA}{%
+  short = {NSA},
+  long = {US National Security Agency}
+}
+\DeclareAcronym{GCHQ}{%
+  short = {GCHQ},
+  long = {UK Government Communications Headquarters}
+}
+\DeclareAcronym{CIA}{%
+  short = {CIA},
+  long = {US Central Intelligence Agency}
+}
+\DeclareAcronym{TAO}{%
+  short = {TAO},
+  long = {Tailored Access Operations}
+}
+\DeclareAcronym{FRA}{%
+  short = {FRA},
+  foreign = {Försvarets radioanstalt},
+  long = {Swedish National Defence Radio Establishment},
+}
+@
+
+
+
+\appendix
+
 \chapter{Ad-hoc networks}
 
 <<bibsp variables>>=
@@ -1585,7 +1624,75 @@ URL-FireChat=https://www.opengarden.com/firechat.html
 
 
 
-\appendix
+\chapter{Blockchains}
+
+<<bibsp variables>>=
+BIBSP_TOPIC+=	blockchain
+@
+
+<<topic acronyms>>=
+\DeclareAcronym{tposet}{%
+  short = {t-poset},
+  long = {transactional partially ordered set},
+  cite = {BlockchainFreeCryptocurrencies},
+}
+@
+
+<<topic bibliographies>>=
+\addbibresource{blockchain.bib}
+@
+
+<<blockchain.bib>>=
+@misc{Bitcoin,
+  title={Bitcoin: A peer-to-peer electronic cash system},
+  author={Nakamoto, Satoshi},
+  year={2008},
+  URL={https://bitcoin.org/bitcoin.pdf},
+}
+
+@misc{OmniLedger,
+  author = {Eleftherios Kokoris-Kogias and Philipp Jovanovic and  Linus Gasser 
+    and Nicolas Gailly and Ewa Syta and Bryan Ford},
+  title = {OmniLedger: A Secure, Scale-Out, Decentralized Ledger via Sharding},
+  howpublished = {Cryptology ePrint Archive, Report 2017/406},
+  year = {2017},
+  url = {https://eprint.iacr.org/2017/406},
+  note = {To appear in 39th IEEE S\&P 2018},
+}
+
+@misc{BlockchainFreeCryptocurrencies,
+  author = {Xavier Boyen and Christopher Carr and Thomas Haines},
+  title = {Blockchain-Free Cryptocurrencies: A Framework for Truly 
+    Decentralised Fast Transactions},
+  howpublished = {Cryptology ePrint Archive, Report 2016/871},
+  year = {2016},
+  note = {\url{http://eprint.iacr.org/2016/871}},
+}
+
+@misc{FairProofOfWork,
+  author = {Colin Boyd and Christopher Carr},
+  title = {Fair Client Puzzles from the Bitcoin Blockchain},
+  howpublished = {Cryptology ePrint Archive, Report 2016/680},
+  year = {2016},
+  note = {\url{http://eprint.iacr.org/2016/680}},
+}
+@
+
+<<blockchain.mk>>=
+BIBSP_REFKEY+= 	Bitcoin
+URL-Bitcoin= 	https://bitcoin.org/bitcoin.pdf
+
+BIBSP_REFKEY+= 	OmniLedger
+URL-OmniLedger=https://eprint.iacr.org/2017/406
+
+BIBSP_REFKEY+=	BlockchainFreeCryptocurrencies
+URL-BlockchainFreeCryptocurrencies=https://eprint.iacr.org/2016/871.pdf
+
+BIBSP_REFKEY+=	FairProofOfWork
+URL-FairProofOfWork=https://eprint.iacr.org/2016/680.pdf
+@
+
+
 
 \chapter{Undocumented in bibsp.sty}
 
@@ -1595,48 +1702,9 @@ URL-FireChat=https://www.opengarden.com/firechat.html
 @
 
 <<topic acronyms>>=
-%%%%%%%%%%%%%%%%%%%%%%%%
-% Organizations
-%%%%%%%%%%%%%%%%%%%%%%%%
-\DeclareAcronym{UN}{%
-  short = {UN},
-  long = {United Nations},
-}
-% Surveillance agencies
-\DeclareAcronym{NSA}{%
-  short = {NSA},
-  long = {US National Security Agency}
-}
-\DeclareAcronym{GCHQ}{%
-  short = {GCHQ},
-  long = {UK Government Communications Headquarters}
-}
-\DeclareAcronym{CIA}{%
-  short = {CIA},
-  long = {US Central Intelligence Agency}
-}
-\DeclareAcronym{TAO}{%
-  short = {TAO},
-  long = {Tailored Access Operations}
-}
-\DeclareAcronym{FRA}{%
-  short = {FRA},
-  long = {Försvarets radioanstalt},
-  foreign = {Swedish National Defence Radio Establishment}
-}
-
 %%%%%%%%%%%%%%%%%%%%%
 % Standard things
 %%%%%%%%%%%%%%%%%%%%%
-\DeclareAcronym{PET}{%
-  short = {PET},
-  long = {%
-      privacy-enhancing technology%
-    },
-  long-plural-form = {%
-      privacy-enhancing technologies%
-    }
-}
 \DeclareAcronym{DoS}{%
   short = {DoS},
   long = {%
@@ -3000,76 +3068,6 @@ URL-MPCgoesLive=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.1007%2F978
 @
 
 
-\chapter{Blockchains}
-
-<<bibsp variables>>=
-BIBSP_TOPIC+=	blockchain
-@
-
-<<topic acronyms>>=
-\DeclareAcronym{tposet}{%
-  short = {t-poset},
-  long = {transactional partially ordered set},
-  cite = {BlockchainFreeCryptocurrencies},
-}
-@
-
-<<topic bibliographies>>=
-\addbibresource{blockchain.bib}
-@
-
-<<blockchain.bib>>=
-@misc{Bitcoin,
-  title={Bitcoin: A peer-to-peer electronic cash system},
-  author={Nakamoto, Satoshi},
-  year={2008},
-  URL={https://bitcoin.org/bitcoin.pdf},
-}
-
-@misc{OmniLedger,
-  author = {Eleftherios Kokoris-Kogias and Philipp Jovanovic and  Linus Gasser 
-    and Nicolas Gailly and Ewa Syta and Bryan Ford},
-  title = {OmniLedger: A Secure, Scale-Out, Decentralized Ledger via Sharding},
-  howpublished = {Cryptology ePrint Archive, Report 2017/406},
-  year = {2017},
-  url = {https://eprint.iacr.org/2017/406},
-  note = {To appear in 39th IEEE S\&P 2018},
-}
-
-@misc{BlockchainFreeCryptocurrencies,
-  author = {Xavier Boyen and Christopher Carr and Thomas Haines},
-  title = {Blockchain-Free Cryptocurrencies: A Framework for Truly 
-    Decentralised Fast Transactions},
-  howpublished = {Cryptology ePrint Archive, Report 2016/871},
-  year = {2016},
-  note = {\url{http://eprint.iacr.org/2016/871}},
-}
-
-@misc{FairProofOfWork,
-  author = {Colin Boyd and Christopher Carr},
-  title = {Fair Client Puzzles from the Bitcoin Blockchain},
-  howpublished = {Cryptology ePrint Archive, Report 2016/680},
-  year = {2016},
-  note = {\url{http://eprint.iacr.org/2016/680}},
-}
-@
-
-<<blockchain.mk>>=
-BIBSP_REFKEY+= 	Bitcoin
-URL-Bitcoin= 	https://bitcoin.org/bitcoin.pdf
-
-BIBSP_REFKEY+= 	OmniLedger
-URL-OmniLedger=https://eprint.iacr.org/2017/406
-
-BIBSP_REFKEY+=	BlockchainFreeCryptocurrencies
-URL-BlockchainFreeCryptocurrencies=https://eprint.iacr.org/2016/871.pdf
-
-BIBSP_REFKEY+=	FairProofOfWork
-URL-FairProofOfWork=https://eprint.iacr.org/2016/680.pdf
-@
-
-
-
 \chapter{Computer systems}
 
 <<topic acronyms>>=
@@ -3199,6 +3197,14 @@ URL-FairProofOfWork=https://eprint.iacr.org/2016/680.pdf
 
 <<bibsp variables>>=
 BIBSP_TOPIC+=	privacy
+@
+
+<<topic acronyms>>=
+\DeclareAcronym{PET}{%
+  short = {PET},
+  long = {privacy-enhancing technology},
+  long-plural-form = {privacy-enhancing technologies}
+}
 @
 
 <<topic bibliographies>>=
