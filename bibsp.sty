@@ -777,7 +777,7 @@
     {\xleftarrow[\hspace{#1}]{#2}}%
     {\xleftarrow[\hspace{\ProtoArrowLength}]{#2}}%
   }}
-\ProvideDocumentCommand{\concat}{}{\mathbin{\|}}
+\ProvideDocumentCommand{\concat}{}{\ensuremath{\mathbin{\|}}}
 \ProvideDocumentCommand{\NewCryptoScheme}{m m}{%
   \ProvideDocumentCommand{#1}{s o}{%
     \ensuremath{%
@@ -925,20 +925,20 @@
   \ifthenelse{\equal{#2}{}}{}{_{#2}}%
 }}
 \ProvideDocumentCommand{\textand}{}{\ensuremath{\qquad\text{and}\qquad}}
-\DeclareMathOperator{\NN}{\mathbb{N}}
-\DeclareMathOperator{\ZZ}{\mathbb{Z}}
-\DeclareMathOperator{\QQ}{\mathbb{Q}}
-\DeclareMathOperator{\RR}{\mathbb{R}}
-\DeclareMathOperator{\CC}{\mathbb{C}}
+\ProvideDocumentCommand{\NN}{}{\ensuremath{\mathbb{N}}}
+\ProvideDocumentCommand{\ZZ}{}{\ensuremath{\mathbb{Z}}}
+\ProvideDocumentCommand{\QQ}{}{\ensuremath{\mathbb{Q}}}
+\ProvideDocumentCommand{\RR}{}{\ensuremath{\mathbb{R}}}
+\ProvideDocumentCommand{\CC}{}{\ensuremath{\mathbb{C}}}
 \ProvideDocumentCommand{\card}{m}{\ensuremath{|#1|}}
 \ifdefined\powerset%
   \relax%
 \else%
   \DeclareMathOperator{\powerset}{\mathscr{P}}%
 \fi
-\DeclareMathOperator{\GF}{\mathrm{GF}}
-\DeclareMathOperator{\FF}{\mathbb{F}}
+\ProvideDocumentCommand{\GF}{}{\ensuremath{\mathrm{GF}}}
+\ProvideDocumentCommand{\FF}{}{\ensuremath{\mathbb{F}}}
 \DeclareMathOperator{\ord}{ord}
-\ProvideDocumentCommand{\gen}{m}{\mleft\langle #1\mright\rangle}
+\ProvideDocumentCommand{\gen}{m}{\ensuremath{\mleft\langle #1\mright\rangle}}
 \ProcessOptions\relax
 \endinput
