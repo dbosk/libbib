@@ -74,9 +74,14 @@ the standard "\left" and "\right" commands.
 We also provide a makefile [[<<bibsp.mk>>]] which can be used to easily add 
 bibsp as a dependency.
 <<bibsp.mk>>=
-<<bibsp variables>>
-<<bibsp targets>>
-<<bibsp includes>>
+ifndef BIBSP_MK
+BIBSP_MK=true
+
+<<make variables>>
+<<make targets>>
+<<make includes>>
+
+endif
 @ Since we know one file that we will use, [[<<bibsp.sty>>]] above, we can 
 provide its desired targets.
 
@@ -88,12 +93,12 @@ We will do this for many files, so we might as well add a variable to hold all
 the filenames.
 We will create a variable [[BIBSP_LINK]] for this purpose, starting with our 
 package.
-<<bibsp variables>>=
+<<make variables>>=
 BIBSP_LINK+=  bibsp.sty
 @ Now, if such a file exists in the current directory, we don't want to do 
 anything.
 Otherwise, we want to create a link to it.
-<<bibsp targets>>=
+<<make targets>>=
 ${BIBSP_LINK}:
 	[ -e "./$@" ] || ln -s ${INCLUDE_BIBSP}/$@ ./$@
 @
@@ -101,7 +106,7 @@ ${BIBSP_LINK}:
 We must also provide a default value for [[INCLUDE_BIBSP]], in case it is not 
 set.
 We let the default be the current directory.
-<<bibsp variables>>=
+<<make variables>>=
 INCLUDE_BIBSP?=.
 @
 
@@ -110,7 +115,7 @@ We'd like to do this on [[distclean]] and not on every [[clean]].
 Note also that we only want to remove the symbolic links that we have created, 
 so we must look for the symbolic links and ignore any other files that happens 
 to have the same name.
-<<bibsp targets>>=
+<<make targets>>=
 .PHONY: distclean
 distclean: clean-bibsp
 clean-bibsp:
@@ -228,14 +233,24 @@ In addition to providing TeXnical tools, bibsp provides a bibliographic library
 and Privacy.
 We will now describe the framework for how those parts will be presented.
 
+The library will be organized by topics and provide bibliographies, acronyms and 
+commands relevant to each topic.
 Each topic will provide its own bibliography file (\DescribeFile{topic.bib}).
 It will also provide a set of acronyms which might automatically cite the 
 relevant papers in the bibliography.
 Finally, it might also provide some TeXnical commands to make writing on this 
 topic easier.
 To add a topic, it must be added to the variable 
-\DescribeVar{BIBSP\textunderscore TOPIC} in
-[[<<bibsp variables>>]].
+\DescribeVar{BIBSP\textunderscore TOPIC}.
+This variable will then be used to generate targets for the various files, \eg 
+"topic.bib".
+However, these variables must be defined before any use of them, specifically 
+for generating targets.
+This is due to make's lazy evaluation of variables.
+<<make variables>>=
+<<make topic definitions>>
+<<make topic use>>
+@
 
 We will use the acro package as we did above (\cref{Acronyms}).
 We will use the biblatex package for citations.
@@ -260,7 +275,7 @@ documents they reference.
 We also want to make the bibliography (.bib) files available for inclusion in 
 parent projects.
 In particular, we want the following.
-<<bibsp targets>>=
+<<make targets>>=
 <<targets for opening paper URLs>>
 <<targets for linking bibliographies>>
 @
@@ -269,7 +284,8 @@ We can start with the latter, [[<<targets for linking bibliographies>>]].
 We already provided [[BIBSP_LINK]] above, so we can simply use that.
 So, for every topic in the list [[BIBSP_TOPIC]], we simply add its bibliography 
 file ("topic.bib") to [[BIBSP_LINK]].
-<<targets for linking bibliographies>>=
+This is just some variable definitions so we add them to that part.
+<<make topic use>>=
 define bibsp_bibfiles
 BIBSP_LINK+=		$(1).bib
 endef
@@ -279,6 +295,7 @@ $(foreach topic,${BIBSP_TOPIC},$(eval $(call bibsp_bibfiles,${topic})))
 
 Since [[bibsp.sty]] will contain an "\addbibresource" for each bibliography 
 "topic.bib", we must also add them as dependencies for [[bibsp.sty]].
+So this is the actual target that will trigger the linking.
 <<targets for linking bibliographies>>=
 bibsp.sty: $(foreach b,${BIBSP_TOPIC},${b}.bib)
 @
@@ -301,7 +318,7 @@ $(foreach ref,${BIBSP_REFKEY},$(eval $(call bibsp_display,${ref})))
 
 Finally, for this to work, we must include all the "topic.mk" files, since 
 that's where the [[BIBSP_REFKEY]] variables is populated.
-<<bibsp includes>>=
+<<make includes>>=
 define bibsp_includes
 include 		$${INCLUDE_BIBSP}/$(1).mk
 endef
@@ -548,7 +565,7 @@ The commands are implemented as follows.
 
 The topic of cryptography is a very big one.
 It provides several subtopics in addition to the main one.
-<<bibsp variables>>=
+<<make topic definitions>>=
 BIBSP_TOPIC+=   crypto
 @ We provide the general bibliography [[<<crypto.bib>>]].
 <<topic bibliographies>>=
@@ -968,7 +985,7 @@ There are, however, a variety of properties that we might be interested in
 verifying.
 
 We add the topic.
-<<bibsp variables>>=
+<<make topic definitions>>=
 BIBSP_TOPIC+=   auth
 @ And also provide references in [[<<auth.bib>>]].
 We the bibliography to biblatex for inclusion.
@@ -1400,7 +1417,7 @@ URL-Psigs=https://doi.org/10.1007/978-3-540-78524-8_20
 Another property that we might want to verify is the physical location of 
 something.
 This is indeed related to \ac{DB} protocols.
-<<bibsp variables>>=
+<<make topic definitions>>=
 BIBSP_TOPIC+=   location
 @ We add the bibliography.
 <<topic bibliographies>>=
@@ -1461,7 +1478,7 @@ URL-PROPS=http://ieeexplore.ieee.org/ielx7/6979347/6983362/06983374.pdf
 The topic most people associate with authentication is passwords, or 
 password-based authentication.
 We devote a separate topic to passwords.
-<<bibsp variables>>=
+<<make topic definitions>>=
 BIBSP_TOPIC+=   passwd
 @ We add the password bibliography for automatic inclusion by [[bibsp]].
 <<topic bibliographies>>=
@@ -1562,7 +1579,7 @@ Then we have some of the world's spy agencies:
 
 \chapter{Ad-hoc networks}
 
-<<bibsp variables>>=
+<<make topic definitions>>=
 BIBSP_TOPIC+=	adhocnets
 @
 
@@ -1632,7 +1649,7 @@ URL-FireChat=https://www.opengarden.com/firechat.html
 
 \chapter{Blockchains}
 
-<<bibsp variables>>=
+<<make topic definitions>>=
 BIBSP_TOPIC+=	blockchain
 @
 
@@ -1764,7 +1781,7 @@ URL-FairProofOfWork=https://eprint.iacr.org/2016/680.pdf
 
 \chapter{Anonymity}
 
-<<bibsp variables>>=
+<<make topic definitions>>=
 BIBSP_TOPIC+=	anon
 @
 
@@ -2970,7 +2987,7 @@ URL-FSThresholdSignatures=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.
 
 \section{Broadcast encryption}
 
-<<bibsp variables>>=
+<<make topic definitions>>=
 BIBSP_TOPIC+=   be
 @
 
@@ -3032,7 +3049,7 @@ URL-oANOBE=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.1007%2F978-3-64
 
 \section{Secure multi-party computation}
 
-<<bibsp variables>>=
+<<make topic definitions>>=
 BIBSP_TOPIC+=   mpc
 @
 
@@ -3201,7 +3218,7 @@ URL-MPCgoesLive=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.1007%2F978
 
 \chapter{Privacy and meta data}
 
-<<bibsp variables>>=
+<<make topic definitions>>=
 BIBSP_TOPIC+=	privacy
 @
 
@@ -3259,7 +3276,7 @@ BIBSP_REFKEY+=DataTrack
 URL-DataTrack=http://doi.acm.org/10.1145/2702613.2732701
 @
 
-<<bibsp variables>>=
+<<make topic definitions>>=
 BIBSP_TOPIC+= meta
 @
 
@@ -3308,7 +3325,7 @@ URL-OnlineTrackingInfersPregnancy=http://www.forbes.com/sites/kashmirhill/2012/0
 
 \chapter{Surveillance}
 
-<<bibsp variables>>=
+<<make topic definitions>>=
 BIBSP_TOPIC+= surveillance
 @
 
@@ -3573,7 +3590,7 @@ URL-KeysUnderDoormats=https://dspace.mit.edu/bitstream/handle/1721.1/97690/MIT-C
 
 \chapter{Human rights}
 
-<<bibsp variables>>=
+<<make topic definitions>>=
 BIBSP_TOPIC+= hr
 @
 
@@ -3624,7 +3641,7 @@ URL-NilePhish=https://citizenlab.org/2017/02/nilephish-report/
 
 \chapter{Protesting and voting}
 
-<<bibsp variables>>=
+<<make topic definitions>>=
 BIBSP_TOPIC+=	protests
 @
 
@@ -4059,7 +4076,7 @@ BIBSP_REFKEY+=DiVote
 URL-DiVote=http://urn.kb.se/resolve?urn=urn:nbn:se:kth:diva-187737
 @
 
-<<bibsp variables>>=
+<<make topic definitions>>=
 BIBSP_TOPIC+= voting
 @
 
@@ -4088,7 +4105,7 @@ URL-VerifyingPrivacyPropertiesOfVotingProtocols=https://dx.doi.org/10.3233/JCS-2
 
 \chapter{Online social networks}
 
-<<bibsp variables>>=
+<<make topic definitions>>=
 BIBSP_TOPIC+=	osn
 @
 
@@ -4270,7 +4287,7 @@ URL-ThresholdUserSearch=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.10
 
 \chapter{Reputation systems}
 
-<<bibsp variables>>=
+<<make topic definitions>>=
 BIBSP_TOPIC+=	reputation
 
 <<topic bibliographies>>=
@@ -4303,7 +4320,7 @@ URL-SybilAttack=http://link.springer.com/content/pdf/10.1007%2F3-540-45748-8_24.
 
 \chapter{Statistics}
 
-<<bibsp variables>>=
+<<make topic definitions>>=
 BIBSP_TOPIC+=	stats
 @
 
@@ -4374,7 +4391,7 @@ URL-BotsAndAutomationDuringUSElection=https://www.politicalbots.org/?p=787
 
 \chapter{Dependable systems}
 
-<<bibsp variables>>=
+<<make topic definitions>>=
 BIBSP_TOPIC+= depend
 @
 
@@ -4411,7 +4428,7 @@ URL-ByzantineGenerals=http://doi.acm.org/10.1145/357172.357176
 
 \chapter{\acl{NFC}}
 
-<<bibsp variables>>=
+<<make topic definitions>>=
 BIBSP_TOPIC+=	nfc
 @
 
@@ -4462,7 +4479,7 @@ URL-RFIDProximity=https://dl.acm.org/citation.cfm?id=1653668
 
 \chapter{Electronic currencies}
 
-<<bibsp variables>>=
+<<make topic definitions>>=
 BIBSP_TOPIC+=	ecurrency
 @
 
@@ -4498,7 +4515,7 @@ URL-ecash=https://link-springer-com/chapter/10.1007/978-1-4757-0602-4_18
 
 \chapter{Own papers, should be merged}
 
-<<bibsp variables>>=
+<<make topic definitions>>=
 BIBSP_TOPIC+=	otrmsg otpkx ppes
 @
 
@@ -4829,7 +4846,7 @@ URL-P2PPasswords=http://ieeexplore.ieee.org/ielx5/6329089/6335787/06335797.pdf
 
 \chapter{Access control}
 
-<<bibsp variables>>=
+<<make topic definitions>>=
 BIBSP_TOPIC+=   ac
 @
 
