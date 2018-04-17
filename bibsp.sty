@@ -156,15 +156,20 @@
     }%
   }%
 }
-\ProvideDocumentCommand{\NewCryptoSet}{m m}{%
+\ProvideDocumentCommand{\NewSet}{m m}{%
   \ProvideDocumentCommand{#1}{}{%
     \ensuremath{\mathcal{#2}}%
   }%
 }
-\ProvideDocumentCommand{\NewCryptoEntity}{m m}{%
+\ProvideDocumentCommand{\NewEntity}{m m}{%
   \ProvideDocumentCommand{#1}{}{%
     \ensuremath{\mathcal{#2}}%
   }%
+}
+\ProvideDocumentCommand{\NewVariable}{m m}{%
+  \ProvideDocumentCommand{#1}{}{%
+    \ensuremath{\mathit{#2}}%
+  }
 }
 %
 % Proofs of knowledge
