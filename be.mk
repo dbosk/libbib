@@ -1,3 +1,6 @@
+BIBSP_REFKEY+=BroadcastEncryption
+URL-BroadcastEncryption=https://link.springer.com/chapter/10.1007%2F3-540-48329-2_40
+
 BIBSP_REFKEY+=ANOBE
 URL-ANOBE=http://eprint.iacr.org/2011/476.pdf
 
