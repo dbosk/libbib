@@ -1,3 +1,6 @@
+BIBSP_REFKEY+=PerfectForwardSecrecy
+URL-PerfectForwardSecrecy=https://link.springer.com/chapter/10.1007%2F3-540-46885-4_5
+
 BIBSP_REFKEY+=HMAC HMAC-std
 URL-HMAC=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.1007%2F3-540-68697-5_1.pdf
 URL-HMAC-std=https://csrc.nist.gov/publications/fips/fips198-1/FIPS-198-1_final.pdf
