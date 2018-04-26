@@ -44,9 +44,6 @@ URL-DiffieHellman=http://ieeexplore.ieee.org${LIBRARY_EXT}/ielx5/18/22693/010556
 BIBSP_REFKEY+=AuthKeyExchange
 URL-AuthKeyExchange=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.1007%2FBF00124891.pdf
 
-BIBSP_REFKEY+=BroadcastEncryption
-URL-BroadcastEncryption=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.1007%2F3-540-48329-2_40.pdf
-
 BIBSP_REFKEY+=ImprovedProxyReencryption
 URL-ImprovedProxyReencryption=http://delivery.acm.org${LIBRARY_EXT}/10.1145/1130000/1127346/p1-ateniese.pdf
 
