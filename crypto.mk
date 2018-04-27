@@ -23,8 +23,8 @@ URL-RobustEncryption=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.1007%
 BIBSP_REFKEY+=RandomnessReuse
 URL-RandomnessReuse=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.1007%2F978-3-540-77272-9_16.pdf
 
-BIBSP_REFKEY+=KD-KEM
-URL-KD-KEM=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.1007%2F978-3-540-28628-8_26.pdf
+BIBSP_REFKEY+=KD-HES
+URL-KD-HES=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.1007%2F978-3-540-28628-8_26.pdf
 
 BIBSP_REFKEY+=DeniableEncryption
 URL-DeniableEncryption=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.1007%2FBFb0052229.pdf
