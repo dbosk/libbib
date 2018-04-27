@@ -101,9 +101,7 @@
 %
 % General algorithmic parts
 %
-\ProvideDocumentCommand{\method}{}{\ensuremath{%
-    .\!%
-  }}
+\ProvideDocumentCommand{\method}{}{\ensuremath{.\!}}
 \ProvideDocumentCommand{\NewScheme}{m m}{%
   \ProvideDocumentCommand{#1}{s o}{%
     \ensuremath{%
@@ -293,7 +291,7 @@
   short = {DLP},
   long = {Discrete Logarithm Problem}
 }
-\DeclareAcronym{DH}{
+\DeclareAcronym{DH}{%
   short = {DH},
   long = {Diffie-Hellman},
   cite = {DiffieHellman}
