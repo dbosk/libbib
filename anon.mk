@@ -12,3 +12,6 @@ URL-Tor=http://freehaven.net/anonbib/cache/tor-design.pdf
 
 BIBSP_REFKEY+=TowardsMeasuringAnonymity
 URL-TowardsMeasuringAnonymity=http://www.academia.edu/download/40412595/Towards_Measuring_Anonymity20151126-1621-1mi6po3.pdf
+
+BIBSP_REFKEY+=Sphinx
+URL-Sphinx=https://ieeexplore.ieee.org/abstract/document/5207650/
