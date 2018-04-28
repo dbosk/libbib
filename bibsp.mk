@@ -11,6 +11,7 @@ BIBSP_TOPIC+=	blockchain depend
 BIBSP_TOPIC+=	nfc
 BIBSP_TOPIC+=	adhocnets
 BIBSP_TOPIC+=	ecurrency
+BIBSP_TOPIC+= 	p2p
 
 BIBSP_TOPIC+=	otrmsg otpkx ppes
 
