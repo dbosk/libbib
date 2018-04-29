@@ -15,3 +15,6 @@ URL-TowardsMeasuringAnonymity=http://www.academia.edu/download/40412595/Towards_
 
 BIBSP_REFKEY+=Sphinx
 URL-Sphinx=https://ieeexplore.ieee.org/abstract/document/5207650/
+
+BIBSP_REFKEY+=UniversalReencryption
+URL-UniversalReencryption=https://link.springer.com/chapter/10.1007%2F978-3-540-24660-2_14
