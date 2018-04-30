@@ -18,3 +18,12 @@ URL-Sphinx=https://ieeexplore.ieee.org/abstract/document/5207650/
 
 BIBSP_REFKEY+=UniversalReencryption
 URL-UniversalReencryption=https://link.springer.com/chapter/10.1007%2F978-3-540-24660-2_14
+
+BIBSP_REFKEY+=RouteFingerprinting
+URL-RouteFingerprinting=https://ieeexplore.ieee.org/abstract/document/1698593/
+
+BIBSP_REFKEY+=EpistemicAttacksOnRouteSelection
+URL-EpistemicAttacksOnRouteSelection=https://link.springer.com/chapter/10.1007%2F978-3-540-70630-4_10
+
+BIBSP_REFKEY+=DenialOfSecurity
+URL-DenialOfSecurity=https://dl.acm.org/citation.cfm?id=1315258
