@@ -27,3 +27,6 @@ URL-EpistemicAttacksOnRouteSelection=https://link.springer.com/chapter/10.1007%2
 
 BIBSP_REFKEY+=DenialOfSecurity
 URL-DenialOfSecurity=https://dl.acm.org/citation.cfm?id=1315258
+
+BIBSP_REFKEY+=CLOnionRouting
+URL-CLOnionRouting=https://link.springer.com/chapter/10.1007/11535218_11
