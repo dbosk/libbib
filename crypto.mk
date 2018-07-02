@@ -94,3 +94,6 @@ URL-DY-VRF=https://link.springer.com/chapter/10.1007%2F978-3-540-30580-4_28
 
 BIBSP_REFKEY+=PKnotation
 URL-PKnotation=https://link.springer.com/chapter/10.1007%2FBFb0052252
+
+BIBSP_REFKEY+=UniversalComposability
+URL-UniversalComposability=https://eprint.iacr.org/2000/067
