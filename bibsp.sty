@@ -164,10 +164,16 @@
     \ensuremath{\mathcal{#2}}%
   }%
 }
-\ProvideDocumentCommand{\NewVariable}{m m}{%
-  \ProvideDocumentCommand{#1}{}{%
-    \ensuremath{\mathit{#2}}%
-  }
+\ProvideDocumentCommand{\NewVariable}{s m m}{%
+  \IfValueTF{#1}{%
+    \ProvideDocumentCommand{#2}{}{%
+      \ensuremath{#3}%
+    }%
+  }{%
+    \ProvideDocumentCommand{#2}{}{%
+      \ensuremath{\mathit{#3}}%
+    }%
+  }%
 }
 %
 % Proofs of knowledge
