@@ -30,3 +30,6 @@ URL-DenialOfSecurity=https://dl.acm.org/citation.cfm?id=1315258
 
 BIBSP_REFKEY+=CLOnionRouting
 URL-CLOnionRouting=https://link.springer.com/chapter/10.1007/11535218_11
+
+BIBSP_REFKEY+=RoutingSurveyAnonymousProtocols
+URL-RoutingSurveyAnonymousProtocols=https://dx.doi.org/10.1145/3182658
