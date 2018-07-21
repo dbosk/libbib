@@ -33,3 +33,6 @@ URL-CLOnionRouting=https://link.springer.com/chapter/10.1007/11535218_11
 
 BIBSP_REFKEY+=RoutingSurveyAnonymousProtocols
 URL-RoutingSurveyAnonymousProtocols=https://dx.doi.org/10.1145/3182658
+
+BIBSP_REFKEY+=Octopus
+URL-Octopus=https://arxiv.org/abs/1203.2668
