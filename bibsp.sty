@@ -41,65 +41,8 @@
   \crefname{proposition}{Prop.}{Prop.}
   \Crefname{proposition}{Proposition}{Propositions}
 }
-%%%%%%%%%%%%%%%%%%%%%%
-% Protocols
-%%%%%%%%%%%%%%%%%%%%%%
-\newlength{\ProtoArrowLength}
-\setlength{\ProtoArrowLength}{0.15\linewidth}
-\ProvideDocumentCommand{\ProtoSendRight}{o m}{\ensuremath{%
-    \IfValueTF{#1}%
-    {\xrightarrow[\hspace{#1}]{#2}}%
-    {\xrightarrow[\hspace{\ProtoArrowLength}]{#2}}%
-  }}
-\ProvideDocumentCommand{\ProtoSendLeft}{o m}{\ensuremath{%
-    \IfValueTF{#1}%
-    {\xleftarrow[\hspace{#1}]{#2}}%
-    {\xleftarrow[\hspace{\ProtoArrowLength}]{#2}}%
-  }}
-\ProvideDocumentCommand{\Proto}{m m}{\ensuremath{%
-    \mleft\langle%
-    #1; #2%
-    \mright\rangle%
-  }}
-%%%%%%%%%%%%%%%%%%%%%%
-% General maths
-%%%%%%%%%%%%%%%%%%%%%%
-%\ProvideDocumentCommand{\ord}{m}{\ensuremath{|#1|}}
-%\DeclareMathOperator{\N}{\mathbb{N}}
-%\DeclareMathOperator{\Z}{\mathbb{Z}}
-%\DeclareMathOperator{\Q}{\mathbb{Q}}
-%\DeclareMathOperator{\R}{\mathbb{R}}
-%\DeclareMathOperator{\C}{\mathbb{C}}
-\ifdefined\powerset%
-  \relax%
-\else%
-  \DeclareMathOperator{\powerset}{\mathscr{P}}%
-\fi
-\ProvideDocumentCommand{\textand}{}{\ensuremath{\qquad\text{and}\qquad}}
-\ProvideDocumentCommand{\Prob}{o o m}{\ensuremath{%
-  \Pr%
-  \IfValueT{#1}{\ifthenelse{\equal{#1}{}}{}{_{#1}}}%
-  \IfValueT{#2}{^{#2}}%
-  \mleft[%
-    \ifthenelse{\equal{#3}{}}{\cdot}{#3}%
-  \mright]%
-}}
-
-%%%%%%%%%%%%%%%%%%%%%%
-% Algebra
-%%%%%%%%%%%%%%%%%%%%%%
-% Galois fields (finite fields)
-\DeclareMathOperator{\GF}{\mathrm{GF}}
-\DeclareMathOperator{\F}{\mathbb{F}}
-\DeclareMathOperator{\ord}{ord}
-\ProvideDocumentCommand{\card}{m}{\ensuremath{|#1|}}
-\ProvideDocumentCommand{\gen}{m}{\mleft\langle #1\mright\rangle}
-
-%%%%%%%%%%%%%%%%%%%%%%
-% Crypto
-%%%%%%%%%%%%%%%%%%%%%%
 %
-% General algorithmic parts
+% General algorithmic stuff
 %
 \ProvideDocumentCommand{\method}{}{\ensuremath{.\!}}
 \ProvideDocumentCommand{\NewScheme}{m m}{%
@@ -175,6 +118,59 @@
     }%
   }%
 }
+%%%%%%%%%%%%%%%%%%%%%%
+% Protocols
+%%%%%%%%%%%%%%%%%%%%%%
+\newlength{\ProtoArrowLength}
+\setlength{\ProtoArrowLength}{0.15\linewidth}
+\ProvideDocumentCommand{\ProtoSendRight}{o m}{\ensuremath{%
+    \IfValueTF{#1}%
+    {\xrightarrow[\hspace{#1}]{#2}}%
+    {\xrightarrow[\hspace{\ProtoArrowLength}]{#2}}%
+  }}
+\ProvideDocumentCommand{\ProtoSendLeft}{o m}{\ensuremath{%
+    \IfValueTF{#1}%
+    {\xleftarrow[\hspace{#1}]{#2}}%
+    {\xleftarrow[\hspace{\ProtoArrowLength}]{#2}}%
+  }}
+\ProvideDocumentCommand{\Proto}{m m}{\ensuremath{%
+    \mleft\langle%
+    #1; #2%
+    \mright\rangle%
+  }}
+%%%%%%%%%%%%%%%%%%%%%%
+% General maths
+%%%%%%%%%%%%%%%%%%%%%%
+\NewVariable*{\NN}{\mathbb{N}}
+\NewVariable*{\ZZ}{\mathbb{Z}}
+\NewVariable*{\QQ}{\mathbb{Q}}
+\NewVariable*{\RR}{\mathbb{R}}
+\NewVariable*{\CC}{\mathbb{C}}
+\ifdefined\powerset%
+  \relax%
+\else%
+  \NewFunction*{\powerset}{\mathscr{P}}%
+\fi
+\ProvideDocumentCommand{\textand}{}{\ensuremath{\qquad\text{and}\qquad}}
+\ProvideDocumentCommand{\Prob}{o o m}{\ensuremath{%
+  \Pr%
+  \IfValueT{#1}{\ifthenelse{\equal{#1}{}}{}{_{#1}}}%
+  \IfValueT{#2}{^{#2}}%
+  \mleft[%
+    \ifthenelse{\equal{#3}{}}{\cdot}{#3}%
+  \mright]%
+}}
+
+%%%%%%%%%%%%%%%%%%%%%%
+% Algebra
+%%%%%%%%%%%%%%%%%%%%%%
+% Galois fields (finite fields)
+\NewVariable*{\GF}{\mathrm{GF}}
+\NewVariable*{\F}{\mathbb{F}}
+\NewFunction{\ord}{ord}
+\ProvideDocumentCommand{\card}{m}{\ensuremath{|#1|}}
+\ProvideDocumentCommand{\gen}{m}{\mleft\langle #1\mright\rangle}
+
 %
 % Proofs of knowledge
 %
