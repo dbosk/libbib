@@ -78,14 +78,14 @@
     }%
   }%
 }
-\ProvideDocumentCommand{\NewFunction}{m m}{%
-  \ProvideDocumentCommand{#1}{s o o}{%
+\ProvideDocumentCommand{\NewFunction}{s m m}{%
+  \ProvideDocumentCommand{#2}{s o o}{%
     \ensuremath{%
       \operatorname{%
         \IfBooleanTF{##1}{%
-          \overline{#2}%
+          \overline{#3}%
         }{%
-          #2%
+          #3%
         }%
       }%
       \IfValueTF{##3}{%
@@ -97,15 +97,27 @@
     }%
   }%
 }
-\ProvideDocumentCommand{\NewSet}{m m}{%
-  \ProvideDocumentCommand{#1}{}{%
-    \ensuremath{\mathcal{#2}}%
-  }%
+\ProvideDocumentCommand{\NewSet}{s m m}{%
+  \IfBooleanTF{#1}{%
+    \ProvideDocumentCommand{#2}{}{%
+      \ensuremath{#3}%
+    }%
+  }{%
+    \ProvideDocumentCommand{#2}{}{%
+      \ensuremath{\mathcal{#3}}%
+    }%
+  }
 }
-\ProvideDocumentCommand{\NewEntity}{m m}{%
-  \ProvideDocumentCommand{#1}{}{%
-    \ensuremath{\mathcal{#2}}%
-  }%
+\ProvideDocumentCommand{\NewEntity}{s m m}{%
+  \IfBooleanTF{#1}{%
+    \ProvideDocumentCommand{#2}{}{%
+      \ensuremath{#3}%
+    }%
+  }{%
+    \ProvideDocumentCommand{#2}{}{%
+      \ensuremath{\mathcal{#3}}%
+    }%
+  }
 }
 \ProvideDocumentCommand{\NewVariable}{s m m}{%
   \IfValueTF{#1}{%
