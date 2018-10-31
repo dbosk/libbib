@@ -47,7 +47,7 @@
 \ProvideDocumentCommand{\method}{}{\ensuremath{.\!}}
 \ProvideDocumentCommand{\NewScheme}{m m}{%
   \ProvideDocumentCommand{#1}{s o}{%
-    \ensuremath{%
+    {\ensuremath{%
       \operatorname{%
         \IfBooleanTF{##1}{%
           \overline{{\mathsf{#2}}}%
@@ -57,11 +57,11 @@
         \IfValueT{##2}{.\!\mathsf{##2}}%
       }%
     }%
-  }%
+  }}%
 }
 \ProvideDocumentCommand{\NewAlgorithm}{m m}{%
   \ProvideDocumentCommand{#1}{s o o}{%
-    \ensuremath{%
+    {\ensuremath{%
       \operatorname{%
         \IfBooleanTF{##1}{%
           \overline{\mathsf{#2}}%
@@ -76,11 +76,11 @@
         \IfValueT{##2}{\mleft(##2\mright)}%
       }%
     }%
-  }%
+  }}%
 }
 \ProvideDocumentCommand{\NewFunction}{s m m}{%
   \ProvideDocumentCommand{#2}{s o o}{%
-    \ensuremath{%
+    {\ensuremath{%
       \operatorname{%
         \IfBooleanTF{##1}{%
           \overline{#3}%
@@ -95,38 +95,38 @@
         \IfValueT{##2}{\mleft(##2\mright)}%
       }%
     }%
-  }%
+  }}%
 }
 \ProvideDocumentCommand{\NewSet}{s m m}{%
   \IfBooleanTF{#1}{%
     \ProvideDocumentCommand{#2}{}{%
-      \ensuremath{#3}%
+      {\ensuremath{#3}}%
     }%
   }{%
     \ProvideDocumentCommand{#2}{}{%
-      \ensuremath{\mathcal{#3}}%
+      {\ensuremath{\mathcal{#3}}}%
     }%
   }
 }
 \ProvideDocumentCommand{\NewEntity}{s m m}{%
   \IfBooleanTF{#1}{%
     \ProvideDocumentCommand{#2}{}{%
-      \ensuremath{#3}%
+      {\ensuremath{#3}}%
     }%
   }{%
     \ProvideDocumentCommand{#2}{}{%
-      \ensuremath{\mathcal{#3}}%
+      {\ensuremath{\mathcal{#3}}}%
     }%
   }
 }
 \ProvideDocumentCommand{\NewVariable}{s m m}{%
   \IfValueTF{#1}{%
     \ProvideDocumentCommand{#2}{}{%
-      \ensuremath{#3}%
+      {\ensuremath{#3}}%
     }%
   }{%
     \ProvideDocumentCommand{#2}{}{%
-      \ensuremath{\mathit{#3}}%
+      {\ensuremath{\mathit{#3}}}%
     }%
   }%
 }
