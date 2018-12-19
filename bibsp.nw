@@ -72,7 +72,8 @@ be indispensable:
 the standard "\left" and "\right" commands.
 
 We also provide a makefile [[<<bibsp.mk>>]] which can be used to easily add 
-bibsp as a dependency.
+bibsp as a dependency --- \eg for use with a Makefile 
+framework~\cite[\eg][]{makefiles}.
 <<bibsp.mk>>=
 ifndef BIBSP_MK
 BIBSP_MK=true
