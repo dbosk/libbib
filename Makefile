@@ -49,7 +49,7 @@ BIBSP_TOPIC+= 	otrmsg otpkx ppes
 all: $(foreach t,${BIBSP_TOPIC}, ${t}.bib ${t}.mk)
 
 $(foreach t,${BIBSP_TOPIC}, ${t}.bib ${t}.mk): bibsp.nw
-	${NOTANGLE} ${NOTANGLEFLAGS} -R$@ $< > $@
+	${NOTANGLE}
 
 
 .PHONY: clean
