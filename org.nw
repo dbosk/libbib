@@ -1,0 +1,35 @@
+\chapter{Organizations}
+
+There are a lot of organizations which uses acronyms.
+<<bibsp package content>>=
+\DeclareAcronym{UN}{%
+  short = {UN},
+  long = {United Nations},
+}
+@
+
+Then we have some of the world's spy agencies:
+<<bibsp package content>>=
+\DeclareAcronym{NSA}{%
+  short = {NSA},
+  long = {US National Security Agency}
+}
+\DeclareAcronym{GCHQ}{%
+  short = {GCHQ},
+  long = {UK Government Communications Headquarters}
+}
+\DeclareAcronym{CIA}{%
+  short = {CIA},
+  long = {US Central Intelligence Agency}
+}
+\DeclareAcronym{TAO}{%
+  short = {TAO},
+  long = {Tailored Access Operations}
+}
+\DeclareAcronym{FRA}{%
+  short = {FRA},
+  foreign = {Försvarets radioanstalt},
+  long = {Swedish National Defence Radio Establishment},
+}
+@
+

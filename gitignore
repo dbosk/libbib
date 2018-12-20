@@ -3,21 +3,10 @@
 
 # libbib: general
 libbib.sty
+bibsp.sty
 
 # libbib: bib-files
-ac.bib
-anon.bib
-be.bib
-crypto.bib
-meta.bib
-nfc.bib
-osn.bib
-otpkx.bib
-otrmsg.bib
-ppes.bib
-privacy.bib
-rfc.bib
-surveillance.bib
+bibsp.bib
 
 # libbib: lncs
 aliascnt.sty
@@ -33,5 +22,3 @@ sprmindx.sty
 # libbib: biblatex
 biblatex-lncs-src
 
-# we don't use PDF figures
-*.pdf

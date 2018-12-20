@@ -1,73 +1,145 @@
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
 \ProvidesPackage{bibsp}[2018/03/10 v1.0 Bibliographic Security/Privacy Library]
-\RequirePackage{xparse}
-\RequirePackage{amsmath}
-\RequirePackage{mleftright}
-\PassOptionsToPackage{compress}{cleveref}
-\RequirePackage{cleveref}
+\PassOptionsToPackage{mathscr}{euscript}
 \PassOptionsToPackage{single}{acro}
 \PassOptionsToPackage{label}{acro}
 \RequirePackage{mfirstuc-english}
 \PassOptionsToPackage{uc-cmd=\makefirstuc}{acro}
+\PassOptionsToPackage{compress}{cleveref}
+\RequirePackage{euscript}
+\RequirePackage{xparse}
+\RequirePackage{amsmath}
+\RequirePackage{mleftright}
 \RequirePackage{acro}
 \RequirePackage{biblatex}
-\PassOptionsToPackage{mathscr}{euscript}
-\RequirePackage{euscript}
-\RequirePackage{textcomp}
-\RequirePackage{ifthen}
+\RequirePackage{cleveref}
 \DeclareOption{lncs}{%
   \crefname{chapter}{Chap.}{Chap.}
-	\Crefname{chapter}{Chapter}{Chapters}
-	\crefname{section}{Sect.}{Sect.}
-	\Crefname{section}{Section}{Sections}
-	\crefname{figure}{Fig.}{Fig.}
-	\Crefname{figure}{Figure}{Figures}
-	\crefname{table}{Tab.}{Tab.}
-	\Crefname{table}{Table}{Tables}
-	\crefname{definition}{Def.}{Def.}
-	\Crefname{definition}{Definition}{Definitions}
-	\crefname{theorem}{Thm.}{Thm.}
-	\Crefname{theorem}{Theorem}{Theorems}
-	\crefname{lemma}{Lem.}{Lem.}
-	\Crefname{lemma}{Lemma}{Lemmas}
-	\crefname{corollary}{Cor.}{Cor.}
-	\Crefname{corollary}{Corollary}{Corollaries}
-	\crefname{proposition}{Prop.}{Prop.}
-	\Crefname{proposition}{Proposition}{Propositions}
-	\acsetup{uc-cmd=\capitalisewords}
-	\MFUhyphentrue
-	\let\ac\Ac
-	\let\acf\Acf
-	\let\acl\Acl
-	\let\acp\Acp
-	\let\aclp\Aclp
-	\let\acfp\Acfp
+  \Crefname{chapter}{Chapter}{Chapters}
+  \crefname{section}{Sect.}{Sect.}
+  \Crefname{section}{Section}{Sections}
+  \crefname{figure}{Fig.}{Fig.}
+  \Crefname{figure}{Figure}{Figures}
+  \crefname{table}{Tab.}{Tab.}
+  \Crefname{table}{Table}{Tables}
+  \crefname{definition}{Def.}{Def.}
+  \Crefname{definition}{Definition}{Definitions}
+  \crefname{theorem}{Thm.}{Thm.}
+  \Crefname{theorem}{Theorem}{Theorems}
+  \crefname{lemma}{Lem.}{Lem.}
+  \Crefname{lemma}{Lemma}{Lemmas}
+  \crefname{corollary}{Cor.}{Cor.}
+  \Crefname{corollary}{Corollary}{Corollaries}
+  \crefname{proposition}{Prop.}{Prop.}
+  \Crefname{proposition}{Proposition}{Propositions}
+  \acsetup{uc-cmd=\capitalisewords}
+  \MFUhyphentrue
+  \let\ac\Ac
+  \let\acf\Acf
+  \let\acl\Acl
+  \let\acp\Acp
+  \let\aclp\Aclp
+  \let\acfp\Acfp
 }
-\addbibresource{crypto.bib}
-\addbibresource{auth.bib}
-\addbibresource{location.bib}
-\addbibresource{passwd.bib}
-\addbibresource{adhocnets.bib}
-\addbibresource{blockchain.bib}
-\addbibresource{anon.bib}
-\addbibresource{be.bib}
-\addbibresource{mpc.bib}
-\addbibresource{privacy.bib}
-\addbibresource{meta.bib}
-\addbibresource{surveillance.bib}
-\addbibresource{hr.bib}
-\addbibresource{protests.bib}
-\addbibresource{voting.bib}
-\addbibresource{osn.bib}
-\addbibresource{reputation.bib}
-\addbibresource{stats.bib}
-\addbibresource{depend.bib}
-\addbibresource{nfc.bib}
-\addbibresource{ecurrency.bib}
-\addbibresource{otrmsg.bib}
-\addbibresource{otpkx.bib}
-\addbibresource{ppes.bib}
-\addbibresource{ac.bib}
+\ProvideDocumentCommand{\textand}{}{\ensuremath{\qquad\text{and}\qquad}}
+\ProvideDocumentCommand{\NN}{}{\ensuremath{\mathbb{N}}}
+\ProvideDocumentCommand{\ZZ}{}{\ensuremath{\mathbb{Z}}}
+\ProvideDocumentCommand{\QQ}{}{\ensuremath{\mathbb{Q}}}
+\ProvideDocumentCommand{\RR}{}{\ensuremath{\mathbb{R}}}
+\ProvideDocumentCommand{\CC}{}{\ensuremath{\mathbb{C}}}
+\ProvideDocumentCommand{\card}{m}{\ensuremath{|#1|}}
+\ifdefined\powerset%
+  \relax%
+\else%
+  \DeclareMathOperator{\powerset}{\mathscr{P}}%
+\fi
+\ProvideDocumentCommand{\GF}{}{\ensuremath{\mathrm{GF}}}
+\ProvideDocumentCommand{\FF}{}{\ensuremath{\mathbb{F}}}
+\DeclareMathOperator{\ord}{ord}
+\ProvideDocumentCommand{\gen}{m}{\ensuremath{\mleft\langle #1\mright\rangle}}
+\ProvideDocumentCommand{\Proto}{m m}{\ensuremath{%
+    \mleft\langle%
+    #1; #2%
+    \mright\rangle%
+  }}
+\newlength{\ProtoArrowLength}
+\setlength{\ProtoArrowLength}{0.15\linewidth}
+\ProvideDocumentCommand{\ProtoSendRight}{o m}{\ensuremath{%
+    \IfValueTF{#1}%
+    {\xrightarrow[\hspace{#1}]{#2}}%
+    {\xrightarrow[\hspace{\ProtoArrowLength}]{#2}}%
+  }}
+\ProvideDocumentCommand{\ProtoSendLeft}{o m}{\ensuremath{%
+    \IfValueTF{#1}%
+    {\xleftarrow[\hspace{#1}]{#2}}%
+    {\xleftarrow[\hspace{\ProtoArrowLength}]{#2}}%
+  }}
+\ProvideDocumentCommand{\concat}{}{\ensuremath{\mathbin{\|}}}
+\ProvideDocumentCommand{\NewCryptoScheme}{m m}{%
+  \ProvideDocumentCommand{#1}{s o}{%
+    \ensuremath{%
+      \operatorname{%
+        \IfBooleanTF{##1}{%
+          \overline{{\mathsf{#2}}}%
+        }{%
+          {\mathsf{#2}}%
+        }%
+      }%
+      \IfValueT{##2}{\!.\!##2}%
+    }%
+  }%
+}
+\ProvideDocumentCommand{\method}{m m}{\ensuremath{%
+    \operatorname{#1.\!#2}%
+  }}
+\ProvideDocumentCommand{\NewAlgorithm}{m m}{%
+  \ProvideDocumentCommand{#1}{s o o}{%
+    \ensuremath{%
+      \operatorname{%
+        \IfBooleanTF{##1}{%
+          \overline{\mathsf{#2}}%
+        }{%
+          \mathsf{#2}%
+        }%
+      }%
+      \IfValueTF{##3}{%
+        ##2%
+        \mleft(##3\mright)%
+      }{%
+        \IfValueT{##2}{\mleft(##2\mright)}%
+      }%
+    }%
+  }%
+}
+\ProvideDocumentCommand{\NewFunction}{m m}{%
+  \ProvideDocumentCommand{#1}{s o o}{%
+    \ensuremath{%
+      \operatorname{%
+        \IfBooleanTF{##1}{%
+          \overline{#2}%
+        }{%
+          #2%
+        }%
+      }%
+      \IfValueTF{##3}{%
+        ##2%
+        \mleft(##3\mright)%
+      }{%
+        \IfValueT{##2}{\mleft(##2\mright)}%
+      }%
+    }%
+  }%
+}
+\ProvideDocumentCommand{\NewCryptoSet}{m m}{%
+  \ProvideDocumentCommand{#1}{}{%
+    \ensuremath{\mathcal{#2}}%
+  }%
+}
+\ProvideDocumentCommand{\NewCryptoEntity}{m m}{%
+  \ProvideDocumentCommand{#1}{}{%
+    \ensuremath{\mathcal{#2}}%
+  }%
+}
 \DeclareAcronym{PPT}{%
   short = {PPT},
   long = {probabilistic polynomial-time},
@@ -93,6 +165,29 @@
   long = {Dodis-Yampolskiy verifiable random function},
   cite = {DY-VRF},
 }
+\ProvideDocumentCommand{\PK}{o o}{\ensuremath{%
+    \operatorname{PK}%
+    \IfValueT{#1}{%
+      \IfValueTF{#2}{%
+        \mleft\{\mleft(#1\mright) : #2\mright\}%
+      }{%
+        \mleft\{#1\mright\}%
+      }%
+    }%
+  }}
+\ProvideDocumentCommand{\SPK}{o o o}{\ensuremath{%
+    \operatorname{SPK}%
+    \IfValueT{#1}{%
+      \IfValueTF{#2}{%
+        \mleft\{\mleft(#1\mright) : #2\mright\}%
+      }{%
+        \mleft\{#1\mright\}%
+      }%
+      \IfValueT{#3}{%
+        \mleft(#3\mright)%
+      }%
+    }%
+  }}
 \DeclareAcronym{PK}{%
   short = {PK},
   long = {proof of knowledge},
@@ -232,6 +327,7 @@
   foreign = {Försvarets radioanstalt},
   long = {Swedish National Defence Radio Establishment},
 }
+\addbibresource{bibsp.bib}
 \DeclareAcronym{tposet}{%
   short = {t-poset},
   long = {transactional partially ordered set},
@@ -288,6 +384,64 @@
     }
 }
 
+\ProvideDocumentCommand{\indcpa}{}{\ensuremath{\text{IND-CPA}}}
+\ProvideDocumentCommand{\indcca}{}{\ensuremath{\text{IND-CCA}}}
+\ProvideDocumentCommand{\indsfcca}{}{\ensuremath{\text{IND-SFCCA}}}
+\ProvideDocumentCommand{\intptxt}{}{\ensuremath{\text{INT-PTXT}}}
+\ProvideDocumentCommand{\intctxt}{}{\ensuremath{\text{INT-CTXT}}}
+\ProvideDocumentCommand{\intsfctxt}{}{\ensuremath{\text{INT-SFCTXT}}}
+\ProvideDocumentCommand{\nmcpa}{}{\ensuremath{\text{NM-CPA}}}
+\ProvideDocumentCommand{\nmcca}{}{\ensuremath{\text{NM-CCA}}}
+\ProvideDocumentCommand{\sufcma}{}{\ensuremath{\text{SUF-CMA}}}
+\ProvideDocumentCommand{\denss}{}{\ensuremath{\text{DEN-SS}}}
+\ProvideDocumentCommand{\rgets}{}{\overset{\text{\textcent}}{\gets}}
+%\DeclareMathOperator{\AdvOp}{\mathbf{Adv}}
+%\ProvideDocumentCommand{\Adv}{m m o}{%
+%  \IfValueTF{#3}{%
+%    \ensuremath{\AdvOp^{#1}_{#2}\mleft( #3 \mright)}%
+%  }{%
+%    \ensuremath{\AdvOp^{#1}_{#2}\mleft( \cdot \mright)}%
+%  }%
+%}
+%\DeclareMathOperator{\ExpOp}{\mathbf{Exp}}
+%\ProvideDocumentCommand{\Exp}{m m o}{%
+%  \IfValueTF{#3}{%
+%    \ensuremath{\ExpOp^{#1}_{#2}\mleft( #3 \mright)}%
+%  }{%
+%    \ensuremath{\ExpOp^{#1}_{#2}\mleft( \cdot \mright)}%
+%  }%
+%}
+\ProvideDocumentCommand{\Key}{s m}{\ensuremath{%
+  \IfBooleanT{#1}{\hat}k%
+  %\IfValueT{#2}{^{#2}}%
+  \ifthenelse{\equal{#2}{}}{}{_{#2}}%
+}}
+\ProvideDocumentCommand{\PubKey}{s m}{\ensuremath{%
+  \IfBooleanT{#1}{\hat}pk%
+  \ifthenelse{\equal{#2}{}}{}{_{#2}}%
+}}
+\ProvideDocumentCommand{\PriKey}{s m}{\ensuremath{%
+  \IfBooleanT{#1}{\hat}sk%
+  \ifthenelse{\equal{#2}{}}{}{_{#2}}%
+}}
+\ProvideDocumentCommand{\MACKey}{s m}{\ensuremath{%
+  \IfBooleanT{#1}{\hat}k%
+  \ifthenelse{\equal{#2}{}}{}{_{#2}}%
+  ^{\mathsf{MA}}%
+}}
+\ProvideDocumentCommand{\TagKey}{s m}{\ensuremath{%
+  \IfBooleanT{#1}{\hat}k%
+  \ifthenelse{\equal{#2}{}}{}{_{#2}}%
+  ^{\mathsf{MA}}%
+}}
+\ProvideDocumentCommand{\SignKey}{s m}{\ensuremath{%
+  \IfBooleanT{#1}{\hat}sk%
+  \ifthenelse{\equal{#2}{}}{}{_{#2}}%
+}}
+\ProvideDocumentCommand{\VerifKey}{s m}{\ensuremath{%
+  \IfBooleanT{#1}{\hat}vk%
+  \ifthenelse{\equal{#2}{}}{}{_{#2}}%
+}}
 % Crypto properties
 \DeclareAcronym{IND-CPA}{%
   short = {IND-CPA},
@@ -760,185 +914,5 @@
   long = {Bell-LaPadula},
   cite = {Bell-LaPadula}
 }
-\ProvideDocumentCommand{\Proto}{m m}{\ensuremath{%
-    \mleft\langle%
-    #1; #2%
-    \mright\rangle%
-  }}
-\newlength{\ProtoArrowLength}
-\setlength{\ProtoArrowLength}{0.15\linewidth}
-\ProvideDocumentCommand{\ProtoSendRight}{o m}{\ensuremath{%
-    \IfValueTF{#1}%
-    {\xrightarrow[\hspace{#1}]{#2}}%
-    {\xrightarrow[\hspace{\ProtoArrowLength}]{#2}}%
-  }}
-\ProvideDocumentCommand{\ProtoSendLeft}{o m}{\ensuremath{%
-    \IfValueTF{#1}%
-    {\xleftarrow[\hspace{#1}]{#2}}%
-    {\xleftarrow[\hspace{\ProtoArrowLength}]{#2}}%
-  }}
-\ProvideDocumentCommand{\concat}{}{\ensuremath{\mathbin{\|}}}
-\ProvideDocumentCommand{\NewCryptoScheme}{m m}{%
-  \ProvideDocumentCommand{#1}{s o}{%
-    \ensuremath{%
-      \operatorname{%
-        \IfBooleanTF{##1}{%
-          \overline{{\mathsf{#2}}}%
-        }{%
-          {\mathsf{#2}}%
-        }%
-      }%
-      \IfValueT{##2}{\!.\!##2}%
-    }%
-  }%
-}
-\ProvideDocumentCommand{\method}{m m}{\ensuremath{%
-    \operatorname{#1.\!#2}%
-  }}
-\ProvideDocumentCommand{\NewAlgorithm}{m m}{%
-  \ProvideDocumentCommand{#1}{s o o}{%
-    \ensuremath{%
-      \operatorname{%
-        \IfBooleanTF{##1}{%
-          \overline{\mathsf{#2}}%
-        }{%
-          \mathsf{#2}%
-        }%
-      }%
-      \IfValueTF{##3}{%
-        ##2%
-        \mleft(##3\mright)%
-      }{%
-        \IfValueT{##2}{\mleft(##2\mright)}%
-      }%
-    }%
-  }%
-}
-\ProvideDocumentCommand{\NewFunction}{m m}{%
-  \ProvideDocumentCommand{#1}{s o o}{%
-    \ensuremath{%
-      \operatorname{%
-        \IfBooleanTF{##1}{%
-          \overline{#2}%
-        }{%
-          #2%
-        }%
-      }%
-      \IfValueTF{##3}{%
-        ##2%
-        \mleft(##3\mright)%
-      }{%
-        \IfValueT{##2}{\mleft(##2\mright)}%
-      }%
-    }%
-  }%
-}
-\ProvideDocumentCommand{\NewCryptoSet}{m m}{%
-  \ProvideDocumentCommand{#1}{}{%
-    \ensuremath{\mathcal{#2}}%
-  }%
-}
-\ProvideDocumentCommand{\NewCryptoEntity}{m m}{%
-  \ProvideDocumentCommand{#1}{}{%
-    \ensuremath{\mathcal{#2}}%
-  }%
-}
-\ProvideDocumentCommand{\PK}{o o}{\ensuremath{%
-    \operatorname{PK}%
-    \IfValueT{#1}{%
-      \IfValueTF{#2}{%
-        \mleft\{\mleft(#1\mright) : #2\mright\}%
-      }{%
-        \mleft\{#1\mright\}%
-      }%
-    }%
-  }}
-\ProvideDocumentCommand{\SPK}{o o o}{\ensuremath{%
-    \operatorname{SPK}%
-    \IfValueT{#1}{%
-      \IfValueTF{#2}{%
-        \mleft\{\mleft(#1\mright) : #2\mright\}%
-      }{%
-        \mleft\{#1\mright\}%
-      }%
-      \IfValueT{#3}{%
-        \mleft(#3\mright)%
-      }%
-    }%
-  }}
-\ProvideDocumentCommand{\indcpa}{}{\ensuremath{\text{IND-CPA}}}
-\ProvideDocumentCommand{\indcca}{}{\ensuremath{\text{IND-CCA}}}
-\ProvideDocumentCommand{\indsfcca}{}{\ensuremath{\text{IND-SFCCA}}}
-\ProvideDocumentCommand{\intptxt}{}{\ensuremath{\text{INT-PTXT}}}
-\ProvideDocumentCommand{\intctxt}{}{\ensuremath{\text{INT-CTXT}}}
-\ProvideDocumentCommand{\intsfctxt}{}{\ensuremath{\text{INT-SFCTXT}}}
-\ProvideDocumentCommand{\nmcpa}{}{\ensuremath{\text{NM-CPA}}}
-\ProvideDocumentCommand{\nmcca}{}{\ensuremath{\text{NM-CCA}}}
-\ProvideDocumentCommand{\sufcma}{}{\ensuremath{\text{SUF-CMA}}}
-\ProvideDocumentCommand{\denss}{}{\ensuremath{\text{DEN-SS}}}
-\ProvideDocumentCommand{\rgets}{}{\overset{\text{\textcent}}{\gets}}
-%\DeclareMathOperator{\AdvOp}{\mathbf{Adv}}
-%\ProvideDocumentCommand{\Adv}{m m o}{%
-%  \IfValueTF{#3}{%
-%    \ensuremath{\AdvOp^{#1}_{#2}\mleft( #3 \mright)}%
-%  }{%
-%    \ensuremath{\AdvOp^{#1}_{#2}\mleft( \cdot \mright)}%
-%  }%
-%}
-%\DeclareMathOperator{\ExpOp}{\mathbf{Exp}}
-%\ProvideDocumentCommand{\Exp}{m m o}{%
-%  \IfValueTF{#3}{%
-%    \ensuremath{\ExpOp^{#1}_{#2}\mleft( #3 \mright)}%
-%  }{%
-%    \ensuremath{\ExpOp^{#1}_{#2}\mleft( \cdot \mright)}%
-%  }%
-%}
-\ProvideDocumentCommand{\Key}{s m}{\ensuremath{%
-  \IfBooleanT{#1}{\hat}k%
-  %\IfValueT{#2}{^{#2}}%
-  \ifthenelse{\equal{#2}{}}{}{_{#2}}%
-}}
-\ProvideDocumentCommand{\PubKey}{s m}{\ensuremath{%
-  \IfBooleanT{#1}{\hat}pk%
-  \ifthenelse{\equal{#2}{}}{}{_{#2}}%
-}}
-\ProvideDocumentCommand{\PriKey}{s m}{\ensuremath{%
-  \IfBooleanT{#1}{\hat}sk%
-  \ifthenelse{\equal{#2}{}}{}{_{#2}}%
-}}
-\ProvideDocumentCommand{\MACKey}{s m}{\ensuremath{%
-  \IfBooleanT{#1}{\hat}k%
-  \ifthenelse{\equal{#2}{}}{}{_{#2}}%
-  ^{\mathsf{MA}}%
-}}
-\ProvideDocumentCommand{\TagKey}{s m}{\ensuremath{%
-  \IfBooleanT{#1}{\hat}k%
-  \ifthenelse{\equal{#2}{}}{}{_{#2}}%
-  ^{\mathsf{MA}}%
-}}
-\ProvideDocumentCommand{\SignKey}{s m}{\ensuremath{%
-  \IfBooleanT{#1}{\hat}sk%
-  \ifthenelse{\equal{#2}{}}{}{_{#2}}%
-}}
-\ProvideDocumentCommand{\VerifKey}{s m}{\ensuremath{%
-  \IfBooleanT{#1}{\hat}vk%
-  \ifthenelse{\equal{#2}{}}{}{_{#2}}%
-}}
-\ProvideDocumentCommand{\textand}{}{\ensuremath{\qquad\text{and}\qquad}}
-\ProvideDocumentCommand{\NN}{}{\ensuremath{\mathbb{N}}}
-\ProvideDocumentCommand{\ZZ}{}{\ensuremath{\mathbb{Z}}}
-\ProvideDocumentCommand{\QQ}{}{\ensuremath{\mathbb{Q}}}
-\ProvideDocumentCommand{\RR}{}{\ensuremath{\mathbb{R}}}
-\ProvideDocumentCommand{\CC}{}{\ensuremath{\mathbb{C}}}
-\ProvideDocumentCommand{\card}{m}{\ensuremath{|#1|}}
-\ifdefined\powerset%
-  \relax%
-\else%
-  \DeclareMathOperator{\powerset}{\mathscr{P}}%
-\fi
-\ProvideDocumentCommand{\GF}{}{\ensuremath{\mathrm{GF}}}
-\ProvideDocumentCommand{\FF}{}{\ensuremath{\mathbb{F}}}
-\DeclareMathOperator{\ord}{ord}
-\ProvideDocumentCommand{\gen}{m}{\ensuremath{\mleft\langle #1\mright\rangle}}
 \ProcessOptions\relax
 \endinput

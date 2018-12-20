@@ -1,0 +1,404 @@
+\chapter{Cryptography}
+
+We can start by adding some good textbooks and references on cryptography.
+\Textcite{Stinson2006cta}, \DescribeBibkey{Stinson2006cta}, provides an easy 
+read, a good introduction.
+<<bibtex entries>>=
+@book{Stinson2006cta,
+  author={Stinson, Douglas R.},
+  title={Cryptography: Theory and Practice},
+  publisher={Chapman {\&} Hall/CRC},
+  address={Boca Raton},
+  year={2006},
+  edition={3},
+  ISBN={1-58488-508-4 (Hardcover)},
+  keywords={Kryptering},
+}
+@
+
+Then we have the reference works by \textcite{GoldreichFOC-1,GoldreichFOC-2}, 
+\DescribeBibkey{GoldreichFOC-1} and \DescribeBibkey{GoldreichFOC-2}.
+<<bibtex entries>>=
+@book{GoldreichFOC-1,
+  author={Goldreich, Oded},
+  title={Foundations of cryptography, Vol.~1: Basic tools},
+  publisher={Cambridge Univ.\ Press},
+  address={Cambridge},
+  year={2001},
+  ISBN={0-521-79172-3},
+}
+@book{GoldreichFOC-2,
+  author={Goldreich, Oded},
+  title={Foundations of cryptography, Vol.~2: Basic applications},
+  publisher={Cambridge Univ.\ Press},
+  address={Cambridge},
+  year={2004},
+  ISBN={0-521-83084-2:},
+}
+@
+
+Finally, we have the book by \textcite{KatzLindell-v2}, 
+\DescribeBibkey{KatzLindell-v2}.
+(And its first version~\cite{KatzLindell-v1}, \DescribeBibkey{KatzLindell-v1}.)
+<<bibtex entries>>=
+@book{KatzLindell-v1,
+  title={Introduction to modern cryptography},
+  author={Katz, Jonathan and Lindell, Yehuda},
+  publisher={Chapman {\&} Hall/CRC},
+  address={Boca Raton},
+  year={2008},
+  edition={1},
+  ISBN={9781584885511},
+}
+@book{KatzLindell-v2,
+  title={Introduction to modern cryptography},
+  author={Katz, Jonathan and Lindell, Yehuda.},
+  publisher={Chapman {\&} Hall/CRC},
+  address={Boca Raton},
+  year={2014},
+  edition={2},
+  ISBN={9781466570269},
+}
+@
+
+
+\section{Algorithmic notation}
+
+When doing applied cryptography, we must use several schemes at the same time.
+A useful notation is that of classes and methods.
+\NewCryptoScheme{\SchemeS}{S}
+Say that we have two schemes \(\SchemeS, \SchemeS*\).
+\NewAlgorithm{\Sign}{Sign}
+Also say that each of these schemes provide a signature algorithm, \(\Sign\).
+Then we can differentiate between them by the notation \(\SchemeS[\Sign]\) and 
+\(\SchemeS*[\Sign]\).
+
+We provide a command \DescribeMacro{\NewCryptoScheme}\marg{macro}\marg{name} 
+which creates a command \cs{\meta{macro}}.
+\Eg the schemes \(\SchemeS, \SchemeS*\) were generated using
+\begin{center}
+"\NewCryptoScheme{\SchemeS}{S}"
+\end{center}
+and \cmd{\SchemeS} produces \(\SchemeS\) and \(\cmd{\SchemeS*}\) produces 
+\(\SchemeS*\).
+Each scheme macro accepts an optional star (to give it the overline) and an 
+optional argument interpreted as a method, \eg "\SchemeS[\Sign]" produces 
+\(\SchemeS[\Sign]\).
+The "\NewCryptoScheme" command is implemented as follows:
+<<bibsp package content>>=
+\ProvideDocumentCommand{\NewCryptoScheme}{m m}{%
+  \ProvideDocumentCommand{#1}{s o}{%
+    \ensuremath{%
+      \operatorname{%
+        \IfBooleanTF{##1}{%
+          \overline{{\mathsf{#2}}}%
+        }{%
+          {\mathsf{#2}}%
+        }%
+      }%
+      \IfValueT{##2}{\!.\!##2}%
+    }%
+  }%
+}
+@
+
+We also provide \DescribeMacro{\method}\marg{class}\marg{method} to simply 
+provide a nice method notation between \meta{class} and \meta{method}.
+The result will be treated as a mathematical operator.
+<<bibsp package content>>=
+\ProvideDocumentCommand{\method}{m m}{\ensuremath{%
+    \operatorname{#1.\!#2}%
+  }}
+@
+
+The algorithm \(\Sign\) was produced using 
+\DescribeMacro{\NewAlgorithm}\marg{macro}\marg{name}, more specifically,
+\begin{center}
+"\NewAlgorithm{\Sign}{Sign}".
+\end{center}
+Analogous to algorithms, we also provide \DescribeMacro{\NewFunction} for 
+mathematical functions, the only difference lies in the typeface.
+An algorithm (or function) command, takes an optional star and then two optional 
+arguments:
+\begin{center}
+\cs{\meta{macro}}\oarg{sub/supscripts}\oarg{argument}.
+\end{center}
+If only one optional argument is given, it's interpreted as the \meta{argument}.
+
+The "\NewAlgorithm" and "\NewFunction" are implemented as follows.
+<<bibsp package content>>=
+\ProvideDocumentCommand{\NewAlgorithm}{m m}{%
+  \ProvideDocumentCommand{#1}{s o o}{%
+    \ensuremath{%
+      \operatorname{%
+        \IfBooleanTF{##1}{%
+          \overline{\mathsf{#2}}%
+        }{%
+          \mathsf{#2}%
+        }%
+      }%
+      \IfValueTF{##3}{%
+        ##2%
+        \mleft(##3\mright)%
+      }{%
+        \IfValueT{##2}{\mleft(##2\mright)}%
+      }%
+    }%
+  }%
+}
+\ProvideDocumentCommand{\NewFunction}{m m}{%
+  \ProvideDocumentCommand{#1}{s o o}{%
+    \ensuremath{%
+      \operatorname{%
+        \IfBooleanTF{##1}{%
+          \overline{#2}%
+        }{%
+          #2%
+        }%
+      }%
+      \IfValueTF{##3}{%
+        ##2%
+        \mleft(##3\mright)%
+      }{%
+        \IfValueT{##2}{\mleft(##2\mright)}%
+      }%
+    }%
+  }%
+}
+@
+
+Finally, we provide two commands for creating macros representing sets or other 
+cryptographic entities, \eg adversarial algorithms.
+\DescribeMacro{\NewCryptoSet}\marg{macro}\marg{name} (and 
+\DescribeMacro{\NewCryptoEntity}\marg{macro}\marg{name}) takes two arguments, 
+one the name of the macro and the second the display name.
+The resulting \cs{\meta{macro}} doesn't take any options.
+<<bibsp package content>>=
+\ProvideDocumentCommand{\NewCryptoSet}{m m}{%
+  \ProvideDocumentCommand{#1}{}{%
+    \ensuremath{\mathcal{#2}}%
+  }%
+}
+\ProvideDocumentCommand{\NewCryptoEntity}{m m}{%
+  \ProvideDocumentCommand{#1}{}{%
+    \ensuremath{\mathcal{#2}}%
+  }%
+}
+@
+
+
+\section{Algorithmic terminology}
+
+There are many terms from the area of complexity theory that we rely on in 
+cryptography, many of them also deserve acronyms.
+The first ones that comes to mind are
+\ac{PPT}, given by \DescribeAcro{PPT}, and
+\ac{PPTM}, given by \DescribeAcro{PPTM}.
+<<bibsp package content>>=
+\DeclareAcronym{PPT}{%
+  short = {PPT},
+  long = {probabilistic polynomial-time},
+}
+\DeclareAcronym{PPTM}{%
+  short = {PPTM},
+  long = {probabilitstic polynomial-time Turing machine},
+}
+@
+
+
+\section{Cryptographic primitives}
+
+There are some basic primitives that we use quite often too:
+\ac{PRP}, provided by \DescribeAcro{PRP};
+\ac{PRF}, provided by \DescribeAcro{PRF};
+\ac{VRF}, provided by \DescribeAcro{VRF}.
+<<bibsp package content>>=
+\DeclareAcronym{PRP}{%
+  short = {PRP},
+  long = {pseudo-random permutation}
+}
+\DeclareAcronym{PRF}{%
+  short = {PRF},
+  long = {pseudo-random function}
+}
+\DeclareAcronym{VRF}{%
+  short = {VRF},
+  long = {verifiable random function},
+}
+@
+
+We also provide some more specific acronyms, with citations.
+We start with the \ac{DY-VRF}, \DescribeAcro{DY-VRF} with the citation 
+\DescribeBibkey{DY-VRF}.
+<<bibsp package content>>=
+\DeclareAcronym{DY-VRF}{%
+  short = {DY-VRF},
+  long = {Dodis-Yampolskiy verifiable random function},
+  cite = {DY-VRF},
+}
+@
+<<bibtex entries>>=
+@inproceedings{DY-VRF,
+  title={A verifiable random function with short proofs and keys},
+  author={Dodis, Yevgeniy and Yampolskiy, Aleksandr},
+  booktitle={International Workshop on Public Key Cryptography},
+  pages={416--431},
+  year={2005},
+  organization={Springer}
+}
+@
+
+
+\section{Proofs of knowledge}
+
+We will use the notation of \textcite{PKnotation} for proofs of knowledge.
+And also provide the previous citation, \DescribeBibkey{PKnotation}.
+<<bibtex entries>>=
+@inproceedings{PKnotation,
+  title={Efficient group signature schemes for large groups},
+  author={Camenisch, Jan and Stadler, Markus},
+  booktitle={Annual International Cryptology Conference, CRYPTO'97},
+  pages={410--424},
+  year={1997},
+  organization={Springer}
+}
+@ And the URL for download.
+<<crypto.mk>>=
+BIBSP_REFKEY+=PKnotation
+URL-PKnotation=https://link.springer.com/chapter/10.1007%2FBFb0052252
+@
+
+We provide \DescribeMacro{\PK}\oarg{secrets}\oarg{predicates}.
+\Eg the Schnorr Identification Scheme~\cite{Schnorr} can be written as 
+\(\PK[\alpha][y = g^\alpha]\), \ie "\PK[\alpha][y = g^\alpha]".
+We similarly use 
+\DescribeMacro{\SPK}\oarg{secrets}\oarg{predicates}\oarg{message} for 
+\ac{NIZKPK}.
+<<bibsp package content>>=
+\ProvideDocumentCommand{\PK}{o o}{\ensuremath{%
+    \operatorname{PK}%
+    \IfValueT{#1}{%
+      \IfValueTF{#2}{%
+        \mleft\{\mleft(#1\mright) : #2\mright\}%
+      }{%
+        \mleft\{#1\mright\}%
+      }%
+    }%
+  }}
+\ProvideDocumentCommand{\SPK}{o o o}{\ensuremath{%
+    \operatorname{SPK}%
+    \IfValueT{#1}{%
+      \IfValueTF{#2}{%
+        \mleft\{\mleft(#1\mright) : #2\mright\}%
+      }{%
+        \mleft\{#1\mright\}%
+      }%
+      \IfValueT{#3}{%
+        \mleft(#3\mright)%
+      }%
+    }%
+  }}
+@
+
+We also provide some acronyms:
+\DescribeAcro{PK} for \ac{PK};
+\DescribeAcro{ZKP} for \ac{ZKP};
+\DescribeAcro{NIZK} for \ac{NIZK};
+\DescribeAcro{ZKPK} for \ac{ZKPK};
+\DescribeAcro{NIZKPK} for \ac{NIZKPK}.
+<<bibsp package content>>=
+\DeclareAcronym{PK}{%
+  short = {PK},
+  long = {proof of knowledge},
+}
+\DeclareAcronym{ZKP}{%
+  short = {ZKP},
+  long = {zero-knowledge proof},
+}
+\DeclareAcronym{NIZK}{%
+  short = {NIZK},
+  long = {non-interactive zero-knowledge},
+}
+\DeclareAcronym{ZKPK}{%
+  short = {ZKPK},
+  long = {zero-knowledge proof-of-knowledge},
+}
+\DeclareAcronym{NIZKPK}{%
+  short = {NIZKPK},
+  long = {non-interactive zero-knowledge proof-of-knowledge},
+}
+@
+
+\(\PK\) for discrete logarithms can be implemented using the Schnorr 
+Identification Scheme~\cite{Schnorr}, mentioned above as well.
+<<bibtex entries>>=
+@Article{Schnorr,
+  author="Schnorr, C. P.",
+  title="Efficient signature generation by smart cards",
+  journal="Journal of Cryptology",
+  volume="4",
+  number="3",
+  year="1991",
+  pages="161--174",
+  issn="1432-1378",
+  doi="10.1007/BF00196725",
+  url="http://dx.doi.org/10.1007/BF00196725",
+}
+@
+<<crypto.mk>>=
+BIBSP_REFKEY+=Schnorr
+URL-Schnorr=http://link.springer.com/content/pdf/10.1007%2FBF00196725.pdf
+@
+
+We can use the Fiat-Shamir heuristic~\cite{FiatShamirHeuristic} to turn any 
+\(\PK\) into \(\SPK\).
+<<bibtex entries>>=
+@Inbook{FiatShamirHeuristic,
+  author="Fiat, Amos
+      and Shamir, Adi",
+  editor="Odlyzko, Andrew M.",
+  title="How To Prove Yourself: Practical Solutions to Identification and 
+      Signature Problems",
+  bookTitle="Advances in Cryptology --- CRYPTO' 86: Proceedings",
+  year="1987",
+  publisher="Springer Berlin Heidelberg",
+  address="Berlin, Heidelberg",
+  pages="186--194",
+  isbn="978-3-540-47721-1",
+  doi="10.1007/3-540-47721-7_12",
+  url="http://dx.doi.org/10.1007/3-540-47721-7_12"
+}
+@
+<<crypto.mk>>=
+BIBSP_REFKEY+=FiatShamirHeuristic
+URL-FiatShamirHeuristic=http://dx.doi.org/10.1007/3-540-47721-7_12
+@
+
+
+\section{Commitments}
+
+We have two properties for commitments, binding and hiding.
+Each property can have varying strength, \ie a commitment scheme can either be
+\begin{itemize}
+\item perfectly or computationally binding and
+\item perfectly, statistically or computationally hiding.
+\end{itemize}
+
+We have the Pedersen commitment scheme~\cite{PedersenCommitment}, which is 
+computationally binding and perfectly hiding.
+<<bibtex entries>>=
+@inproceedings{PedersenCommitment,
+  title={Non-interactive and information-theoretic secure verifiable secret 
+    sharing},
+  author={Pedersen, Torben Pryds},
+  booktitle={Annual International Cryptology Conference},
+  pages={129--140},
+  year={1991},
+  organization={Springer}
+}
+@
+<<crypto.mk>>=
+BIBSP_REFKEY+=PedersenCommitment
+URL-PedersenCommitment=https://link.springer.com/chapter/10.1007/3-540-46766-1_9
+@
+

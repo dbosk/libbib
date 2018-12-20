@@ -1,0 +1,134 @@
+\chapter{Protocols}
+
+There are two things we want concerning protocols.
+First, we want a shorthand notation for two entities participating in an 
+interactive protocol.
+Second, we want to provide easy access to arrows for protocol diagrams, using 
+the tabular environment.
+In summary, we provide the following:
+<<bibsp package content>>=
+<<protocol notation>>
+<<protocol diagram arrows>>
+<<string concatenation>>
+@
+
+We usually concatenate strings in protocols, we provide the concatenation 
+operator \DescribeMacro{\concat}.
+"A\concat B" results in \(A\concat B\).
+<<string concatenation>>=
+\ProvideDocumentCommand{\concat}{}{\ensuremath{\mathbin{\|}}}
+@
+
+\paragraph{Protocol notation}
+
+We have two \acp{PPTM}, \(A\) and \(B\), who participate in an interactive 
+protocol with each other.
+We denote this as \(\Proto{A}{B}\).
+This can be achieved with the provided \DescribeMacro{\Proto} command, 
+specifically "\Proto{A}{B}" or "\Proto A B" produces \(\Proto{A}{B}\).
+
+This is implemented as follows.
+<<protocol notation>>=
+\ProvideDocumentCommand{\Proto}{m m}{\ensuremath{%
+    \mleft\langle%
+    #1; #2%
+    \mright\rangle%
+  }}
+@
+
+\paragraph{Protocol diagrams}
+
+We often want to create protocol diagrams.
+There are a few packages, \eg the [[msc]] and [[cryptocode]] packages.
+However, it's usually easier to work with the tabular environment.
+But we would like to have some semantic commands for sending messages back and 
+forth.
+
+We provide \DescribeMacro{\ProtoSendLeft} and \DescribeMacro{\ProtoSendRight} to 
+have semantic names for the arrows in protocols figures, \eg 
+\cref{ProtocolFigure}.
+\Cref{ProtocolFigure} is implemented with the following code:
+\begin{verbatim}
+\begin{figure}
+  \centering
+  \begin{tabular}{lcl}
+  \(A(x, q)\) & & \(B(y, q)\) \\
+  \toprule
+
+  \(r\gets \ZZ_q\)
+  & \(\ProtoSendLeft{r}\)
+  &
+  \\
+
+  % null
+  & \(\ProtoSendRight{c}\)
+  & \(c\gets \ZZ_q\)
+  \\
+
+  % null
+  & \ProtoSendLeft[1em]{y}
+  &
+  \\
+
+  \bottomrule
+  \end{tabular}
+  \caption{%
+    The interactive protocol \(\Proto{A(x)}{B(y)}(q)\) between algorithm \(A\) 
+    with private input \(x\) and algorithm \(B\) with private input \(y\) and 
+    common input \(q\).
+  }\label{ProtocolFigure}
+\end{figure}
+\end{verbatim}
+
+\begin{figure}
+  \centering
+  \begin{tabular}{lcl}
+  \(A(x, q)\) & & \(B(y, q)\) \\
+  \toprule
+
+  \(r\gets \ZZ_q\)
+  & \(\ProtoSendLeft{r}\)
+  &
+  \\
+
+  % null
+  & \(\ProtoSendRight{c}\)
+  & \(c\gets \ZZ_q\)
+  \\
+
+  % null
+  & \ProtoSendLeft[1em]{y}
+  &
+  \\
+
+  \bottomrule
+  \end{tabular}
+  \caption{%
+    The interactive protocol \(\Proto{A(x)}{B(y)}(q)\) between algorithm \(A\) 
+    with private input \(x\) and algorithm \(B\) with private input \(y\) and 
+    common input \(q\).
+  }\label{ProtocolFigure}
+\end{figure}
+
+The default length of the arrow is set by the length 
+\DescribeMacro{\ProtoArrowLength}.
+However, each "\ProtoSendLeft" or "\ProtoSendRight" can be provided with an 
+optional argument, which is a length and overrides the setting of 
+"\ProtoArrowLength" (see the last line of \cref{ProtocolFigure}).
+
+The commands are implemented as follows.
+<<protocol diagram arrows>>=
+\newlength{\ProtoArrowLength}
+\setlength{\ProtoArrowLength}{0.15\linewidth}
+\ProvideDocumentCommand{\ProtoSendRight}{o m}{\ensuremath{%
+    \IfValueTF{#1}%
+    {\xrightarrow[\hspace{#1}]{#2}}%
+    {\xrightarrow[\hspace{\ProtoArrowLength}]{#2}}%
+  }}
+\ProvideDocumentCommand{\ProtoSendLeft}{o m}{\ensuremath{%
+    \IfValueTF{#1}%
+    {\xleftarrow[\hspace{#1}]{#2}}%
+    {\xleftarrow[\hspace{\ProtoArrowLength}]{#2}}%
+  }}
+@
+

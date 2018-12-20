@@ -36,10 +36,7 @@
 
 @
 
-\chapter{A framework}
-
-
-\section{Introduction}%
+\chapter{Introduction}%
 \label{Intro}
 
 When writing papers on the topic of Security and Privacy, a lot of papers and 
@@ -47,25 +44,27 @@ acronyms recur.
 As do a lot of TeXnical constructions needed to write.
 The bibsp library provides some of these.
 
+
+\section{Some tools}
+
 We provide a package [[<<bibsp.sty>>]]:
 <<bibsp.sty>>=
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
 \ProvidesPackage{bibsp}[2018/03/10 v1.0 Bibliographic Security/Privacy Library]
-<<required packages>>
-<<package options>>
-<<main package content>>
+<<required packages' options>>
+<<load required packages>>
+<<bibsp package options>>
+<<bibsp package content>>
 \ProcessOptions\relax
 \endinput
-@
-
-Since the purpose of bibsp is to provide commands for writing documents, we can 
+@ Since the purpose of bibsp is to provide commands for writing documents, we can 
 start by including the LaTeX3 xparse package:
-<<required packages>>=
+<<load required packages>>=
 \RequirePackage{xparse}
 @ This will allow us to easily create commands.
 We will also do a lot of mathematical notation, so the following packages will 
 be indispensable:
-<<required packages>>=
+<<load required packages>>=
 \RequirePackage{amsmath}
 \RequirePackage{mleftright}
 @ The mleftright package provides "\mleft" and "\mright", which fixes a bug in 
@@ -80,10 +79,9 @@ BIBSP_MK=true
 
 <<make variables>>
 <<make targets>>
-<<make includes>>
 
 endif
-@ Since we know one file that we will use, [[<<bibsp.sty>>]] above, we can 
+@ Since we know one file that we will use, [[<<bibsp.sty>>]] above, we will now 
 provide its desired targets.
 
 When we include [[bibsp.mk]] in a makefile, we want it to provide a local link 
@@ -92,8 +90,8 @@ to the directory [[INCLUDE_BIBSP]].
 is residing, not in this repo.)
 We will do this for many files, so we might as well add a variable to hold all 
 the filenames.
-We will create a variable [[BIBSP_LINK]] for this purpose, starting with our 
-package.
+We will create a variable \DescribeVar{BIBSP\textunderscore LINK} for this 
+purpose, starting with our package.
 <<make variables>>=
 BIBSP_LINK+=  bibsp.sty
 @ Now, if such a file exists in the current directory, we don't want to do 
@@ -102,9 +100,7 @@ Otherwise, we want to create a link to it.
 <<make targets>>=
 ${BIBSP_LINK}:
 	[ -e "./$@" ] || ln -s ${INCLUDE_BIBSP}/$@ ./$@
-@
-
-We must also provide a default value for [[INCLUDE_BIBSP]], in case it is not 
+@ We must also provide a default value for [[INCLUDE_BIBSP]], in case it is not 
 set.
 We let the default be the current directory.
 <<make variables>>=
@@ -124,13 +120,91 @@ clean-bibsp:
 @
 
 
-\section{Publisher-specific options}
+\section{A bibliography}%
+\label{TopicsFramework}
+
+In addition to providing TeXnical tools, bibsp provides a bibliographic library 
+(based on BibTeX and BibLaTeX) covering a variety of topics related to Security 
+and Privacy.
+The library provides one joint bibliography, [[bibsp.bib]].
+The reason for this is that citation keys should not collide anyway and when we 
+provide automatic citations for acronyms, we must include the entire 
+bibliography anyway.
+
+We will provide automatic linking for the bibliography if [[bibsp.mk]] is used, 
+similarly as for [[bibsp.sty]].
+<<make variables>>=
+BIBSP_LINK+=  bibsp.bib
+@
+
+The [[bibsp.bib]] file will be organized as follows.
+We need:
+<<bibsp.bib>>=
+<<bibtex entries>>
+@
+
+We will use the acro package for acronyms and it will automatically cite the 
+relevant paper whenever possible, then we will use the biblatex package for 
+citations.
+<<load required packages>>=
+\RequirePackage{acro}
+\RequirePackage{biblatex}
+@ So we can automatically load the bibliography as part of the [[bibsp.sty]] 
+package.
+<<bibsp package content>>=
+\addbibresource{bibsp.bib}
+@ With this, we must also add [[bibsp.bib]] as a dependency for [[bibsp.sty]],
+so that is the actual target that will trigger the linking.
+<<make targets>>=
+bibsp.sty: bibsp.bib
+@
+
+We want to turn some of the features of [[acro]] and [[biblatex]] on by 
+default.
+If we only use an acronym once, then there is no point in providing an acronym, 
+just write it out.
+<<required packages' options>>=
+\PassOptionsToPackage{single}{acro}
+@ Next, we want the acro package to give us a label for the first occurrence of 
+the acronym's use.
+<<required packages' options>>=
+\PassOptionsToPackage{label}{acro}
+@ Finally, we want to use the mfirstuc package to handle changing letters to upper 
+case, \eg when we start a sentence with an acronym using "\Ac{FOO}".
+This requires
+<<required packages' options>>=
+\RequirePackage{mfirstuc-english}
+\PassOptionsToPackage{uc-cmd=\makefirstuc}{acro}
+@
+
+Along with each bibliography entry we want the URLs to the PDFs, or online 
+versions, of the documents they reference.
+We will capture this data with two variables:
+\DescribeVar{BIBSP\textunderscore REFKEY} and
+\DescribeVar{URL-refkey}.
+Every citation key used in [[bibsp.bib]] must be added to [[BIBSP_REFKEY]].
+For a citation key [[refkey]], the variable [[URL-refkey]] will contain a URL 
+to its PDF or online version.
+Then we can use the list [[BIBSP_REFKEY]] to generate phony targets that will 
+open the paper referenced by the citation key.
+<<targets for opening paper URLs>>=
+define bibsp_display
+.PHONY: $(1)
+$(1):
+	${OPEN} ${URL-$(1)}
+endef
+
+$(foreach ref,${BIBSP_REFKEY},$(eval $(call bibsp_display,${ref})))
+@
+
+
+\chapter{Publisher-specific options}
 
 We provide settings tailored to some specific publishers.
 For now, we provide \DescribeOpt{lncs} for Springer's LNCS series.
-<<package options>>=
+<<bibsp package options>>=
 \DeclareOption{lncs}{%
-  <<Springer LNCS option code>>
+  <<lncs option code>>
 }
 @
 
@@ -143,22 +217,23 @@ Various publishers have different requirements, \eg whether Figure X should be
 referred to as Figure X or Fig.~X, or something else.
 The cleveref package is probably the best package available to help us with 
 this.
-There the target of the reference keeps track of what kind of object itself is.
+<<load required packages>>=
+\RequirePackage{cleveref}
+@ There the target of the reference keeps track of what kind of object itself is.
 \Eg we can refer to the introduction of this document using "\cref{Intro}", 
 which results in \enquote{\cref{Intro}}.
 
 We generally prefer a compressed notation, so we will load the package with that 
 option:
-<<required packages>>=
+<<required packages' options>>=
 \PassOptionsToPackage{compress}{cleveref}
-\RequirePackage{cleveref}
 @
 
 Then we provide a package option for the bibsp package to select which 
 configuration to use for cleveref.
 We currently provide the option \DescribeOpt{lncs}, which sets the values for 
 cleveref to what Springer recommends for its LNCS series.
-<<Springer LNCS option code>>=
+<<lncs option code>>=
 \crefname{chapter}{Chap.}{Chap.}
 \Crefname{chapter}{Chapter}{Chapters}
 \crefname{section}{Sect.}{Sect.}
@@ -183,38 +258,9 @@ cleveref to what Springer recommends for its LNCS series.
 \section{Acronyms}%
 \label{Acronyms}
 
-We usually make heavy use of acronyms, especially in cryptography.
-The probably best available package for handling acronyms is the acro package.
-
-We want to turn some of its features on by default.
-If we only use an acronym once, then there is no point in providing an acronym, 
-just write it out.
-<<required packages>>=
-\PassOptionsToPackage{single}{acro}
-@
-
-Next, we want the acro package to give us a label for the first occurrence of 
-the acronym's use.
-<<required packages>>=
-\PassOptionsToPackage{label}{acro}
-@
-
-Finally, we want to use the mfirstuc package to handle changing letters to upper 
-case, \eg when we start a sentence with an acronym using "\Ac{FOO}".
-<<required packages>>=
-\RequirePackage{mfirstuc-english}
-\PassOptionsToPackage{uc-cmd=\makefirstuc}{acro}
-@
-
-Now, all that is left is to request the package to be loaded.
-<<required packages>>=
-\RequirePackage{acro}
-@
-
-
 We provide the \DescribeOpt{lncs} option to have the acronym handling according 
 to Springer's requirements for its LNCS series.
-<<Springer LNCS option code>>=
+<<lncs option code>>=
 \acsetup{uc-cmd=\capitalisewords}
 \MFUhyphentrue
 \let\ac\Ac
@@ -226,1353 +272,11 @@ to Springer's requirements for its LNCS series.
 @
 
 
-\section{Topics framework}%
-\label{TopicsFramework}
-
-In addition to providing TeXnical tools, bibsp provides a bibliographic library 
-(based on BibTeX and BibLaTeX) covering a variety of topics related to Security 
-and Privacy.
-We will now describe the framework for how those parts will be presented.
-
-The library will be organized by topics and provide bibliographies, acronyms and 
-commands relevant to each topic.
-Each topic will provide its own bibliography file (\DescribeFile{topic.bib}).
-It will also provide a set of acronyms which might automatically cite the 
-relevant papers in the bibliography.
-Finally, it might also provide some TeXnical commands to make writing on this 
-topic easier.
-To add a topic, it must be added to the variable 
-\DescribeVar{BIBSP\textunderscore TOPIC}.
-This variable will then be used to generate targets for the various files, \eg 
-"topic.bib".
-However, these variables must be defined before any use of them, specifically 
-for generating targets.
-This is due to make's lazy evaluation of variables.
-<<make variables>>=
-<<make topic definitions>>
-<<make topic use>>
-@
-
-We will use the acro package as we did above (\cref{Acronyms}).
-We will use the biblatex package for citations.
-<<required packages>>=
-\RequirePackage{biblatex}
-@ Each topic will then add to the following package main content.
-<<main package content>>=
-<<topic bibliographies>>
-<<topic acronyms>>
-<<topic commands>>
-@ Each entry in [[<<topic bibliographies>>]] should be a "\addbibresource" 
-command to add the bibliography to biblatex.
-<<requred packages>>=
-\RequirePackage{biblatex}
-@ [[<<topic acronyms>>]] will contain "\DeclareAcronym" statements for the acro 
-package.
-
-Along with each bibliography file ("topic.bib"), each topic should add a 
-corresponding makefile, \DescribeFile{topic.mk}.
-We want these makefiles to contain URLs to the PDFs or online versions of the 
-documents they reference.
-We also want to make the bibliography (.bib) files available for inclusion in 
-parent projects.
-In particular, we want the following.
-<<make targets>>=
-<<targets for opening paper URLs>>
-<<targets for linking bibliographies>>
-@
-
-We can start with the latter, [[<<targets for linking bibliographies>>]].
-We already provided [[BIBSP_LINK]] above, so we can simply use that.
-So, for every topic in the list [[BIBSP_TOPIC]], we simply add its bibliography 
-file ("topic.bib") to [[BIBSP_LINK]].
-This is just some variable definitions so we add them to that part.
-<<make topic use>>=
-define bibsp_bibfiles
-BIBSP_LINK+=		$(1).bib
-endef
-
-$(foreach topic,${BIBSP_TOPIC},$(eval $(call bibsp_bibfiles,${topic})))
-@
-
-Since [[bibsp.sty]] will contain an "\addbibresource" for each bibliography 
-"topic.bib", we must also add them as dependencies for [[bibsp.sty]].
-So this is the actual target that will trigger the linking.
-<<targets for linking bibliographies>>=
-bibsp.sty: $(foreach b,${BIBSP_TOPIC},${b}.bib)
-@
-
-Now, for each bibliographic entry in "topic.bib", we must add its citation key 
-to the list \DescribeVar{BIBSP\textunderscore REFKEY}.
-Then we will add the URL of the citation key "refkey" to the variable 
-\DescribeVar{URL-refkey}.
-Then we can use the list [[BIBSP_REFKEY]] to generate phony targets that will 
-open the paper referenced by the citation key.
-<<targets for opening paper URLs>>=
-define bibsp_display
-.PHONY: $(1)
-$(1):
-	xdg-open ${URL-$(1)}
-endef
-
-$(foreach ref,${BIBSP_REFKEY},$(eval $(call bibsp_display,${ref})))
-@
-
-Finally, for this to work, we must include all the "topic.mk" files, since 
-that's where the [[BIBSP_REFKEY]] variables is populated.
-<<make includes>>=
-define bibsp_includes
-include 		$${INCLUDE_BIBSP}/$(1).mk
-endef
-
-$(foreach topic,${BIBSP_TOPIC},$(eval $(call bibsp_includes,${topic})))
-@
-
-
-
-\chapter{Mathematical notation}
-
-We need to add some mathematical notation that we always use but so far is not 
-implemented in any other package.
-The things we are interested in are the following.
-<<main package content>>=
-<<textual shortcuts>>
-<<basic sets>>
-<<power-set symbol>>
-<<algebra>>
-@
-
-\paragraph{Textual shortcuts}
-
-We sometimes want to bind equations together textually, \eg
-\begin{equation}
-  y = f(x) \textand y' = g(x).
-\end{equation}
-We provide \DescribeMacro{\textand} for this.
-The equation above can be produced using
-\begin{verbatim}
-\begin{equation}
-  y = f(x) \textand y' = g(x).
-\end{equation}
-\end{verbatim}
-The command itself is implemented as follows.
-<<textual shortcuts>>=
-\ProvideDocumentCommand{\textand}{}{\ensuremath{\qquad\text{and}\qquad}}
-@
-
-
-\paragraph{Basic sets}
-
-We need the basic sets for the numbers.
-\DescribeMacro{\NN} is used to denote the natural numbers, \ie \(\NN\).
-\DescribeMacro{\ZZ} is used for the integers, denoted \(\ZZ\).
-\DescribeMacro{\QQ} for the rational numbers, denoted \(\QQ\).
-\DescribeMacro{\RR} for the real numbers, denoted \(\RR\).
-Finally, \DescribeMacro{\CC} is used for the complex numbers, denoted \(\CC\).
-
-These commands are simply implemented as follows:
-<<basic sets>>=
-\ProvideDocumentCommand{\NN}{}{\ensuremath{\mathbb{N}}}
-\ProvideDocumentCommand{\ZZ}{}{\ensuremath{\mathbb{Z}}}
-\ProvideDocumentCommand{\QQ}{}{\ensuremath{\mathbb{Q}}}
-\ProvideDocumentCommand{\RR}{}{\ensuremath{\mathbb{R}}}
-\ProvideDocumentCommand{\CC}{}{\ensuremath{\mathbb{C}}}
-@
-
-
-We provide \DescribeMacro{\card}\marg{set} to denote the cardinality of a set, 
-\eg "\card A" yields \(\card{A}\).
-This command is implemented as follows.
-<<basic sets>>=
-\ProvideDocumentCommand{\card}{m}{\ensuremath{|#1|}}
-@
-
-\paragraph{The power-set symbol}
-
-Some packages defines the power-set symbol, \(\powerset\), achieved by 
-\DescribeMacro{\powerset}.
-However, many do not, but we still want to have it accessible.
-<<power-set symbol>>=
-\ifdefined\powerset%
-  \relax%
-\else%
-  \DeclareMathOperator{\powerset}{\mathscr{P}}%
-\fi
-@
-
-We will use the font from the euscript package:
-<<required packages>>=
-\PassOptionsToPackage{mathscr}{euscript}
-\RequirePackage{euscript}
-@
-
-\paragraph{Algebra}
-
-We also use a lot of algebraic notation in cryptography, \eg fields and 
-generators of groups.
-We provide \DescribeMacro{\GF} to denote \(\GF\), \ie the Galois field.
-Or \DescribeMacro{\FF} for \(\FF\) to denote a field.
-
-We also provide \DescribeMacro{\ord} to denote the order of a group by \(\ord\).
-And \DescribeMacro{\gen}\marg{generator} to denote the group \(\gen g\) 
-generated by the generator \(g\).
-
-The above commands are implemented as follows.
-<<algebra>>=
-\ProvideDocumentCommand{\GF}{}{\ensuremath{\mathrm{GF}}}
-\ProvideDocumentCommand{\FF}{}{\ensuremath{\mathbb{F}}}
-\DeclareMathOperator{\ord}{ord}
-\ProvideDocumentCommand{\gen}{m}{\ensuremath{\mleft\langle #1\mright\rangle}}
-@
-
-
-
-\chapter{Protocols}
-
-There are two things we want concerning protocols.
-First, we want a shorthand notation for two entities participating in an 
-interactive protocol.
-Second, we want to provide easy access to arrows for protocol diagrams, using 
-the tabular environment.
-In summary, we provide the following:
-<<topic commands>>=
-<<protocol notation>>
-<<protocol diagram arrows>>
-<<string concatenation>>
-@
-
-We usually concatenate strings in protocols, we provide the concatenation 
-operator \DescribeMacro{\concat}.
-"A\concat B" results in \(A\concat B\).
-<<string concatenation>>=
-\ProvideDocumentCommand{\concat}{}{\ensuremath{\mathbin{\|}}}
-@
-
-\paragraph{Protocol notation}
-
-We have two \acp{PPTM}, \(A\) and \(B\), who participate in an interactive 
-protocol with each other.
-We denote this as \(\Proto{A}{B}\).
-This can be achieved with the provided \DescribeMacro{\Proto} command, 
-specifically "\Proto{A}{B}" or "\Proto A B" produces \(\Proto{A}{B}\).
-
-This is implemented as follows.
-<<protocol notation>>=
-\ProvideDocumentCommand{\Proto}{m m}{\ensuremath{%
-    \mleft\langle%
-    #1; #2%
-    \mright\rangle%
-  }}
-@
-
-\paragraph{Protocol diagrams}
-
-We often want to create protocol diagrams.
-There are a few packages, \eg the [[msc]] and [[cryptocode]] packages.
-However, it's usually easier to work with the tabular environment.
-But we would like to have some semantic commands for sending messages back and 
-forth.
-
-We provide \DescribeMacro{\ProtoSendLeft} and \DescribeMacro{\ProtoSendRight} to 
-have semantic names for the arrows in protocols figures, \eg 
-\cref{ProtocolFigure}.
-\Cref{ProtocolFigure} is implemented with the following code:
-\begin{verbatim}
-\begin{figure}
-  \centering
-  \begin{tabular}{lcl}
-  \(A(x, q)\) & & \(B(y, q)\) \\
-  \toprule
-
-  \(r\gets \ZZ_q\)
-  & \(\ProtoSendLeft{r}\)
-  &
-  \\
-
-  % null
-  & \(\ProtoSendRight{c}\)
-  & \(c\gets \ZZ_q\)
-  \\
-
-  % null
-  & \ProtoSendLeft[1em]{y}
-  &
-  \\
-
-  \bottomrule
-  \end{tabular}
-  \caption{%
-    The interactive protocol \(\Proto{A(x)}{B(y)}(q)\) between algorithm \(A\) 
-    with private input \(x\) and algorithm \(B\) with private input \(y\) and 
-    common input \(q\).
-  }\label{ProtocolFigure}
-\end{figure}
-\end{verbatim}
-
-\begin{figure}
-  \centering
-  \begin{tabular}{lcl}
-  \(A(x, q)\) & & \(B(y, q)\) \\
-  \toprule
-
-  \(r\gets \ZZ_q\)
-  & \(\ProtoSendLeft{r}\)
-  &
-  \\
-
-  % null
-  & \(\ProtoSendRight{c}\)
-  & \(c\gets \ZZ_q\)
-  \\
-
-  % null
-  & \ProtoSendLeft[1em]{y}
-  &
-  \\
-
-  \bottomrule
-  \end{tabular}
-  \caption{%
-    The interactive protocol \(\Proto{A(x)}{B(y)}(q)\) between algorithm \(A\) 
-    with private input \(x\) and algorithm \(B\) with private input \(y\) and 
-    common input \(q\).
-  }\label{ProtocolFigure}
-\end{figure}
-
-The default length of the arrow is set by the length 
-\DescribeMacro{\ProtoArrowLength}.
-However, each "\ProtoSendLeft" or "\ProtoSendRight" can be provided with an 
-optional argument, which is a length and overrides the setting of 
-"\ProtoArrowLength" (see the last line of \cref{ProtocolFigure}).
-
-The commands are implemented as follows.
-<<protocol diagram arrows>>=
-\newlength{\ProtoArrowLength}
-\setlength{\ProtoArrowLength}{0.15\linewidth}
-\ProvideDocumentCommand{\ProtoSendRight}{o m}{\ensuremath{%
-    \IfValueTF{#1}%
-    {\xrightarrow[\hspace{#1}]{#2}}%
-    {\xrightarrow[\hspace{\ProtoArrowLength}]{#2}}%
-  }}
-\ProvideDocumentCommand{\ProtoSendLeft}{o m}{\ensuremath{%
-    \IfValueTF{#1}%
-    {\xleftarrow[\hspace{#1}]{#2}}%
-    {\xleftarrow[\hspace{\ProtoArrowLength}]{#2}}%
-  }}
-@
-
-
-
-\chapter{Cryptography}
-
-The topic of cryptography is a very big one.
-It provides several subtopics in addition to the main one.
-<<make topic definitions>>=
-BIBSP_TOPIC+=   crypto
-@ We provide the general bibliography [[<<crypto.bib>>]].
-<<topic bibliographies>>=
-\addbibresource{crypto.bib}
-@
-
-We can start by adding some good textbooks and references on cryptography.
-\Textcite{Stinson2006cta}, \DescribeBibkey{Stinson2006cta}, provides an easy 
-read, a good introduction.
-<<crypto.bib>>=
-@book{Stinson2006cta,
-  author={Stinson, Douglas R.},
-  title={Cryptography: Theory and Practice},
-  publisher={Chapman {\&} Hall/CRC},
-  address={Boca Raton},
-  year={2006},
-  edition={3},
-  ISBN={1-58488-508-4 (Hardcover)},
-  keywords={Kryptering},
-}
-@
-
-Then we have the reference works by \textcite{GoldreichFOC-1,GoldreichFOC-2}, 
-\DescribeBibkey{GoldreichFOC-1} and \DescribeBibkey{GoldreichFOC-2}.
-<<crypto.bib>>=
-@book{GoldreichFOC-1,
-  author={Goldreich, Oded},
-  title={Foundations of cryptography, Vol.~1: Basic tools},
-  publisher={Cambridge Univ.\ Press},
-  address={Cambridge},
-  year={2001},
-  ISBN={0-521-79172-3},
-}
-@book{GoldreichFOC-2,
-  author={Goldreich, Oded},
-  title={Foundations of cryptography, Vol.~2: Basic applications},
-  publisher={Cambridge Univ.\ Press},
-  address={Cambridge},
-  year={2004},
-  ISBN={0-521-83084-2:},
-}
-@
-
-Finally, we have the book by \textcite{KatzLindell-v2}, 
-\DescribeBibkey{KatzLindell-v2}.
-(And its first version~\cite{KatzLindell-v1}, \DescribeBibkey{KatzLindell-v1}.)
-<<crypto.bib>>=
-@book{KatzLindell-v1,
-  title={Introduction to modern cryptography},
-  author={Katz, Jonathan and Lindell, Yehuda},
-  publisher={Chapman {\&} Hall/CRC},
-  address={Boca Raton},
-  year={2008},
-  edition={1},
-  ISBN={9781584885511},
-}
-@book{KatzLindell-v2,
-  title={Introduction to modern cryptography},
-  author={Katz, Jonathan and Lindell, Yehuda.},
-  publisher={Chapman {\&} Hall/CRC},
-  address={Boca Raton},
-  year={2014},
-  edition={2},
-  ISBN={9781466570269},
-}
-@
-
-
-\section{Algorithmic notation}
-
-When doing applied cryptography, we must use several schemes at the same time.
-A useful notation is that of classes and methods.
-\NewCryptoScheme{\SchemeS}{S}
-Say that we have two schemes \(\SchemeS, \SchemeS*\).
-\NewAlgorithm{\Sign}{Sign}
-Also say that each of these schemes provide a signature algorithm, \(\Sign\).
-Then we can differentiate between them by the notation \(\SchemeS[\Sign]\) and 
-\(\SchemeS*[\Sign]\).
-
-We provide a command \DescribeMacro{\NewCryptoScheme}\marg{macro}\marg{name} 
-which creates a command \cs{\meta{macro}}.
-\Eg the schemes \(\SchemeS, \SchemeS*\) were generated using
-\begin{center}
-"\NewCryptoScheme{\SchemeS}{S}"
-\end{center}
-and \cmd{\SchemeS} produces \(\SchemeS\) and \(\cmd{\SchemeS*}\) produces 
-\(\SchemeS*\).
-Each scheme macro accepts an optional star (to give it the overline) and an 
-optional argument interpreted as a method, \eg "\SchemeS[\Sign]" produces 
-\(\SchemeS[\Sign]\).
-The "\NewCryptoScheme" command is implemented as follows:
-<<topic commands>>=
-\ProvideDocumentCommand{\NewCryptoScheme}{m m}{%
-  \ProvideDocumentCommand{#1}{s o}{%
-    \ensuremath{%
-      \operatorname{%
-        \IfBooleanTF{##1}{%
-          \overline{{\mathsf{#2}}}%
-        }{%
-          {\mathsf{#2}}%
-        }%
-      }%
-      \IfValueT{##2}{\!.\!##2}%
-    }%
-  }%
-}
-@
-
-We also provide \DescribeMacro{\method}\marg{class}\marg{method} to simply 
-provide a nice method notation between \meta{class} and \meta{method}.
-The result will be treated as a mathematical operator.
-<<topic commands>>=
-\ProvideDocumentCommand{\method}{m m}{\ensuremath{%
-    \operatorname{#1.\!#2}%
-  }}
-@
-
-The algorithm \(\Sign\) was produced using 
-\DescribeMacro{\NewAlgorithm}\marg{macro}\marg{name}, more specifically,
-\begin{center}
-"\NewAlgorithm{\Sign}{Sign}".
-\end{center}
-Analogous to algorithms, we also provide \DescribeMacro{\NewFunction} for 
-mathematical functions, the only difference lies in the typeface.
-An algorithm (or function) command, takes an optional star and then two optional 
-arguments:
-\begin{center}
-\cs{\meta{macro}}\oarg{sub/supscripts}\oarg{argument}.
-\end{center}
-If only one optional argument is given, it's interpreted as the \meta{argument}.
-
-The "\NewAlgorithm" and "\NewFunction" are implemented as follows.
-<<topic commands>>=
-\ProvideDocumentCommand{\NewAlgorithm}{m m}{%
-  \ProvideDocumentCommand{#1}{s o o}{%
-    \ensuremath{%
-      \operatorname{%
-        \IfBooleanTF{##1}{%
-          \overline{\mathsf{#2}}%
-        }{%
-          \mathsf{#2}%
-        }%
-      }%
-      \IfValueTF{##3}{%
-        ##2%
-        \mleft(##3\mright)%
-      }{%
-        \IfValueT{##2}{\mleft(##2\mright)}%
-      }%
-    }%
-  }%
-}
-\ProvideDocumentCommand{\NewFunction}{m m}{%
-  \ProvideDocumentCommand{#1}{s o o}{%
-    \ensuremath{%
-      \operatorname{%
-        \IfBooleanTF{##1}{%
-          \overline{#2}%
-        }{%
-          #2%
-        }%
-      }%
-      \IfValueTF{##3}{%
-        ##2%
-        \mleft(##3\mright)%
-      }{%
-        \IfValueT{##2}{\mleft(##2\mright)}%
-      }%
-    }%
-  }%
-}
-@
-
-Finally, we provide two commands for creating macros representing sets or other 
-cryptographic entities, \eg adversarial algorithms.
-\DescribeMacro{\NewCryptoSet}\marg{macro}\marg{name} (and 
-\DescribeMacro{\NewCryptoEntity}\marg{macro}\marg{name}) takes two arguments, 
-one the name of the macro and the second the display name.
-The resulting \cs{\meta{macro}} doesn't take any options.
-<<topic commands>>=
-\ProvideDocumentCommand{\NewCryptoSet}{m m}{%
-  \ProvideDocumentCommand{#1}{}{%
-    \ensuremath{\mathcal{#2}}%
-  }%
-}
-\ProvideDocumentCommand{\NewCryptoEntity}{m m}{%
-  \ProvideDocumentCommand{#1}{}{%
-    \ensuremath{\mathcal{#2}}%
-  }%
-}
-@
-
-
-\section{Algorithmic terminology}
-
-There are many terms from the area of complexity theory that we rely on in 
-cryptography, many of them also deserve acronyms.
-The first ones that comes to mind are
-\ac{PPT}, given by \DescribeAcro{PPT}, and
-\ac{PPTM}, given by \DescribeAcro{PPTM}.
-<<topic acronyms>>=
-\DeclareAcronym{PPT}{%
-  short = {PPT},
-  long = {probabilistic polynomial-time},
-}
-\DeclareAcronym{PPTM}{%
-  short = {PPTM},
-  long = {probabilitstic polynomial-time Turing machine},
-}
-@
-
-
-\section{Cryptographic primitives}
-
-There are some basic primitives that we use quite often too:
-\ac{PRP}, provided by \DescribeAcro{PRP};
-\ac{PRF}, provided by \DescribeAcro{PRF};
-\ac{VRF}, provided by \DescribeAcro{VRF}.
-<<topic acronyms>>=
-\DeclareAcronym{PRP}{%
-  short = {PRP},
-  long = {pseudo-random permutation}
-}
-\DeclareAcronym{PRF}{%
-  short = {PRF},
-  long = {pseudo-random function}
-}
-\DeclareAcronym{VRF}{%
-  short = {VRF},
-  long = {verifiable random function},
-}
-@
-
-We also provide some more specific acronyms, with citations.
-We start with the \ac{DY-VRF}, \DescribeAcro{DY-VRF} with the citation 
-\DescribeBibkey{DY-VRF}.
-<<topic acronyms>>=
-\DeclareAcronym{DY-VRF}{%
-  short = {DY-VRF},
-  long = {Dodis-Yampolskiy verifiable random function},
-  cite = {DY-VRF},
-}
-@
-<<crypto.bib>>=
-@inproceedings{DY-VRF,
-  title={A verifiable random function with short proofs and keys},
-  author={Dodis, Yevgeniy and Yampolskiy, Aleksandr},
-  booktitle={International Workshop on Public Key Cryptography},
-  pages={416--431},
-  year={2005},
-  organization={Springer}
-}
-@
-
-
-\section{Proofs of knowledge}
-
-We will use the notation of \textcite{PKnotation} for proofs of knowledge.
-And also provide the previous citation, \DescribeBibkey{PKnotation}.
-<<crypto.bib>>=
-@inproceedings{PKnotation,
-  title={Efficient group signature schemes for large groups},
-  author={Camenisch, Jan and Stadler, Markus},
-  booktitle={Annual International Cryptology Conference, CRYPTO'97},
-  pages={410--424},
-  year={1997},
-  organization={Springer}
-}
-@ And the URL for download.
-<<crypto.mk>>=
-BIBSP_REFKEY+=PKnotation
-URL-PKnotation=https://link.springer.com/chapter/10.1007%2FBFb0052252
-@
-
-We provide \DescribeMacro{\PK}\oarg{secrets}\oarg{predicates}.
-\Eg the Schnorr Identification Scheme~\cite{Schnorr} can be written as 
-\(\PK[\alpha][y = g^\alpha]\), \ie "\PK[\alpha][y = g^\alpha]".
-We similarly use 
-\DescribeMacro{\SPK}\oarg{secrets}\oarg{predicates}\oarg{message} for 
-\ac{NIZKPK}.
-<<topic commands>>=
-\ProvideDocumentCommand{\PK}{o o}{\ensuremath{%
-    \operatorname{PK}%
-    \IfValueT{#1}{%
-      \IfValueTF{#2}{%
-        \mleft\{\mleft(#1\mright) : #2\mright\}%
-      }{%
-        \mleft\{#1\mright\}%
-      }%
-    }%
-  }}
-\ProvideDocumentCommand{\SPK}{o o o}{\ensuremath{%
-    \operatorname{SPK}%
-    \IfValueT{#1}{%
-      \IfValueTF{#2}{%
-        \mleft\{\mleft(#1\mright) : #2\mright\}%
-      }{%
-        \mleft\{#1\mright\}%
-      }%
-      \IfValueT{#3}{%
-        \mleft(#3\mright)%
-      }%
-    }%
-  }}
-@
-
-We also provide some acronyms:
-\DescribeAcro{PK} for \ac{PK};
-\DescribeAcro{ZKP} for \ac{ZKP};
-\DescribeAcro{NIZK} for \ac{NIZK};
-\DescribeAcro{ZKPK} for \ac{ZKPK};
-\DescribeAcro{NIZKPK} for \ac{NIZKPK}.
-<<topic acronyms>>=
-\DeclareAcronym{PK}{%
-  short = {PK},
-  long = {proof of knowledge},
-}
-\DeclareAcronym{ZKP}{%
-  short = {ZKP},
-  long = {zero-knowledge proof},
-}
-\DeclareAcronym{NIZK}{%
-  short = {NIZK},
-  long = {non-interactive zero-knowledge},
-}
-\DeclareAcronym{ZKPK}{%
-  short = {ZKPK},
-  long = {zero-knowledge proof-of-knowledge},
-}
-\DeclareAcronym{NIZKPK}{%
-  short = {NIZKPK},
-  long = {non-interactive zero-knowledge proof-of-knowledge},
-}
-@
-
-\(\PK\) for discrete logarithms can be implemented using the Schnorr 
-Identification Scheme~\cite{Schnorr}, mentioned above as well.
-<<crypto.bib>>=
-@Article{Schnorr,
-  author="Schnorr, C. P.",
-  title="Efficient signature generation by smart cards",
-  journal="Journal of Cryptology",
-  volume="4",
-  number="3",
-  year="1991",
-  pages="161--174",
-  issn="1432-1378",
-  doi="10.1007/BF00196725",
-  url="http://dx.doi.org/10.1007/BF00196725",
-}
-@
-<<crypto.mk>>=
-BIBSP_REFKEY+=Schnorr
-URL-Schnorr=http://link.springer.com/content/pdf/10.1007%2FBF00196725.pdf
-@
-
-We can use the Fiat-Shamir heuristic~\cite{FiatShamirHeuristic} to turn any 
-\(\PK\) into \(\SPK\).
-<<crypto.bib>>=
-@Inbook{FiatShamirHeuristic,
-  author="Fiat, Amos
-      and Shamir, Adi",
-  editor="Odlyzko, Andrew M.",
-  title="How To Prove Yourself: Practical Solutions to Identification and 
-      Signature Problems",
-  bookTitle="Advances in Cryptology --- CRYPTO' 86: Proceedings",
-  year="1987",
-  publisher="Springer Berlin Heidelberg",
-  address="Berlin, Heidelberg",
-  pages="186--194",
-  isbn="978-3-540-47721-1",
-  doi="10.1007/3-540-47721-7_12",
-  url="http://dx.doi.org/10.1007/3-540-47721-7_12"
-}
-@
-<<crypto.mk>>=
-BIBSP_REFKEY+=FiatShamirHeuristic
-URL-FiatShamirHeuristic=http://dx.doi.org/10.1007/3-540-47721-7_12
-@
-
-
-\section{Commitments}
-
-We have two properties for commitments, binding and hiding.
-Each property can have varying strength, \ie a commitment scheme can either be
-\begin{itemize}
-\item perfectly or computationally binding and
-\item perfectly, statistically or computationally hiding.
-\end{itemize}
-
-We have the Pedersen commitment scheme~\cite{PedersenCommitment}, which is 
-computationally binding and perfectly hiding.
-<<crypto.bib>>=
-@inproceedings{PedersenCommitment,
-  title={Non-interactive and information-theoretic secure verifiable secret 
-    sharing},
-  author={Pedersen, Torben Pryds},
-  booktitle={Annual International Cryptology Conference},
-  pages={129--140},
-  year={1991},
-  organization={Springer}
-}
-@
-<<crypto.mk>>=
-BIBSP_REFKEY+=PedersenCommitment
-URL-PedersenCommitment=https://link.springer.com/chapter/10.1007/3-540-46766-1_9
-@
-
-
-
-\chapter{Authentication}
-
-Authentication concerns ensuring that a claimed property indeed holds.
-\Eg in user authentication, the verifier wants to ensure that the user indeed 
-corresponds to the claimed identity.
-There are, however, a variety of properties that we might be interested in 
-verifying.
-
-We add the topic.
-<<make topic definitions>>=
-BIBSP_TOPIC+=   auth
-@ And also provide references in [[<<auth.bib>>]].
-We the bibliography to biblatex for inclusion.
-<<topic bibliographies>>=
-\addbibresource{auth.bib}
-@
-
-We need some basic terminology, which happens to be acronyms:
-\ac{eID}, \DescribeAcro{eID};
-\ac{CA}, \DescribeAcro{CA};
-and more generally \iac{PKI}, \DescribeAcro{PKI}.
-They are defined as follows.
-<<topic acronyms>>=
-\DeclareAcronym{eID}{%
-  short = {eID},
-  short-indefinite = {an},
-  long = {electronic ID},
-  long-indefinite = {an},
-}
-\DeclareAcronym{CA}{%
-  short = {CA},
-  long = {certificate authority},
-}
-\DeclareAcronym{PKI}{%
-  short = {PKI},
-  long = {public-key infrastructure},
-}
-@
-
-
-\section{Distance bounding}
-
-\Ac{DB} was first suggested by \textcite{DistanceBounding} as a technique to 
-prove that a secret key was within physical proximity.
-We provide the acronym \DescribeAcro{DB}
-<<topic acronyms>>=
-\DeclareAcronym{DB}{%
-  short = {DB},
-  long = {distance bounding},
-  cite = {DistanceBounding},
-}
-@ which automatically cites the paper:
-<<auth.bib>>=
-@inproceedings{DistanceBounding,
-  title={Distance-bounding protocols},
-  author={Brands, Stefan and Chaum, David},
-  booktitle={Workshop on the Theory and Application of of Cryptographic 
-    Techniques},
-  pages={344--359},
-  year={1993},
-  organization={Springer}
-}
-@
-<<auth.mk>>=
-BIBSP_REFKEY+=DistanceBounding
-URL-DistanceBounding=https://link.springer.com/chapter/10.1007/3-540-48285-7_30
-
-@
-
-\subsection{Basic properties}
-
-In their paper, \citeauthor{DistanceBounding} introduce the property \ac{DBDF}, 
-\DescribeAcro{DBDF}.
-<<topic acronyms>>=
-\DeclareAcronym{DBDF}{%
-  short = {DF},
-  long = {distance fraud},
-  cite = {DistanceBounding},
-}
-@ They also discuss the property \ac{DBMF}, \DescribeAcro{DBMF}.
-<<topic acronyms>>=
-\DeclareAcronym{DBMF}{%
-  short = {MF},
-  short-indefinite = {an},
-  long = {Mafia fraud},
-  cite = {MafiaFraud},
-}
-@ However, this property was actually first defined in an earlier paper.
-<<auth.bib>>=
-@inproceedings{MafiaFraud,
-  title={Special uses and abuses of the Fiat-Shamir passport protocol},
-  author={Desmedt, Yvo and Goutier, Claude and Bengio, Samy},
-  booktitle={Conference on the Theory and Application of Cryptographic Techniques},
-  pages={21--39},
-  year={1987},
-  organization={Springer}
-}
-@
-<<auth.mk>>=
-BIBSP_REFKEY+=MafiaFraud
-URL-MafiaFraud=https://link.springer.com/chapter/10.1007/3-540-48184-2_3
-@
-
-\Textcite{DistanceHijacking} introduced \ac{DBDH}, \DescribeAcro{DBDH}, which is 
-an attack against parallel executions of some protocols (or the presence of 
-multiple provers).
-This attack allows a malicious prover to use an honest prover to do the \ac{DB} 
-phase of the protocol.
-<<topic acronyms>>=
-\DeclareAcronym{DBDH}{%
-  short = {DH},
-  long = {distance hijacking},
-  cite = {DistanceHijacking},
-}
-@
-<<auth.bib>>=
-@inproceedings{DistanceHijacking,
-  title={Distance hijacking attacks on distance bounding protocols},
-  author={Cremers, Cas and Rasmussen, Kasper B and Schmidt, Benedikt and Capkun, 
-    Srdjan},
-  booktitle={Security and Privacy (SP), 2012 IEEE Symposium on},
-  pages={113--127},
-  year={2012},
-  organization={IEEE},
-}
-@
-<<auth.mk>>=
-BIBSP_REFKEY+=DistanceHijacking
-URL-DistanceHijacking=http://ieeexplore.ieee.org/abstract/document/6234408/
-@
-
-It's generally difficult to prevent someone from sharing a credential with 
-others, \eg a subscription or pass.
-However, we can assume that Alice is more reluctant to allow Bob to impersonate 
-her forever, than she is to allow Bob to impersonate her only once.
-This is captured by \ac{DBTF}, \DescribeAcro{DBTF}.
-<<topic acronyms>>=
-\DeclareAcronym{DBTF}{%
-  short = {TF},
-  long = {terrorist fraud},
-  cite = {TerroristFraud},
-}
-@
-<<auth.bib>>=
-@inproceedings{TerroristFraud,
-  title={Major security problems with the ‘unforgeable’(feige)-fiat-shamir 
-    proofs of identity and how to overcome them},
-  author={Desmedt, Yvo},
-  booktitle={Proceedings of SECURICOM},
-  volume={88},
-  pages={15--17},
-  year={1988}
-}
-@
-<<auth.mk>>=
-BIBSP_REFKEY+=TerroristFraud
-URL-TerroristFraud=https://scholar.google.fr/scholar?hl=en&as_sdt=0%2C5&q=+%09+Major+Security+Problems+with+the+%22Unforgeable%22+%28Feige%29-Fiat-Shamir+Proofs+of+Identity+and+How+to+Overcome+Them&btnG=
-@
-
-<<topic acronyms>>=
-\DeclareAcronym{DBIF}{%
-  short = {IF},
-  short-indefinite = {an},
-  long = {impersonation fraud},
-  long-indefinite = {an},
-  cite = {ImpersonationFraud},
-}
-\DeclareAcronym{DBPK}{%
-  short = {DBPK},
-  long = {distance-bounding proof-of-knowledge},
-}
-@
-
-Finally, we have the property of \ac{DBIF}, \DescribeAcro{DBIF}.
-This means that a malicious prover can make an honest verifier believe he is 
-someone else --- without any help, as in the \ac{DBTF} case.
-<<auth.bib>>=
-@inproceedings{ImpersonationFraud,
-  title={An efficient distance bounding RFID authentication protocol: balancing 
-    false-acceptance rate and memory requirement},
-  author={Avoine, Gildas and Tchamkerten, Aslan},
-  booktitle={International Conference on Information Security},
-  pages={250--261},
-  year={2009},
-  organization={Springer}
-}
-@
-<<auth.mk>>=
-BIBSP_REFKEY+=ImpersonationFraud
-URL-ImpersonationFraud=https://link.springer.com/chapter/10.1007/978-3-642-04474-8_21
-@
-
-
-\subsection{Formal models for \acl{DB}}
-
-There are two (competing) formal models of \ac{DB}:
-the \ac{DB-BMV} model, \DescribeAcro{DB-BMV}, and the \ac{DB-DFKO} model, 
-\DescribeAcro{DB-DFKO}.
-<<topic acronyms>>=
-\DeclareAcronym{DB-BMV}{%
-  short = {BMV},
-  long = {Boureanu-Mitrokotsa-Vaudenay},
-  cite = {DB-BMV},
-}
-\DeclareAcronym{DB-DFKO}{%
-  short = {DFKO},
-  long = {Dürholz-Fischlin-Kasper-Onete},
-  cite = {DB-DFKO},
-}
-@
-<<auth.bib>>=
-@article{DB-BMV,
-  title={Practical and provably secure distance-bounding},
-  author={Boureanu, Ioana and Mitrokotsa, Aikaterini and Vaudenay, Serge},
-  journal={Journal of Computer Security},
-  volume={23},
-  number={2},
-  pages={229--257},
-  year={2015},
-  publisher={IOS Press}
-}
-@inproceedings{DB-DFKO,
-  title={A formal approach to distance-bounding RFID protocols},
-  author={D{\"u}rholz, Ulrich and Fischlin, Marc and Kasper, Michael and Onete, 
-    Cristina},
-  booktitle={International Conference on Information Security},
-  pages={47--62},
-  year={2011},
-  organization={Springer}
-}
-@
-<<auth.mk>>=
-BIBSP_REFKEY+=DB-BMV
-#URL-DB-BMV=https://content.iospress.com/articles/journal-of-computer-security/jcs518
-URL-DB-BMV=https://eprint.iacr.org/2013/465
-
-BIBSP_REFKEY+=DB-DFKO
-URL-DB-DFKO=https://link.springer.com/chapter/10.1007%2F978-3-642-24861-0_4
-@
-
-
-\subsection{Public-key \acl{DB}}
-
-While the majority of \ac{DB} protocols proposed over the years since 
-\citeyear{DistanceBounding} have all been symmetric, \ie the verifier must be 
-trusted, there are a (very) few works on public-key \ac{DB}.
-
-One scheme in this class is \ac{ProProx}, \DescribeAcro{ProProx}, which is 
-\iac{PPK}, \DescribeAcro{PPK}.
-(Note that \textcite{ProProx} used \aca{PPK} as acronym.)
-<<topic acronyms>>=
-\DeclareAcronym{ProProx}{%
-  short = {ProProx},
-  long = {ProProx},
-  cite = {ProProx},
-}
-\DeclareAcronym{PPK}{%
-  short = {PPK},
-  alt = {PoPoK},
-  long = {proof of proximity of knowledge},
-  cite = {ProProx},
-}
-@
-<<auth.bib>>=
-@inproceedings{ProProx,
-  title={Sound proof of proximity of knowledge},
-  author={Vaudenay, Serge},
-  booktitle={International Conference on Provable Security},
-  pages={105--126},
-  year={2015},
-  organization={Springer}
-}
-@
-<<auth.mk>>=
-BIBSP_REFKEY+=ProProx
-URL-ProProx=https://link.springer.com/chapter/10.1007/978-3-319-26059-4_6
-@
-
-
-\subsection{Physical implementations}
-
-During the \ac{DB} phase, we measure the round-trip time of electromagnetic 
-waves.
-This means that we must add as little overhead from processing as possible 
-during this step.
-This means that we need dedicated hardware.
-
-\Textcite{DBonSmartphones} evaluated how well one could do to implement \ac{DB} 
-protocols on smartphones without hardware support.
-<<auth.bib>>=
-@inproceedings{DBonSmartphones,
-  TITLE = {{The Not-so-distant Future: Distance-Bounding Protocols on 
-    Smartphones}},
-  AUTHOR = {Gambs, S{\'e}bastien and Eduardo Rosar Kos Lassance, Carlos and 
-    Onete, Cristina},
-  URL = {https://hal.inria.fr/hal-01244606},
-  BOOKTITLE = {{14th Smart Card Research and Advanced Application 
-    Conference}},
-  ADDRESS = {Bochum, Germany},
-  YEAR = {2015},
-  MONTH = Nov,
-  HAL_ID = {hal-01244606},
-  HAL_VERSION = {v1},
-}
-@
-<<auth.mk>>=
-BIBSP_REFKEY+=DBonSmartphones
-URL-DBonSmartphones=https://hal.inria.fr/hal-01244606
-@
-
-Hardware is starting to come though.
-There is 3DB-access\footnote{%
-  URL: \url{https://3db-access.com}.
-} who provides \iac{DB} chip with \SI{10}{\centi\metre} precision up to 
-\SI{150}{\metre}.
-
-
-\section{Anonymous credentials}
-
-For an anonymous credential system, it is sufficient to have a commitment 
-scheme, a signature scheme and (efficient) protocols for
-\begin{enumerate*}
-  \item proving equality of two committed values;
-  \item getting a signature on a committed value; and
-  \item proving knowledge of a signature on a committed 
-  value~\cite{CLsigs}.
-\end{enumerate*}
-One such scheme is \ac{CLsigs}, \DescribeAcro{CLsigs}.
-<<topic acronyms>>=
-\DeclareAcronym{CLsigs}{%
-  short = {CL-signatures},
-  long = {Camenisch-Lysyanskaya signatures},
-  cite = {CLsigs},
-}
-@
-<<auth.bib>>=
-@inproceedings{CLsigs,
-  title={Signature schemes and anonymous credentials from bilinear maps},
-  author={Camenisch, Jan and Lysyanskaya, Anna},
-  booktitle={Annual International Cryptology Conference},
-  pages={56--72},
-  year={2004},
-  organization={Springer}
-}
-@
-<<auth.mk>>=
-BIBSP_REFKEY+=CLsigs
-URL-CLsigs=https://link.springer.com/chapter/10.1007/978-3-540-28628-8_4
-@
-
-\Textcite{HowToWinTheCloneWars}, \DescribeBibkey{HowToWinTheCloneWars}, then 
-extended this by adding the \ac{DY-VRF} to prevent cloning of anonymous 
-credentials for \eg subscriptions.
-<<auth.bib>>=
-@inproceedings{HowToWinTheCloneWars,
-  author = {Camenisch, Jan and Hohenberger, Susan and Kohlweiss, Markulf and 
-  Lysyanskaya, Anna and Meyerovich, Mira},
-  title = {How to Win the Clonewars: Efficient Periodic N-times Anonymous 
-  Authentication},
-  booktitle = {Proceedings of the 13th ACM Conference on Computer and 
-  Communications Security},
-  series = {CCS '06},
-  year = {2006},
-  isbn = {1-59593-518-5},
-  location = {Alexandria, Virginia, USA},
-  pages = {201--210},
-  numpages = {10},
-  doi = {10.1145/1180405.1180431},
-  acmid = {1180431},
-  publisher = {ACM},
-  address = {New York, NY, USA},
-  keywords = {n-anonymous authentication, clone detection, credentials},
-}
-@
-<<auth.mk>>=
-BIBSP_REFKEY+=HowToWinTheCloneWars
-URL-HowToWinTheCloneWars=http://doi.acm.org/10.1145/1180405.1180431
-@ \Textcite{AnonPass}, \DescribeBibkey{AnonPass}, later implemented this scheme, 
-with some extensions and minor modifications.
-<<auth.bib>>=
-@inproceedings{AnonPass,
-  title={Anon-pass: Practical anonymous subscriptions},
-  author={Lee, Michael Z and Dunn, Alan M and Waters, Brent and Witchel, Emmett 
-    and Katz, Jonathan},
-  booktitle={Security and Privacy (SP), 2013 IEEE Symposium on},
-  pages={319--333},
-  year={2013},
-  organization={IEEE}
-}
-@
-<<auth.mk>>=
-BIBSP_REFKEY+=AnonPass
-#URL-AnonPass=http://ieeexplore.ieee.org/abstract/document/6547118/
-URL-AnonPass=https://eprint.iacr.org/2013/317
-@
-
-Finally, \textcite{Psigs} proposed a scheme for non-interactive anonymous 
-credentials without the random-oracle model.
-The \ac{CLsigs} required the Fiat-Shamir heuristic~\cite{FiatShamirHeuristic} to 
-turn the interactive \ac{ZKPK} to non-interactive.
-<<auth.bib>>=
-@Inbook{Psigs,
-  author="Belenkiy, Mira
-      and Chase, Melissa
-      and Kohlweiss, Markulf
-      and Lysyanskaya, Anna",
-  editor="Canetti, Ran",
-  title="P-signatures and Noninteractive Anonymous Credentials",
-  bookTitle="Theory of Cryptography: Fifth Theory of Cryptography Conference, TCC 2008, New York, USA, March 19-21, 2008. Proceedings",
-  year="2008",
-  publisher="Springer Berlin Heidelberg",
-  address="Berlin, Heidelberg",
-  pages="356--374",
-  abstract="In this paper, we introduce P-signatures. A P-signature scheme 
-  consists of a signature scheme, a commitment scheme, and (1) an interactive 
-  protocol for obtaining a signature on a committed value; (2) a non-interactive 
-  proof system for proving that the contents of a commitment has been signed; 
-  (3) a noninteractive proof system for proving that a pair of commitments are 
-  commitments to the same value. We give a definition of security for 
-  P-signatures and show how they can be realized under appropriate assumptions 
-  about groups with a bilinear map. We make extensive use of the powerful suite 
-  of non-interactive proof techniques due to Groth and Sahai. Our P-signatures 
-  enable, for the first time, the design of a practical non-interactive 
-  anonymous credential system whose security does not rely on the random oracle 
-  model. In addition, they may serve as a useful building block for other 
-  privacy-preserving authentication mechanisms.",
-  isbn="978-3-540-78524-8",
-  doi="10.1007/978-3-540-78524-8_20",
-}
-@
-<<auth.mk>>=
-BIBSP_REFKEY+=Psigs
-URL-Psigs=https://doi.org/10.1007/978-3-540-78524-8_20
-@
-
-
-\section{Location-based services}
-
-Another property that we might want to verify is the physical location of 
-something.
-This is indeed related to \ac{DB} protocols.
-<<make topic definitions>>=
-BIBSP_TOPIC+=   location
-@ We add the bibliography.
-<<topic bibliographies>>=
-\addbibresource{location.bib}
-@
-
-\Textcite{PROPS}, \DescribeBibkey{PROPS}, provide a privacy-preserving \ac{LP} 
-system, \DescribeAcro{LP}, called \ac{PROPS}, \DescribeAcro{PROPS}.
-It's a decentralized system, where a prover collects \acp{LPS}, 
-\DescribeAcro{LPS}, from witnesses.
-<<topic acronyms>>=
-\DeclareAcronym{PROPS}{%
-  short = {PROPS},
-  long = {PRivacy-preserving lOcation-Proof System},
-  cite = {PROPS},
-}
-\DeclareAcronym{LP}{%
-  short = {LP},
-  short-indefinite = {an},
-  long = {location proof},
-  long-indefinite = {a},
-}
-\DeclareAcronym{LPS}{%
-  short = {LPS},
-  short-indefinite = {an},
-  long = {location-proof share},
-  long-indefinite = {a},
-}
-@
-<<location.bib>>=
-@inproceedings{PROPS,
-  title={PROPS: A PRivacy-preserving lOcation Proof System},
-  author={Gambs, S. and Killijian, M.-O. and Roy, M. and Traore, M.},
-  booktitle={Reliable Distributed Systems (SRDS), 2014 IEEE 33rd International 
-    Symposium on},
-  pages={1-10},
-  month={10},
-  year={2014},
-  keywords={data privacy;groupware;mobile computing;theorem proving;user 
-    interfaces;PROPS;collaborative manner;mobile user;privacy-preserving 
-        location proof system;private manner;secure location-based 
-        service;ubiquitous computing;Computer architecture;Cryptography;Global 
-        Positioning System;Privacy;Protocols;Testing;collaborative 
-        algorithms;distance bounding;location based services;location proof 
-        system;privacy},
-  doi={10.1109/SRDS.2014.37},
-  URL={http://ieeexplore.ieee.org/ielx7/6979347/6983362/06983374.pdf}
-}
-@
-<<location.mk>>=
-BIBSP_REFKEY+=PROPS
-URL-PROPS=http://ieeexplore.ieee.org/ielx7/6979347/6983362/06983374.pdf
-@
-
-
-\section{Passwords}
-
-The topic most people associate with authentication is passwords, or 
-password-based authentication.
-We devote a separate topic to passwords.
-<<make topic definitions>>=
-BIBSP_TOPIC+=   passwd
-@ We add the password bibliography for automatic inclusion by [[bibsp]].
-<<topic bibliographies>>=
-\addbibresource{passwd.bib}
-@
-
-The first paper treats security and usability of password composition policies.
-We first add the BibTeX entry.
-<<passwd.bib>>=
-@inproceedings{OfPasswordsAndPeople,
-  author={Komanduri, Saranga and
-    Shay, Richard and
-    Kelley, Patrick Gage and
-    Mazurek, Michelle L. and
-    Bauer, Lujo and
-    Christin Nicolas and
-    Cranor, Lorrie Faith and
-    Egelman, Serge},
-  title={Of passwords and people:
-    Measuring the effect of password-composition policies},
-  booktitle={CHI},
-  year={2011},
-  URL={http://cups.cs.cmu.edu/rshay/pubs/passwords_and_people2011.pdf},
-}
-@ And then provide the citation key and the paper's \ac{URL} so that we can 
-automatically fetch the paper.
-<<passwd.mk>>=
-BIBSP_REFKEY+=OfPasswordsAndPeople
-URL-OfPasswordsAndPeople=http://cups.cs.cmu.edu/rshay/pubs/passwords_and_people2011.pdf
-@
-
-The second paper is a follow-up to the first.
-<<passwd.bib>>=
-@inproceedings{CanLongPasswordsBeSecureAndUsable,
-  title={Can long passwords be secure and usable?},
-  author={Shay, Richard and
-    Komanduri, Saranga and
-    Durity, Adam L and
-    Huh, Phillip Seyoung and
-    Mazurek, Michelle L and
-    Segreti, Sean M and
-    Ur, Blase and
-    Bauer, Lujo and
-    Christin, Nicolas and
-    Cranor, Lorrie Faith},
-  booktitle={Proceedings of the 32nd annual ACM conference on Human factors in 
-    computing systems},
-  pages={2927--2936},
-  year={2014},
-  organization={ACM},
-  URL={http://lorrie.cranor.org/pubs/longpass-chi2014.pdf},
-}
-@ Now the citation key and \ac{URL}.
-<<passwd.mk>>=
-BIBSP_REFKEY+=CanLongPasswordsBeSecureAndUsable
-URL-CanLongPasswordsBeSecureAndUsablp=http://lorrie.cranor.org/pubs/longpass-chi2014.pdf
-@
-
-
-\chapter{Organizations}
-
-There are a lot of organizations which uses acronyms.
-<<topic acronyms>>=
-\DeclareAcronym{UN}{%
-  short = {UN},
-  long = {United Nations},
-}
-@
-
-Then we have some of the world's spy agencies:
-<<topic acronyms>>=
-\DeclareAcronym{NSA}{%
-  short = {NSA},
-  long = {US National Security Agency}
-}
-\DeclareAcronym{GCHQ}{%
-  short = {GCHQ},
-  long = {UK Government Communications Headquarters}
-}
-\DeclareAcronym{CIA}{%
-  short = {CIA},
-  long = {US Central Intelligence Agency}
-}
-\DeclareAcronym{TAO}{%
-  short = {TAO},
-  long = {Tailored Access Operations}
-}
-\DeclareAcronym{FRA}{%
-  short = {FRA},
-  foreign = {Försvarets radioanstalt},
-  long = {Swedish National Defence Radio Establishment},
-}
-@
+\include{maths}
+\include{protocols}
+\include{crypto}
+\include{auth}
+\include{org}
 
 
 
@@ -1654,7 +358,7 @@ URL-FireChat=https://www.opengarden.com/firechat.html
 BIBSP_TOPIC+=	blockchain
 @
 
-<<topic acronyms>>=
+<<bibsp package content>>=
 \DeclareAcronym{tposet}{%
   short = {t-poset},
   long = {transactional partially ordered set},
@@ -1725,7 +429,7 @@ URL-FairProofOfWork=https://eprint.iacr.org/2016/680.pdf
 \RequirePackage{ifthen}
 @
 
-<<topic acronyms>>=
+<<bibsp package content>>=
 %%%%%%%%%%%%%%%%%%%%%
 % Standard things
 %%%%%%%%%%%%%%%%%%%%%
@@ -1901,7 +605,7 @@ URL-TowardsMeasuringAnonymity=http://www.academia.edu/download/40412595/Towards_
 
 \chapter{Cryptography}
 
-<<topic commands>>=
+<<bibsp package content>>=
 \ProvideDocumentCommand{\indcpa}{}{\ensuremath{\text{IND-CPA}}}
 \ProvideDocumentCommand{\indcca}{}{\ensuremath{\text{IND-CCA}}}
 \ProvideDocumentCommand{\indsfcca}{}{\ensuremath{\text{IND-SFCCA}}}
@@ -1962,7 +666,7 @@ URL-TowardsMeasuringAnonymity=http://www.academia.edu/download/40412595/Towards_
 }}
 @
 
-<<topic acronyms>>=
+<<bibsp package content>>=
 % Crypto properties
 \DeclareAcronym{IND-CPA}{%
   short = {IND-CPA},
@@ -2283,7 +987,7 @@ URL-TowardsMeasuringAnonymity=http://www.academia.edu/download/40412595/Towards_
 }
 @
 
-<<crypto.bib>>=
+<<bibtex entries>>=
 @article{ShannonSecrecy,
   title={Communication theory of secrecy systems},
   author={Shannon, Claude E},
@@ -3094,7 +1798,7 @@ URL-MPCgoesLive=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.1007%2F978
 
 \chapter{Computer systems}
 
-<<topic acronyms>>=
+<<bibsp package content>>=
 \DeclareAcronym{IO}{%
   short = {I/O},
   short-indefinite = {an},
@@ -3130,7 +1834,7 @@ URL-MPCgoesLive=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.1007%2F978
 
 \chapter{Services}
 
-<<topic acronyms>>=
+<<bibsp package content>>=
 \DeclareAcronym{GPG}{%
   short = {GPG},
   long = {GNU Privacy Guard},
@@ -3185,7 +1889,7 @@ URL-MPCgoesLive=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.1007%2F978
 
 \chapter{Peer-to-peer systems}
 
-<<topic acronyms>>=
+<<bibsp package content>>=
 \DeclareAcronym{P2P}{%
   short = {P2P},
   long = {peer-to-peer},
@@ -3200,7 +1904,7 @@ URL-MPCgoesLive=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.1007%2F978
 
 \chapter{Usability}
 
-<<topic acronyms>>=
+<<bibsp package content>>=
 \DeclareAcronym{HCI}{%
   short = {HCI},
   short-indefinite = {an},
@@ -3223,7 +1927,7 @@ URL-MPCgoesLive=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.1007%2F978
 BIBSP_TOPIC+=	privacy
 @
 
-<<topic acronyms>>=
+<<bibsp package content>>=
 \DeclareAcronym{PET}{%
   short = {PET},
   long = {privacy-enhancing technology},
@@ -4851,7 +3555,7 @@ URL-P2PPasswords=http://ieeexplore.ieee.org/ielx5/6329089/6335787/06335797.pdf
 BIBSP_TOPIC+=   ac
 @
 
-<<topic acronyms>>=
+<<bibsp package content>>=
 \DeclareAcronym{AC}{%
   short = {AC},
   long = {access control},
@@ -4871,7 +3575,7 @@ BIBSP_TOPIC+=   ac
 
 \section{Access-control models}
 
-<<topic acronyms>>=
+<<bibsp package content>>=
 \DeclareAcronym{IBAC}{%
   short = {IBAC},
   long = {identity-based access control},
@@ -4894,7 +3598,7 @@ BIBSP_TOPIC+=   ac
 }
 @
 
-<<topic acronyms>>=
+<<bibsp package content>>=
 \DeclareAcronym{ACL}{%
   short = {ACL},
   long = {access-control list},
@@ -4906,7 +3610,7 @@ BIBSP_TOPIC+=   ac
 
 \section{Information flow}
 
-<<topic acronyms>>=
+<<bibsp package content>>=
 \DeclareAcronym{IFC}{%
   short = {IFC},
   short-indefinite = {an},
