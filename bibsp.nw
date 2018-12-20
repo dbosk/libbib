@@ -3717,10 +3717,6 @@ URL-PPACTechniquesInDistSys=http://ro.uow.edu.au/cgi/viewcontent.cgi?article=532
 @
 
 
-\printbibliography
-
-\chapter*{An index of the code blocks}
-\nowebchunks
-
+\printbibliography[heading=bibintoc]
 \printindex
 \end{document}
