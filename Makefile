@@ -11,7 +11,7 @@ all: bibsp.pdf
 NOWEAVEFLAGS= 	-n -delay -t2
 TEX_IND= 		yes
 
-bibsp.pdf: bibsp.tex preamble.tex bibsp.sty
+bibsp.pdf: bibsp.tex preamble.tex bibsp.sty bibsp.bib
 bibsp.pdf: abstract.tex LICENSE
 bibsp.pdf: bibsp.tex
 
