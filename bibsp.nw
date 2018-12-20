@@ -197,6 +197,130 @@ endef
 $(foreach ref,${BIBSP_REFKEY},$(eval $(call bibsp_display,${ref})))
 @
 
+\section{Bibliographic sources}
+
+Finally, we provide [[feed2imaprc]] which provides a configuration file for 
+[[feed2imap]], which provides URLs for RSS-feeds providing papers in security 
+and privacy.
+<<feed2imaprc>>=
+<<feed2imap settings>>
+feeds:
+  <<feeds>>
+@
+
+The required default settings are an email address and a destination.
+<<feed2imap settings>>=
+default-email:  dbosk@kth.se
+target-refix:   &maildir "maildir:///home/dbosk/mail/feeds/"
+@
+
+We start with the preprints:
+<<feeds>>=
+- name: IACR ePrint
+  url: http://eprint.iacr.org/rss/rss.xml
+  target: [ *maildir, "preprint" ]
+- name: arXiv-cs.CR
+  url: http://arxiv.org/rss/cs.CR?version=2.0
+  target: [ *maildir, "preprint" ]
+- name: arXiv-cs.SI
+  url: http://arxiv.org/rss/cs.SI?version=2.0
+  target: [ *maildir, "preprint" ]
+- name: arXiv-cs.IR
+  url: http://arxiv.org/rss/cs.IR?version=2.0
+  target: [ *maildir, "preprint" ]
+- name: arXiv-cs.HC
+  url: http://arxiv.org/rss/cs.HC?version=2.0
+  target: [ *maildir, "preprint" ]
+- name: arXiv-cs.DC
+  url: http://arxiv.org/rss/cs.DC?version=2.0
+  target: [ *maildir, "preprint" ]
+@
+
+Next we have the proceedings of the top-tier conferences.
+<<feeds>>=
+- name: ACM CCS
+  url: http://rss.acm.org/dl/RM67.xml
+  target: [ *maildir, "security" ]
+@
+
+Interesting workshops.
+<<feeds>>=
+- name: WPES
+  url: http://rss.acm.org/dl/RM733.xml
+  target: [ *maildir, "security" ]
+@
+
+Next we have the Foundations and Trends published by Now Publishers.
+These are extensive works, more like books than papers.
+<<feeds>>=
+- name: Foundations and Trends in TCS
+  url: http://www.nowpublishers.com/feed/TCS
+  target: [ *maildir, "tcs" ]
+- name: Foundations and Trends in Privacy and Security
+  url: http://www.nowpublishers.com/feed/SEC
+  target: [ *maildir, "security" ]
+@
+
+Next we have the ACM transactions and journals.
+<<feeds>>=
+- name: ACM Computing Surveys
+  url: http://rss.acm.org/dl/J204.xml
+  target: [ *maildir, "surveys" ]
+- name: ACM TISSEC
+  url: http://rss.acm.org/dl/J789.xml
+  target: [ *maildir, "security" ]
+- name: ACM TOPS
+  url: http://rss.acm.org/dl/J1547.xml
+  target: [ *maildir, "security" ]
+- name: ACM J Comp Sec
+  url: http://rss.acm.org/dl/J468.xml
+  target: [ *maildir, "security" ]
+- name: ACM T Social Computing
+  url: http://rss.acm.org/dl/J1546.xml
+  target: [ *maildir, "privacy" ]
+@
+
+Next we have the IEEE transactions.
+<<feeds>>=
+- name: IEEE TDSC Dependable and Secure Computing
+  url: https://ieeecs-services.computer.org/rss/periodicals/trans/tq/rss.xml
+  target: [ *maildir, "security" ]
+- name: IEEE TIFS Info Forensics and Security
+  url: https://ieeexplore.ieee.org/rss/TOC10206.XML
+  target: [ *maildir, "security" ]
+@
+
+Next we have a Frontiers journal.
+<<feeds>>=
+- name: Frontiers Computer and Network Security
+  url: http://journal.frontiersin.org/journal/ict/section/computer-and-network-security/rss
+  target: [ *maildir, "security" ]
+@
+
+Finally, we have some news oriented feeds.
+<<feeds>>=
+- name: Schneier
+  url: http://www.schneier.com/blog/atom.xml
+  target: [ *maildir, "news" ]
+- name: LightBlueTouchpaper
+  url: http://www.lightbluetouchpaper.org/feed/
+  target: [ *maildir, "news" ]
+- name: BristolCrypto
+  url: http://bristolcrypto.blogspot.com/feeds/posts/default
+  target: [ *maildir, "news" ]
+- name: Thoughts on Cryptographic Engineering
+  url: https://blog.cryptographyengineering.com/feed/
+  target: [ *maildir, "news" ]
+- name: ACM CACM Security
+  url: https://cacm.acm.org/browse-by-subject/security.rss
+  target: [ *maildir, "news" ]
+- name: IEEE S&P Mag
+  url: https://ieeecs-services.computer.org/rss/periodicals/mags/sp/rss.xml
+  target: [ *maildir, "news" ]
+- name: IEEE Computer
+  url: https://ieeecs-services.computer.org/rss/periodicals/mags/co/rss.xml
+@
+
 
 \chapter{Publisher-specific options}
 
