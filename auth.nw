@@ -6,15 +6,6 @@ corresponds to the claimed identity.
 There are, however, a variety of properties that we might be interested in 
 verifying.
 
-We add the topic.
-<<make topic definitions>>=
-BIBSP_TOPIC+=   auth
-@ And also provide references in [[<<auth.bib>>]].
-We the bibliography to biblatex for inclusion.
-<<topic bibliographies>>=
-\addbibresource{auth.bib}
-@
-
 We need some basic terminology, which happens to be acronyms:
 \ac{eID}, \DescribeAcro{eID};
 \ac{CA}, \DescribeAcro{CA};
@@ -50,7 +41,7 @@ We provide the acronym \DescribeAcro{DB}
   cite = {DistanceBounding},
 }
 @ which automatically cites the paper:
-<<auth.bib>>=
+<<bibtex entries>>=
 @inproceedings{DistanceBounding,
   title={Distance-bounding protocols},
   author={Brands, Stefan and Chaum, David},
@@ -61,10 +52,9 @@ We provide the acronym \DescribeAcro{DB}
   organization={Springer}
 }
 @
-<<auth.mk>>=
+<<make variables>>=
 BIBSP_REFKEY+=DistanceBounding
 URL-DistanceBounding=https://link.springer.com/chapter/10.1007/3-540-48285-7_30
-
 @
 
 \subsection{Basic properties}
@@ -86,7 +76,7 @@ In their paper, \citeauthor{DistanceBounding} introduce the property \ac{DBDF},
   cite = {MafiaFraud},
 }
 @ However, this property was actually first defined in an earlier paper.
-<<auth.bib>>=
+<<bibtex entries>>=
 @inproceedings{MafiaFraud,
   title={Special uses and abuses of the Fiat-Shamir passport protocol},
   author={Desmedt, Yvo and Goutier, Claude and Bengio, Samy},
@@ -96,7 +86,7 @@ In their paper, \citeauthor{DistanceBounding} introduce the property \ac{DBDF},
   organization={Springer}
 }
 @
-<<auth.mk>>=
+<<make variables>>=
 BIBSP_REFKEY+=MafiaFraud
 URL-MafiaFraud=https://link.springer.com/chapter/10.1007/3-540-48184-2_3
 @
@@ -113,7 +103,7 @@ phase of the protocol.
   cite = {DistanceHijacking},
 }
 @
-<<auth.bib>>=
+<<bibtex entries>>=
 @inproceedings{DistanceHijacking,
   title={Distance hijacking attacks on distance bounding protocols},
   author={Cremers, Cas and Rasmussen, Kasper B and Schmidt, Benedikt and Capkun, 
@@ -124,7 +114,7 @@ phase of the protocol.
   organization={IEEE},
 }
 @
-<<auth.mk>>=
+<<make variables>>=
 BIBSP_REFKEY+=DistanceHijacking
 URL-DistanceHijacking=http://ieeexplore.ieee.org/abstract/document/6234408/
 @
@@ -141,7 +131,7 @@ This is captured by \ac{DBTF}, \DescribeAcro{DBTF}.
   cite = {TerroristFraud},
 }
 @
-<<auth.bib>>=
+<<bibtex entries>>=
 @inproceedings{TerroristFraud,
   title={Major security problems with the ‘unforgeable’(feige)-fiat-shamir 
     proofs of identity and how to overcome them},
@@ -152,7 +142,7 @@ This is captured by \ac{DBTF}, \DescribeAcro{DBTF}.
   year={1988}
 }
 @
-<<auth.mk>>=
+<<make variables>>=
 BIBSP_REFKEY+=TerroristFraud
 URL-TerroristFraud=https://scholar.google.fr/scholar?hl=en&as_sdt=0%2C5&q=+%09+Major+Security+Problems+with+the+%22Unforgeable%22+%28Feige%29-Fiat-Shamir+Proofs+of+Identity+and+How+to+Overcome+Them&btnG=
 @
@@ -174,7 +164,7 @@ URL-TerroristFraud=https://scholar.google.fr/scholar?hl=en&as_sdt=0%2C5&q=+%09+M
 Finally, we have the property of \ac{DBIF}, \DescribeAcro{DBIF}.
 This means that a malicious prover can make an honest verifier believe he is 
 someone else --- without any help, as in the \ac{DBTF} case.
-<<auth.bib>>=
+<<bibtex entries>>=
 @inproceedings{ImpersonationFraud,
   title={An efficient distance bounding RFID authentication protocol: balancing 
     false-acceptance rate and memory requirement},
@@ -185,7 +175,7 @@ someone else --- without any help, as in the \ac{DBTF} case.
   organization={Springer}
 }
 @
-<<auth.mk>>=
+<<make variables>>=
 BIBSP_REFKEY+=ImpersonationFraud
 URL-ImpersonationFraud=https://link.springer.com/chapter/10.1007/978-3-642-04474-8_21
 @
@@ -208,7 +198,7 @@ the \ac{DB-BMV} model, \DescribeAcro{DB-BMV}, and the \ac{DB-DFKO} model,
   cite = {DB-DFKO},
 }
 @
-<<auth.bib>>=
+<<bibtex entries>>=
 @article{DB-BMV,
   title={Practical and provably secure distance-bounding},
   author={Boureanu, Ioana and Mitrokotsa, Aikaterini and Vaudenay, Serge},
@@ -229,7 +219,7 @@ the \ac{DB-BMV} model, \DescribeAcro{DB-BMV}, and the \ac{DB-DFKO} model,
   organization={Springer}
 }
 @
-<<auth.mk>>=
+<<make variables>>=
 BIBSP_REFKEY+=DB-BMV
 #URL-DB-BMV=https://content.iospress.com/articles/journal-of-computer-security/jcs518
 URL-DB-BMV=https://eprint.iacr.org/2013/465
@@ -261,7 +251,7 @@ One scheme in this class is \ac{ProProx}, \DescribeAcro{ProProx}, which is
   cite = {ProProx},
 }
 @
-<<auth.bib>>=
+<<bibtex entries>>=
 @inproceedings{ProProx,
   title={Sound proof of proximity of knowledge},
   author={Vaudenay, Serge},
@@ -271,7 +261,7 @@ One scheme in this class is \ac{ProProx}, \DescribeAcro{ProProx}, which is
   organization={Springer}
 }
 @
-<<auth.mk>>=
+<<make variables>>=
 BIBSP_REFKEY+=ProProx
 URL-ProProx=https://link.springer.com/chapter/10.1007/978-3-319-26059-4_6
 @
@@ -287,7 +277,7 @@ This means that we need dedicated hardware.
 
 \Textcite{DBonSmartphones} evaluated how well one could do to implement \ac{DB} 
 protocols on smartphones without hardware support.
-<<auth.bib>>=
+<<bibtex entries>>=
 @inproceedings{DBonSmartphones,
   TITLE = {{The Not-so-distant Future: Distance-Bounding Protocols on 
     Smartphones}},
@@ -303,7 +293,7 @@ protocols on smartphones without hardware support.
   HAL_VERSION = {v1},
 }
 @
-<<auth.mk>>=
+<<make variables>>=
 BIBSP_REFKEY+=DBonSmartphones
 URL-DBonSmartphones=https://hal.inria.fr/hal-01244606
 @
@@ -333,7 +323,7 @@ One such scheme is \ac{CLsigs}, \DescribeAcro{CLsigs}.
   cite = {CLsigs},
 }
 @
-<<auth.bib>>=
+<<bibtex entries>>=
 @inproceedings{CLsigs,
   title={Signature schemes and anonymous credentials from bilinear maps},
   author={Camenisch, Jan and Lysyanskaya, Anna},
@@ -343,7 +333,7 @@ One such scheme is \ac{CLsigs}, \DescribeAcro{CLsigs}.
   organization={Springer}
 }
 @
-<<auth.mk>>=
+<<make variables>>=
 BIBSP_REFKEY+=CLsigs
 URL-CLsigs=https://link.springer.com/chapter/10.1007/978-3-540-28628-8_4
 @
@@ -351,7 +341,7 @@ URL-CLsigs=https://link.springer.com/chapter/10.1007/978-3-540-28628-8_4
 \Textcite{HowToWinTheCloneWars}, \DescribeBibkey{HowToWinTheCloneWars}, then 
 extended this by adding the \ac{DY-VRF} to prevent cloning of anonymous 
 credentials for \eg subscriptions.
-<<auth.bib>>=
+<<bibtex entries>>=
 @inproceedings{HowToWinTheCloneWars,
   author = {Camenisch, Jan and Hohenberger, Susan and Kohlweiss, Markulf and 
   Lysyanskaya, Anna and Meyerovich, Mira},
@@ -372,12 +362,12 @@ credentials for \eg subscriptions.
   keywords = {n-anonymous authentication, clone detection, credentials},
 }
 @
-<<auth.mk>>=
+<<make variables>>=
 BIBSP_REFKEY+=HowToWinTheCloneWars
 URL-HowToWinTheCloneWars=http://doi.acm.org/10.1145/1180405.1180431
 @ \Textcite{AnonPass}, \DescribeBibkey{AnonPass}, later implemented this scheme, 
 with some extensions and minor modifications.
-<<auth.bib>>=
+<<bibtex entries>>=
 @inproceedings{AnonPass,
   title={Anon-pass: Practical anonymous subscriptions},
   author={Lee, Michael Z and Dunn, Alan M and Waters, Brent and Witchel, Emmett 
@@ -388,7 +378,7 @@ with some extensions and minor modifications.
   organization={IEEE}
 }
 @
-<<auth.mk>>=
+<<make variables>>=
 BIBSP_REFKEY+=AnonPass
 #URL-AnonPass=http://ieeexplore.ieee.org/abstract/document/6547118/
 URL-AnonPass=https://eprint.iacr.org/2013/317
@@ -398,7 +388,7 @@ Finally, \textcite{Psigs} proposed a scheme for non-interactive anonymous
 credentials without the random-oracle model.
 The \ac{CLsigs} required the Fiat-Shamir heuristic~\cite{FiatShamirHeuristic} to 
 turn the interactive \ac{ZKPK} to non-interactive.
-<<auth.bib>>=
+<<bibtex entries>>=
 @Inbook{Psigs,
   author="Belenkiy, Mira
       and Chase, Melissa
@@ -428,7 +418,7 @@ turn the interactive \ac{ZKPK} to non-interactive.
   doi="10.1007/978-3-540-78524-8_20",
 }
 @
-<<auth.mk>>=
+<<make variables>>=
 BIBSP_REFKEY+=Psigs
 URL-Psigs=https://doi.org/10.1007/978-3-540-78524-8_20
 @
@@ -439,12 +429,6 @@ URL-Psigs=https://doi.org/10.1007/978-3-540-78524-8_20
 Another property that we might want to verify is the physical location of 
 something.
 This is indeed related to \ac{DB} protocols.
-<<make topic definitions>>=
-BIBSP_TOPIC+=   location
-@ We add the bibliography.
-<<topic bibliographies>>=
-\addbibresource{location.bib}
-@
 
 \Textcite{PROPS}, \DescribeBibkey{PROPS}, provide a privacy-preserving \ac{LP} 
 system, \DescribeAcro{LP}, called \ac{PROPS}, \DescribeAcro{PROPS}.
@@ -469,7 +453,7 @@ It's a decentralized system, where a prover collects \acp{LPS},
   long-indefinite = {a},
 }
 @
-<<location.bib>>=
+<<bibtex entries>>=
 @inproceedings{PROPS,
   title={PROPS: A PRivacy-preserving lOcation Proof System},
   author={Gambs, S. and Killijian, M.-O. and Roy, M. and Traore, M.},
@@ -489,7 +473,7 @@ It's a decentralized system, where a prover collects \acp{LPS},
   URL={http://ieeexplore.ieee.org/ielx7/6979347/6983362/06983374.pdf}
 }
 @
-<<location.mk>>=
+<<make variables>>=
 BIBSP_REFKEY+=PROPS
 URL-PROPS=http://ieeexplore.ieee.org/ielx7/6979347/6983362/06983374.pdf
 @
@@ -499,17 +483,10 @@ URL-PROPS=http://ieeexplore.ieee.org/ielx7/6979347/6983362/06983374.pdf
 
 The topic most people associate with authentication is passwords, or 
 password-based authentication.
-We devote a separate topic to passwords.
-<<make topic definitions>>=
-BIBSP_TOPIC+=   passwd
-@ We add the password bibliography for automatic inclusion by [[bibsp]].
-<<topic bibliographies>>=
-\addbibresource{passwd.bib}
-@
 
 The first paper treats security and usability of password composition policies.
 We first add the BibTeX entry.
-<<passwd.bib>>=
+<<bibtex entries>>=
 @inproceedings{OfPasswordsAndPeople,
   author={Komanduri, Saranga and
     Shay, Richard and
@@ -527,13 +504,13 @@ We first add the BibTeX entry.
 }
 @ And then provide the citation key and the paper's \ac{URL} so that we can 
 automatically fetch the paper.
-<<passwd.mk>>=
+<<make variables>>=
 BIBSP_REFKEY+=OfPasswordsAndPeople
 URL-OfPasswordsAndPeople=http://cups.cs.cmu.edu/rshay/pubs/passwords_and_people2011.pdf
 @
 
 The second paper is a follow-up to the first.
-<<passwd.bib>>=
+<<bibtex entries>>=
 @inproceedings{CanLongPasswordsBeSecureAndUsable,
   title={Can long passwords be secure and usable?},
   author={Shay, Richard and
@@ -554,7 +531,7 @@ The second paper is a follow-up to the first.
   URL={http://lorrie.cranor.org/pubs/longpass-chi2014.pdf},
 }
 @ Now the citation key and \ac{URL}.
-<<passwd.mk>>=
+<<make variables>>=
 BIBSP_REFKEY+=CanLongPasswordsBeSecureAndUsable
 URL-CanLongPasswordsBeSecureAndUsablp=http://lorrie.cranor.org/pubs/longpass-chi2014.pdf
 @
