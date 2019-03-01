@@ -1,3 +1,6 @@
+BIBSP_REFKEY+=pfitzmann-hansen
+URL-pfitzmann-hansen=http://dud.inf.tu-dresden.de/literatur/Anon\_Terminology\_v0.34.pdf
+
 BIBSP_REFKEY+=DiningCryptographers
 URL-DiningCryptographers=http://delivery.acm.org/10.1145/360000/358563/p84-chaum.pdf
 
