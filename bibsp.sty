@@ -349,22 +349,34 @@
   long = {zero-knowledge},
 }
 \DeclareAcronym{ZKP}{%
-  short = {ZKP},
-  long = {zero-knowledge proof}
+  short = {\acs*{ZK}P},
+  long = {\acifused{ZK}{\acs*{ZK}}{\acl*{ZK}} proof}
 }
 \DeclareAcronym{PK}{%
   short = {PK},
   long = {proof of knowledge},
+  long-plural-form = {proofs of knowledge},
 }
 \DeclareAcronym{ZKPK}{%
-  short = {ZKPK},
-  long = {zero-knowledge proof of knowledge},
+  short = {\acs*{ZK}\acs*{PK}},
+  long = {%
+    \acifused{ZK}{%
+      \acs*{ZK}\acifused{PK}{\acs*{PK}}{ \acl*{PK}}%
+    }{%
+      \acl*{ZK} \acifused{PK}{\acs*{PK}}{\acl*{PK}}%
+    }%
+  },
+  long-plural-form = {%
+    \acifused{ZK}{%
+      \acs*{ZK}\acifused{PK}{\acs*{PK}}{ \aclp*{PK}}%
+    }{%
+      \acl*{ZK} \acifused{PK}{\acs*{PK}}{\aclp*{PK}}%
+    }%
+  },
 }
 \DeclareAcronym{NIZK}{%
-  short = {NIZK},
-  long = {%
-    non-interactive zero-knowledge%
-  },
+  short = {NI\acs*{ZK}},
+  long = {non-interactive \acifused{ZK}{\acs*{ZK}}{\acl*{ZK}}},
 }
 \DeclareAcronym{MA}{%
   short = {MA},
@@ -461,22 +473,16 @@
 % Key-exchange mechanisms
 \DeclareAcronym{KE}{%
   short = {KE},
-  long = {%
-      key-exchange%
-    }
+  long = {key-exchange}
 }
 \DeclareAcronym{DHKE}{%
   short = {DHKE},
-  long = {%
-      Diffie-Hellman key-exchange%
-    },
+  long = {Diffie-Hellman \acifused{KE}{\acs*{KE}}{\acl*{KE}}},
   cite = {DiffieHellman}
 }
 \DeclareAcronym{AKE}{%
   short = {AKE},
-  long = {%
-      authenticated key-exchange
-    },
+  long = {authenticated \acifused{KE}{\acs*{KE}}{\acl*{KE}}},
   cite = {AuthKeyExchange}
 }
 % Cryptographic properties
