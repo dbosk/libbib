@@ -49,5 +49,5 @@ URL-TamarinDB=https://doi.ieeecomputersociety.org/10.1109/SP.2018.00001
 BIBSP_REFKEY+=DistanceBoundingSurvey
 URL-DistanceBoundingSurvey=http://doi.acm.org/10.1145/3264628
 
-BIBSP_REFKEY+=UWBwithPulseReordering
-URL-UWBwithPulseReordering=https://www.ndss-symposium.org/ndss-paper/uwb-with-pulse-reordering-securing-ran  ging-against-relay-and-physical-layer-attacks/
+BIBSP_REFKEY+=UWBPR
+URL-UWBPR=https://www.ndss-symposium.org/ndss-paper/uwb-with-pulse-reordering-securing-ran  ging-against-relay-and-physical-layer-attacks/
