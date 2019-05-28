@@ -176,9 +176,10 @@
 %%%%%%%%%%%%%%%%%%%%%%
 % Algebra
 %%%%%%%%%%%%%%%%%%%%%%
-% Galois fields (finite fields)
+\NewVariable*{\GG}{\mathbb{G}}
+\NewVariable*{\RR}{\mathbb{R}}
+\NewVariable*{\FF}{\mathbb{F}}
 \NewVariable*{\GF}{\mathrm{GF}}
-\NewVariable*{\F}{\mathbb{F}}
 \NewFunction{\ord}{ord}
 \ProvideDocumentCommand{\card}{m}{\ensuremath{|#1|}}
 \ProvideDocumentCommand{\gen}{m}{\mleft\langle #1\mright\rangle}
@@ -741,6 +742,10 @@
       certificate authority%
     },
 }
+\DeclareAcronym{PUF}{%
+  short = {PUF},
+  long = {physical unclonable function},
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%
 % Distance bounding
@@ -927,6 +932,10 @@
       digital rights management%
     },
 }
+\DeclareAcronym{E2E}{%
+  short = {E2E},
+  long = {end-to-end},
+}
 % Types of providers
 \DeclareAcronym{CSP}{%
   short = {CSP},
@@ -1048,6 +1057,12 @@
   long = {%
       user experience%
     },
+}
+
+%%%%%%%%%%%%%%%%%%%%%
+\DeclareAcronym{GDPR}{%
+  short = {GDPR},
+  long = {EU General Data Protection Regulation},
 }
 
 \ProcessOptions\relax
