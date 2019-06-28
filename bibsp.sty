@@ -868,9 +868,38 @@
 }
 
 \DeclareAcronym{DBPK}{%
-  short = {DBPK},
-  long = {distance-bounding proof-of-knowledge},
-  long-plural = {distance-bounding proofs-of-knowledge},
+  short = {\acs*{DB}\acs*{PK}},
+  long = {%
+    \acifused{DB}{%
+      \acs*{DB}\acifused{PK}{\acs*{PK}}{ \acl*{PK}}%
+    }{%
+      \acl*{DB} \acifused{PK}{\acs*{PK}}{\acl*{PK}}%
+    }%
+  },
+  long-plural-form = {%
+    \acifused{DB}{%
+      \acs*{DB}\acifused{PK}{\acs*{PK}}{ \aclp*{PK}}%
+    }{%
+      \acl*{DB} \acifused{PK}{\acs*{PK}}{\aclp*{PK}}%
+    }%
+  },
+}
+\DeclareAcronym{DBZKPK}{%
+  short = {\acs*{DB}\acs*{ZKPK}},
+  long = {%
+    \acifused{DB}{%
+      \ac{DB}\acifused{ZKPK}{\acs{ZKPK}}{ \acl*{ZKPK}}%
+    }{%
+      \acl*{DB} \acifused{ZKPK}{\acs{ZKPK}}{\acl*{ZKPK}}%
+    }%
+  },
+  long-plural-form = {%
+    \acifused{DB}{%
+      \acs{DB}\acifused{ZKPK}{\acs{ZKPK}}{ \aclp*{ZKPK}}%
+    }{%
+      \acl*{DB} \acifused{ZKPK}{\acs{ZKPK}}{\aclp*{ZKPK}}%
+    }%
+  },
 }
 \DeclareAcronym{PPK}{%
   short = {PPK},
