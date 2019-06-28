@@ -51,3 +51,9 @@ URL-DistanceBoundingSurvey=http://doi.acm.org/10.1145/3264628
 
 BIBSP_REFKEY+=UWBPR
 URL-UWBPR=https://www.ndss-symposium.org/ndss-paper/uwb-with-pulse-reordering-securing-ran  ging-against-relay-and-physical-layer-attacks/
+
+BIBSP_REFKEY+=TREAD
+URL-TREAD=https://dl.acm.org/citation.cfm?id=3053000
+
+BIBSP_REFKEY+=FormalTerroristFraud
+URL-FormalTerroristFraud=https://link.springer.com/chapter/10.1007/978-3-642-38980-1_26
