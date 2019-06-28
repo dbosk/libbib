@@ -57,3 +57,6 @@ URL-TREAD=https://dl.acm.org/citation.cfm?id=3053000
 
 BIBSP_REFKEY+=FormalTerroristFraud
 URL-FormalTerroristFraud=https://link.springer.com/chapter/10.1007/978-3-642-38980-1_26
+
+BIBSP_REFKEY+=OnSigmaProtocols
+URL-OnSigmaProtocols=http://www.cs.au.dk/~ivan/Sigma.pdf
