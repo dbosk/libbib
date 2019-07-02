@@ -123,24 +123,44 @@
     }%
   }}%
 }
-\ProvideDocumentCommand{\NewAlgorithm}{m m}{%
-  \ProvideDocumentCommand{#1}{s o o}{%
-    {\ensuremath{%
-      \operatorname{%
-        \IfBooleanTF{##1}{%
-          \overline{\mathsf{#2}}%
-        }{%
-          \mathsf{#2}%
+\ProvideDocumentCommand{\NewAlgorithm}{m o m}{%
+  \IfValueTF{#2}{%
+    \ProvideDocumentCommand{#1}{s o o}{%
+      {\ensuremath{%
+          \operatorname{%
+            \IfBooleanTF{##1}{%
+              \overline{#2{#3}}%
+            }{%
+              #2{#3}%
+            }%
+          }%
+          \IfValueTF{##3}{%
+            ##2%
+            \mleft(##3\mright)%
+          }{%
+            \IfValueT{##2}{\mleft(##2\mright)}%
+          }%
         }%
-      }%
-      \IfValueTF{##3}{%
-        ##2%
-        \mleft(##3\mright)%
-      }{%
-        \IfValueT{##2}{\mleft(##2\mright)}%
-      }%
-    }%
-  }}%
+      }}%
+  }{%
+    \ProvideDocumentCommand{#1}{s o o}{%
+      {\ensuremath{%
+          \operatorname{%
+            \IfBooleanTF{##1}{%
+              \overline{\mathsf{#3}}%
+            }{%
+              \mathsf{#3}%
+            }%
+          }%
+          \IfValueTF{##3}{%
+            ##2%
+            \mleft(##3\mright)%
+          }{%
+            \IfValueT{##2}{\mleft(##2\mright)}%
+          }%
+        }%
+      }}%
+  }
 }
 \ProvideDocumentCommand{\NewFunction}{s m m}{%
   \ProvideDocumentCommand{#2}{s o o}{%
