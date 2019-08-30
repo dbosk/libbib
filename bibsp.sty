@@ -5,74 +5,10 @@
 \RequirePackage{mleftright}
 \RequirePackage[mathscr]{euscript}
 \RequirePackage{mfirstuc-english}
-\PassOptionsToPackage{single}{acro}
-\PassOptionsToPackage{label}{acro}
-\PassOptionsToPackage{uc-cmd=\makefirstuc}{acro}
-\RequirePackage{acro}
-\ProvideAcroEnding{possessive-singular}{'s}{'s}
-\ProvideAcroEnding{possessive-plural}{s'}{s'}
-\ExplSyntaxOn
-\ProvideAcroCommand{\acg}{%
-  \acro_possessive_singular:
-  \acro_use:n {#1}
-}
-\ProvideAcroCommand{\acgp}{%
-  \acro_possessive_plural:
-  \acro_use:n {#1}
-}
-\ProvideAcroCommand{\Acg}{%
-  \acro_possessive_singular:
-  \acro_first_upper:
-  \acro_use:n {#1}
-}
-\ProvideAcroCommand{\Acgp}{%
-  \acro_possessive_plural:
-  \acro_first_upper:
-  \acro_use:n {#1}
-}
-\ProvideAcroEnding{adverb}{}{ly}
-\ProvideAcroCommand{\acadv}{%
-  \acro_adverb:
-  \acro_use:n {#1}
-}
-\ProvideAcroCommand{\iacadv}{%
-  \acro_adverb:
-  \acro_indefinite:
-  \acro_use:n {#1}
-}
-\ProvideAcroCommand{\Acadv}{%
-  \acro_adverb:
-  \acro_first_upper:
-  \acro_use:n {#1}
-}
-\ProvideAcroCommand{\Iacadv}{%
-  \acro_adverb:
-  \acro_first_upper:
-  \acro_indefinite:
-  \acro_use:n {#1}
-}
-\ProvideAcroEnding{adjective}{ly}{ly}
-\ProvideAcroCommand{\acadj}{%
-  \acro_adjective:
-  \acro_use:n {#1}
-}
-\ProvideAcroCommand{\iacadj}{%
-  \acro_adjective:
-  \acro_indefinite:
-  \acro_use:n {#1}
-}
-\ProvideAcroCommand{\Acadj}{%
-  \acro_adjective:
-  \acro_first_upper:
-  \acro_use:n {#1}
-}
-\ProvideAcroCommand{\Iacadj}{%
-  \acro_adjective:
-  \acro_first_upper:
-  \acro_indefinite:
-  \acro_use:n {#1}
-}
-\ExplSyntaxOff
+\PassOptionsToPackage{single}{acrox}
+\PassOptionsToPackage{label}{acrox}
+\PassOptionsToPackage{uc-cmd=\makefirstuc}{acrox}
+\RequirePackage{acrox}
 \RequirePackage{textcomp}
 \RequirePackage{ifthen}
 \PassOptionsToPackage{compress}{cleveref}
