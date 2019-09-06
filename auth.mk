@@ -63,3 +63,6 @@ URL-OnSigmaProtocols=http://www.cs.au.dk/~ivan/Sigma.pdf
 
 BIBSP_REFKEY+=Bussard-Bagga
 URL-Bussard-Bagga=https://link.springer.com/chapter/10.1007/0-387-25660-1_15
+
+BIBSP_REFKEY+=Bussard-Bagga-attack
+URL-Bussard-Bagga-attack=https://link.springer.com/chapter/10.1007/978-3-642-38519-3_23
