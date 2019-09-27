@@ -26,8 +26,8 @@ INCLUDE_BIBSP?=		${INCLUDE_LIBBIB}
 ${BIBSP_BIB} ${BIBSP_STY}:
 	[ -e "./$@" ] || ln -s ${INCLUDE_BIBSP}/$@ ./$@
 
-.PHONY: clean-depends
-clean-depends: clean-bibsp
+.PHONY: clean-depends distclean
+clean-depends distclean: clean-bibsp
 clean-bibsp:
 	find ${BIBSP_BIB} ${BIBSP_STY} -type l | xargs ${RM}
 
