@@ -1,27 +1,91 @@
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
-\ProvidesPackage{libbib}[2015/07/16 v0.1 LaTeX/BibTeX library]
+\ProvidesPackage{bibsp}[2015/07/16 v0.1 LaTeX/BibTeX library]
 \RequirePackage{amsmath}
 \RequirePackage{xparse}
 \RequirePackage{mleftright}
 \RequirePackage[mathscr]{euscript}
 \RequirePackage{mfirstuc-english}
-\NewDocumentCommand{\libbib@capitalize}{m}{#1}
 \PassOptionsToPackage{single}{acro}
 \PassOptionsToPackage{label}{acro}
 \PassOptionsToPackage{uc-cmd=\makefirstuc}{acro}
 \RequirePackage{acro}
+\ProvideAcroEnding{possessive-singular}{'s}{'s}
+\ProvideAcroEnding{possessive-plural}{s'}{s'}
+\ExplSyntaxOn
+\ProvideAcroCommand{\acg}{%
+  \acro_possessive_singular:
+  \acro_use:n {#1}
+}
+\ProvideAcroCommand{\acgp}{%
+  \acro_possessive_plural:
+  \acro_use:n {#1}
+}
+\ProvideAcroCommand{\Acg}{%
+  \acro_possessive_singular:
+  \acro_first_upper:
+  \acro_use:n {#1}
+}
+\ProvideAcroCommand{\Acgp}{%
+  \acro_possessive_plural:
+  \acro_first_upper:
+  \acro_use:n {#1}
+}
+\ProvideAcroEnding{adverb}{}{ly}
+\ProvideAcroCommand{\acadv}{%
+  \acro_adverb:
+  \acro_use:n {#1}
+}
+\ProvideAcroCommand{\iacadv}{%
+  \acro_adverb:
+  \acro_indefinite:
+  \acro_use:n {#1}
+}
+\ProvideAcroCommand{\Acadv}{%
+  \acro_adverb:
+  \acro_first_upper:
+  \acro_use:n {#1}
+}
+\ProvideAcroCommand{\Iacadv}{%
+  \acro_adverb:
+  \acro_first_upper:
+  \acro_indefinite:
+  \acro_use:n {#1}
+}
+\ProvideAcroEnding{adjective}{ly}{ly}
+\ProvideAcroCommand{\acadj}{%
+  \acro_adjective:
+  \acro_use:n {#1}
+}
+\ProvideAcroCommand{\iacadj}{%
+  \acro_adjective:
+  \acro_indefinite:
+  \acro_use:n {#1}
+}
+\ProvideAcroCommand{\Acadj}{%
+  \acro_adjective:
+  \acro_first_upper:
+  \acro_use:n {#1}
+}
+\ProvideAcroCommand{\Iacadj}{%
+  \acro_adjective:
+  \acro_first_upper:
+  \acro_indefinite:
+  \acro_use:n {#1}
+}
+\ExplSyntaxOff
 \RequirePackage{textcomp}
 \RequirePackage{ifthen}
 \PassOptionsToPackage{compress}{cleveref}
 \RequirePackage{cleveref}
 \DeclareOption{lncs}{%
-  \RenewDocumentCommand{\libbib@capitalize}{m}{\capitalisewords{#1}}
-  \let\Ac\ac
-  \let\Acf\acf
-  \let\Acl\acl
-  \let\Acp\acp
-  \let\Aclp\aclp
-  \let\Acfp\acfp
+  \acsetup{uc-cmd=\capitalisewords}
+  \MFUhyphentrue
+  \let\ac\Ac
+  \let\acf\Acf
+  \let\acl\Acl
+  \let\acp\Acp
+  \let\aclp\Aclp
+  \let\acfp\Acfp
   \crefname{chapter}{Chap.}{Chap.}
   \Crefname{chapter}{Chapter}{Chapters}
   \crefname{section}{Sect.}{Sect.}
@@ -41,913 +105,1062 @@
   \crefname{proposition}{Prop.}{Prop.}
   \Crefname{proposition}{Proposition}{Propositions}
 }
-\DeclareOption{math}{%
-  % General maths
-  %\ProvideDocumentCommand{\ord}{m}{\ensuremath{|#1|}}
-  \DeclareMathOperator{\N}{\mathbb{N}}
-  \DeclareMathOperator{\Z}{\mathbb{Z}}
-  \DeclareMathOperator{\Q}{\mathbb{Q}}
-  \DeclareMathOperator{\R}{\mathbb{R}}
-  %\DeclareMathOperator{\C}{\mathbb{C}}
-  \DeclareMathOperator{\powerset}{\mathscr{P}}
-  \ProvideDocumentCommand{\textand}{}{\ensuremath{\qquad\text{and}\qquad}}
-  \ProvideDocumentCommand{\Prob}{o o m}{\ensuremath{%
-    \Pr%
-    \IfValueT{#1}{\ifthenelse{\equal{#1}{}}{}{_{#1}}}%
-    \IfValueT{#2}{^{#2}}%
-    \mleft[%
-      \ifthenelse{\equal{#3}{}}{\cdot}{#3}%
-    \mright]%
-  }}
-}
-\DeclareOption{algebra}{%
-  % Galois fields (finite fields)
-  \DeclareMathOperator{\GF}{\mathrm{GF}}
-  \DeclareMathOperator{\F}{\mathbb{F}}
-  \DeclareMathOperator{\ord}{ord}
-  \ProvideDocumentCommand{\card}{m}{\ensuremath{|#1|}}
-}
-\DeclareOption{crypto}{%
-  % General algorithmic parts
-  \ProvideDocumentCommand{\Scheme}{s m o o}{\ensuremath{%
+%
+% General algorithmic stuff
+%
+\ProvideDocumentCommand{\method}{}{\ensuremath{.\!}}
+\ProvideDocumentCommand{\NewScheme}{m m}{%
+  \ProvideDocumentCommand{#1}{s o}{%
+    {\ensuremath{%
       \operatorname{%
-        \IfBooleanTF{#1}{%
+        \IfBooleanTF{##1}{%
           \overline{{\mathsf{#2}}}%
         }{%
           {\mathsf{#2}}%
         }%
-        \IfValueT{#3}{.\!\mathsf{#3}}%
+        \IfValueT{##2}{.\!\mathsf{##2}}%
       }%
-      \IfValueT{#4}{\mleft( #4 \mright)}%
-    }}
-  \DeclareMathOperator{\K}{\mathcal{K}}
-  \DeclareMathOperator{\M}{\mathcal{M}}
-  \DeclareMathOperator{\C}{\mathcal{C}}
-  \DeclareMathOperator{\E}{\mathcal{E}}
-  \DeclareMathOperator{\D}{\mathcal{D}}
-  \ProvideDocumentCommand{\indcpa}{}{\ensuremath{\text{IND-CPA}}}
-  \ProvideDocumentCommand{\indcca}{}{\ensuremath{\text{IND-CCA}}}
-  \ProvideDocumentCommand{\indsfcca}{}{\ensuremath{\text{IND-SFCCA}}}
-  \ProvideDocumentCommand{\intptxt}{}{\ensuremath{\text{INT-PTXT}}}
-  \ProvideDocumentCommand{\intctxt}{}{\ensuremath{\text{INT-CTXT}}}
-  \ProvideDocumentCommand{\intsfctxt}{}{\ensuremath{\text{INT-SFCTXT}}}
-  \ProvideDocumentCommand{\nmcpa}{}{\ensuremath{\text{NM-CPA}}}
-  \ProvideDocumentCommand{\nmcca}{}{\ensuremath{\text{NM-CCA}}}
-  \ProvideDocumentCommand{\sufcma}{}{\ensuremath{\text{SUF-CMA}}}
-  \ProvideDocumentCommand{\denss}{}{\ensuremath{\text{DEN-SS}}}
-  \ProvideDocumentCommand{\rgets}{}{\overset{\text{\textcent}}{\gets}}
-  \DeclareMathOperator{\AdvOp}{\mathbf{Adv}}
-  \ProvideDocumentCommand{\Adv}{m m o}{%
-    \IfValueTF{#3}{%
-      \ensuremath{\AdvOp^{#1}_{#2}\mleft( #3 \mright)}%
-    }{%
-      \ensuremath{\AdvOp^{#1}_{#2}\mleft( \cdot \mright)}%
+    }%
+  }}%
+}
+\ProvideDocumentCommand{\NewAlgorithm}{m o m}{%
+  \IfValueTF{#2}{%
+    \ProvideDocumentCommand{#1}{s o o}{%
+      {\ensuremath{%
+          \operatorname{%
+            \IfBooleanTF{##1}{%
+              \overline{#2{#3}}%
+            }{%
+              #2{#3}%
+            }%
+          }%
+          \IfValueTF{##3}{%
+            ##2%
+            \mleft(##3\mright)%
+          }{%
+            \IfValueT{##2}{\mleft(##2\mright)}%
+          }%
+        }%
+      }}%
+  }{%
+    \ProvideDocumentCommand{#1}{s o o}{%
+      {\ensuremath{%
+          \operatorname{%
+            \IfBooleanTF{##1}{%
+              \overline{\mathsf{#3}}%
+            }{%
+              \mathsf{#3}%
+            }%
+          }%
+          \IfValueTF{##3}{%
+            ##2%
+            \mleft(##3\mright)%
+          }{%
+            \IfValueT{##2}{\mleft(##2\mright)}%
+          }%
+        }%
+      }}%
+  }
+}
+\ProvideDocumentCommand{\NewFunction}{s m m}{%
+  \ProvideDocumentCommand{#2}{s o o}{%
+    {\ensuremath{%
+      \operatorname{%
+        \IfBooleanTF{##1}{%
+          \overline{#3}%
+        }{%
+          #3%
+        }%
+      }%
+      \IfValueTF{##3}{%
+        ##2%
+        \mleft(##3\mright)%
+      }{%
+        \IfValueT{##2}{\mleft(##2\mright)}%
+      }%
+    }%
+  }}%
+}
+\ProvideDocumentCommand{\NewSet}{s m m}{%
+  \IfBooleanTF{#1}{%
+    \ProvideDocumentCommand{#2}{}{%
+      {\ensuremath{#3}}%
+    }%
+  }{%
+    \ProvideDocumentCommand{#2}{}{%
+      {\ensuremath{\mathcal{#3}}}%
     }%
   }
-  \DeclareMathOperator{\ExpOp}{\mathbf{Exp}}
-  \ProvideDocumentCommand{\Exp}{m m o}{%
-    \IfValueTF{#3}{%
-      \ensuremath{\ExpOp^{#1}_{#2}\mleft( #3 \mright)}%
-    }{%
-      \ensuremath{\ExpOp^{#1}_{#2}\mleft( \cdot \mright)}%
+}
+\ProvideDocumentCommand{\NewEntity}{s m m}{%
+  \IfBooleanTF{#1}{%
+    \ProvideDocumentCommand{#2}{}{%
+      {\ensuremath{#3}}%
+    }%
+  }{%
+    \ProvideDocumentCommand{#2}{}{%
+      {\ensuremath{\mathcal{#3}}}%
     }%
   }
-  % Cryptographic functions
-  % XXX Make all crypto functions commands
-  \DeclareMathOperator{\GenOp}{\mathsf{Gen}}
-  \ProvideDocumentCommand{\Gen}{s o m}{\ensuremath{%
-    \IfBooleanTF{#1}{%
-      \overline{\GenOp}%
-      \IfValueT{#2}{^{#2}}%
-      \ifthenelse{\equal{#3}{}}{}{\mleft(#3\mright)}%
-    }{%
-      \GenOp%
-      \IfValueT{#2}{^{#2}}%
-      \ifthenelse{\equal{#3}{}}{}{\mleft(#3\mright)}%
+}
+\ProvideDocumentCommand{\NewVariable}{s m m}{%
+  \IfValueTF{#1}{%
+    \ProvideDocumentCommand{#2}{}{%
+      {\ensuremath{#3}}%
+    }%
+  }{%
+    \ProvideDocumentCommand{#2}{}{%
+      {\ensuremath{\mathit{#3}}}%
+    }%
+  }%
+}
+%%%%%%%%%%%%%%%%%%%%%%
+% Protocols
+%%%%%%%%%%%%%%%%%%%%%%
+\newlength{\ProtoArrowLength}
+\setlength{\ProtoArrowLength}{0.15\linewidth}
+\ProvideDocumentCommand{\ProtoSendRight}{o m}{\ensuremath{%
+    \IfValueTF{#1}%
+    {\xrightarrow[\hspace{#1}]{#2}}%
+    {\xrightarrow[\hspace{\ProtoArrowLength}]{#2}}%
+  }}
+\ProvideDocumentCommand{\ProtoSendLeft}{o m}{\ensuremath{%
+    \IfValueTF{#1}%
+    {\xleftarrow[\hspace{#1}]{#2}}%
+    {\xleftarrow[\hspace{\ProtoArrowLength}]{#2}}%
+  }}
+\ProvideDocumentCommand{\Proto}{m m}{\ensuremath{%
+    \mleft\langle%
+    #1; #2%
+    \mright\rangle%
+  }}
+%%%%%%%%%%%%%%%%%%%%%%
+% General maths
+%%%%%%%%%%%%%%%%%%%%%%
+\NewVariable*{\NN}{\mathbb{N}}
+\NewVariable*{\ZZ}{\mathbb{Z}}
+\NewVariable*{\QQ}{\mathbb{Q}}
+\NewVariable*{\RR}{\mathbb{R}}
+\NewVariable*{\CC}{\mathbb{C}}
+\ifdefined\powerset%
+  \relax%
+\else%
+  \NewFunction*{\powerset}{\mathscr{P}}%
+\fi
+\ProvideDocumentCommand{\textand}{}{\ensuremath{\qquad\text{and}\qquad}}
+\ProvideDocumentCommand{\Prob}{o o m}{\ensuremath{%
+  \Pr%
+  \IfValueT{#1}{\ifthenelse{\equal{#1}{}}{}{_{#1}}}%
+  \IfValueT{#2}{^{#2}}%
+  \mleft[%
+    \ifthenelse{\equal{#3}{}}{\cdot}{#3}%
+  \mright]%
+}}
+
+%%%%%%%%%%%%%%%%%%%%%%
+% Algebra
+%%%%%%%%%%%%%%%%%%%%%%
+\NewVariable*{\GG}{\mathbb{G}}
+\NewVariable*{\RR}{\mathbb{R}}
+\NewVariable*{\FF}{\mathbb{F}}
+\NewVariable*{\GF}{\mathrm{GF}}
+\NewFunction{\ord}{ord}
+\ProvideDocumentCommand{\card}{m}{\ensuremath{|#1|}}
+\ProvideDocumentCommand{\gen}{m}{\mleft\langle #1\mright\rangle}
+
+%
+% Proofs of knowledge
+%
+\ProvideDocumentCommand{\PK}{o o}{\ensuremath{%
+    \operatorname{PK}%
+    \IfValueT{#1}{%
+      \IfValueTF{#2}{%
+        \mleft\{\mleft(#1\mright) : #2\mright\}%
+      }{%
+        \mleft\{#1\mright\}%
+      }%
     }%
   }}
-  \DeclareMathOperator{\SetupOp}{\mathsf{Setup}}
-  \ProvideDocumentCommand{\Setup}{s o m}{\ensuremath{%
-    \IfBooleanTF{#1}{%
-      \overline{\SetupOp}%
-      \IfValueT{#2}{^{#2}}%
-      \ifthenelse{\equal{#3}{}}{}{\mleft(#3\mright)}%
+\ProvideDocumentCommand{\SPK}{o o o}{\ensuremath{%
+    \operatorname{SPK}%
+    \IfValueT{#1}{%
+      \IfValueTF{#2}{%
+        \mleft\{\mleft(#1\mright) : #2\mright\}%
+      }{%
+        \mleft\{#1\mright\}%
+      }%
+      \IfValueT{#3}{%
+        \mleft(#3\mright)%
+      }%
+    }%
+  }}
+%%%%
+\ProvideDocumentCommand{\indcpa}{}{\ensuremath{\text{IND-CPA}}}
+\ProvideDocumentCommand{\indcca}{}{\ensuremath{\text{IND-CCA}}}
+\ProvideDocumentCommand{\indsfcca}{}{\ensuremath{\text{IND-SFCCA}}}
+\ProvideDocumentCommand{\intptxt}{}{\ensuremath{\text{INT-PTXT}}}
+\ProvideDocumentCommand{\intctxt}{}{\ensuremath{\text{INT-CTXT}}}
+\ProvideDocumentCommand{\intsfctxt}{}{\ensuremath{\text{INT-SFCTXT}}}
+\ProvideDocumentCommand{\nmcpa}{}{\ensuremath{\text{NM-CPA}}}
+\ProvideDocumentCommand{\nmcca}{}{\ensuremath{\text{NM-CCA}}}
+\ProvideDocumentCommand{\sufcma}{}{\ensuremath{\text{SUF-CMA}}}
+\ProvideDocumentCommand{\denss}{}{\ensuremath{\text{DEN-SS}}}
+\ProvideDocumentCommand{\rgets}{}{\overset{\text{\textcent}}{\gets}}
+\DeclareAcronym{PPT}{%
+  short = {PPT},
+  long = {probabilistic polynomial-time},
+}
+\DeclareAcronym{PPTM}{%
+  short = {PPTM},
+  long = {probabilitstic polynomial-time Turing machine},
+}
+% Crypto properties
+\DeclareAcronym{IND-CPA}{%
+  short = {IND-CPA},
+  long = {%
+      indistinguishability under chosen-plaintext attack%
+    },
+  cite = {AuthEncryption}
+}
+\DeclareAcronym{IND-CCA}{%
+  short = {IND-CCA},
+  long = {%
+      indistinguishability under chosen-ciphertext attack%
+    },
+  cite = {AuthEncryption}
+}
+\DeclareAcronym{IND-SFCCA}{%
+  short = {IND-SFCCA},
+  long = {%
+      indistinguishability under statefully chosen-ciphertext attack%
+    },
+  cite = {StatefulDecryption}
+}
+\DeclareAcronym{WUF-CMA}{%
+  short = {WUF-CMA},
+  long = {%
+      weak unforgeability under chosen-message attack%
+    },
+  cite = {AuthEncryption}
+}
+\DeclareAcronym{SUF-CMA}{%
+  short = {SUF-CMA},
+  long = {%
+      strong unforgeability under chosen-message attack%
+  },
+  cite = {AuthEncryption}
+}
+\DeclareAcronym{INT-PTXT}{%
+  short = {INT-PTXT},
+  long = {%
+      integrity of plaintexts%
+    },
+  cite = {AuthEncryption}
+}
+\DeclareAcronym{INT-SFPTXT}{%
+  short = {INT-SFPTXT},
+  long = {%
+      integrity of stateful plaintexts%
+    },
+  cite = {StatefulDecryption}
+}
+\DeclareAcronym{INT-CTXT}{%
+  short = {INT-CTXT},
+  long = {%
+      integrity of ciphertexts%
+    },
+  cite = {AuthEncryption}
+}
+\DeclareAcronym{INT-SFCTXT}{%
+  short = {INT-SFCTXT},
+  long = {%
+      integrity of stateful ciphertexts%
+    },
+  cite = {StatefulDecryption}
+}
+\DeclareAcronym{DEN-SS}{%
+  short = {DEN-SS},
+  long = {%
+      deniability under surveillance-state attack%
+    },
+  cite = {OTPKX}
+}
+% Computational problems
+\DeclareAcronym{DLP}{%
+  short = {DLP},
+  long = {Discrete Logarithm Problem}
+}
+\DeclareAcronym{DH}{%
+  short = {DH},
+  long = {Diffie-Hellman},
+  cite = {DiffieHellman}
+}
+\DeclareAcronym{DHA}{%
+  short = {DHA},
+  long = {Diffie-Hellman Assumption},
+  cite = {DiffieHellman},
+}
+\DeclareAcronym{DHP}{%
+  short = {DHP},
+  long = {Diffie-Hellman Problem},
+  cite = {DiffieHellman}
+}
+\DeclareAcronym{DDH}{%
+  short = {DDH},
+  long = {Decisional Diffie-Hellman},
+  cite = {DiffieHellman}
+}
+\DeclareAcronym{DC}{%
+  short = {DC},
+  long = {Dining Cryptographers},
+  cite = {DiningCryptographers}
+}
+\DeclareAcronym{DCP}{%
+  short = {DCP},
+  long = {Dining Cryptographers Problem},
+  cite = {DiningCryptographers}
+}
+\DeclareAcronym{SMP}{%
+  short = {SMP},
+  long = {Socialist Millionaires' Problem}
+}
+% Cryptographic mechanisms
+\DeclareAcronym{OTP}{%
+  short = {OTP},
+  long = {One-Time Pad}
+}
+\DeclareAcronym{ZK}{%
+  short = {ZK},
+  long = {zero-knowledge},
+}
+\DeclareAcronym{ZKP}{%
+  short = {\acs*{ZK}P},
+  long = {\acifused{ZK}{\acs*{ZK}}{\acl*{ZK}} proof}
+}
+\DeclareAcronym{PK}{%
+  short = {PK},
+  long = {proof of knowledge},
+  long-plural-form = {proofs of knowledge},
+}
+\DeclareAcronym{ZKPK}{%
+  short = {\acs*{ZK}\acs*{PK}},
+  long = {%
+    \acifused{ZK}{%
+      \acs*{ZK}\acifused{PK}{\acs*{PK}}{ \acl*{PK}}%
     }{%
-      \SetupOp%
-      \IfValueT{#2}{^{#2}}%
-      \ifthenelse{\equal{#3}{}}{}{\mleft(#3\mright)}%
+      \acl*{ZK} \acifused{PK}{\acs*{PK}}{\acl*{PK}}%
+    }%
+  },
+  long-plural-form = {%
+    \acifused{ZK}{%
+      \acs*{ZK}\acifused{PK}{\acs*{PK}}{ \aclp*{PK}}%
+    }{%
+      \acl*{ZK} \acifused{PK}{\acs*{PK}}{\aclp*{PK}}%
+    }%
+  },
+}
+\DeclareAcronym{NIZK}{%
+  short = {NI\acs*{ZK}},
+  long = {non-interactive \acifused{ZK}{\acs*{ZK}}{\acl*{ZK}}},
+}
+\DeclareAcronym{MA}{%
+  short = {MA},
+  long = {%
+      message authentication%
     }
-  }}
-  \DeclareMathOperator{\KeygenOp}{\mathsf{Keygen}}
-  \ProvideDocumentCommand{\Keygen}{s o m}{\ensuremath{%
-    \IfBooleanTF{#1}{%
-      \overline{\KeygenOp}%
-      \IfValueT{#2}{^{#2}}%
-      \ifthenelse{\equal{#3}{}}{}{\mleft(#3\mright)}%
-    }{%
-      \KeygenOp%
-      \IfValueT{#2}{^{#2}}%
-      \ifthenelse{\equal{#3}{}}{}{\mleft(#3\mright)}%
-    }%
-  }}
-  \DeclareMathOperator{\SignOp}{\mathsf{Sign}}
-  \ProvideDocumentCommand{\Sign}{s o o m}{\ensuremath{%
-    \IfBooleanTF{#1}{%
-      \overline{\SignOp}%
-      \IfValueT{#2}{_{#2}}%
-      \IfValueT{#3}{^{#3}}%
-      \ifthenelse{\equal{#4}{}}{}{\mleft(#4\mright)}%
-    }{%
-      \SignOp%
-      \IfValueT{#2}{_{#2}}%
-      \IfValueT{#3}{^{#3}}%
-      \ifthenelse{\equal{#4}{}}{}{\mleft(#4\mright)}%
-    }%
-  }}
-  %\DeclareMathOperator{\Hash}{\mathsf{Hash}}
-  \DeclareMathOperator{\MACOp}{\mathsf{MAC}}
-  \ProvideDocumentCommand{\MAC}{s o o m}{\ensuremath{%
-    \IfBooleanTF{#1}{%
-      \overline{\MACOp}%
-      \IfValueT{#2}{_{#2}}%
-      \IfValueT{#3}{^{#3}}%
-      \ifthenelse{\equal{#4}{}}{}{\mleft(#4\mright)}%
-    }{%
-      \MACOp%
-      \IfValueT{#2}{_{#2}}%
-      \IfValueT{#3}{^{#3}}%
-      \ifthenelse{\equal{#4}{}}{}{\mleft(#4\mright)}%
-    }%
-  }}
-  \DeclareMathOperator{\HMACOp}{\mathsf{HMAC}}
-  \ProvideDocumentCommand{\HMAC}{s o o m}{\ensuremath{%
-    \IfBooleanTF{#1}{%
-      \overline{\HMACOp}%
-      \IfValueT{#2}{_{#2}}%
-      \IfValueT{#3}{^{#3}}%
-      \ifthenelse{\equal{#4}{}}{}{\mathopen{}\left(#4\right)\mathclose{}}%
-    }{%
-      \HMACOp%
-      \IfValueT{#2}{_{#2}}%
-      \IfValueT{#3}{^{#3}}%
-      \ifthenelse{\equal{#4}{}}{}{\mathopen{}\left(#4\right)\mathclose{}}%
-    }%
-  }}
-  \DeclareMathOperator{\TagOp}{\mathsf{Tag}}
-  \ProvideDocumentCommand{\Tag}{s o o m}{\ensuremath{%
-    \IfBooleanTF{#1}{%
-      \overline{\TagOp}%
-      \IfValueT{#2}{_{#2}}%
-      \IfValueT{#3}{^{#3}}%
-      \ifthenelse{\equal{#4}{}}{}{\mleft(#4\mright)}%
-    }{%
-      \TagOp%
-      \IfValueT{#2}{_{#2}}%
-      \IfValueT{#3}{^{#3}}%
-      \ifthenelse{\equal{#4}{}}{}{\mleft(#4\mright)}%
-    }%
-  }}
-  \DeclareMathOperator{\VerifyOp}{\mathsf{Verify}}
-  \ProvideDocumentCommand{\Verify}{s o o m}{\ensuremath{%
-    \IfBooleanTF{#1}{%
-      \overline{\VerifyOp}%
-      \IfValueT{#2}{_{#2}}%
-      \IfValueT{#3}{^{#3}}%
-      \ifthenelse{\equal{#4}{}}{}{\mleft(#4\mright)}%
-    }{%
-      \VerifyOp%
-      \IfValueT{#2}{_{#2}}%
-      \IfValueT{#3}{^{#3}}%
-      \ifthenelse{\equal{#4}{}}{}{\mleft(#4\mright)}%
-    }%
-  }}
-  \DeclareMathOperator{\EncOp}{\mathsf{Enc}}
-  \ProvideDocumentCommand{\Enc}{s o o m}{\ensuremath{%
-    \IfBooleanTF{#1}{%
-      \overline{\EncOp}%
-      \IfValueT{#2}{_{#2}}%
-      \IfValueT{#3}{^{#3}}%
-      \ifthenelse{\equal{#4}{}}{}{\mleft(#4\mright)}%
-    }{%
-      \EncOp%
-      \IfValueT{#2}{_{#2}}%
-      \IfValueT{#3}{^{#3}}%
-      \ifthenelse{\equal{#4}{}}{}{\mleft(#4\mright)}%
-    }%
-  }}
-  \DeclareMathOperator{\DecOp}{\mathsf{Dec}}
-  \ProvideDocumentCommand{\Dec}{s o o m}{\ensuremath{%
-    \IfBooleanTF{#1}{%
-      \overline{\DecOp}%
-      \IfValueT{#2}{_{#2}}%
-      \IfValueT{#3}{^{#3}}%
-      \ifthenelse{\equal{#4}{}}{}{\mleft(#4\mright)}%
-    }{%
-      \DecOp%
-      \IfValueT{#2}{_{#2}}%
-      \IfValueT{#3}{^{#3}}%
-      \ifthenelse{\equal{#4}{}}{}{\mleft(#4\mright)}%
-    }%
-  }}
-  \DeclareMathOperator{\AuthEncOp}{\mathsf{AuthEnc}}
-  \ProvideDocumentCommand{\AuthEnc}{s o o m}{\ensuremath{%
-    \IfBooleanTF{#1}{%
-      \overline{\AuthEncOp}%
-      \IfValueT{#2}{_{#2}}%
-      \IfValueT{#3}{^{#3}}%
-      \ifthenelse{\equal{#4}{}}{}{\mleft(#4\mright)}%
-    }{%
-      \AuthEncOp%
-      \IfValueT{#2}{_{#2}}%
-      \IfValueT{#3}{^{#3}}%
-      \ifthenelse{\equal{#4}{}}{}{\mleft(#4\mright)}%
-    }%
-  }}
-  \DeclareMathOperator{\AuthDecOp}{\mathsf{AuthDec}}
-  \ProvideDocumentCommand{\AuthDec}{s o o m}{\ensuremath{%
-    \IfBooleanTF{#1}{%
-      \overline{\AuthDecOp}%
-      \IfValueT{#2}{_{#2}}%
-      \IfValueT{#3}{^{#3}}%
-      \ifthenelse{\equal{#4}{}}{}{\mleft(#4\mright)}%
-    }{%
-      \AuthDecOp%
-      \IfValueT{#2}{_{#2}}%
-      \IfValueT{#3}{^{#3}}%
-      \ifthenelse{\equal{#4}{}}{}{\mleft(#4\mright)}%
-    }%
-  }}
-  \DeclareMathOperator{\VerifDecOp}{\mathsf{AuthDec}}
-  \ProvideDocumentCommand{\VerifDec}{s o o m}{\ensuremath{%
-    \IfBooleanTF{#1}{%
-      \overline{\VerifDecOp}%
-      \IfValueT{#2}{_{#2}}%
-      \IfValueT{#3}{^{#3}}%
-      \ifthenelse{\equal{#4}{}}{}{\mleft(#4\mright)}%
-    }{%
-      \VerifDecOp%
-      \IfValueT{#2}{_{#2}}%
-      \IfValueT{#3}{^{#3}}%
-      \ifthenelse{\equal{#4}{}}{}{\mleft(#4\mright)}%
-    }%
-  }}
-  % Cryptographic parts
-  \ProvideDocumentCommand{\Key}{s m}{\ensuremath{%
-    \IfBooleanT{#1}{\hat}k%
-    %\IfValueT{#2}{^{#2}}%
-    \ifthenelse{\equal{#2}{}}{}{_{#2}}%
-  }}
-  \ProvideDocumentCommand{\PubKey}{s m}{\ensuremath{%
-    \IfBooleanT{#1}{\hat}k%
-    \ifthenelse{\equal{#2}{}}{}{_{#2}}%
-    ^{\mathsf{Pub}}%
-  }}
-  \ProvideDocumentCommand{\PriKey}{s m}{\ensuremath{%
-    \IfBooleanT{#1}{\hat}k%
-    \ifthenelse{\equal{#2}{}}{}{_{#2}}%
-    ^{\mathsf{Pri}}%
-  }}
-  \ProvideDocumentCommand{\MACKey}{s m}{\ensuremath{%
-    \IfBooleanT{#1}{\hat}k%
-    \ifthenelse{\equal{#2}{}}{}{_{#2}}%
-    ^{\mathsf{MA}}%
-  }}
-  \ProvideDocumentCommand{\TagKey}{s m}{\ensuremath{%
-    \IfBooleanT{#1}{\hat}k%
-    \ifthenelse{\equal{#2}{}}{}{_{#2}}%
-    ^{\mathsf{MA}}%
-  }}
-  \ProvideDocumentCommand{\SignKey}{s m}{\ensuremath{%
-    \IfBooleanT{#1}{\hat}s%
-    \ifthenelse{\equal{#2}{}}{}{_{#2}}%
-  }}
-  \ProvideDocumentCommand{\VerifKey}{s m}{\ensuremath{%
-    \IfBooleanT{#1}{\hat}v%
-    \ifthenelse{\equal{#2}{}}{}{_{#2}}%
-  }}
-  % Crypto properties
-  \DeclareAcronym{IND-CPA}{%
-    short = {IND-CPA},
-    long = {\libbib@capitalize{%
-        indistinguishability under chosen-plaintext attack%
-      }},
-    cite = {AuthEncryption}
-  }
-  \DeclareAcronym{IND-CCA}{%
-    short = {IND-CCA},
-    long = {\libbib@capitalize{%
-        indistinguishability under chosen-ciphertext attack%
-      }},
-    cite = {AuthEncryption}
-  }
-  \DeclareAcronym{IND-SFCCA}{%
-    short = {IND-SFCCA},
-    long = {\libbib@capitalize{%
-        indistinguishability under statefully chosen-ciphertext attack%
-      }},
-    cite = {StatefulDecryption}
-  }
-  \DeclareAcronym{WUF-CMA}{%
-    short = {WUF-CMA},
-    long = {\libbib@capitalize{%
-        weak unforgeability under chosen-message attack%
-      }},
-    cite = {AuthEncryption}
-  }
-  \DeclareAcronym{SUF-CMA}{%
-    short = {SUF-CMA},
-    long = {\libbib@capitalize{%
-        strong unforgeability under chosen-message attack%
-    }},
-    cite = {AuthEncryption}
-  }
-  \DeclareAcronym{INT-PTXT}{%
-    short = {INT-PTXT},
-    long = {\libbib@capitalize{%
-        integrity of plaintexts%
-      }},
-    cite = {AuthEncryption}
-  }
-  \DeclareAcronym{INT-SFPTXT}{%
-    short = {INT-SFPTXT},
-    long = {\libbib@capitalize{%
-        integrity of stateful plaintexts%
-      }},
-    cite = {StatefulDecryption}
-  }
-  \DeclareAcronym{INT-CTXT}{%
-    short = {INT-CTXT},
-    long = {\libbib@capitalize{%
-        integrity of ciphertexts%
-      }},
-    cite = {AuthEncryption}
-  }
-  \DeclareAcronym{INT-SFCTXT}{%
-    short = {INT-SFCTXT},
-    long = {\libbib@capitalize{%
-        integrity of stateful ciphertexts%
-      }},
-    cite = {StatefulDecryption}
-  }
-  \DeclareAcronym{DEN-SS}{%
-    short = {DEN-SS},
-    long = {\libbib@capitalize{%
-        deniability under surveillance-state attack%
-      }},
-    cite = {OTPKX}
-  }
-  % Computational problems
-  \DeclareAcronym{DLP}{%
-    short = {DLP},
-    long = {Discrete Logarithm Problem}
-  }
-  \DeclareAcronym{DH}{
-    short = {DH},
-    long = {Diffie-Hellman},
-    cite = {DiffieHellman}
-  }
-  \DeclareAcronym{DHP}{%
-    short = {DHP},
-    long = {Diffie-Hellman Problem},
-    cite = {DiffieHellman}
-  }
-  \DeclareAcronym{DDH}{%
-    short = {DDH},
-    long = {Decisional Diffie-Hellman},
-    cite = {DiffieHellman}
-  }
-  \DeclareAcronym{DC}{%
-    short = {DC},
-    long = {Dining Cryptographers},
-    cite = {DiningCryptographers}
-  }
-  \DeclareAcronym{DCP}{%
-    short = {DCP},
-    long = {Dining Cryptographers Problem},
-    cite = {DiningCryptographers}
-  }
-  \DeclareAcronym{SMP}{%
-    short = {SMP},
-    long = {Socialist Millionaires' Problem}
-  }
-  % Cryptographic mechanisms
-  \DeclareAcronym{OTP}{%
-    short = {OTP},
-    long = {One-Time Pad}
-  }
-  \DeclareAcronym{ZKP}{%
-    short = {ZKP},
-    long = {\libbib@capitalize{%
-        zero-knowledge proof of knowledge%
-      }}
-  }
-  \DeclareAcronym{MA}{%
-    short = {MA},
-    long = {\libbib@capitalize{%
-        message authentication%
-      }}
-  }
-  \DeclareAcronym{MAC}{%
-    short = {MAC},
-    long = {\libbib@capitalize{%
-        message-authentication code%
-      }}
-  }
-  \DeclareAcronym{HMAC}{%
-    short = {HMAC},
-    short-indefinite = {an},
-    long = {\libbib@capitalize{%
-        hash-based message-authentication code%
-      }},
-    long-indefinite = {a},
-    cite = {HMAC},
-  }
-  \DeclareAcronym{PRP}{%
-    short = {PRP},
-    long = {\libbib@capitalize{%
-        pseudo-random permutation%
-      }}
-  }
-  \DeclareAcronym{PRF}{%
-    short = {PRF},
-    long = {\libbib@capitalize{%
-        pseudo-random function%
-      }}
-  }
-  \DeclareAcronym{PRNG}{%
-    short = {PRNG},
-    long = {\libbib@capitalize{%
-        pseudo-random number generator%
-      }}
-  }
-  \DeclareAcronym{RNG}{%
-    short = {RNG},
-    long = {\libbib@capitalize{%
-        random-number generator%
-      }}
-  }
-  \DeclareAcronym{KEM}{%
-    short = {KEM},
-    long = {\libbib@capitalize{%
-        key-encapsulation mechanism%
-      }}
-  }
-  \DeclareAcronym{DEM}{%
-    short = {DEM},
-    long = {\libbib@capitalize{%
-        data-encryption mechanism%
-      }}
-  }
-  \DeclareAcronym{EtM}{%
-    short = {EtM},
-    long = {\libbib@capitalize{%
-        encrypt-then-MAC
-      }},
-    cite = {AuthEncryption}
-  }
-  \DeclareAcronym{PIR}{%
-    short = {PIR},
-    long = {\libbib@capitalize{%
-        private information retrieval%
-      }},
-    %cite = {PIR}
-  }
-  \DeclareAcronym{OT}{%
-    short = {OT},
-    short-indefinite = {an},
-    long = {\libbib@capitalize{%
-        oblivious transfer%
-      }},
-    long-indefinite = {an},
-    cite = {ObliviousTransfer}
-  }
-  % Key-exchange mechanisms
-  \DeclareAcronym{KE}{%
-    short = {KE},
-    long = {\libbib@capitalize{%
-        key-exchange%
-      }}
-  }
-  \DeclareAcronym{DHKE}{%
-    short = {DHKE},
-    long = {\libbib@capitalize{%
-        Diffie-Hellman key-exchange%
-      }},
-    cite = {DiffieHellman}
-  }
-  \DeclareAcronym{AKE}{%
-    short = {AKE},
-    long = {\libbib@capitalize{%
-        authenticated key-exchange
-      }},
-    cite = {AuthKeyExchange}
-  }
-  % Cryptographic properties
-  \DeclareAcronym{PFS}{%
-    short = {PFS},
-    long = {\libbib@capitalize{%
-        perfect forward-secrecy%
-      }}
-  }
-  % Types of encryption
-  \DeclareAcronym{PKC}{%
-    short = {PKC},
-    long = {\libbib@capitalize{%
-        public-key cryptography%
-      }}
-  }
-  \DeclareAcronym{PKE}{%
-    short = {PKE},
-    long = {\libbib@capitalize{%
-        public-key encryption%
-      }}
-  }
-  \DeclareAcronym{SKE}{%
-    short = {SKE},
-    long = {\libbib@capitalize{%
-        symmetric-key encryption%
-      }}
-  }
-  \DeclareAcronym{BE}{%
-    short = {BE},
-    long = {\libbib@capitalize{%
-        broadcast encryption%
-      }},
-    cite = {BroadcastEncryption}
-  }
-  \DeclareAcronym{ANOBE}{%
-    short = {ANOBE},
-    short-indefinite = {an},
-    long = {\libbib@capitalize{%
-        anonymous broadcast encryption%
-      }},
-    long-indefinite = {an},
-    cite = {ANOBE}
-  }
-  \DeclareAcronym{oANOBE}{%
-    short = {oANOBE},
-    long = {\libbib@capitalize{%
-        outsider-anonymous broadcast encryption%
-      }},
-    cite = {oANOBE}
-  }
-  \DeclareAcronym{IBE}{%
-    short = {IBE},
-    long = {\libbib@capitalize{%
-        identity-based encryption%
-      }}
-  }
-  \DeclareAcronym{ABE}{%
-    short = {ABE},
-    long = {\libbib@capitalize{%
-        attribute-based encryption%
-      }},
-    short-indefinite = {an},
-    long-indefinite = {an},
-  }
-  \DeclareAcronym{CP-ABE}{%
-    short = {CP-ABE},
-    long = {\libbib@capitalize{%
-        ciphertext-policy attribute-based encryption%
-      }},
-    cite = {CP-ABE}
-  }
-  \DeclareAcronym{KP-ABE}{%
-    short = {KP-ABE},
-    long = {\libbib@capitalize{%
-        key-policy attribute-based encryption%
-      }},
-    cite = {KP-ABE},
-  }
-  \DeclareAcronym{PE}{%
-    short = {PE},
-    long = {\libbib@capitalize{%
-        predicate encryption%
-      }}
-  }
-  \DeclareAcronym{PRE}{%
-    short = {PRE},
-    long = {\libbib@capitalize{%
-        proxy re-encryption%
-      }},
-    cite = {AtomicProxyCrypto}
-  }
-  \DeclareAcronym{FHE}{%
-    short = {FHE},
-    long = {\libbib@capitalize{%
-        fully homomorphic encryption%
-      }},
-  }
-  \DeclareAcronym{SHE}{%
-    short = {SHE},
-    long = {\libbib@capitalize{%
-        somewhat homomorphic encryption%
-      }},
-  }
-  % Protocols
-  \DeclareAcronym{OTR}{%
-    short = {OTR},
-    long = {Off-the-Record},
-    cite = {otr2004}
-  }
 }
-\DeclareOption{ac}{%
-  \DeclareAcronym{AC}{%
-    short = {AC},
-    long = {\libbib@capitalize{%
-        access control%
-      }},
-    short-indefinite = {an},
-    long-indefinite = {an},
-  }
-  % Access Control Models
-  \DeclareAcronym{IBAC}{%
-    short = {IBAC},
-    long = {\libbib@capitalize{%
-        identity-based access control%
-      }},
-    short-indefinite = {an},
-    long-indefinite = {an},
-  }
-  \DeclareAcronym{ABAC}{%
-    short = {ABAC},
-    long = {\libbib@capitalize{%
-        attribute-based access control%
-      }},
-    short-indefinite = {an},
-    long-indefinite = {an},
-  }
-  \DeclareAcronym{RBAC}{%
-    short = {RBAC},
-    long = {\libbib@capitalize{%
-        role-based access control%
-      }},
-    short-indefinite = {an},
-    long-indefinite = {a},
-  }
-  \DeclareAcronym{DAC}{%
-    short = {DAC},
-    long = {\libbib@capitalize{%
-        discretionary access control%
-      }}
-  }
-  \DeclareAcronym{acMAC}{%
-    short = {MAC},
-    long = {\libbib@capitalize{%
-        mandatory access control%
-      }}
-  }
-  % Access control objects
-  \DeclareAcronym{ACL}{%
-    short = {ACL},
-    long = {\libbib@capitalize{%
-        access control list%
-      }},
-    short-indefinite = {an},
-    long-indefinite = {an},
-  }
-  \DeclareAcronym{FS}{%
-    short = {FS},
-    short-indefinite = {an},
-    long = {\libbib@capitalize{%
-        file system%
-      }},
-    long-indefinite = {a},
-  }
+\DeclareAcronym{MAC}{%
+  short = {MAC},
+  long = {%
+      message-authentication code%
+    }
 }
-\DeclareOption{auth}{%
-  \DeclareAcronym{eID}{%
-    short = {eID},
-    short-indefinite = {an},
-    long = {\libbib@capitalize{%
-        electronic ID%
-      }},
-    long-indefinite = {an},
-  }
-  \DeclareAcronym{PKI}{%
-    short = {PKI},
-    long = {\libbib@capitalize{%
-        public-key infrastructure%
-      }},
-  }
-  \DeclareAcronym{CA}{%
-    short = {CA},
-    long = {\libbib@capitalize{%
-        certificate authority%
-      }},
-  }
+\DeclareAcronym{HMAC}{%
+  short = {HMAC},
+  short-indefinite = {an},
+  long = {%
+      hash-based message-authentication code%
+    },
+  long-indefinite = {a},
+  cite = {HMAC},
 }
-\DeclareOption{location}{%
-  \DeclareAcronym{PROPS}{%
-    short = {PROPS},
-    long = {PRivacy-preserving lOcation-Proof System},
-    cite = {PROPS},
-  }
-  \DeclareAcronym{LP}{%
-    short = {LP},
-    short-indefinite = {an},
-    long = {\libbib@capitalize{%
-        location proof%
-      }},
-    long-indefinite = {a},
-  }
-  \DeclareAcronym{LPS}{%
-    short = {LPS},
-    short-indefinite = {an},
-    long = {\libbib@capitalize{%
-        location-proof share%
-      }},
-    long-indefinite = {a},
-  }
+\DeclareAcronym{PRP}{%
+  short = {PRP},
+  long = {%
+      pseudo-random permutation%
+    }
 }
-\DeclareOption{mpc}{%
-  \DeclareAcronym{MPC}{%
-    short = {MPC},
-    short-indefinite = {an},
-    long = {\libbib@capitalize{%
-        secure multiparty computation%
-      }},
-    long-indefinite = {a},
-  }
+\DeclareAcronym{PRG}{%
+  short = {PRG},
+  long = {%
+    pseudo-random generator%
+  },
 }
-\DeclareOption{surveillance}{%
+\DeclareAcronym{PRF}{%
+  short = {PRF},
+  long = {%
+      pseudo-random function%
+    }
 }
-\DeclareOption{organizations}{%
-  \DeclareAcronym{UN}{%
-    short = {UN},
-    long = {United Nations},
-  }
-  % Surveillance agencies
-  \DeclareAcronym{NSA}{%
-    short = {NSA},
-    long = {US National Security Agency}
-  }
-  \DeclareAcronym{GCHQ}{%
-    short = {GCHQ},
-    long = {UK Government Communications Headquarters}
-  }
-  \DeclareAcronym{CIA}{%
-    short = {CIA},
-    long = {US Central Intelligence Agency}
-  }
-  \DeclareAcronym{TAO}{%
-    short = {TAO},
-    long = {Tailored Access Operations}
-  }
-  \DeclareAcronym{FRA}{%
-    short = {FRA},
-    long = {Försvarets radioanstalt},
-    foreign = {Swedish National Defence Radio Establishment}
-  }
+\DeclareAcronym{VRF}{%
+  short = {VRF},
+  long = {verifiable random function},
 }
-\DeclareOption{std}{%
-  \ProvideDocumentCommand{\concat}{}{\mathbin{\|}}
-  \DeclareAcronym{ICT}{%
-    short = {ICT},
-    long = {\libbib@capitalize{%
-        information and communication technology%
-      }},
-    long-plural-form = {\libbib@capitalize{%
-        information and communication technologies%
-      }}
-  }
-  \DeclareAcronym{PET}{%
-    short = {PET},
-    long = {\libbib@capitalize{%
-        privacy-enhancing technology%
-      }},
-    long-plural-form = {\libbib@capitalize{%
-        privacy-enhancing technologies%
-      }}
-  }
-  \DeclareAcronym{DoS}{%
-    short = {DoS},
-    long = {\libbib@capitalize{%
-        denial-of-service%
-      }}
-  }
-  \DeclareAcronym{DDoS}{%
-    short = {DDoS},
-    long = {\libbib@capitalize{%
-        distributed denial-of-service%
-      }}
-  }
-  \DeclareAcronym{APT}{%
-    short = {APT},
-    short-indefinite = {an},
-    long = {\libbib@capitalize{%
-        advanced persistent threat%
-      }},
-    long-indefinite = {an}
-  }
-  % Types of providers
-  \DeclareAcronym{CSP}{%
-    short = {CSP},
-    long = {\libbib@capitalize{%
-        cloud-service provider%
-      }}
-  }
-  \DeclareAcronym{ISP}{%
-    short = {ISP},
-    long = {\libbib@capitalize{%
-        Internet-service provider%
-      }}
-  }
-  % Entities
-  \DeclareAcronym{TTP}{%
-    short = {TTP},
-    long = {\libbib@capitalize{%
-        trusted third-party%
-      }}
-  }
-  % Protocols
-  \DeclareAcronym{NFC}{%
-    short = {NFC},
-    long = {Near-Field Communication}
-  }
-  % World Wide Web
-  \DeclareAcronym{WWW}{%
-    short = {WWW},
-    long = {World-Wide Web}
-  }
-  \DeclareAcronym{URL}{%
-    short = {URL},
-    long = {Uniform Resource Locator}
-  }
-  \DeclareAcronym{URI}{%
-    short = {URI},
-    long = {Uniform Resource Identifier}
-  }
-  \DeclareAcronym{URN}{%
-    short = {URN},
-    long = {Uniform Resource Name}
-  }
-  % Social Networks
-  \DeclareAcronym{OSN}{%
-    short = {OSN},
-    short-indefinite = {an},
-    long = {\libbib@capitalize{%
-        online social network%
-      }},
-    long-indefinite = {an},
-  }
-  \DeclareAcronym{DOSN}{%
-    short = {DOSN},
-    long = {\libbib@capitalize{%
-        decentralized online social network%
-      }}
-  }
-  \DeclareAcronym{SNS}{%
-    short = {SNS},
-    long = {\libbib@capitalize{%
-        socal-network service%
-      }},
-  }
-  \DeclareAcronym{IM}{%
-    short = {IM},
-    long = {\libbib@capitalize{%
-        instant messaging%
-      }}
-  }
-  \DeclareAcronym{TOC}{%
-    short = {TOC},
-    long = {\libbib@capitalize{%
-        table of contents%
-      }}
-  }
-  % Services/protocols
-  \DeclareAcronym{GPG}{%
-    short = {GPG},
-    long = {GNU Privacy Guard},
-    cite = {GnuPG}
-  }
-  \DeclareAcronym{PGP}{%
-    short = {PGP},
-    long = {Pretty Good Privacy}
-  }
-  % Models
-  \DeclareAcronym{P2P}{%
-    short = {P2P},
-    long = {\libbib@capitalize{%
-        peer-to-peer%
-      }}
-  }
+\DeclareAcronym{PRNG}{%
+  short = {PRNG},
+  long = {%
+      pseudo-random number generator%
+    }
 }
-\DeclareOption{distrib}{%
-  \DeclareAcronym{DHT}{%
-    short = {DHT},
-    long = {\libbib@capitalize{%
-        distributed hash table%
-      }},
-  }
+\DeclareAcronym{RNG}{%
+  short = {RNG},
+  long = {%
+      random-number generator%
+    }
 }
-\DeclareOption{usability}{%
-  \DeclareAcronym{UX}{%
-    short = {UX},
-    long = {\libbib@capitalize{%
-        user experience%
-      }},
-  }
+\DeclareAcronym{HE}{%
+  short = {HE},
+  short-indefinite = {an},
+  long = {hybrid encryption},
+  cite = {KD-HES},
 }
+\DeclareAcronym{KEM}{%
+  short = {KEM},
+  long = {key-encapsulation mechanism}
+}
+\DeclareAcronym{DEM}{%
+  short = {DEM},
+  long = {data-encapsulation mechanism}
+}
+\DeclareAcronym{EtM}{%
+  short = {EtM},
+  long = {%
+      encrypt-then-MAC
+    },
+  cite = {AuthEncryption}
+}
+\DeclareAcronym{PIR}{%
+  short = {PIR},
+  long = {%
+      private information retrieval%
+    },
+  %cite = {PIR}
+}
+\DeclareAcronym{OT}{%
+  short = {OT},
+  short-indefinite = {an},
+  long = {%
+      oblivious transfer%
+    },
+  long-indefinite = {an},
+  cite = {ObliviousTransfer}
+}
+% Key-exchange mechanisms
+\DeclareAcronym{KE}{%
+  short = {KE},
+  long = {key-exchange}
+}
+\DeclareAcronym{DHKE}{%
+  short = {DHKE},
+  long = {Diffie-Hellman \acifused{KE}{\acs*{KE}}{\acl*{KE}}},
+  cite = {DiffieHellman}
+}
+\DeclareAcronym{AKE}{%
+  short = {AKE},
+  short-indefinite = {an},
+  long = {authenticated \acifused{KE}{\acs*{KE}}{\acl*{KE}}},
+  long-indefinite = {an},
+  cite = {AuthKeyExchange}
+}
+% Cryptographic properties
+\DeclareAcronym{PFS}{%
+  short = {PFS},
+  long = {perfect forward-secrecy},
+  cite = {PerfectForwardSecrecy}
+}
+% Types of encryption
+\DeclareAcronym{PKC}{%
+  short = {PKC},
+  long = {%
+      public-key cryptography%
+    }
+}
+\DeclareAcronym{PKE}{%
+  short = {PKE},
+  long = {%
+      public-key encryption%
+    }
+}
+\DeclareAcronym{SKE}{%
+  short = {SKE},
+  long = {%
+      symmetric-key encryption%
+    }
+}
+\DeclareAcronym{BE}{%
+  short = {BE},
+  long = {%
+      broadcast encryption%
+    },
+  cite = {BroadcastEncryption}
+}
+\DeclareAcronym{ANOBE}{%
+  short = {ANOBE},
+  short-indefinite = {an},
+  long = {%
+      anonymous broadcast encryption%
+    },
+  long-indefinite = {an},
+  cite = {ANOBE}
+}
+\DeclareAcronym{oANOBE}{%
+  short = {oANOBE},
+  long = {%
+      outsider-anonymous broadcast encryption%
+    },
+  cite = {oANOBE}
+}
+\DeclareAcronym{DBE}{%
+  short = {DBE},
+  long = {dynamic broadcast encryption},
+  cite = {DynamicBroadcastEncryption}
+}
+\DeclareAcronym{DeBE}{%
+  short = {DeBE},
+  long = {decentralized broadcast encryption},
+}
+\DeclareAcronym{KD-HES}{%
+  short = {KD},
+  long = {the Kurosawa-Desmedt hybrid-encryption scheme},
+  cite = {KD-HES},
+}
+\DeclareAcronym{IBE}{%
+  short = {IBE},
+  long = {%
+      identity-based encryption%
+    }
+}
+\DeclareAcronym{ABE}{%
+  short = {ABE},
+  long = {%
+      attribute-based encryption%
+    },
+  short-indefinite = {an},
+  long-indefinite = {an},
+}
+\DeclareAcronym{CP-ABE}{%
+  short = {CP-ABE},
+  long = {%
+      ciphertext-policy attribute-based encryption%
+    },
+  cite = {CP-ABE}
+}
+\DeclareAcronym{KP-ABE}{%
+  short = {KP-ABE},
+  long = {%
+      key-policy attribute-based encryption%
+    },
+  cite = {KP-ABE},
+}
+\DeclareAcronym{PE}{%
+  short = {PE},
+  long = {%
+      predicate encryption%
+    }
+}
+\DeclareAcronym{PRE}{%
+  short = {PRE},
+  long = {%
+      proxy re-encryption%
+    },
+  cite = {AtomicProxyCrypto}
+}
+\DeclareAcronym{FHE}{%
+  short = {FHE},
+  long = {%
+      fully homomorphic encryption%
+    },
+}
+\DeclareAcronym{SHE}{%
+  short = {SHE},
+  long = {%
+      somewhat homomorphic encryption%
+    },
+}
+\DeclareAcronym{SHA}{%
+  short = {SHA},
+  long = {Secure Hash Algorithm},
+  cite = {SHA},
+}
+% Protocols
+\DeclareAcronym{OTR}{%
+  short = {OTR},
+  long = {Off-the-Record},
+  cite = {otr2004}
+}
+% Anonymity
+\DeclareAcronym{DP}{%
+  short = {DP},
+  long = {differential privacy},
+  cite = {DifferentialPrivacy},
+}
+\DeclareAcronym{Tor}{%
+  short = {Tor},
+  long = {Tor},
+  cite = {Tor},
+}
+\DeclareAcronym{Sphinx}{%
+  short = {Sphinx},
+  long = {Sphinx},
+  cite = {Sphinx},
+}
+% Other
+\DeclareAcronym{UC}{%
+  short = {UC},
+  long = {universal composability},
+  long-adjective-form = {universally composable},
+  long-adverb-form = {universally composably},
+  cite = {UniversalComposability}
+}
+\DeclareAcronym{ABC}{%
+  short = {ABC},
+  short-indefinite = {an},
+  long = {attribute-based credential},
+  long-indefinite = {an},
+}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+% Access control
+%%%%%%%%%%%%%%%%%%%%%%
+\DeclareAcronym{AC}{%
+  short = {AC},
+  long = {%
+      access control%
+    },
+  short-indefinite = {an},
+  long-indefinite = {an},
+}
+% Access Control Models
+\DeclareAcronym{IBAC}{%
+  short = {IBAC},
+  long = {%
+      identity-based access control%
+    },
+  short-indefinite = {an},
+  long-indefinite = {an},
+}
+\DeclareAcronym{ABAC}{%
+  short = {ABAC},
+  long = {%
+      attribute-based access control%
+    },
+  short-indefinite = {an},
+  long-indefinite = {an},
+}
+\DeclareAcronym{RBAC}{%
+  short = {RBAC},
+  long = {%
+      role-based access control%
+    },
+  short-indefinite = {an},
+  long-indefinite = {a},
+}
+\DeclareAcronym{DAC}{%
+  short = {DAC},
+  long = {%
+      discretionary access control%
+    }
+}
+\DeclareAcronym{acMAC}{%
+  short = {MAC},
+  long = {%
+      mandatory access control%
+    }
+}
+\DeclareAcronym{IFC}{%
+  short = {IFC},
+  short-indefinite = {an},
+  long = {information-flow control},
+  long-indefinite = {an},
+}
+\DeclareAcronym{BLP}{%
+  short = {BLP},
+  long = {Bell-LaPadula},
+  cite = {Bell-LaPadula}
+}
+% Access control objects
+\DeclareAcronym{ACL}{%
+  short = {ACL},
+  long = {%
+      access control list%
+    },
+  short-indefinite = {an},
+  long-indefinite = {an},
+}
+\DeclareAcronym{FS}{%
+  short = {FS},
+  short-indefinite = {an},
+  long = {%
+      file system%
+    },
+  long-indefinite = {a},
+}
+
+%%%%%%%%%%%%%%%%%%%%%%
+% Authentication
+%%%%%%%%%%%%%%%%%%%%%%
+\DeclareAcronym{eID}{%
+  short = {eID},
+  short-indefinite = {an},
+  long = {%
+      electronic ID%
+    },
+  long-indefinite = {an},
+}
+\DeclareAcronym{PKI}{%
+  short = {PKI},
+  long = {%
+      public-key infrastructure%
+    },
+}
+\DeclareAcronym{CA}{%
+  short = {CA},
+  long = {%
+      certificate authority%
+    },
+}
+\DeclareAcronym{PUF}{%
+  short = {PUF},
+  long = {physical unclonable function},
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+% Distance bounding
+%%%%%%%%%%%%%%%%%%%%%%%
+\DeclareAcronym{DB}{%
+  short = {DB},
+  long = {distance bounding},
+  cite = {DistanceBounding},
+}
+
+\DeclareAcronym{DBMF}{%
+  short = {MF},
+  short-indefinite = {an},
+  long = {Mafia fraud},
+  cite = {MafiaFraud},
+}
+\DeclareAcronym{DBDF}{%
+  short = {DF},
+  long = {distance fraud},
+  cite = {DistanceBounding},
+}
+\DeclareAcronym{DBEDLC}{%
+  short = {ED/LC},
+  short-indefinite = {an},
+  long = {early-detect and late-commit},
+  long-indefinite = {an},
+}
+\DeclareAcronym{DBDH}{%
+  short = {DH},
+  long = {distance hijacking},
+  cite = {DistanceHijacking},
+}
+\DeclareAcronym{DBTF}{%
+  short = {TF},
+  long = {terrorist fraud},
+  cite = {TerroristFraud},
+}
+\DeclareAcronym{DBIF}{%
+  short = {IF},
+  short-indefinite = {an},
+  long = {impersonation fraud},
+  long-indefinite = {an},
+  cite = {ImpersonationFraud},
+}
+\DeclareAcronym{DBIV}{%
+  short = {IV},
+  short-indefinite = {an},
+  long = {impersonating verifier},
+  long-indefinite = {an},
+  %cite = {PRIVO},
+}
+
+\DeclareAcronym{DBPK}{%
+  short = {DBPK},
+  long = {distance-bounding proof-of-knowledge},
+  long-plural = {distance-bounding proofs-of-knowledge},
+}
+\DeclareAcronym{PPK}{%
+  short = {PPK},
+  long = {proof of proximity of knowledge},
+  long-plural = {proofs of proximity of knowledge},
+  cite = {ProProx},
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Location-based services
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\DeclareAcronym{LBS}{%
+  short = {LBS},
+  short-indefinite = {an},
+  long = {location-based service},
+}
+\DeclareAcronym{PROPS}{%
+  short = {PROPS},
+  long = {PRivacy-preserving lOcation-Proof System},
+  cite = {PROPS},
+}
+\DeclareAcronym{LP}{%
+  short = {LP},
+  short-indefinite = {an},
+  long = {%
+      location proof%
+    },
+  long-indefinite = {a},
+}
+\DeclareAcronym{LPS}{%
+  short = {LPS},
+  short-indefinite = {an},
+  long = {%
+      location-proof share%
+    },
+  long-indefinite = {a},
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Multi-party computation
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\DeclareAcronym{MPC}{%
+  short = {MPC},
+  short-indefinite = {an},
+  long = {%
+      secure multiparty computation%
+    },
+  long-indefinite = {a},
+}
+\DeclareAcronym{SMC}{%
+  short = {MPC},
+  short-indefinite = {an},
+  long = {%
+      secure multiparty computation%
+    },
+  long-indefinite = {a},
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+% Organizations
+%%%%%%%%%%%%%%%%%%%%%%%%
+\DeclareAcronym{UN}{%
+  short = {UN},
+  long = {United Nations},
+}
+% Surveillance agencies
+\DeclareAcronym{NSA}{%
+  short = {NSA},
+  long = {US National Security Agency}
+}
+\DeclareAcronym{GCHQ}{%
+  short = {GCHQ},
+  long = {UK Government Communications Headquarters}
+}
+\DeclareAcronym{CIA}{%
+  short = {CIA},
+  long = {US Central Intelligence Agency}
+}
+\DeclareAcronym{TAO}{%
+  short = {TAO},
+  long = {Tailored Access Operations}
+}
+\DeclareAcronym{FRA}{%
+  short = {FRA},
+  long = {Försvarets radioanstalt},
+  foreign = {Swedish National Defence Radio Establishment}
+}
+
+%%%%%%%%%%%%%%%%%%%%%
+% Standard things
+%%%%%%%%%%%%%%%%%%%%%
+\ProvideDocumentCommand{\concat}{}{\mathbin{\|}}
+\DeclareAcronym{ICT}{%
+  short = {ICT},
+  long = {%
+      information and communication technology%
+    },
+  long-plural-form = {%
+      information and communication technologies%
+    }
+}
+\DeclareAcronym{PET}{%
+  short = {PET},
+  long = {%
+      privacy-enhancing technology%
+    },
+  long-plural-form = {%
+      privacy-enhancing technologies%
+    },
+  long-adjective-form = {privacy-enhancing technologies},
+  short-adjective-form = {PETs},
+}
+\DeclareAcronym{DoS}{%
+  short = {DoS},
+  long = {%
+      denial-of-service%
+    }
+}
+\DeclareAcronym{DDoS}{%
+  short = {DDoS},
+  long = {%
+      distributed denial-of-service%
+    }
+}
+\DeclareAcronym{APT}{%
+  short = {APT},
+  short-indefinite = {an},
+  long = {%
+      advanced persistent threat%
+    },
+  long-indefinite = {an}
+}
+\DeclareAcronym{DRM}{%
+  short = {DRM},
+  long = {%
+      digital rights management%
+    },
+}
+\DeclareAcronym{E2E}{%
+  short = {E2E},
+  long = {end-to-end},
+}
+% Types of providers
+\DeclareAcronym{CSP}{%
+  short = {CSP},
+  long = {%
+      cloud-service provider%
+    }
+}
+\DeclareAcronym{ISP}{%
+  short = {ISP},
+  long = {%
+      Internet-service provider%
+    }
+}
+% Entities
+\DeclareAcronym{TTP}{%
+  short = {TTP},
+  long = {%
+      trusted third-party%
+    }
+}
+% Protocols
+\DeclareAcronym{NFC}{%
+  short = {NFC},
+  long = {Near-Field Communication}
+}
+% World Wide Web
+\DeclareAcronym{WWW}{%
+  short = {WWW},
+  long = {World-Wide Web}
+}
+\DeclareAcronym{URL}{%
+  short = {URL},
+  long = {Uniform Resource Locator}
+}
+\DeclareAcronym{URI}{%
+  short = {URI},
+  long = {Uniform Resource Identifier}
+}
+\DeclareAcronym{URN}{%
+  short = {URN},
+  long = {Uniform Resource Name}
+}
+% Social Networks
+\DeclareAcronym{OSN}{%
+  short = {OSN},
+  short-indefinite = {an},
+  long = {%
+      online social network%
+    },
+  long-indefinite = {an},
+}
+\DeclareAcronym{DOSN}{%
+  short = {DOSN},
+  long = {%
+      decentralized online social network%
+    }
+}
+\DeclareAcronym{SNS}{%
+  short = {SNS},
+  long = {%
+      socal-network service%
+    },
+}
+\DeclareAcronym{IM}{%
+  short = {IM},
+  long = {%
+      instant messaging%
+    }
+}
+\DeclareAcronym{TOC}{%
+  short = {TOC},
+  long = {%
+      table of contents%
+    }
+}
+% Services/protocols
+\DeclareAcronym{GPG}{%
+  short = {GPG},
+  long = {GNU Privacy Guard},
+  cite = {GnuPG}
+}
+\DeclareAcronym{PGP}{%
+  short = {PGP},
+  long = {Pretty Good Privacy}
+}
+\DeclareAcronym{IO}{%
+  short = {I/O},
+  short-indefinite = {an},
+  long = {input/output},
+  long-indefinite = {an},
+}
+
+%%%%%%%%%%%%%%%%%%%%
+% Distributed/decentralized systems
+%%%%%%%%%%%%%%%%%%%%
+\DeclareAcronym{P2P}{%
+  short = {P2P},
+  long = {%
+      peer-to-peer%
+    }
+}
+\DeclareAcronym{DHT}{%
+  short = {DHT},
+  long = {%
+      distributed hash table%
+    },
+}
+\DeclareAcronym{tposet}{%
+  short = {t-poset},
+  long = {transactional partially ordered set},
+  cite = {BlockchainFreeCryptocurrencies},
+}
+
+%%%%%%%%%%%%%%%%%%%%%
+% Usability
+%%%%%%%%%%%%%%%%%%%%%
+\DeclareAcronym{UX}{%
+  short = {UX},
+  long = {%
+      user experience%
+    },
+}
+
+%%%%%%%%%%%%%%%%%%%%%
+\DeclareAcronym{GDPR}{%
+  short = {GDPR},
+  long = {EU General Data Protection Regulation},
+}
+
 \ProcessOptions\relax
 \endinput

@@ -1,3 +1,6 @@
+BIBSP_REFKEY+=PerfectForwardSecrecy
+URL-PerfectForwardSecrecy=https://link.springer.com/chapter/10.1007%2F3-540-46885-4_5
+
 BIBSP_REFKEY+=HMAC HMAC-std
 URL-HMAC=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.1007%2F3-540-68697-5_1.pdf
 URL-HMAC-std=https://csrc.nist.gov/publications/fips/fips198-1/FIPS-198-1_final.pdf
@@ -20,8 +23,8 @@ URL-RobustEncryption=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.1007%
 BIBSP_REFKEY+=RandomnessReuse
 URL-RandomnessReuse=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.1007%2F978-3-540-77272-9_16.pdf
 
-BIBSP_REFKEY+=KD-KEM
-URL-KD-KEM=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.1007%2F978-3-540-28628-8_26.pdf
+BIBSP_REFKEY+=KD-HES
+URL-KD-HES=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.1007%2F978-3-540-28628-8_26.pdf
 
 BIBSP_REFKEY+=DeniableEncryption
 URL-DeniableEncryption=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.1007%2FBFb0052229.pdf
@@ -40,9 +43,6 @@ URL-DiffieHellman=http://ieeexplore.ieee.org${LIBRARY_EXT}/ielx5/18/22693/010556
 
 BIBSP_REFKEY+=AuthKeyExchange
 URL-AuthKeyExchange=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.1007%2FBF00124891.pdf
-
-BIBSP_REFKEY+=BroadcastEncryption
-URL-BroadcastEncryption=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.1007%2F3-540-48329-2_40.pdf
 
 BIBSP_REFKEY+=ImprovedProxyReencryption
 URL-ImprovedProxyReencryption=http://delivery.acm.org${LIBRARY_EXT}/10.1145/1130000/1127346/p1-ateniese.pdf
@@ -82,3 +82,18 @@ URL-FSThresholdSignatures=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.
 
 BIBSP_REFKEY+=Schnorr
 URL-Schnorr=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.1007%2FBF00196725.pdf
+
+BIBSP_REFKEY+=FiatShamirHeuristic
+URL-FiatShamirHeuristic=http://dx.doi.org/10.1007/3-540-47721-7_12
+
+BIBSP_REFKEY+=PedersenCommitment
+URL-PedersenCommitment=https://link.springer.com/chapter/10.1007/3-540-46766-1_9
+
+BIBSP_REFKEY+=DY-VRF
+URL-DY-VRF=https://link.springer.com/chapter/10.1007%2F978-3-540-30580-4_28
+
+BIBSP_REFKEY+=PKnotation
+URL-PKnotation=https://link.springer.com/chapter/10.1007%2FBFb0052252
+
+BIBSP_REFKEY+=UniversalComposability
+URL-UniversalComposability=https://eprint.iacr.org/2000/067
