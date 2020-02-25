@@ -46,6 +46,9 @@ URL-ProProx=https://link.springer.com/chapter/10.1007/978-3-319-26059-4_6
 BIBSP_REFKEY+=TamarinDB
 URL-TamarinDB=https://doi.ieeecomputersociety.org/10.1109/SP.2018.00001
 
+BIBSP_REFKEY+=TamarinDBTF
+URL-TamarinDBTF=https://doi.org/10.1145/3319535.3345651
+
 BIBSP_REFKEY+=DistanceBoundingSurvey
 URL-DistanceBoundingSurvey=http://doi.acm.org/10.1145/3264628
 
