@@ -69,3 +69,6 @@ URL-Bussard-Bagga=https://link.springer.com/chapter/10.1007/0-387-25660-1_15
 
 BIBSP_REFKEY+=Bussard-Bagga-attack
 URL-Bussard-Bagga-attack=https://link.springer.com/chapter/10.1007/978-3-642-38519-3_23
+
+BIBSP_REFKEY+=DirectAnonymousAttestation
+URL-DirectAnonymousAttestation=https://eprint.iacr.org/2004/205
