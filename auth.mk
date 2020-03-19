@@ -1,3 +1,6 @@
+BIBSP_REFKEY+=Camenisch-phdthesis
+URL-Camenisch-phdthesis=ftp://ftp.inf.ethz.ch/pub/crypto/publications/Cameni98.pdf
+
 BIBSP_REFKEY+=P2PPasswords
 URL-P2PPasswords=http://ieeexplore.ieee.org/ielx5/6329089/6335787/06335797.pdf
 
@@ -42,3 +45,30 @@ URL-ProProx=https://link.springer.com/chapter/10.1007/978-3-319-26059-4_6
 
 BIBSP_REFKEY+=TamarinDB
 URL-TamarinDB=https://doi.ieeecomputersociety.org/10.1109/SP.2018.00001
+
+BIBSP_REFKEY+=TamarinDBTF
+URL-TamarinDBTF=https://doi.org/10.1145/3319535.3345651
+
+BIBSP_REFKEY+=DistanceBoundingSurvey
+URL-DistanceBoundingSurvey=http://doi.acm.org/10.1145/3264628
+
+BIBSP_REFKEY+=UWBPR
+URL-UWBPR=https://www.ndss-symposium.org/ndss-paper/uwb-with-pulse-reordering-securing-ran  ging-against-relay-and-physical-layer-attacks/
+
+BIBSP_REFKEY+=TREAD
+URL-TREAD=https://dl.acm.org/citation.cfm?id=3053000
+
+BIBSP_REFKEY+=FormalTerroristFraud
+URL-FormalTerroristFraud=https://link.springer.com/chapter/10.1007/978-3-642-38980-1_26
+
+BIBSP_REFKEY+=OnSigmaProtocols
+URL-OnSigmaProtocols=http://www.cs.au.dk/~ivan/Sigma.pdf
+
+BIBSP_REFKEY+=Bussard-Bagga
+URL-Bussard-Bagga=https://link.springer.com/chapter/10.1007/0-387-25660-1_15
+
+BIBSP_REFKEY+=Bussard-Bagga-attack
+URL-Bussard-Bagga-attack=https://link.springer.com/chapter/10.1007/978-3-642-38519-3_23
+
+BIBSP_REFKEY+=DirectAnonymousAttestation
+URL-DirectAnonymousAttestation=https://eprint.iacr.org/2004/205

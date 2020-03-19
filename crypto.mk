@@ -97,3 +97,6 @@ URL-PKnotation=https://link.springer.com/chapter/10.1007%2FBFb0052252
 
 BIBSP_REFKEY+=UniversalComposability
 URL-UniversalComposability=https://eprint.iacr.org/2000/067
+
+BIBSP_REFKEY+=LWE
+URL-LWE=https://dl.acm.org/doi/abs/10.1145/1568318.1568324

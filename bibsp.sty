@@ -1,6 +1,7 @@
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
 \ProvidesPackage{bibsp}[2015/07/16 v0.1 LaTeX/BibTeX library]
 \RequirePackage{amsmath}
+\RequirePackage{amssymb}
 \RequirePackage{xparse}
 \RequirePackage{mleftright}
 \RequirePackage[mathscr]{euscript}
@@ -9,6 +10,70 @@
 \PassOptionsToPackage{label}{acro}
 \PassOptionsToPackage{uc-cmd=\makefirstuc}{acro}
 \RequirePackage{acro}
+\ProvideAcroEnding{possessive-singular}{'s}{'s}
+\ProvideAcroEnding{possessive-plural}{s'}{s'}
+\ExplSyntaxOn
+\ProvideAcroCommand{\acg}{%
+  \acro_possessive_singular:
+  \acro_use:n {#1}
+}
+\ProvideAcroCommand{\acgp}{%
+  \acro_possessive_plural:
+  \acro_use:n {#1}
+}
+\ProvideAcroCommand{\Acg}{%
+  \acro_possessive_singular:
+  \acro_first_upper:
+  \acro_use:n {#1}
+}
+\ProvideAcroCommand{\Acgp}{%
+  \acro_possessive_plural:
+  \acro_first_upper:
+  \acro_use:n {#1}
+}
+\ProvideAcroEnding{adverb}{}{ly}
+\ProvideAcroCommand{\acadv}{%
+  \acro_adverb:
+  \acro_use:n {#1}
+}
+\ProvideAcroCommand{\iacadv}{%
+  \acro_adverb:
+  \acro_indefinite:
+  \acro_use:n {#1}
+}
+\ProvideAcroCommand{\Acadv}{%
+  \acro_adverb:
+  \acro_first_upper:
+  \acro_use:n {#1}
+}
+\ProvideAcroCommand{\Iacadv}{%
+  \acro_adverb:
+  \acro_first_upper:
+  \acro_indefinite:
+  \acro_use:n {#1}
+}
+\ProvideAcroEnding{adjective}{ly}{ly}
+\ProvideAcroCommand{\acadj}{%
+  \acro_adjective:
+  \acro_use:n {#1}
+}
+\ProvideAcroCommand{\iacadj}{%
+  \acro_adjective:
+  \acro_indefinite:
+  \acro_use:n {#1}
+}
+\ProvideAcroCommand{\Acadj}{%
+  \acro_adjective:
+  \acro_first_upper:
+  \acro_use:n {#1}
+}
+\ProvideAcroCommand{\Iacadj}{%
+  \acro_adjective:
+  \acro_first_upper:
+  \acro_indefinite:
+  \acro_use:n {#1}
+}
+\ExplSyntaxOff
 \RequirePackage{textcomp}
 \RequirePackage{ifthen}
 \PassOptionsToPackage{compress}{cleveref}
@@ -44,9 +109,10 @@
 %
 % General algorithmic stuff
 %
+\NewDocumentCommand{\starcmd}{}{\bar}
 \ProvideDocumentCommand{\method}{}{\ensuremath{.\!}}
 \ProvideDocumentCommand{\NewScheme}{m m}{%
-  \ProvideDocumentCommand{#1}{s o}{%
+  \NewDocumentCommand{#1}{s o}{%
     {\ensuremath{%
       \operatorname{%
         \IfBooleanTF{##1}{%
@@ -59,27 +125,47 @@
     }%
   }}%
 }
-\ProvideDocumentCommand{\NewAlgorithm}{m m}{%
-  \ProvideDocumentCommand{#1}{s o o}{%
-    {\ensuremath{%
-      \operatorname{%
-        \IfBooleanTF{##1}{%
-          \overline{\mathsf{#2}}%
-        }{%
-          \mathsf{#2}%
+\ProvideDocumentCommand{\NewAlgorithm}{m o m}{%
+  \IfValueTF{#2}{%
+    \NewDocumentCommand{#1}{s o o}{%
+      {\ensuremath{%
+          \operatorname{%
+            \IfBooleanTF{##1}{%
+              \overline{#2{#3}}%
+            }{%
+              #2{#3}%
+            }%
+          }%
+          \IfValueTF{##3}{%
+            ##2%
+            \mleft(##3\mright)%
+          }{%
+            \IfValueT{##2}{\mleft(##2\mright)}%
+          }%
         }%
-      }%
-      \IfValueTF{##3}{%
-        ##2%
-        \mleft(##3\mright)%
-      }{%
-        \IfValueT{##2}{\mleft(##2\mright)}%
-      }%
-    }%
-  }}%
+      }}%
+  }{%
+    \NewDocumentCommand{#1}{s o o}{%
+      {\ensuremath{%
+          \operatorname{%
+            \IfBooleanTF{##1}{%
+              \overline{\mathsf{#3}}%
+            }{%
+              \mathsf{#3}%
+            }%
+          }%
+          \IfValueTF{##3}{%
+            ##2%
+            \mleft(##3\mright)%
+          }{%
+            \IfValueT{##2}{\mleft(##2\mright)}%
+          }%
+        }%
+      }}%
+  }
 }
 \ProvideDocumentCommand{\NewFunction}{s m m}{%
-  \ProvideDocumentCommand{#2}{s o o}{%
+  \NewDocumentCommand{#2}{s o o}{%
     {\ensuremath{%
       \operatorname{%
         \IfBooleanTF{##1}{%
@@ -99,34 +185,34 @@
 }
 \ProvideDocumentCommand{\NewSet}{s m m}{%
   \IfBooleanTF{#1}{%
-    \ProvideDocumentCommand{#2}{}{%
-      {\ensuremath{#3}}%
+    \NewDocumentCommand{#2}{s}{%
+      {\ensuremath{\IfBooleanT{##1}{\starcmd}#3}}%
     }%
   }{%
-    \ProvideDocumentCommand{#2}{}{%
-      {\ensuremath{\mathcal{#3}}}%
+    \NewDocumentCommand{#2}{s}{%
+      {\ensuremath{\mathcal{\IfBooleanT{##1}{\starcmd}#3}}}%
     }%
   }
 }
 \ProvideDocumentCommand{\NewEntity}{s m m}{%
   \IfBooleanTF{#1}{%
-    \ProvideDocumentCommand{#2}{}{%
-      {\ensuremath{#3}}%
+    \NewDocumentCommand{#2}{s}{%
+      {\ensuremath{\IfBooleanT{##1}{\starcmd}#3}}%
     }%
   }{%
-    \ProvideDocumentCommand{#2}{}{%
-      {\ensuremath{\mathcal{#3}}}%
+    \NewDocumentCommand{#2}{s}{%
+      {\ensuremath{\mathcal{\IfBooleanT{##1}{\starcmd}#3}}}%
     }%
   }
 }
 \ProvideDocumentCommand{\NewVariable}{s m m}{%
   \IfValueTF{#1}{%
-    \ProvideDocumentCommand{#2}{}{%
-      {\ensuremath{#3}}%
+    \NewDocumentCommand{#2}{s}{%
+      {\ensuremath{\IfBooleanT{##1}{\starcmd}#3}}%
     }%
   }{%
-    \ProvideDocumentCommand{#2}{}{%
-      {\ensuremath{\mathit{#3}}}%
+    \NewDocumentCommand{#2}{s}{%
+      {\ensuremath{\mathit{\IfBooleanT{##1}{\starcmd}#3}}}%
     }%
   }%
 }
@@ -153,14 +239,22 @@
 %%%%%%%%%%%%%%%%%%%%%%
 % General maths
 %%%%%%%%%%%%%%%%%%%%%%
-\NewVariable*{\NN}{\mathbb{N}}
-\NewVariable*{\ZZ}{\mathbb{Z}}
-\NewVariable*{\QQ}{\mathbb{Q}}
-\NewVariable*{\RR}{\mathbb{R}}
-\NewVariable*{\CC}{\mathbb{C}}
-\ifdefined\powerset%
-  \relax%
-\else%
+\ifdefined\NN\relax\else
+  \NewVariable*{\NN}{\mathbb{N}}
+\fi
+\ifdefined\ZZ\relax\else
+  \NewVariable*{\ZZ}{\mathbb{Z}}
+\fi
+\ifdefined\QQ\relax\else
+  \NewVariable*{\QQ}{\mathbb{Q}}
+\fi
+\ifdefined\RR\relax\else
+  \NewVariable*{\RR}{\mathbb{R}}
+\fi
+\ifdefined\CC\relax\else
+  \NewVariable*{\CC}{\mathbb{C}}
+\fi
+\ifdefined\powerset\relax\else
   \NewFunction*{\powerset}{\mathscr{P}}%
 \fi
 \ProvideDocumentCommand{\textand}{}{\ensuremath{\qquad\text{and}\qquad}}
@@ -176,10 +270,18 @@
 %%%%%%%%%%%%%%%%%%%%%%
 % Algebra
 %%%%%%%%%%%%%%%%%%%%%%
-% Galois fields (finite fields)
-\NewVariable*{\GF}{\mathrm{GF}}
-\NewVariable*{\F}{\mathbb{F}}
-\NewFunction{\ord}{ord}
+\ifdefined\GG\relax\else
+  \NewVariable*{\GG}{\mathbb{G}}
+\fi
+\ifdefined\FF\relax\else
+  \NewVariable*{\FF}{\mathbb{F}}
+\fi
+\ifdefined\GF\relax\else
+  \NewVariable*{\GF}{\mathrm{GF}}
+\fi
+\ifdefined\ord\relax\else
+  \NewFunction{\ord}{ord}
+\fi
 \ProvideDocumentCommand{\card}{m}{\ensuremath{|#1|}}
 \ProvideDocumentCommand{\gen}{m}{\mleft\langle #1\mright\rangle}
 
@@ -339,6 +441,12 @@
   short = {SMP},
   long = {Socialist Millionaires' Problem}
 }
+\DeclareAcronym{LWE}{%
+  short = {LWE},
+  short-indefinite = {an},
+  long = {learning with errors},
+  cite = {LWE},
+}
 % Cryptographic mechanisms
 \DeclareAcronym{OTP}{%
   short = {OTP},
@@ -349,22 +457,34 @@
   long = {zero-knowledge},
 }
 \DeclareAcronym{ZKP}{%
-  short = {ZKP},
-  long = {zero-knowledge proof}
+  short = {\acs*{ZK}P},
+  long = {\acifused{ZK}{\acs*{ZK}}{\acl*{ZK}} proof}
 }
 \DeclareAcronym{PK}{%
   short = {PK},
   long = {proof of knowledge},
+  long-plural-form = {proofs of knowledge},
 }
 \DeclareAcronym{ZKPK}{%
-  short = {ZKPK},
-  long = {zero-knowledge proof of knowledge},
+  short = {\acs*{ZK}\acs*{PK}},
+  long = {%
+    \acifused{ZK}{%
+      \acs*{ZK}\acifused{PK}{\acs*{PK}}{ \acl*{PK}}%
+    }{%
+      \acl*{ZK} \acifused{PK}{\acs*{PK}}{\acl*{PK}}%
+    }%
+  },
+  long-plural-form = {%
+    \acifused{ZK}{%
+      \acs*{ZK}\acifused{PK}{\acs*{PK}}{ \aclp*{PK}}%
+    }{%
+      \acl*{ZK} \acifused{PK}{\acs*{PK}}{\aclp*{PK}}%
+    }%
+  },
 }
 \DeclareAcronym{NIZK}{%
-  short = {NIZK},
-  long = {%
-    non-interactive zero-knowledge%
-  },
+  short = {NI\acs*{ZK}},
+  long = {non-interactive \acifused{ZK}{\acs*{ZK}}{\acl*{ZK}}},
 }
 \DeclareAcronym{MA}{%
   short = {MA},
@@ -461,22 +581,18 @@
 % Key-exchange mechanisms
 \DeclareAcronym{KE}{%
   short = {KE},
-  long = {%
-      key-exchange%
-    }
+  long = {key-exchange}
 }
 \DeclareAcronym{DHKE}{%
   short = {DHKE},
-  long = {%
-      Diffie-Hellman key-exchange%
-    },
+  long = {Diffie-Hellman \acifused{KE}{\acs*{KE}}{\acl*{KE}}},
   cite = {DiffieHellman}
 }
 \DeclareAcronym{AKE}{%
   short = {AKE},
-  long = {%
-      authenticated key-exchange
-    },
+  short-indefinite = {an},
+  long = {authenticated \acifused{KE}{\acs*{KE}}{\acl*{KE}}},
+  long-indefinite = {an},
   cite = {AuthKeyExchange}
 }
 % Cryptographic properties
@@ -625,9 +741,18 @@
 \DeclareAcronym{UC}{%
   short = {UC},
   long = {universal composability},
-  %long-indefinite = {universally composable},
+  long-adjective-form = {universally composable},
+  long-adverb-form = {universally composably},
   cite = {UniversalComposability}
 }
+\DeclareAcronym{ABC}{%
+  short = {ABC},
+  short-indefinite = {an},
+  long = {attribute-based credential},
+  long-indefinite = {an},
+}
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%
 % Access control
@@ -729,6 +854,10 @@
       certificate authority%
     },
 }
+\DeclareAcronym{PUF}{%
+  short = {PUF},
+  long = {physical unclonable function},
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%
 % Distance bounding
@@ -749,6 +878,12 @@
   short = {DF},
   long = {distance fraud},
   cite = {DistanceBounding},
+}
+\DeclareAcronym{DBEDLC}{%
+  short = {ED/LC},
+  short-indefinite = {an},
+  long = {early-detect and late-commit},
+  long-indefinite = {an},
 }
 \DeclareAcronym{DBDH}{%
   short = {DH},
@@ -783,8 +918,14 @@
 \DeclareAcronym{PPK}{%
   short = {PPK},
   long = {proof of proximity of knowledge},
-  long-plural = {proofs of proximity of knowledge},
+  long-plural-form = {proofs of proximity of knowledge},
   cite = {ProProx},
+}
+
+\DeclareAcronym{DFKOmodel}{%
+  short = {DFKO model},
+  long = {Dürholz-Fischlin-Kasper-Onete model},
+  cite = {DB-DFKO,FormalTerroristFraud,TREAD}
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -887,7 +1028,9 @@
     },
   long-plural-form = {%
       privacy-enhancing technologies%
-    }
+    },
+  long-adjective-form = {privacy-enhancing technologies},
+  short-adjective-form = {PETs},
 }
 \DeclareAcronym{DoS}{%
   short = {DoS},
@@ -915,6 +1058,10 @@
       digital rights management%
     },
 }
+\DeclareAcronym{E2E}{%
+  short = {E2E},
+  long = {end-to-end},
+}
 % Types of providers
 \DeclareAcronym{CSP}{%
   short = {CSP},
@@ -927,6 +1074,15 @@
   long = {%
       Internet-service provider%
     }
+}
+\DeclareAcronym{TPM}{%
+  short = {TPM},
+  long = {Trusted Platform Module},
+}
+\DeclareAcronym{DAA}{%
+  short = {DAA},
+  long = {Direct Anonymous Attestation},
+  cite = {DirectAnonymousAttestation},
 }
 % Entities
 \DeclareAcronym{TTP}{%
@@ -1040,6 +1196,12 @@
   long = {%
       user experience%
     },
+}
+
+%%%%%%%%%%%%%%%%%%%%%
+\DeclareAcronym{GDPR}{%
+  short = {GDPR},
+  long = {EU General Data Protection Regulation},
 }
 
 \ProcessOptions\relax

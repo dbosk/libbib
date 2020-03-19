@@ -3,3 +3,6 @@ URL-SybilAttack=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.1007%2F3-5
 
 BIBSP_REFKEY+=proof-of-personhood
 URL-proof-of-personhood=https://doi.org/10.1109/EuroSPW.2017.46
+
+BIBSP_REFKEY+=SybilFreePseudonyms
+URL-SybilFreePseudonyms=https://doi.org/10.1145/1352533.1352558
