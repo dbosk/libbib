@@ -109,7 +109,6 @@
 %
 % General algorithmic stuff
 %
-\NewDocumentCommand{\starcmd}{}{\bar}
 \ProvideDocumentCommand{\method}{}{\ensuremath{.\!}}
 \ProvideDocumentCommand{\NewScheme}{m m}{%
   \NewDocumentCommand{#1}{s o}{%
@@ -185,34 +184,34 @@
 }
 \ProvideDocumentCommand{\NewSet}{s m m}{%
   \IfBooleanTF{#1}{%
-    \NewDocumentCommand{#2}{s}{%
-      {\ensuremath{\IfBooleanT{##1}{\starcmd}#3}}%
+    \NewDocumentCommand{#2}{}{%
+      {\ensuremath{#3}}%
     }%
   }{%
-    \NewDocumentCommand{#2}{s}{%
-      {\ensuremath{\mathcal{\IfBooleanT{##1}{\starcmd}#3}}}%
+    \NewDocumentCommand{#2}{}{%
+      {\ensuremath{\mathcal{#3}}}%
     }%
   }
 }
 \ProvideDocumentCommand{\NewEntity}{s m m}{%
   \IfBooleanTF{#1}{%
-    \NewDocumentCommand{#2}{s}{%
-      {\ensuremath{\IfBooleanT{##1}{\starcmd}#3}}%
+    \NewDocumentCommand{#2}{}{%
+      {\ensuremath{#3}}%
     }%
   }{%
-    \NewDocumentCommand{#2}{s}{%
-      {\ensuremath{\mathcal{\IfBooleanT{##1}{\starcmd}#3}}}%
+    \NewDocumentCommand{#2}{}{%
+      {\ensuremath{\mathcal{#3}}}%
     }%
   }
 }
 \ProvideDocumentCommand{\NewVariable}{s m m}{%
   \IfValueTF{#1}{%
-    \NewDocumentCommand{#2}{s}{%
-      {\ensuremath{\IfBooleanT{##1}{\starcmd}#3}}%
+    \NewDocumentCommand{#2}{}{%
+      {\ensuremath{#3}}%
     }%
   }{%
-    \NewDocumentCommand{#2}{s}{%
-      {\ensuremath{\mathit{\IfBooleanT{##1}{\starcmd}#3}}}%
+    \NewDocumentCommand{#2}{}{%
+      {\ensuremath{\mathit{#3}}}%
     }%
   }%
 }
