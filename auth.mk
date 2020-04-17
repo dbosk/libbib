@@ -11,6 +11,9 @@ URL-CLsignatures=https://cs.brown.edu/people/alysyans/papers/cl04.pdf
 BIBSP_REFKEY+=HowToWinTheCloneWars
 URL-HowToWinTheCloneWars=http://doi.acm.org/10.1145/1180405.1180431
 
+BIBSP_REFKEY+=SelfCertifiedSybilFreePseudonyms
+URL-SelfCertifiedSybilFreePseudonyms=https://dl.acm.org/doi/10.1145/1352533.1352558
+
 BIBSP_REFKEY+=Psignatures
 URL-Psignatures=https://doi.org/10.1007/978-3-540-78524-8_20
 
