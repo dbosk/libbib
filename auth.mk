@@ -11,6 +11,9 @@ URL-CLsignatures=https://cs.brown.edu/people/alysyans/papers/cl04.pdf
 BIBSP_REFKEY+=HowToWinTheCloneWars
 URL-HowToWinTheCloneWars=http://doi.acm.org/10.1145/1180405.1180431
 
+BIBSP_REFKEY+=SelfCertifiedSybilFreePseudonyms
+URL-SelfCertifiedSybilFreePseudonyms=https://dl.acm.org/doi/10.1145/1352533.1352558
+
 BIBSP_REFKEY+=Psignatures
 URL-Psignatures=https://doi.org/10.1007/978-3-540-78524-8_20
 
@@ -46,6 +49,9 @@ URL-ProProx=https://link.springer.com/chapter/10.1007/978-3-319-26059-4_6
 BIBSP_REFKEY+=TamarinDB
 URL-TamarinDB=https://doi.ieeecomputersociety.org/10.1109/SP.2018.00001
 
+BIBSP_REFKEY+=TamarinDBTF
+URL-TamarinDBTF=https://doi.org/10.1145/3319535.3345651
+
 BIBSP_REFKEY+=DistanceBoundingSurvey
 URL-DistanceBoundingSurvey=http://doi.acm.org/10.1145/3264628
 
@@ -66,3 +72,6 @@ URL-Bussard-Bagga=https://link.springer.com/chapter/10.1007/0-387-25660-1_15
 
 BIBSP_REFKEY+=Bussard-Bagga-attack
 URL-Bussard-Bagga-attack=https://link.springer.com/chapter/10.1007/978-3-642-38519-3_23
+
+BIBSP_REFKEY+=DirectAnonymousAttestation
+URL-DirectAnonymousAttestation=https://eprint.iacr.org/2004/205
