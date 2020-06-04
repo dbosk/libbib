@@ -42,3 +42,6 @@ URL-Octopus=https://arxiv.org/abs/1203.2668
 
 BIBSP_REFKEY+=StatisticalDisclosureAttacks
 URL-StatisticalDisclosureAttacks=https://link.springer.com/chapter/10.1007/978-0-387-35691-4_40
+
+BIBSP_REFKEY+=BreakingAndPartiallyFixingProvablySecureOnionRouting
+URL-BreakingAndPartiallyFixingProvablySecureOnionRouting=https://arxiv.org/abs/1910.13772
