@@ -45,3 +45,10 @@ URL-StatisticalDisclosureAttacks=https://link.springer.com/chapter/10.1007/978-0
 
 BIBSP_REFKEY+=BreakingAndPartiallyFixingProvablySecureOnionRouting
 URL-BreakingAndPartiallyFixingProvablySecureOnionRouting=https://arxiv.org/abs/1910.13772
+
+BIBSP_REFKEY+=WebsiteFingerprinting
+URL-WebsiteFingerprinting=https://link.springer.com/chapter/10.1007/3-540-36467-6_13
+
+BIBSP_REFKEY+=WebsiteFingerprintingWithWebsiteOracles
+URL-WebsiteFingerprintingWithWebsiteOracles=https://content.sciendo.com/view/journals/popets/2020/1/article-p235.xml
+
