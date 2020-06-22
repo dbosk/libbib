@@ -5,6 +5,9 @@ BIBSP_REFKEY+=HMAC HMAC-std
 URL-HMAC=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.1007%2F3-540-68697-5_1.pdf
 URL-HMAC-std=https://csrc.nist.gov/publications/fips/fips198-1/FIPS-198-1_final.pdf
 
+BIBSP_REFKEY+=AES
+URL-AES=https://www.nist.gov/publications/advanced-encryption-standard-aes
+
 BIBSP_REFKEY+=ElGamal
 URL-ElGamal=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.1007%2F3-540-39568-7_2.pdf
 
