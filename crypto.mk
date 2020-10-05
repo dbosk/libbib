@@ -103,3 +103,6 @@ URL-UniversalComposability=https://eprint.iacr.org/2000/067
 
 BIBSP_REFKEY+=LWE
 URL-LWE=https://dl.acm.org/doi/abs/10.1145/1568318.1568324
+
+BIBSP_REFKEY+=SolvingDLOGfromPartialKnowledge
+URL-SolvingDLOGfromPartialKnowledge=https://link.springer.com/chapter/10.1007/978-3-540-77026-8_17
