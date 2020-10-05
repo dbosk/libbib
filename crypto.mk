@@ -106,3 +106,6 @@ URL-LWE=https://dl.acm.org/doi/abs/10.1145/1568318.1568324
 
 BIBSP_REFKEY+=SolvingDLPfromPartialKnowledge
 URL-SolvingDLOGfromPartialKnowledge=https://link.springer.com/chapter/10.1007/978-3-540-77026-8_17
+
+BIBSP_REFKEY+=LowerBoundsForDLPandRelatedProblems
+URL-LowerBoundsForDLPandRelatedProblems=https://www.shoup.net/papers/dlbounds1.pdf
