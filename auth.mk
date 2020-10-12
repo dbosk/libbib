@@ -21,6 +21,9 @@ BIBSP_REFKEY+=AnonPass
 #URL-AnonPass=http://ieeexplore.ieee.org/abstract/document/6547118/
 URL-AnonPass=https://eprint.iacr.org/2013/317
 
+BIBSP_REFKEY+=CL02
+URL-CL02=https://link.springer.com/chapter/10.1007/3-540-36413-7_20
+
 BIBSP_REFKEY+=MafiaFraud
 URL-MafiaFraud=https://link.springer.com/chapter/10.1007/3-540-48184-2_3
 
