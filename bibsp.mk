@@ -12,6 +12,7 @@ BIBSP_TOPIC+=	nfc
 BIBSP_TOPIC+=	adhocnets
 BIBSP_TOPIC+=	ecurrency
 BIBSP_TOPIC+= 	p2p
+BIBSP_TOPIC+= 	society
 
 BIBSP_TOPIC+=	otrmsg otpkx ppes
 
