@@ -5,6 +5,9 @@ BIBSP_REFKEY+=HMAC HMAC-std
 URL-HMAC=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.1007%2F3-540-68697-5_1.pdf
 URL-HMAC-std=https://csrc.nist.gov/publications/fips/fips198-1/FIPS-198-1_final.pdf
 
+BIBSP_REFKEY+=AES
+URL-AES=https://www.nist.gov/publications/advanced-encryption-standard-aes
+
 BIBSP_REFKEY+=ElGamal
 URL-ElGamal=http://link.springer.com${LIBRARY_EXT}/content/pdf/10.1007%2F3-540-39568-7_2.pdf
 
@@ -97,3 +100,12 @@ URL-PKnotation=https://link.springer.com/chapter/10.1007%2FBFb0052252
 
 BIBSP_REFKEY+=UniversalComposability
 URL-UniversalComposability=https://eprint.iacr.org/2000/067
+
+BIBSP_REFKEY+=LWE
+URL-LWE=https://dl.acm.org/doi/abs/10.1145/1568318.1568324
+
+BIBSP_REFKEY+=SolvingDLPwithPartialKnowledge
+URL-SolvingDLOGfromPartialKnowledge=https://link.springer.com/chapter/10.1007/978-3-540-77026-8_17
+
+BIBSP_REFKEY+=LowerBoundsForDLPandRelatedProblems
+URL-LowerBoundsForDLPandRelatedProblems=https://www.shoup.net/papers/dlbounds1.pdf

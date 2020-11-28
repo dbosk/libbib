@@ -1,6 +1,7 @@
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
 \ProvidesPackage{bibsp}[2015/07/16 v0.1 LaTeX/BibTeX library]
 \RequirePackage{amsmath}
+\RequirePackage{amssymb}
 \RequirePackage{xparse}
 \RequirePackage{mleftright}
 \RequirePackage[mathscr]{euscript}
@@ -45,9 +46,10 @@
 %
 % General algorithmic stuff
 %
+\NewDocumentCommand{\starcmd}{}{\bar}
 \ProvideDocumentCommand{\method}{}{\ensuremath{.\!}}
 \ProvideDocumentCommand{\NewScheme}{m m}{%
-  \ProvideDocumentCommand{#1}{s o}{%
+  \NewDocumentCommand{#1}{s o}{%
     {\ensuremath{%
       \operatorname{%
         \IfBooleanTF{##1}{%
@@ -62,7 +64,7 @@
 }
 \ProvideDocumentCommand{\NewAlgorithm}{m o m}{%
   \IfValueTF{#2}{%
-    \ProvideDocumentCommand{#1}{s o o}{%
+    \NewDocumentCommand{#1}{s o o}{%
       {\ensuremath{%
           \operatorname{%
             \IfBooleanTF{##1}{%
@@ -80,7 +82,7 @@
         }%
       }}%
   }{%
-    \ProvideDocumentCommand{#1}{s o o}{%
+    \NewDocumentCommand{#1}{s o o}{%
       {\ensuremath{%
           \operatorname{%
             \IfBooleanTF{##1}{%
@@ -100,7 +102,7 @@
   }
 }
 \ProvideDocumentCommand{\NewFunction}{s m m}{%
-  \ProvideDocumentCommand{#2}{s o o}{%
+  \NewDocumentCommand{#2}{s o o}{%
     {\ensuremath{%
       \operatorname{%
         \IfBooleanTF{##1}{%
@@ -120,34 +122,34 @@
 }
 \ProvideDocumentCommand{\NewSet}{s m m}{%
   \IfBooleanTF{#1}{%
-    \ProvideDocumentCommand{#2}{}{%
-      {\ensuremath{#3}}%
+    \NewDocumentCommand{#2}{s}{%
+      {\ensuremath{\IfBooleanT{##1}{\starcmd}#3}}%
     }%
   }{%
-    \ProvideDocumentCommand{#2}{}{%
-      {\ensuremath{\mathcal{#3}}}%
+    \NewDocumentCommand{#2}{s}{%
+      {\ensuremath{\mathcal{\IfBooleanT{##1}{\starcmd}#3}}}%
     }%
   }
 }
 \ProvideDocumentCommand{\NewEntity}{s m m}{%
   \IfBooleanTF{#1}{%
-    \ProvideDocumentCommand{#2}{}{%
-      {\ensuremath{#3}}%
+    \NewDocumentCommand{#2}{s}{%
+      {\ensuremath{\IfBooleanT{##1}{\starcmd}#3}}%
     }%
   }{%
-    \ProvideDocumentCommand{#2}{}{%
-      {\ensuremath{\mathcal{#3}}}%
+    \NewDocumentCommand{#2}{s}{%
+      {\ensuremath{\mathcal{\IfBooleanT{##1}{\starcmd}#3}}}%
     }%
   }
 }
 \ProvideDocumentCommand{\NewVariable}{s m m}{%
   \IfValueTF{#1}{%
-    \ProvideDocumentCommand{#2}{}{%
-      {\ensuremath{#3}}%
+    \NewDocumentCommand{#2}{s}{%
+      {\ensuremath{\IfBooleanT{##1}{\starcmd}#3}}%
     }%
   }{%
-    \ProvideDocumentCommand{#2}{}{%
-      {\ensuremath{\mathit{#3}}}%
+    \NewDocumentCommand{#2}{s}{%
+      {\ensuremath{\mathit{\IfBooleanT{##1}{\starcmd}#3}}}%
     }%
   }%
 }
@@ -174,14 +176,22 @@
 %%%%%%%%%%%%%%%%%%%%%%
 % General maths
 %%%%%%%%%%%%%%%%%%%%%%
-\NewVariable*{\NN}{\mathbb{N}}
-\NewVariable*{\ZZ}{\mathbb{Z}}
-\NewVariable*{\QQ}{\mathbb{Q}}
-\NewVariable*{\RR}{\mathbb{R}}
-\NewVariable*{\CC}{\mathbb{C}}
-\ifdefined\powerset%
-  \relax%
-\else%
+\ifdefined\NN\relax\else
+  \NewVariable*{\NN}{\mathbb{N}}
+\fi
+\ifdefined\ZZ\relax\else
+  \NewVariable*{\ZZ}{\mathbb{Z}}
+\fi
+\ifdefined\QQ\relax\else
+  \NewVariable*{\QQ}{\mathbb{Q}}
+\fi
+\ifdefined\RR\relax\else
+  \NewVariable*{\RR}{\mathbb{R}}
+\fi
+\ifdefined\CC\relax\else
+  \NewVariable*{\CC}{\mathbb{C}}
+\fi
+\ifdefined\powerset\relax\else
   \NewFunction*{\powerset}{\mathscr{P}}%
 \fi
 \ProvideDocumentCommand{\textand}{}{\ensuremath{\qquad\text{and}\qquad}}
@@ -197,11 +207,18 @@
 %%%%%%%%%%%%%%%%%%%%%%
 % Algebra
 %%%%%%%%%%%%%%%%%%%%%%
-\NewVariable*{\GG}{\mathbb{G}}
-\NewVariable*{\RR}{\mathbb{R}}
-\NewVariable*{\FF}{\mathbb{F}}
-\NewVariable*{\GF}{\mathrm{GF}}
-\NewFunction{\ord}{ord}
+\ifdefined\GG\relax\else
+  \NewVariable*{\GG}{\mathbb{G}}
+\fi
+\ifdefined\FF\relax\else
+  \NewVariable*{\FF}{\mathbb{F}}
+\fi
+\ifdefined\GF\relax\else
+  \NewVariable*{\GF}{\mathrm{GF}}
+\fi
+\ifdefined\ord\relax\else
+  \NewFunction{\ord}{ord}
+\fi
 \ProvideDocumentCommand{\card}{m}{\ensuremath{|#1|}}
 \ProvideDocumentCommand{\gen}{m}{\mleft\langle #1\mright\rangle}
 
@@ -361,10 +378,21 @@
   short = {SMP},
   long = {Socialist Millionaires' Problem}
 }
+\DeclareAcronym{LWE}{%
+  short = {LWE},
+  short-indefinite = {an},
+  long = {learning with errors},
+  cite = {LWE},
+}
 % Cryptographic mechanisms
 \DeclareAcronym{OTP}{%
   short = {OTP},
   long = {One-Time Pad}
+}
+\DeclareAcronym{AES}{%
+  short = {AES},
+  long = {Advanced Encryption Standard},
+  cite = {AES},
 }
 \DeclareAcronym{ZK}{%
   short = {ZK},
@@ -832,8 +860,14 @@
 \DeclareAcronym{PPK}{%
   short = {PPK},
   long = {proof of proximity of knowledge},
-  long-plural = {proofs of proximity of knowledge},
+  long-plural-form = {proofs of proximity of knowledge},
   cite = {ProProx},
+}
+
+\DeclareAcronym{DFKOmodel}{%
+  short = {DFKO model},
+  long = {Dürholz-Fischlin-Kasper-Onete model},
+  cite = {DB-DFKO,FormalTerroristFraud,TREAD}
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -983,6 +1017,15 @@
       Internet-service provider%
     }
 }
+\DeclareAcronym{TPM}{%
+  short = {TPM},
+  long = {Trusted Platform Module},
+}
+\DeclareAcronym{DAA}{%
+  short = {DAA},
+  long = {Direct Anonymous Attestation},
+  cite = {DirectAnonymousAttestation},
+}
 % Entities
 \DeclareAcronym{TTP}{%
   short = {TTP},
@@ -1077,6 +1120,10 @@
       distributed hash table%
     },
 }
+\DeclareAcronym{DLT}{%
+  short = {DLT},
+  long = {distributed ledger technologies},
+}
 \DeclareAcronym{tposet}{%
   short = {t-poset},
   long = {transactional partially ordered set},
@@ -1097,6 +1144,20 @@
 \DeclareAcronym{GDPR}{%
   short = {GDPR},
   long = {EU General Data Protection Regulation},
+}
+
+%%%%%%%%%%%%%%%%%%%%%
+% Anonymity
+%%%%%%%%%%%%%%%%%%%%%
+\DeclareAcronym{WF}{%
+  short = {WF},
+  long = {website fingerprinting},
+  cite = {WebsiteFingerprinting},
+}
+\DeclareAcronym{WFWO}{%
+  short = {WF+WO},
+  long = {\acifused{WF}{\acs{WF}}{\acl{WF}} with website oracles},
+  cite = {WebsiteFingerprintingWithWebsiteOracles},
 }
 
 \ProcessOptions\relax
