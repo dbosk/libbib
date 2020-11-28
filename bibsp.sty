@@ -372,7 +372,7 @@
 }
 \DeclareAcronym{ZKP}{%
   short = {\acs*{ZK}P},
-  long = {\acifused{ZK}{\acs*{ZK}}{\acl*{ZK}} proof}
+  long = {\acroifusedTF{ZK}{\acs*{ZK}}{\acl*{ZK}} proof}
 }
 \DeclareAcronym{PK}{%
   short = {PK},
@@ -382,23 +382,23 @@
 \DeclareAcronym{ZKPK}{%
   short = {\acs*{ZK}\acs*{PK}},
   long = {%
-    \acifused{ZK}{%
-      \acs*{ZK}\acifused{PK}{\acs*{PK}}{ \acl*{PK}}%
+    \acroifusedTF{ZK}{%
+      \acs*{ZK}\acroifusedTF{PK}{\acs*{PK}}{ \acl*{PK}}%
     }{%
-      \acl*{ZK} \acifused{PK}{\acs*{PK}}{\acl*{PK}}%
+      \acl*{ZK} \acroifusedTF{PK}{\acs*{PK}}{\acl*{PK}}%
     }%
   },
   long-plural-form = {%
-    \acifused{ZK}{%
-      \acs*{ZK}\acifused{PK}{\acs*{PK}}{ \aclp*{PK}}%
+    \acroifusedTF{ZK}{%
+      \acs*{ZK}\acroifusedTF{PK}{\acs*{PK}}{ \aclp*{PK}}%
     }{%
-      \acl*{ZK} \acifused{PK}{\acs*{PK}}{\aclp*{PK}}%
+      \acl*{ZK} \acroifusedTF{PK}{\acs*{PK}}{\aclp*{PK}}%
     }%
   },
 }
 \DeclareAcronym{NIZK}{%
   short = {NI\acs*{ZK}},
-  long = {non-interactive \acifused{ZK}{\acs*{ZK}}{\acl*{ZK}}},
+  long = {non-interactive \acroifusedTF{ZK}{\acs*{ZK}}{\acl*{ZK}}},
 }
 \DeclareAcronym{MA}{%
   short = {MA},
@@ -499,13 +499,13 @@
 }
 \DeclareAcronym{DHKE}{%
   short = {DHKE},
-  long = {Diffie-Hellman \acifused{KE}{\acs*{KE}}{\acl*{KE}}},
+  long = {Diffie-Hellman \acroifusedTF{KE}{\acs*{KE}}{\acl*{KE}}},
   cite = {DiffieHellman}
 }
 \DeclareAcronym{AKE}{%
   short = {AKE},
   short-indefinite = {an},
-  long = {authenticated \acifused{KE}{\acs*{KE}}{\acl*{KE}}},
+  long = {authenticated \acroifusedTF{KE}{\acs*{KE}}{\acl*{KE}}},
   long-indefinite = {an},
   cite = {AuthKeyExchange}
 }
